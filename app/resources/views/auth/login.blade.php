@@ -25,7 +25,7 @@
         <div class="body-content">
             <div class="container">
                 <center>
-                    <a href="{{ route('index') }}">
+                    <a href="{{ route('home') }}">
                         <img src="{{ asset('logo.png') }}" alt="" width="80"/>                                            
                     </a>
                 </center>
