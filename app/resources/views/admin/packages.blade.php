@@ -53,9 +53,9 @@
                                                             <form id="formMark" action="{{ route('admin.packages.delete', ['id' => $package->id]) }}" method="post">
                                                                 @csrf
                                                                 </form>
-                                                  
+{{--                                                   
                                                                 <li><a href="{{ route('admin.packages.edit', ['id' => $package->id]) }}" >
-                                                                <em class="icon ni ni-user-cross-fill"></em><span>Edit</span></a></li>
+                                                                <em class="icon ni ni-user-cross-fill"></em><span>Edit</span></a></li> --}}
                                                                 <li><a href="#" onclick="event.preventDefault()"><button style="border:none; background:none" onclick="deletePackage('{{ route('admin.packages.delete', ['id' => $package->id]) }}')" >
                                                                 <em class="icon ni ni-na"></em><span>Delete</span></button></li></a>
                                                                    
