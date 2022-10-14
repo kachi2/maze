@@ -396,7 +396,7 @@ if (!function_exists('get_payment_methods')) {
             Deposit::PAYMENT_METHOD_LTC => 'LTC',
         ];
     }
-}
+} 
 
 if (!function_exists('get_payment_method')) {
     /**

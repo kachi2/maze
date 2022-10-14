@@ -14,6 +14,8 @@ use App\Models\Package;
 use App\Models\Withdrawal;
 use App\User;
 use App\UserActivity;
+use App\WalletAddress;
+use App\WalletDeposit;
 use Illuminate\Http\Response;
 
 class HomeController extends Controller
@@ -30,8 +32,10 @@ class HomeController extends Controller
         $todayUsers = User::where('created_at', '>=', today())->count();
         $adminUsers = User::whereIsAdmin(true)->count();
 
-        $totalDeposits = Deposit::sum('amount');
-        $activeDeposits = Deposit::whereStatus(Deposit::STATUS_ACTIVE)->sum('amount');
+        $Deposits = Deposit::where('payment_method', '!=', 'wallet')->sum('amount');
+        $wallet = WalletDeposit::where('status', 1)->sum('amount');
+        $totalDeposits =  $Deposits + $wallet;
+        $activeDeposits = Deposit::whereStatus(0)->sum('amount');
         $lastDeposit = Deposit::latest()->take(1)->sum('amount');
 
         $totalWithdrawals = Withdrawal::where('status', '!=', Withdrawal::STATUS_CANCELED)->sum('amount');
@@ -50,12 +54,26 @@ class HomeController extends Controller
             'total_users' => $totalUsers,
             'today_users' => $todayUsers,
             'admin_users' => $adminUsers,
-            'total_deposits' => $totalDeposits,
+            'total_investment' => $totalDeposits,
             'active_deposits' => $activeDeposits,
             'last_deposit' => $lastDeposit,
             'total_withdrawals' => $totalWithdrawals,
             'pending_withdrawals' => $pendingWithdrawals,
             'last_withdrawal' => $lastWithdrawal,
         ], $data);
+    }
+
+    public function WalletAddresses(){
+        return view('admin.wallet')
+        ->with('wallets', WalletAddress::latest()->get());
+    }
+
+    public function WalletAddressDelete($id){
+        $wallet = WalletAddress::findorfail(decrypt($id));
+        $wallet->delete();
+        \Session::flash('msg', 'success');
+        \Session::flash('message', 'Wallet Deleted Successfully'); 
+        return back();
+  
     }
 }

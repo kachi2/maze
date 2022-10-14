@@ -7,6 +7,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\WalletAddress;
+use Intervention\Image\Facades\Image;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -48,10 +50,7 @@ class SettingController extends Controller
         $this->validate($request, [
             'title' => 'nullable|max:225|min:3',
             'description' => 'nullable',
-            'registration' => 'nullable|between:0,1',
-            'login' => 'nullable|between:0,1',
-            'automatic_withdrawal' => 'nullable|between:0,1',
-            'referral_interest_percent' => 'numeric',
+            'name' => 'unique:wallet_addresses'
         ]);
 
         if ($request->input('title')) {
@@ -62,54 +61,22 @@ class SettingController extends Controller
             Setting::setItem('app.description', $request->input('description'));
         }
 
-        if ($request->has('registration')) {
-            Setting::setItem('app.registration', $request->input('registration'));
-        }
+        if($request->name){
+            $address = new WalletAddress;
+            $address->name = $request->name;
+            $address->address = $request->address;
+            if($request->barcode){
+                $image = $request->file('barcode');
+                $file = $image->getClientOriginalExtension();
+                $ex = time().'.'.$file;
+                Image::make($request->file('barcode'))->resize(295,298)->save('mobile/images/'.$ex);
+                $address->barcode = $ex;
+            }
+        $address->save();
 
-        if ($request->has('login')) {
-            Setting::setItem('app.login', $request->input('login'));
+        \Session::flash('msg', 'success');
+        \Session::flash('message', 'Settings Updated Successfully'); 
         }
-
-        if ($request->has('automatic_withdrawal')) {
-            Setting::setItem('app.automatic_withdrawal', $request->input('automatic_withdrawal'));
-        }
-
-        if ($request->input('coinpayments_merchant_id')) {
-            Setting::setItem('coinpayments.merchant_id', $request->input('coinpayments_merchant_id'));
-        }
-
-        if ($request->input('coinpayments_public_key')) {
-            Setting::setItem('coinpayments.public_key', $request->input('coinpayments_public_key'));
-        }
-
-        if ($request->input('coinpayments_private_key')) {
-            Setting::setItem('coinpayments.private_key', $request->input('coinpayments_private_key'));
-        }
-
-        if ($request->input('coinpayments_ipn_secret')) {
-            Setting::setItem('coinpayments.ipn_secret', $request->input('coinpayments_ipn_secret'));
-        }
-
-        if ($request->input('perfectmoney_account_id')) {
-            Setting::setItem('perfectmoney.account_id', $request->input('perfectmoney_account_id'));
-        }
-
-        if ($request->input('perfectmoney_passphrase')) {
-            Setting::setItem('perfectmoney.passphrase', $request->input('perfectmoney_passphrase'));
-        }
-
-        if ($request->input('perfectmoney_marchant_id')) {
-            Setting::setItem('perfectmoney.marchant_id', $request->input('perfectmoney_marchant_id'));
-        }
-
-        if ($request->input('perfectmoney_alternate_passphrase')) {
-            Setting::setItem('perfectmoney.alternate_passphrase', $request->input('perfectmoney_alternate_passphrase'));
-        }
-
-        if ($request->input('referral_interest_percent')) {
-            Setting::setItem('referral.interest_percent', $request->input('referral_interest_percent'));
-        }
-
         return redirect()->back()->with('success', 'Settings updated successfully');
     }
 }

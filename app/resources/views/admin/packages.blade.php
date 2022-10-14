@@ -11,13 +11,7 @@
                                         <h5 class="nk-block-title fw-normal">Packages </h5>
                                         
                                     </div>
-                                    <div class="nk-block-head-content">
-                                        <ul class="nk-block-tools gx-3">
-                                            <li class="order-md-last">
-                                                   <a href="{{ route('admin.packages.add') }}" class="btn btn-primary"><i
-                                                    class='uil uil-plus mr-1'></i>Add Package</a> </li>
-                                       </ul>
-                                    </div>
+                                  
                                 </div>
                             </div><!-- .nk-block-head -->
                                 
@@ -59,8 +53,7 @@
                                                             <form id="formMark" action="{{ route('admin.packages.delete', ['id' => $package->id]) }}" method="post">
                                                                 @csrf
                                                                 </form>
-                                                                <li><a href="{{ route('admin.packages.show', ['id' => $package->id]) }}" >
-                                                                <em class="icon ni ni-focus"></em><span>View</span></a></li>
+                                                  
                                                                 <li><a href="{{ route('admin.packages.edit', ['id' => $package->id]) }}" >
                                                                 <em class="icon ni ni-user-cross-fill"></em><span>Edit</span></a></li>
                                                                 <li><a href="#" onclick="event.preventDefault()"><button style="border:none; background:none" onclick="deletePackage('{{ route('admin.packages.delete', ['id' => $package->id]) }}')" >

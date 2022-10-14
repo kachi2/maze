@@ -1,6 +1,3 @@
-
-
-
 @extends('layouts.admin')
 @section('content')
      <div class="nk-content ">
@@ -10,10 +7,10 @@
                                 <div class="nk-block-head nk-block-head-sm">
                                     <div class="nk-block-between g-3">
                                         <div class="nk-block-head-content">
-                                            <h3 class="nk-block-title page-title">Daily Payouts</h3>
+                                            <h3 class="nk-block-title page-title">Wallet Deposits</h3>
                                            
                                         </div><!-- .nk-block-head-content -->
-                                    
+                                         
                                         <div class="nk-block-head-content">
                                             <div class="toggle-wrap nk-block-tools-toggle">
                                                 <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
@@ -41,7 +38,7 @@
                                                             <li>
                                                                 <div class="dropdown">
                                                                     <a href="#" class="btn btn-trigger btn-icon dropdown-toggle" data-toggle="dropdown">
-                                                                        <div class="badge badge-circle badge-primary"></div>
+                                                                        <div class="badge badge-circle badge-primary">3</div>
                                                                         <em class="icon ni ni-filter-alt"></em>
                                                                     </a>
                                                                     <div class="filter-wg dropdown-menu dropdown-menu-xl dropdown-menu-right">
@@ -54,12 +51,12 @@
                                                                                
                                                                                 <div class="col-12">
                                                                                     <div class="form-group">
-                                                                                        {{-- <ul class="link-check">
+                                                                                        <ul class="link-check">
                                                                             <li><a  href="{{ filter_url('all') }}">All Deposits</a></li>
                                                                             <li><a href="{{ filter_url('active') }}">Approved Deposits</a></li>
                                                                             <li><a href="{{ filter_url('completed') }}">Cancelled Deposits</a></li>
                                                                    
-                                                                        </ul> --}}
+                                                                        </ul>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -89,52 +86,78 @@
                                                     <div class="nk-tb-item nk-tb-head">
                                                         <div class="nk-tb-col"><span>#Ref</span></div>
                                                         <div class="nk-tb-col"><span>User</span></div>
-                                                        <div class="nk-tb-col"><span>Payout Ref</span></div>
-                                                        <div class="nk-tb-col ">Plan</div>
-                                                        <div class="nk-tb-col ">Amount</div>
-                                                        <div class="nk-tb-col ">Status</div>
-                                                        <div class="nk-tb-col  "><span>Created At</div>
-                                                     
+                                                        <div class="nk-tb-col tb-col-lg"><span>Paid</span></div>
+                                                        <div class="nk-tb-col "><span>Profit</span></div>
+                                                        <div class="nk-tb-col  tb-col-sm"><span>Method</span></div>
+                                                         <div class="nk-tb-col nk-tb-col-status"><span >Status</span></div>
+                                                        <div class="nk-tb-col  tb-col-sm"><span>Created At</span></div>
+                                                        <div class="nk-tb-col  tb-col-sm"><span> </span></div>
                                                        
                                                     </div><!-- .nk-tb-item -->
-                                                    @forelse($payouts as $payout)
+                                                @foreach ($deposits as $deposit )
                                                     <div class="nk-tb-item">
                                                         <div class="nk-tb-col">
                                                             <div class="nk-tnx-type">
                                                                
                                                                 <div class="nk-tnx-type-text">
-                                                                    <span class="tb-lead">{{$payout->ref}}</span>
+                                                                    <span class="tb-lead">{{$deposit->ref}}</span>
                                                                
-                                                                    <span class="tb-date">{{$payout->created_at->format('d/m/y h:s A')}}</span>
+                                                                    <span class="tb-date">{{$deposit->created_at->format('d/m/y h:s A')}}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="nk-tb-col tb-col-lg">
-                                                            <span class="tb-lead-sub">  <a href="{{ route('admin.users.show', ['id' => $payout->user->id]) }}">
-                                                                {{ $payout->user->username }}
-                                                            </a></span>
+                                                            <span class="tb-lead-sub">{{ $deposit->user->username }}</span>
+                                                            <span class="badge badge-dot badge-info">{{ $deposit->user->email}}</span>
                                                         </div>
-                                                         <div class="nk-tb-col tb-col-lg">
-                                                            <span class="">
-                                                               <a href="{{ $payout->deposit->url }}">{{ $payout->deposit->ref }}</a>
-                                                            </span>
+                                                        <div class="nk-tb-col ">
+                                                            <span class="tb-amount">{{moneyFormat($deposit->amount,'USD')}}</span>
+                                                        </div>
+                                                        <div class="nk-tb-col  tb-col-sm">
+                                                            <span class="tb-amount">{{moneyFormat($deposit->paid_amount,'USD')}}</span>
+                                                        </div>
+                                                        <div class="nk-tb-col  tb-col-sm">
+                                                            <span class="tb-amount">{{$deposit->payment_method}}</span>
                                                         </div>
                                                        
-                                                        <div class="nk-tb-col ">
-                                                            <span class="tb-amount"> {{ $payout->plan->formatted_name }}</span>
-                                                        </div>
-                                                        <div class="nk-tb-col ">
-                                                            <span class="tb-amount">{{ moneyFormat($payout->amount, 'USD') }}</span>
-                                                        </div>
-                                                        <div class="nk-tb-col ">
-                                                            <span class="badge badge-sm badge-dim badge-outline-success d-none d-md-inline-flex">Paid</span>
-                                                            
+                                                        <div class="nk-tb-col nk-tb-col-status">
+                                                            <div class="dot dot-success d-md-none"></div>
+                                                             @if( $deposit->status == 1)
+                                                            <span class="badge badge-sm badge-dim badge-outline-success d-none d-md-inline-flex">Approved</span>
+                                                            @elseif ($deposit->status == -1)
+                                                            <span class="badge badge-sm badge-dim badge-outline-warning d-none d-md-inline-flex">Cancelled</span>
+                                                            @else
+                                                             <span class="badge badge-sm badge-dim badge-outline-primary d-none d-md-inline-flex">Pending</span>
+                                                            @endif
                                                         </div>
 
                                                          <div class="nk-tb-col tb-col-sm">
-                                                            <span class="tb-amount">{{$payout->created_at}}</span>
+                                                            <span class="tb-amount">{{$deposit->created_at}}</span>
                                                         </div>
-                                                       
+                                                        <div class="nk-tb-col nk-tb-col-tools">
+                                                            <ul class="nk-tb-actions gx-1"> 
+                                                                @if($deposit->status == 0)
+                                                                <li>
+                                                                    <div class="drodown">
+                                                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                                            <ul class="link-list-opt no-bdr">
+                                                                                
+                                                                                
+                                                                                <form id="formMark" action="{{ route('admin.wallet.update', ['id' => encrypt($deposit->id)]) }}" method="post">
+                                                                                @csrf
+                                                                                
+                                                                                <li><button type="submit" onclick="return confirm('Are you Sure')" class="btn btn-outline-primary">
+                                                                                <em class="icon ni ni-shield-off"></em><span> Approve Payment</span> </button></li>
+                                                                                </form>
+                                                                                 
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                @endif
+                                                            </ul>
+                                                        </div>
                                                     </div><!-- .nk-tb-item --> 
                                                 @endforeach
 
@@ -142,7 +165,7 @@
                                                 </div><!-- .nk-tb-list -->
                                             </div><!-- .card-inner -->
                                             <div class="card-inner">
-                                               {{$payouts->links()}}
+                                               {{$deposits->links()}}
                                             </div><!-- .card-inner -->
                                         </div><!-- .card-inner-group -->
                                     </div><!-- .card -->
@@ -189,4 +212,3 @@ toastr.clear();
 
 </script>
 @endsection
-

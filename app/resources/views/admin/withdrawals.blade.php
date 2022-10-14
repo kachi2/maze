@@ -11,13 +11,7 @@
                                         <h5 class="nk-block-title fw-normal">Users List</h5>
                                         
                                     </div>
-                                    <div class="nk-block-head-content">
-                                        <ul class="nk-block-tools gx-3">
-                                            <li class="order-md-last">
-                                                   <a href="{{ route('admin.withdrawals.add') }}" class="btn btn-primary"><i
-                                                    class='uil uil-plus mr-1'></i>Add Withdrawals</a> </li>
-                                       </ul>
-                                    </div>
+                                   
                                 </div>
                             </div><!-- .nk-block-head -->
                                 

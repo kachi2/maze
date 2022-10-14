@@ -3,8 +3,8 @@
         <div class="nk-apps-sidebar is-dark">
             <div class="nk-apps-brand">
                 <a href="#" class="logo-link">
-                    <img class="logo-light logo-img" src="{{asset('/logo-black.png')}}" srcset="{{asset('/logo-black.png')}} 2x" alt="logo">
-                    <img class="logo-dark logo-img" src="{{asset('/logo-black.png')}}" srcset="{{asset('/logo-black.png')}} 2x" alt="logo-dark">
+                    <img class="logo-light logo-img" src="{{asset('/logo.png')}}" srcset="{{asset('/logo.png')}} 2x" alt="logo">
+                    <img class="logo-dark logo-img" src="{{asset('/logo.png')}}" srcset="{{asset('/logo.png')}} 2x" alt="logo-dark">
                 </a>
             </div>
             <div class="nk-sidebar-element">
@@ -118,10 +118,9 @@
                             <div class="nk-header-app-name">
                                 <div class="nk-header-app-logo">
                             
-                                          <img class="logo-dark logo-img" src="{{asset('/logo-black.png')}}" srcset="{{asset('/logo-black.png')}} 2x" alt="logo-dark">
+                                          <img class="logo-dark logo-img" src="{{asset('/logo.png')}}" srcset="{{asset('/logo.png')}} 2x" alt="logo-dark">
                                 </div>
                                 <div class="nk-header-app-info">
-                                    <span class="sub-text">Think Richly</span>
                                     <span class="lead-text">Mazeoptions</span>
                                 </div>
                             </div>
@@ -130,15 +129,15 @@
                                     <!-- Menu -->
                                     <ul class="nk-menu nk-menu-main">
                                         <li class="nk-menu-item">
-                                            <a href="{{ route('deposits') }}" class="nk-menu-link">
-                                                <span class="nk-menu-text btn-primary btn-sm">Deposit</span>
+                                            <a href="" class="nk-menu-link">
+                                                <span class="nk-menu-text btn-primary btn-sm">Home</span>
                                             </a>
                                         </li>
-                                        <li class="nk-menu-item">
-                                            <a href="{{ route('withdrawals') }}" class="nk-menu-link">
+                                        {{-- <li class="nk-menu-item">
+                                            <a href="" class="nk-menu-link">
                                                 <span class="nk-menu-text btn-warning btn btn-sm">Withdraw</span>
                                             </a>
-                                        </li>
+                                        </li> --}}
 
                                    <!-- .nk-menu-item -->
                                     </ul>

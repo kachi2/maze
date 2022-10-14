@@ -21,6 +21,7 @@ use App\Notifications\DepositPaid;
 use App\Notifications\InvestmentCreated;
 use App\User;
 use App\UserNotify;
+use App\WalletDeposit;
 use Exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\RedirectResponse;
@@ -93,7 +94,7 @@ class DepositController extends Controller
         if (count($sort) > 0 && in_array($sort[0], $this->sortable))
             $query->orderBy($sort[0], $sort[1]);
 
-        $deposits = $query->latest()->get();
+        $deposits = $query->latest()->simplePaginate();
 
         $breadcrumb = [
             [
@@ -106,6 +107,19 @@ class DepositController extends Controller
             'deposits' => $deposits,
             'breadcrumb' => $breadcrumb
         ]);
+    }
+
+    public function WalletDeposit(){
+       $deposits =  WalletDeposit::latest()->simplePaginate(20);
+       return view('admin.wallet_deposits')->with('deposits', $deposits);
+    }
+
+    public function WalletDepositUpdate($id){
+           WalletDeposit::where('id', decrypt($id))->first()
+            ->update(['status' => 1]);
+            Session::flash('msg', 'success');
+            Session::flash('message', 'Deposit Approved Successfully'); 
+            return redirect()->back();
     }
 
     /**

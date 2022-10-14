@@ -34,8 +34,11 @@ Route::domain('agency.mazeoption.com')->group(function(){
     Route::get('/agent/referral', 'Agency\HomeController@AgentReferral')->name('agent.referral');
     
     });
-
     #========== end of agent routes ======================
+
+
+
+
 Route::get('/index', 'WelcomeController@index')->name('index');
 Auth::routes(['verify' => true]);
 route::post('/user/register', 'Auth\RegisterController@create_user')->name('register_user');

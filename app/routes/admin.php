@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DepositController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@home')->name('admin.home');
@@ -87,5 +88,10 @@ Route::get('tokens', 'TokenController@index')->name('admin.tokens');
 Route::get('tokens/add', 'TokenController@addToken')->name('admin.tokens.add');
 Route::post('tokens/add', 'TokenController@storeToken')->name('admin.tokens.add');
 Route::post('tokens/{id}/delete', 'TokenController@destroy')->name('admin.tokens.delete');
+
+Route::get('/wallet/deposits/index', 'DepositController@WalletDeposit')->name('admin.wallet.deposit');
+Route::post('/wallet/deposits/update/{id}', 'DepositController@WalletDepositUpdate')->name('admin.wallet.update');
+Route::get('/wallet/address/index', 'HomeController@WalletAddresses')->name('admin.wallet.addresses');
+Route::get('/wallet/address/delete/{id}', 'HomeController@WalletAddressDelete')->name('wallet.address.delete');
 
 

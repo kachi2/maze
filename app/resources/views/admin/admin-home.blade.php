@@ -12,7 +12,7 @@
                                         <div class="nk-block-head-content">
                                             <h3 class="nk-block-title page-title">Welcome, Admin!</h3>
                                             <div class="nk-block-des text-soft">
-                                                <p>At a glance summary of your account. </p>
+                                               
                                             </div>
                                         </div><!-- .nk-block-head-content -->
                                         <div class="nk-block-head-content">
@@ -28,7 +28,7 @@
                                                 <div class="card-inner">
                                                     <div class="card-title-group align-start mb-0">
                                                         <div class="card-title">
-                                                            <h6 class="subtitle text-light ">Accumulated Balance</h6>
+                                                            <h6 class="subtitle text-light ">Users Wallet Balances</h6>
                                                         </div>
                                                         <div class="card-tools">
                                                             <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Overview of your deposits and investments"></em>
@@ -41,11 +41,11 @@
                                                     <div class="invest-data">
                                                         <div class="invest-data-amount g-2">
                                                             <div class="invest-data-history">
-                                                                <div class="title text-light ">Accumulated Bonus</div>
+                                                                <div class="title text-light ">Bonus wallet</div>
                                                                 <div class="amount text-light "><span class="currency currency-ng text-light ">{{ moneyFormat(get_admin_stats()['bonus'], 'USD') }}</span></div>
                                                             </div>
                                                             <div class="invest-data-history">
-                                                                <div class="title text-light ">Accumulated Referrals Bonus</div>
+                                                                <div class="title text-light ">Referrals Bonus</div>
                                                                 <div class="amount text-light "> <span class="currency currency-NG text-light ">{{ moneyFormat(get_admin_stats()['referral_bonus'], 'USD') }}</span></div>
                                                             </div>
                                                         </div>
@@ -61,24 +61,28 @@
                                                 <div class="card-inner">
                                                     <div class="card-title-group align-start mb-0">
                                                         <div class="card-title">
-                                                            <h6 class="subtitle text-light ">Total Deposits</h6>
+                                                            <h6 class="subtitle text-light ">Total Investments</h6>
                                                         </div>
                                                         <div class="card-tools">
                                                             <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Overview of your deposits and investments"></em>
                                                         </div>
                                                     </div>
                                                     <div class="card-amount ">
-                                                        <span class="amount text-light"> <span class="currency currency-usd text-light">{{ moneyFormat($total_deposits, 'USD') }}</span>
+                                                        <span class="amount text-light"> <span class="currency currency-usd text-light">{{ moneyFormat($total_investment, 'USD') }}</span>
                                                         </span>
                                                     </div>
                                                     <div class="invest-data">
                                                         <div class="invest-data-amount g-2">
                                                             <div class="invest-data-history">
-                                                                <div class="title text-light ">Active Deposits</div>
+                                                                <div class="title text-light ">Active Investments</div>
+                                                                <div class="amount text-light "> <span class="currency currency-NG text-light ">{{ moneyFormat($last_deposit, 'USD') }}</span></div>
+                                                            </div>
+                                                            <div class="invest-data-history">
+                                                                <div class="title text-light ">Approved Deposits</div>
                                                                 <div class="amount text-light "><span class="currency currency-ng text-light ">{{ moneyFormat($active_deposits, 'USD') }}</span></div>
                                                             </div>
                                                             <div class="invest-data-history">
-                                                                <div class="title text-light ">Last Deposit</div>
+                                                                <div class="title text-light ">Pending Deposit</div>
                                                                 <div class="amount text-light "> <span class="currency currency-NG text-light ">{{ moneyFormat($last_deposit, 'USD') }}</span></div>
                                                             </div>
                                                         </div>
@@ -143,7 +147,7 @@
                                                             
                                                             <div class="invest-data-history">
                                                                 <div class="title text-light ">Total Admin</div>
-                                                                <div class="amount text-light "> <span class="currency currency-usd text-light ">2 Admin Accounts</span></div>
+                                                                <div class="amount text-light "> <span class="currency currency-usd text-light ">Admin Accounts</span></div>
                                                             </div>
                                                               <div class="invest-data-history">
                                                                 <div class="title text-light ">Today Users</div>

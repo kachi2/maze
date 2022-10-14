@@ -19,7 +19,13 @@
                             <li class="nk-menu-item">
                                 <a href="{{ route('admin.deposits') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-cc-alt2"></em></span>
-                                    <span class="nk-menu-text">Manage Deposits</span>
+                                    <span class="nk-menu-text">Manage Investments</span>
+                                </a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{ route('admin.wallet.deposit') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-cc-alt2"></em></span>
+                                    <span class="nk-menu-text">Wallet Deposits</span>
                                 </a>
                             </li>
 
@@ -39,26 +45,29 @@
                                     <span class="nk-menu-text">Packages</span>
                                 </a><!-- .nk-menu-sub -->
                             </li><!-- .nk-menu-item -->
-
-                            <li class="nk-menu-heading">
-                                <h6 class="overline-title text-primary-alt">Deposit Request</h6>
-                            </li><!-- .nk-menu-heading -->
                             <li class="nk-menu-item ">
                                 <a href="{{ route('admin.payment_request') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-                                    <span class="nk-menu-text">Deposit Request</span>
+                                    <span class="nk-menu-text">Direct Deposit</span>
+                                </a><!-- .nk-menu-sub -->
+                            </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-item ">
+                                <a href="{{ route('admin.payment_request') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                                    <span class="nk-menu-text"> Reward Center </span>
                                 </a><!-- .nk-menu-sub -->
                             </li><!-- .nk-menu-item -->
 
-                            <li class="nk-menu-heading">
+                            {{-- <li class="nk-menu-heading">
                                 <h6 class="overline-title text-primary-alt">Send Bonus</h6>
-                            </li><!-- .nk-menu-heading -->
-                            <li class="nk-menu-item ">
+                            </li> --}}
+                            <!-- .nk-menu-heading -->
+                            {{-- <li class="nk-menu-item ">
                                 <a href="{{ route('admin.users.send_users_bonus') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
                                     <span class="nk-menu-text">Send Bonus</span>
                                 </a><!-- .nk-menu-sub -->
-                            </li><!-- .nk-menu-item -->
+                            </li><!-- .nk-menu-item --> --}}
                               <li class="nk-menu-heading">
                                 <h6 class="overline-title text-primary-alt">Daily Payouts</h6>
                             </li><!-- .nk-menu-heading -->
@@ -72,9 +81,9 @@
                                 <h6 class="overline-title text-primary-alt">Settings</h6>
                             </li><!-- .nk-menu-heading -->
                             <li class="nk-menu-item has-sub">
-                                <a href="#" class="nk-menu-link ">
+                                <a href="{{route('admin.wallet.addresses')}}" class="nk-menu-link ">
                                     <span class="nk-menu-icon"><em class="icon ni ni-signin"></em></span>
-                                    <span class="nk-menu-text">Manage KYC</span>
+                                    <span class="nk-menu-text">Wallet Address</span>
                                 </a><!-- .nk-menu-sub -->
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-item has-sub">
