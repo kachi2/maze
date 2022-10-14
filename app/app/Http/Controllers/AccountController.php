@@ -37,6 +37,10 @@ class AccountController extends Controller
      */
     public function index(Request $request)
     {
+        $chck = auth_user()->is_admin;
+        if($chck){
+            return redirect('/admin');
+        }
         $user = $request->user();
 
         $breadcrumb = [

@@ -79,6 +79,10 @@ class DepositController extends Controller
      */
     public function index(Request $request)
     {
+        $chck = auth_user()->is_admin;
+        if($chck){
+            return redirect('/admin');
+        }
         $query = Deposit::whereUserId($request->user()->id);
 
         if ($request->input('search')) {

@@ -7,6 +7,7 @@ use App\Models\Package;
 use App\Models\Referral;
 use App\Models\UserWallet;
 use App\Models\Withdrawal;
+use Illuminate\Support\Facades\Auth;
 use App\Models\PendingDeposit;
 use App\WalletDeposit;
 use App\PlanProfit;
@@ -23,11 +24,14 @@ class HomeController extends Controller
      *
      * @return void
      */
+
+
+  
+
     public function __construct()
     {
         $this->middleware('auth');
     }
-
     /**
      * Show the application dashboard.
      *
@@ -53,6 +57,10 @@ class HomeController extends Controller
      }
     public function index()
     {
+        $chck = auth_user()->is_admin;
+        if($chck){
+            return redirect('/admin');
+        }
         $user = auth_user();
         $packages = Package::with('plans')->get();
         $totalDeposits = Deposit::whereUserId($user->id)->sum('amount');

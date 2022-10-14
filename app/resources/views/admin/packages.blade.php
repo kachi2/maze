@@ -1,6 +1,5 @@
 @extends('layouts.admin', ['page_title' => 'Packages'])
 @section('content')
-
     <div class="nk-content nk-content-fluid">
                     <div class="container-xl wide-lg">
                         <div class="nk-content-body">
