@@ -2,10 +2,10 @@
     <div class="nk-app-root">
         <div class="nk-apps-sidebar is-dark">
             <div class="nk-apps-brand">
-                <a href="{{route('home')}}" class="logo-link">
-                    <img class="logo-light logo-img" src="{{asset('/logo2.png')}}" srcset="{{asset('/logo2.png')}} 2x" alt="logo">
-                    <img class="logo-dark logo-img" src="{{asset('/logo2.png')}}" srcset="{{asset('/logo2.png')}} 2x" alt="logo-dark">
-                </a>
+                {{-- <a href="{{route('web.home')}}" class="logo-link">
+                    <img class="logo-light logo-img" src="{{asset('/logo.png')}}" srcset="{{asset('/logo.png')}} 2x" alt="logo">
+                    <img class="logo-dark logo-img" src="{{asset('/logo.png')}}" srcset="{{asset('/logo.png')}} 2x" alt="logo-dark">
+                </a> --}}
             </div>
             <div class="nk-sidebar-element">
                 <div class="nk-sidebar-body">
@@ -14,19 +14,19 @@
                             <!-- Menu -->
                             <ul class="nk-menu apps-menu">
                                 <li class="nk-menu-item">
-                                    <a href="{{ route('home') }}" class="nk-menu-link" title="Dashboard">
+                                    <a href="{{ route('web.home') }}" class="nk-menu-link" title="Dashboard">
                                         <span class="nk-menu-icon"><em class="icon ni ni-dashboard"></em></span>
                                     </a>
                                 </li>
                                 <li class="nk-menu-hr"></li>
                                 <li class="nk-menu-item">
-                                    <a href="{{ route('account') }}" class="nk-menu-link" title="Manage Account">
+                                    <a href="{{ route('web.account') }}" class="nk-menu-link" title="Manage Account">
                                         <span class="nk-menu-icon"><em class="icon ni ni-user"></em></span>
                                     </a>
                                 </li>
                                
                                 <li class="nk-menu-item">
-                                    <a href="{{ route('deposits') }}" class="nk-menu-link" title="View Deposits">
+                                    <a href="{{ route('web.deposits') }}" class="nk-menu-link" title="View Deposits">
                                         <span class="nk-menu-icon"><em class="icon ni ni-invest"></em></span>
                                     </a>
                                 </li>
@@ -34,7 +34,7 @@
                                
                                 
                                 <li class="nk-menu-item">
-                                    <a href="{{ route('transfer') }}" class="nk-menu-link" title="Transfer Funds">
+                                    <a href="{{ route('web.transfer') }}" class="nk-menu-link" title="Transfer Funds">
                                         <span class="nk-menu-icon"><em class="icon ni ni-repeat"></em></span>
                                         
                                     </a>
@@ -42,7 +42,7 @@
                                
                                 <li class="nk-menu-hr"></li>
                                 <li class="nk-menu-item">
-                                    <a href="{{ route('user.packages') }}" class="nk-menu-link" title="Packages">
+                                    <a href="{{ route('web.user.packages') }}" class="nk-menu-link" title="Packages">
                                         <span class="nk-menu-icon"><em class="icon ni ni-layers"></em></span>
                                     </a>
                                 </li>
@@ -70,15 +70,15 @@
                             </div>
                             <div class="dropdown-inner">
                                                 <ul class="link-list">
-                                                  <li><a href="{{ route('account') }}"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                                    <li><a href="{{ route('account.activities') }}"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
+                                                  <li><a href="{{ route('web.account') }}"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
+                                                    <li><a href="{{ route('web.account.activities') }}"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
                                                     <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                                                     
                                                      <li>
                                                          @if(auth()->user()->email_verified_at == null)
                                                         <div class="user-status user-status-unverified"> <span style="color:#526484" >  Account Status:</span> Unverified </div> 
                                                         
-                                                        <form method="POST" action="{{route('verification.resend')}}" class="authentication-form" id="verify">
+                                                        <form method="POST" action="{{route('web.verification.resend')}}" class="authentication-form" id="verify">
                                                @csrf
                                            <em> <button type="submit" class="icon ni ni-external btn btn-primay">Resend Verification link</button></em>
                                             </form>
@@ -118,11 +118,11 @@
                             <div class="nk-header-app-name">
                                 <div class="nk-header-app-logo">
                             
-                                          <img class="logo-dark logo-img" src="{{asset('/logo2.png')}}" srcset="{{asset('/logo2.png')}} 2x" alt="logo-dark">
+                                          <img class="logo-dark logo-img" src="{{asset('/fav.png')}}" srcset="{{asset('/fav.png')}} 2x" alt="logo-dark">
                                 </div>
                                 <div class="nk-header-app-info">
-                                    <span class="sub-text">Think Richly</span>
-                                    <span class="lead-text">Zenith Capital</span>
+                                    {{-- <span class="sub-text">Think Richly</span> --}}
+                                    <span class="lead-text">Mazeoptions</span>
                                 </div>
                             </div>
                             <div class="nk-header-menu is-light">
@@ -130,12 +130,12 @@
                                     <!-- Menu -->
                                     <ul class="nk-menu nk-menu-main">
                                         <li class="nk-menu-item">
-                                            <a href="{{ route('deposits') }}" class="nk-menu-link">
+                                            <a href="{{route('web.wallets.deposit.index')}}" class="nk-menu-link">
                                                 <span class="nk-menu-text btn-primary btn-sm">Deposit</span>
                                             </a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{ route('withdrawals') }}" class="nk-menu-link">
+                                            <a href="{{ route('web.withdrawals') }}" class="nk-menu-link">
                                                 <span class="nk-menu-text btn-warning btn btn-sm">Withdraw</span>
                                             </a>
                                         </li>
@@ -193,7 +193,7 @@
                                             </div><!-- .nk-dropdown-body -->
                                            @if(count($notification) > 0)
                                             <div class="dropdown-foot center">
-                                                <a href="{{route('create.notifications')}}">Clear All</a>
+                                                <a href="{{route('web.create.notifications')}}">Clear All</a>
                                             </div>
                                             @endif
                                         </div>
@@ -228,15 +228,15 @@
                                             </div>
                                             <div class="dropdown-inner">
                                                 <ul class="link-list">
-                                                  <li><a href="{{ route('account') }}"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                                    <li><a href="{{ route('account.activities') }}"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
+                                                  <li><a href="{{ route('web.account') }}"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
+                                                    <li><a href="{{ route('web.account.activities') }}"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
                                                     <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                                                     
                                                      <li>
                                                          @if(auth()->user()->email_verified_at == null)
                                                         <div class="user-status user-status-unverified"> <span style="color:#526484" >  Account Status:</span> Unverified </div> 
                                                         
-                                                        <form method="POST" action="{{route('verification.resend')}}" class="authentication-form" id="verify">
+                                                        <form method="POST" action="{{route('web.verification.resend')}}" class="authentication-form" id="verify">
                                                @csrf
                                            <em> <button type="submit" class="icon ni ni-external btn btn-primay">Resend Verification link</button></em>
                                             </form>

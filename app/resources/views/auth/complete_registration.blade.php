@@ -92,7 +92,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="nk-block-content text-center text-lg-left">
-                                        <p class="text-soft">&copy; {{date('Y')}} Zenithcapital. All Rights Reserved.</p>
+                                        <p class="text-soft">&copy; {{date('Y')}} Mazeoptions. All Rights Reserved.</p>
                                     </div>
                                 </div>
                             </div>

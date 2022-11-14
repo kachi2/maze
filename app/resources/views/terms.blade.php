@@ -1,45 +1,167 @@
-@extends('layouts.landing', ['page_title' => 'Terms and Condition'])
+@extends('layouts.landing', ['page_title' => 'About Us', 'heading' => 'About Us', 'sub_heading' => 'Enjoy real benefits and rewards on your accrue mining.'])
 @section('content')
-<div class="p-4"></div>
-<div class="terms-conditions-area ptb-100">
-    <div class="container">
-        <div class="terms-conditions-content">
-            <h6>Mazeoptions Privacy Notice</h6>
-            <p>This Privacy Notice describes how Mazeoptions collects and processes your personal information through the Mazeoptions websites and applications that reference this Privacy Notice. Mazeoptions refers to an ecosystem comprising Mazeoptions websites (whose domain names include but are not limited to www.Mazeoptions.com/).
-                This Privacy Policy applies to all platforms, websites, and departments of Mazeoptions and Mazeoptions Operators. By using Mazeoptions Services, you are consenting to the collection, storage, processing and transfer of your personal information as described in this Privacy Policy.
-               </p>
-            <p style="font-weight:bold">What Personal Information does Mazeoptions collect and process? Why does Mazeoptions process my personal information ?</p>
-            <p>Your information we collect includes the following</p>
-            <p>mail address <br> name <br> gender<br>  home address <br> phone number<br> nationality <br> device ID <br> transactional information
-            </p>
-
-            <p style="font-weight:bold">Can Children Use Mazeoptions Services?</p>
-            <p> Mazeoptions  does not allow anyone under the age of 18 to use Mazeoptions Services.</p>
-               
-            <p style="font-weight:bold">What About Cookies and Other Identifiers?</p>
-            <p>We use cookies and similar tools to enhance your user experience, provide our services, and understand how customers use our services so we can make improvements. Depending on applicable laws in the region you are located in, the cookie banner on your browser will tell you how to accept or refuse cookies.</p>
-          
-            <p style="font-weight:bold"> Does Mazeoptions Share My Personal Information?</p>
-            <p>Information about our users is an important part of our business and we are not in the business of selling our users' personal information to others.   Mazeoptions shares users' personal information only as described below and with the subsidiaries or affiliates of Mazeoptions that are either subject to this Privacy Notice or follow practices at least as protective as those described in this Privacy Notice..</p>
-          
-          
-            <p style="font-weight:bold">How Secure is My Information?.</p>
-            <p>We design our systems with your security and privacy in mind.  We work to protect the security of your personal information during transmission by using encryption protocols and software.
-                We maintain physical, electronic and procedural safeguards in connection with the collection, storage and disclosure of your personal information. Our security procedures mean that we may ask you to verify your identity to protect you against unauthorised access to your account password. We recommend using a unique password for your Mazeoptions account that is not utilized for other online accounts and to sign off when you finish using a shared computer.</p>
-           
-                <p style="font-weight:bold">  What Rights Do I Have?</p>
-                <ol>
-                <li><strong> Right to access: </strong>you have the right to obtain confirmation that your Data are processed and to obtain a copy of it as well as certain information related to its processing</li>
-                    <li><strong> Right to rectify:</strong> you can request the rectification of your Data which are inaccurate, and also add to it. You can also change your personal information in your Account at any time</li>
-                        <li><strong> Right to delete:</strong> you can, in some cases, have your Data deleted</li>
-                            <li><strong> Right to object: </strong>you can object, for reasons relating to your particular situation, to the processing of your Data. For instance, you have the right to object to commercial prospection</li>
-                            <li><strong>Right to withdraw your consent:</strong> for processing requiring your consent, you have the right to withdraw your consent at any time. Exercising this right does not affect the lawfulness of the processing based on the consent given before the withdrawal of the latter;</li>
-            
-                        </ol>
-            <p>Last updated: January 25, 2022 at 12:00 pm</p>
+  @include('partials.landing-header') 
+     <!-- Banner Area Starts -->
+   <section id="main-content" class="">
+         <div id="demos">
+            <h2 style="display:none;">heading</h2>
+            <div id="carouselTicker" class="carouselTicker">
+               <ul class="carouselTicker__list">
+               @if(count($coins) > 0)
+               @foreach ($coins as  $coin )
+                  <li class="carouselTicker__item">
+                     <div class="coin_info">
+                        <div class="inner">
+                           <div class="coin_name">
+                              {{$coin['name']}}
+                              @if($coin['market_cap_change_percentage_24h'] > 0)
+                              <span class="update_change_plus">{{$coin['market_cap_change_percentage_24h']}}</span>
+                              @else
+                              <span class="update_change_minus">{{$coin['market_cap_change_percentage_24h']}}</span>
+                              @endif
+                           </div>
+                           <div class="coin_price">
+                             ${{number_format($coin['current_price'],2)}}
+                             @if($coin['price_change_24h'] > 0) 
+                             <span class="scsl__change_plus" style="color:lightgreen">{{$coin['price_change_24h']}}%</span>
+                             @else
+                             <span class="scsl__change_minus">{{$coin['price_change_24h']}}%</span>
+                             @endif
+                           </div>
+                           <div class="coin_time">
+                              ${{$coin['market_cap']}}
+                           </div>
+                        </div>
+                     </div>
+                  </li>  
+               @endforeach
+               @endif
+               </ul>
+            </div>
+         </div>
+      </section>
+        <section id="inner_page_infor" class="innerpage_banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+                        <div class="inner_page_info">
+                            <h3>Terms & Conditions</h3>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><i class="fa fa-angle-right"></i></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
+        <!-- End breadcumb Area -->
+        <!-- about-area start -->
+        
+        <div class="about-area" style="padding-top:20px">
+            <div class="container">
+                <div class="row">
+                    <!-- column end -->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="about-content">
+							<h3>Risk Notice</h3>
+                            <p style="text-align:left">Cryptocurrencies is a not backed or value guaranteed by any financial institution; when purchasing coins the customer assumes all risk the coins may become worthless in value.
+                            We at Acrabuscapital assumes this risk making it more safe for you to trade with us </p> </div>
+                    </div>
+                    <!-- column end -->
+                </div>
+            </div>
+        </div>
+  <div class="about-area ">
+            <div class="container">
+                <div class="row">
+                   
+                    <!-- column end -->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="about-content">
+							<h3>Severability</h3>
+                             <p style="text-align:left">In the event any court shall declare any section or sections of this Agreement invalid or void, such declaration shall not invalidate the entire Agreement and all other paragraphs of the Agreement shall remain in full force and effect.</p>
+                              
+                        </div>
+                    </div>
+                    <!-- column end -->
+                </div>
+            </div>
+        </div>
 
+         <div class="about-area">
+            <div class="container">
+                <div class="row">
+                   
+                    <!-- column end -->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="about-content">
+							<h3>Customer input errors</h3>
+                             <p style="text-align:left">It is the sole responsibility of the customer to check the accuracy of information entered and saved on the website. Account details displayed on the order summary webpage will be the final transfer destination. In the case that this information is incorrect, and funds are transferred to an unintended destination, the company shall not reimburse the customer and shall not transfer additional funds. As such customers must ensure the Bitcoin address and bank information they enter is completely correct.</p>
+                              
+                        </div>
+                    </div>
+                    <!-- column end -->
+                </div>
+            </div>
+        </div>
 
+        <div class="about-area ">
+            <div class="container">
+                <div class="row">
+                   
+                    <!-- column end -->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="about-content">
+							<h3>Binding Agreement</h3>
+                             <p style="text-align:left">The terms and provisions of this Agreement are binding upon Your heirs, successors, assigns, and other representatives. This Agreement may be executed in counterparts, each of which shall be considered to be an original, but both of which constitute the same Agreement..</p>
+                                                    
+                        </div>
+                    </div>
+                    <!-- column end -->
+                </div>
+            </div>
+        </div>
+
+         <div class="about-area ">
+            <div class="container">
+                <div class="row">
+                   
+                    <!-- column end -->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="about-content">
+							<h3>Expired orders</h3>
+                             <p style="text-align:left">If the company receives payment for an order that has already expired, the company reserves the right to recalculate the Bitcoin to Thai Baht exchange rate at the time of processing the transfer to the customer. This may result in the customer receiving less bitcoins or Thai Baht than the original ordered amount</p>
+                              
+                        </div>
+                    </div>
+                    <!-- column end -->
+                </div>
+            </div>
+        </div>
+         <div class="about-area ">
+            <div class="container">
+                <div class="row">
+                   
+                    <!-- column end -->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="about-content">
+							<h3>Choice of Law</h3>
+                         <p style="text-align:left">This Agreement, and its application and interpretation, shall be governed exclusively by the laws of the State of Georgia, without regard to its conflict of law rules. You consent to the exclusive jurisdiction of the federal and state courts located in or near Atlanta, Georgia for any dispute arising under this Agreement.</p>
+                              
+                        </div>
+                    </div>
+                    <!-- column end -->
+                </div>
+            </div>
+        </div>
+        <!-- about-area end -->
+        <!-- Start About Area -->
+       
+      
+        <!-- facts Section Ends -->
+  @include('partials.landing-footer')
 @endsection

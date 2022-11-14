@@ -1,39 +1,110 @@
 
-@extends('layouts.landing', ['page_title' => 'About Us', 'heading' => 'About Us'])
+@extends('layouts.landing', ['page_title' => 'Home', 'heading' => 'Home'])
 @section('content')
-<div class="p-4"></div>
-<div class="about-area ptb-100">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 col-md-12">
-                <div class="about-content">
-                    <span class="sub-title">About Mazeoptions</span>
-                    <h2>About Us</h2>
-                    <p>Mazeoptions is a fully lincensed company with Employer Identification Number: 88-2398091, providing a comprehensive investment services internationally. 
-
-                        Mazeoptions work in the field of real estate and financing promising developments on cryptocurrency market with blockchain technology. According to experts, blockchain technologies currently have great opportunity. Lots of business ideas related to blockchain technologies become more successful and every day by day it bring high profits to their creator
-                        
-                        We track and analyze most business ideas. It allows us to get high profits. For our investor do not need to research independently in which project it is more profitable. So our investor can invest their capital and then receive an interest on the profit.
-                        
-                        We want to provide each client with the best trading opportunities in multiple trading sectors such as Forex, Shares, Commodities and/or Indices offering innumerable financial instruments. The beginners among investors will value pleasant and comprehensive trading environment of the MT5 platform that also includes highly-developed and interactive trading tools for professionals. Mazeoptions gives you special trading opportunities in a dynamic financial environment</p>
-                    <div class="features-text">
-                        <h6>How we stand-out</h6>
-                        <p>With Mazeoptions at your disposal you have an online broker that in a class of its own – We take product variety literally: As a customer of Mazeoptions you have access to the biggest markets, all important asset classes and the most exciting values. All this at first-class conditions. Whether for trading commodities, futures or crypto-currencies, whether for hedging with foreign exchange, options and CFDs - use the most innovative trading technologies to move quickly and take advantage of presented opportunities. Trade like the pros by using modern financial instruments to experience trading that was once reserved for institutional investors..</p>
-                    </div>
-                    <div class="features-text">
-                        <h6>Our Mission</h6>
-                        <p>Our mission is to be the infrastructure services provider for the blockchain ecosystem.</p>
-                    </div>
-                </div>
+  @include('partials.landing-header') 
+   <section id="main-content" class="">
+         <div id="demos">
+            <h2 style="display:none;">heading</h2>
+            <div id="carouselTicker" class="carouselTicker">
+               <ul class="carouselTicker__list">
+               @if(count($coins) > 0)
+               @foreach ($coins as  $coin )
+                  <li class="carouselTicker__item">
+                     <div class="coin_info">
+                        <div class="inner">
+                           <div class="coin_name">
+                              {{$coin['name']}}
+                              @if($coin['market_cap_change_percentage_24h'] > 0)
+                              <span class="update_change_plus">{{$coin['market_cap_change_percentage_24h']}}</span>
+                              @else
+                              <span class="update_change_minus">{{$coin['market_cap_change_percentage_24h']}}</span>
+                              @endif
+                           </div>
+                           <div class="coin_price">
+                             ${{number_format($coin['current_price'],2)}}
+                             @if($coin['price_change_24h'] > 0) 
+                             <span class="scsl__change_plus" style="color:lightgreen">{{$coin['price_change_24h']}}%</span>
+                             @else
+                             <span class="scsl__change_minus">{{$coin['price_change_24h']}}%</span>
+                             @endif
+                           </div>
+                           <div class="coin_time">
+                              ${{$coin['market_cap']}}
+                           </div>
+                        </div>
+                     </div>
+                  </li>  
+               @endforeach
+               @endif
+               </ul>
             </div>
-            <div class="col-lg-6 col-md-12">
-                <div class="about-image">
-                    <img src="{{asset('/frontend_assets/assets/img/phon.png')}}" data-aos="fade-up" alt="about">
+         </div>
+      </section>
+        <section id="inner_page_infor" class="innerpage_banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+                        <div class="inner_page_info">
+                            <h3>About Us</h3>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><i class="fa fa-angle-right"></i></li>
+                                <li><a href="#">About Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+
+      <section class="layout_padding ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-sm-12 col-xs-12">
+                    <div class="full">
+                        <h4 class="heading_style2">Looking for a First-Class Cryptocurrency Expert?</h4>
+                        <p class="">mazeoptions.com is your partner for Trading online through our premium online brokerage. As a provider for online trading and investment services we offer you reliability that meets the highest standards.Mazeoptions offers you the entire spectrum of asset classes and financial instruments, including stocks, Indices, CFD’s, currencies and Cryptocurrencies. With more than 50 exchanges worldwide, more markets are now available to you than ever before.
+
+Because that is important to us: that every investor - regardless of whether they are new or experienced traders - can find the right instrument for their investment</p>
+                     </div>
+                </div>
+                 <div class="col-md-3 col-sm-12 col-xs-12">
+                 <img src="{{asset('/frontend_assets/images/pr4.jpg')}}">
+                 </div>
+            </div>
+        </div>
+    </section>
+
+      <section class="layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+                        <h2 class="heading_style2">EXCELLENT CUSTOMER SERVICE</h2>
+                        <p class="left_text">Round-the-Clock Support.
+                      <div style="padding-left:15px">  <ul style="list-style-type:circle">
+                        <li  class="p-2"> 5 days a week and 24 hours a day easy accessibility by phone, email or live chat. Schedule a meeting with our trading professionals via our callback service.</li>
+                         <li  class="p-2"> Our service is competent and certified. Experienced traders are available to answer your questions.</li>
+                        <li  class="p-2"> Our staff will help you in a targeted manner even in tricky matters - if desired and required, for example by possible connection to your system.</li>
+                        </ul>
+                        </div>
+                        </p>
+                        <p class="left_text">Low Cost - Fair Trading Conditions and Transparency
+                        <div style="padding-left:15px">  <ul style="list-style-type:circle">
+                        <li  class="p-2"> Trade withMazeoptions at low costs.</li>
+                         <li  class="p-2">We have received high customer satisfaction, among other things also thanks to the favorable Trading conditions..</li>
+                        <li  class="p-2">The large product variety ofMazeoptions offers countless possibilities on the markets worldwide</li>
+                        
+                        </ul> </div>
+                        </p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  @include('partials.landing-footer')
 @endsection
 
 

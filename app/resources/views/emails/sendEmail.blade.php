@@ -17,7 +17,7 @@
             <table style="min-width:100%;max-width:100%;width:100px;border-collapse:collapse;border-spacing:0px" role="presentation" border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-            <td><img style="border:0;display:block;outline:none;text-decoration:none;height:auto;min-width:100%;width:100%;max-width:100%;font-size:13px" src="https://ci5.googleusercontent.com/proxy/Ti0zQQ_aCDepg5TRD-jYjhL78gzwWk8lni6IhVqO_ZU_JrEX6UAjxkKuH6cXuCjUmUSe20fNeoFuKNmItMjqaKk4ZOTM1QY=s0-d-e1-ft#https://theadventcapital.com/mobile/images/email.png" width="100" height="auto" class="CToWUd" data-bit="iit"></td>
+            <td><img style="border:0;display:block;outline:none;text-decoration:none;height:auto;min-width:100%;width:100%;max-width:100%;font-size:13px" src="https://ci5.googleusercontent.com/proxy/Ti0zQQ_aCDepg5TRD-jYjhL78gzwWk8lni6IhVqO_ZU_JrEX6UAjxkKuH6cXuCjUmUSe20fNeoFuKNmItMjqaKk4ZOTM1QY=s0-d-e1-ft#https://mazeoptions.com/mobile/images/email.png" width="100" height="auto" class="CToWUd" data-bit="iit"></td>
             </tr>
             </tbody>
             </table>
@@ -97,7 +97,7 @@
             <table style="border-collapse:separate;line-height:100%" role="presentation" border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-            <td style="border:none;border-radius:3px;background:#160f42" role="presentation" align="center" valign="middle" bgcolor="#FCD535"><a style="display:inline-block;background:#160f42;color:#fff;font-family:Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:14px;font-weight:900;line-height:15px;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;border-radius:3px" href="https://theadventcapital.com/register" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://theadventcapital.com/register&amp;source=gmail&amp;ust=1665788667861000&amp;usg=AOvVaw0g86b2Vmu9s3p0_O4GIAzA"> Register Now and Earn $50.00 cash voucher</a></td>
+            <td style="border:none;border-radius:3px;background:#160f42" role="presentation" align="center" valign="middle" bgcolor="#FCD535"><a style="display:inline-block;background:#160f42;color:#fff;font-family:Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:14px;font-weight:900;line-height:15px;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;border-radius:3px" href="https://mazeoptions.com/register" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://mazeoptions.com/register&amp;source=gmail&amp;ust=1665788667861000&amp;usg=AOvVaw0g86b2Vmu9s3p0_O4GIAzA"> Register Now and Earn $50.00 cash voucher</a></td>
             </tr>
             </tbody>
             </table>
@@ -219,7 +219,7 @@
             </tr>
             <tr>
             <td style="font-size:0px;padding:5px 5px 5px 5px;word-break:break-word" align="center">
-            <div style="font-family:Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:14px;line-height:20px;text-align:center;color:#000000">Deposit Bitcoin to Advent system and start investing &nbsp;<a id="m_-6009173775517576313m_504976421850382900ireh51" style="color:#f0b90b;font-weight:900" href="https://theadventcapital.com/register" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://theadventcapital.com/register&amp;source=gmail&amp;ust=1665788667861000&amp;usg=AOvVaw0g86b2Vmu9s3p0_O4GIAzA">Start Now</a></div>
+            <div style="font-family:Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:14px;line-height:20px;text-align:center;color:#000000">Deposit Bitcoin to Mazeoptions system and start investing &nbsp;<a id="m_-6009173775517576313m_504976421850382900ireh51" style="color:#f0b90b;font-weight:900" href="https://mazeoptions.com/register" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://mazeoptions.com/register&amp;source=gmail&amp;ust=1665788667861000&amp;usg=AOvVaw0g86b2Vmu9s3p0_O4GIAzA">Start Now</a></div>
             </td>
             </tr>
             </tbody>
@@ -233,7 +233,7 @@
             <table style="border-collapse:separate;line-height:100%" role="presentation" border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-            <td style="border:none;border-radius:3px;background:#160f42" role="presentation" align="center" valign="middle" bgcolor="#FCD535"><a style="display:inline-block;background:#160f42;color:#fff;font-family:Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:14px;font-weight:900;line-height:15px;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;border-radius:3px" href="https://theadventcapital.com/register" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://theadventcapital.com/register&amp;source=gmail&amp;ust=1665788667861000&amp;usg=AOvVaw0g86b2Vmu9s3p0_O4GIAzA"> Get Started </a></td>
+            <td style="border:none;border-radius:3px;background:#160f42" role="presentation" align="center" valign="middle" bgcolor="#FCD535"><a style="display:inline-block;background:#160f42;color:#fff;font-family:Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:14px;font-weight:900;line-height:15px;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;border-radius:3px" href="https://mazeoptions.com/register" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://mazeoptions.com/register&amp;source=gmail&amp;ust=1665788667861000&amp;usg=AOvVaw0g86b2Vmu9s3p0_O4GIAzA"> Get Started </a></td>
             </tr>
             </tbody>
             </table>
@@ -325,7 +325,7 @@
             <td style="font-size:0px;padding:5px 5px 5px 5px;word-break:break-word" align="left">
             <div style="font-family:rial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:11px;line-height:15px;text-align:left;color:#000000">
             <div>
-            <div><strong>Risk warning: </strong>Cryptocurrency trading and investment is subject to high market risk. Advent Capital will ensure your capital is safe while making profits for you</div>
+            <div><strong>Risk warning: </strong>Cryptocurrency trading and investment is subject to high market risk. Mazeoptions Capital will ensure your capital is safe while making profits for you</div>
             <div>&nbsp;</div>
             </div>
             <div><strong>Kindly note:</strong> You can withdraw your profit at any time, you have full control of your account</div>
@@ -335,9 +335,9 @@
             <tr>
              <td style="font-size:0px;padding:5px 5px 5px 5px;word-break:break-word" align="left">
             <div style="font-family:Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:11px;line-height:15px;text-align:left;color:#000000">
-            <div id="m_-6009173775517576313m_504976421850382900iku7oh">For more information about how we process data, please see our <a id="m_-6009173775517576313m_504976421850382900i6dmh" style="font-family:'Microsoft YaHei',sans-serif;color:#f0b90b" href="https://theadventcapital.com/terms" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://theadventcapital.com/terms&amp;source=gmail&amp;ust=1665788667862000&amp;usg=AOvVaw24K3fvks_JkkmUUVNz023p">Privacy policy.</a></div>
+            <div id="m_-6009173775517576313m_504976421850382900iku7oh">For more information about how we process data, please see our <a id="m_-6009173775517576313m_504976421850382900i6dmh" style="font-family:'Microsoft YaHei',sans-serif;color:#f0b90b" href="https://mazeoptions.com/terms" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://mazeoptions.com/terms&amp;source=gmail&amp;ust=1665788667862000&amp;usg=AOvVaw24K3fvks_JkkmUUVNz023p">Privacy policy.</a></div>
             <div id="m_-6009173775517576313m_504976421850382900ibf37g">
-            <div id="m_-6009173775517576313m_504976421850382900ibf37g-2">The Adventcapital limited</div>
+            <div id="m_-6009173775517576313m_504976421850382900ibf37g-2">The Mazeoptions limited</div>
             <div id="m_-6009173775517576313m_504976421850382900ibf37g-3">3718 S ISABELLA RD MT PLEASANT, MI 48858</div>
             <div id="m_-6009173775517576313m_504976421850382900ibf37g-3">(+1) 814 217-7669</div>
             </div>
@@ -368,7 +368,7 @@
             <tbody>
             <tr>
             <td style="font-size:0px;padding:5px 5px 5px 5px;word-break:break-word" align="center">
-            <div style="font-family:Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:11px;line-height:15px;text-align:center;color:#000000"><strong>© 2020 - 2022 Theadventcapital.com, All Rights Reserved.</strong></div>
+            <div style="font-family:Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:11px;line-height:15px;text-align:center;color:#000000"><strong>© 2020 - 2022 mazeoptions.com, All Rights Reserved.</strong></div>
             </td>
             </tr>
             <tr>

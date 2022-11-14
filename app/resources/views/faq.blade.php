@@ -82,7 +82,7 @@
 											<div class="panel-heading">
 												<h4 class="check-title">
 													<a data-toggle="collapse" class="active" data-parent="#accordion" href="#check1">
-														<span class="acc-icons"></span>HOW CAN I INVEST WITH ZENITHCAPITAL
+														<span class="acc-icons"></span>HOW CAN I INVEST WITH Mazeoptions
 													</a>
 												</h4>
 											</div>
@@ -99,7 +99,7 @@
 											<div class="panel-heading">
 												<h4 class="check-title">
 													<a data-toggle="collapse" data-parent="#accordion" href="#check2">
-														<span class="acc-icons"></span>I WISH TO INVEST WITH ZENITHCAPITAL BUT I DON'T HAVE AN ANY ECURRENCY ACCOUNT. WHAT SHOULD I DO?
+														<span class="acc-icons"></span>I WISH TO INVEST WITH Mazeoptions BUT I DON'T HAVE AN ANY ECURRENCY ACCOUNT. WHAT SHOULD I DO?
 													</a>
 												</h4>
 											</div>

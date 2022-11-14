@@ -1,36 +1,65 @@
-      <body>
-         <!-- Start Navbar Area -->
-         <div class="navbar-area pakap-new-navbar-area">
-            <div class="pakap-responsive-nav">
-                <div class="container">
-                    <div class="pakap-responsive-menu">
-                        <div class="logo">
-                            <a href="index.html"><img src="{{asset('/mobile/images/logo-hover.png')}}" width="70px" alt="logo"></a>
-                        </div>
-                    </div>
-                </div>
+<body id="default_theme" class="home_page_1">
+      <!-- loader -->
+      <div class="bg_load">
+         <img class="loader_animation" src="{{asset('/logo2.png')}}" alt="#" />
+      </div>
+      <!-- end loader -->
+      <!-- header -->
+      <header id="default_header" class="header_style_1">
+         <div class="header_top">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-7 col-sm-7 col-xs-12">
+                     <div class="full">
+                        <ul class="pull-left header_top_menu cutomer_ser">
+                           <li><a href="mailto:info@mazeoptions.com"><i class="fa fa-life-ring" aria-hidden="true"></i> 24/7 Customer Support</a></li>
+                           <li><a href="mailto:info@mazeoptions.com"><i class="fa fa-envelope"></i>info@mazeoptions.com</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-md-5 col-sm-5 col-xs-12">
+                     <div class="full">
+                        <ul class="pull-right header_top_menu user_login">
+                           <li><a href="{{route('login')}}"><i class="fa fa-sign-in"></i> Login</a></li>
+                           <li ><a href="{{route('register')}}"><i class="fa fa-lock"></i> Register</a></li>
+                          <div style="margin-right:5px"></div>
+                           <div id='google_translate_element'></div>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
             </div>
-            <div class="pakap-nav">
-                <div class="container">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
-                        <a class="navbar-brand" href="{{route('index')}}"><img src="{{asset('/mobile/images/logo-hover.png')}}" width="100px" alt="logo"></a>
-                        <div class="collapse navbar-collapse mean-menu">
-                            <ul class="navbar-nav">
-                                <li class="nav-item"><a href="{{route('index')}}" class="nav-link active">Home</a>
-                                  
-                                </li>
-                              
-                                <li class="nav-item"><a href="{{route('about')}}" class="nav-link">About us</a></li>
-                                <li class="nav-item"><a href="{{route('contact')}}" class="nav-link">Contact us</a></li>
-                                <li class="nav-item"><a href="{{route('terms')}}" class="nav-link">Privacy</a></li>
-                                {{-- <li class="nav-item"><a href="https://cryptonewsupdate24.com/"  target="_blank" class="nav-link">Blogs</a></li> --}}
-
-                            </ul>
-                            <div class="others-option">
-                             <span> <a href="{{route('login')}}" style="font-size:14px; font-weight:bolder; color:blue"> LOGIN </a></span>   <span></span>  &nbsp;  <a href="{{route('register')}}" class="default-btn">Get Starterd</a>
-                            </div>
+         </div>
+         <div class="container">
+            <div class="row">
+               <div class="full">
+                  <div class="col-md-2 col-sm-3 col-xs-12">
+                     <!-- logo -->
+                     <div class="logo">
+                        <a href="{{route('index')}}"><img class="img-responsive" src="{{asset('/logo2.png')}}" alt="logo" /></a>
+                     </div>
+                     <!-- end logo -->
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                     <!-- menu -->
+                     <div class="main_menu">
+                        <div id="cssmenu" class="dark_menu">
+                           <ul>
+                              <li><a href="{{route('index')}}">Home</a></li>
+                              <li><a href="{{route('about')}}">About Us</a></li>
+                              <li><a href="{{route('faq')}}">FAQ</a></li>
+                              <li><a href="{{route('contact')}}">Contact Us</a></li>
+                              <li><a href="{{route('terms')}}">Terms & Conditions</a></li>
+                              <li><a href="{{route('login')}} " style="border-radius:10px;">Login</a></li>
+                              <li><a href="{{route('register')}}"  style="border-radius:10px;">Register</a></li>
+                               
+                           </ul>
                         </div>
-                    </nav>
-                </div>
+                     </div>
+                     <!-- end menu -->
+                  </div>
+                  
+               </div>
             </div>
-        </div>
+         </div>
+      </header>

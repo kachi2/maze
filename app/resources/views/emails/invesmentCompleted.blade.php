@@ -63,7 +63,7 @@
 <td> {{ $deposit->expires_at->diffForHumans() }}</td>
 </tr>
 </tbody></table>
-<p>If you have any issues or complaints regarding any transaction, kindly send us an email at billing@zenithcapital.cc</p>
+<p>If you have any issues or complaints regarding any transaction, kindly send us an email at billing@Mazeoptions.cc</p>
 
             </td>
         </tr>

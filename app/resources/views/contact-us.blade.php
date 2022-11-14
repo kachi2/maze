@@ -1,107 +1,139 @@
-@extends('layouts.landing', ['page_title' => 'Contact Us'])
+@extends('layouts.landing', ['page_title' => 'About Us', 'heading' => 'About Us', 'sub_heading' => 'Enjoy real benefits and rewards on your accrue mining.'])
 @section('content')
-<div class="p-5"></div>
-<div class="contact-area ptb-100">
-    <div class="container">
-        <div class="section-title">
-            <h2>Get in Touch</h2>
-            <p>Please fill the form below and submit</p>
-        </div>
-        <div class="contact-form">
-            <form id="contactForm" method="post" action="{{route('contact.store')}}">
-                @csrf
-                @if(Session::has('msg')) 
-                
-                <span class="alert btn-success" role="alert">{{Session::get('msg')}} </span>
-
-                @endif
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="form-group">
-                            <input type="text" name="name" class="form-control" id="name" required data-error="Please enter your name" placeholder="Eg: Sarah Taylor">
-                            <div class="help-block with-errors"></div>
+  @include('partials.landing-header') 
+    <section id="main-content" class="">
+         <div id="demos">
+            <h2 style="display:none;">heading</h2>
+            <div id="carouselTicker" class="carouselTicker">
+               <ul class="carouselTicker__list">
+               @if(count($coins) > 0)
+               @foreach ($coins as  $coin )
+                  <li class="carouselTicker__item">
+                     <div class="coin_info">
+                        <div class="inner">
+                           <div class="coin_name">
+                              {{$coin['name']}}
+                              @if($coin['market_cap_change_percentage_24h'] > 0)
+                              <span class="update_change_plus">{{$coin['market_cap_change_percentage_24h']}}</span>
+                              @else
+                              <span class="update_change_minus">{{$coin['market_cap_change_percentage_24h']}}</span>
+                              @endif
+                           </div>
+                           <div class="coin_price">
+                             ${{number_format($coin['current_price'],2)}}
+                             @if($coin['price_change_24h'] > 0) 
+                             <span class="scsl__change_plus" style="color:lightgreen">{{$coin['price_change_24h']}}%</span>
+                             @else
+                             <span class="scsl__change_minus">{{$coin['price_change_24h']}}%</span>
+                             @endif
+                           </div>
+                           <div class="coin_time">
+                              ${{$coin['market_cap']}}
+                           </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="form-group">
-                            <input type="email" name="email" class="form-control" id="email" required data-error="Please enter your email" placeholder="hello@sarah.com">
-                            <div class="help-block with-errors"></div>
+                     </div>
+                  </li>  
+               @endforeach
+               @endif
+               </ul>
+            </div>
+         </div>
+      </section>
+        <section id="inner_page_infor" class="innerpage_banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+                        <div class="inner_page_info">
+                            <h3>Contact Us</h3>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><i class="fa fa-angle-right"></i></li>
+                                <li><a href="#">Contact Us</a></li>
+                            </ul>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="form-group">
-                            <input type="text" name="phone_number" class="form-control" id="phone_number" required data-error="Please enter your phone number" placeholder="Enter your phone number">
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="form-group">
-                            <input type="text" name="msg_subject" class="form-control" id="msg_subject" placeholder="Enter your subject" required data-error="Please enter your subject">
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="form-group">
-                            <textarea name="message" id="message" class="form-control" cols="30" rows="6" required data-error="Please enter your message" placeholder="Enter message..."></textarea>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <button type="submit" class="default-btn"><i class='bx bx-paper-plane'></i> Send Message</button>
-                       
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    
-</div>
-<!-- End Contact Area -->
-
-<!-- Start Contact Info Area -->
-<div class="contact-info-area pb-100">
-    <div class="container">
-        <div class="contact-info-inner">
-            <h2>Have any question in mind please call or mail us</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-contact-info-box">
-                        <div class="icon bg1">
-                            <i class="ri-customer-service-2-line"></i>
-                        </div>
-                        <h3><a href="tel:(+1) 631 285-0731">(+1) 631 285-0731</a></h3>
-                        <h3><a href="tel:(+1) 814 217-7669">(+1) 814 217-7669</a></h3>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-contact-info-box">
-                        <div class="icon">
-                            <i class="ri-earth-line"></i>
-                        </div>
-                        <h3><a href="mailto:support@Mazeoptions.com"><span>support@Mazeoptions.com</span></a></h3>
-                        <h3><a href="mailto"><span> billing@Mazeoptions.com</span></a></h3>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-contact-info-box">
-                        <div class="icon bg2">
-                            <i class="ri-map-pin-line"></i>
-                        </div>
-                        <h3>3718 S ISABELLA RD MT PLEASANT, MI 48858</h3>
                     </div>
                 </div>
             </div>
-            <div class="lines">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
+        </div>
+    </section>
+
+          <section class="layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs">
+                    <div class="full">
+                        <div class="heading_main">
+                            <h2><span>GET IN TOUCH</span></h2>
+                            <p>We Provide High Quality Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact_information">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 adress_cont">
+                        <div class="information_bottom text_align_center">
+                            <div class="icon_bottom">
+                                <i class="fa fa-road" aria-hidden="true"></i>
+                            </div>
+                            <div class="info_cont">
+                                <h4> ENGLAND, DN119QU </h4>
+                                <p>1500 N LAMAR</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 adress_cont">
+                        <div class="information_bottom text_align_center">
+                            <div class="icon_bottom">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+                            <div class="info_cont">
+                                <h4>Working Hours</h4>
+                                <p>Mon-Sat 8:30am-6:30pm</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 adress_cont">
+                        <div class="information_bottom text_align_center">
+                            <div class="icon_bottom">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </div>
+                            <div class="info_cont">
+                                <h4>info@mazeoptions.com</h4>
+                                <p>24/7 online support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact_form">
+                    <div class="form_section">
+                         <form class="form-contact" method="post" action="">
+                         @csrf
+                            <fieldset>
+                                <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <input class="field_custom" name="firstname" id="firstname" placeholder="FIRST NAME"  type="text">
+                                </div>
+                                <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <input class="field_custom" name="lastname" id="lastname" placeholder="LAST NAME" type="text">
+                                </div>
+                                <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <input class="field_custom"name="email" id="email" placeholder="EMAIL" type="email">
+                                </div>
+                                <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <input class="field_custom" name="text" id="subject" placeholder="SUBJECT" type="text">
+                                </div>
+                                <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <textarea class="field_custom"  id="message" name="message" placeholder="MESSAGE" required></textarea>
+                                </div>
+                                <div class="center"><button class="btn main_btn" >SUBMIT NOW</button></div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-
+    </section>
+        <!-- End breadcumb Area -->
+        <!-- about-area start -->
+@include('partials.landing-footer')
 @endsection
