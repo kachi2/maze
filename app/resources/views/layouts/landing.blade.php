@@ -14,7 +14,7 @@
     <meta name="keywords" content="crypto, Trading, Cryptocurrency, Cryptocurrency Trading, Investments, Trading comapany, Brokers, Bitcoin, Bitcoin trading">
     <meta name="description" content="{{config('app.name')}} is a highly trusted crypto Trading comapany, helping millions of individuals and firms across the globe to safely Trade and earn more with crypto currency.">
 <meta name="google-site-verification" content="_cvnv3B2JCbGPq6_kmNxoIa_CisW_8P8S96-Bh2nN4Q" />
-	<link rel="icon" href="{{asset('/logo2.png')}}" type="image/gif" />
+<link rel="icon" href="{{asset('/fav.png')}}" type="image/gif" />
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="{{asset('/frontend_assets/css/bootstrap.min.css')}}" />
       <!-- Site CSS -->
