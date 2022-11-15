@@ -50,8 +50,8 @@
                               <li><a href="{{route('faq')}}">FAQ</a></li>
                               <li><a href="{{route('contact')}}">Contact Us</a></li>
                               <li><a href="{{route('terms')}}">Terms & Conditions</a></li>
-                              <li><a href="{{route('login')}} " style="border-radius:10px;">Login</a></li>
-                              <li><a href="{{route('register')}}"  style="border-radius:10px;">Register</a></li>
+                              <li><a href="{{route('web.logins')}} " style="border-radius:10px;">Login</a></li>
+                              <li><a href="{{route('web.register')}}"  style="border-radius:10px;">Register</a></li>
                                
                            </ul>
                         </div>

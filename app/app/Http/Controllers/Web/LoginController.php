@@ -1,9 +1,8 @@
 <?php
 
-
 namespace App\Http\Controllers\Web;
-use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Carbon;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/user/home';
 
     /**
      * Create a new controller instance.
@@ -41,6 +40,11 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    function loginForm(){
+        return view('auth.web_login');
+    }
+
+    
     function authenticated(Request $request, $user)
     {
         $user->update([

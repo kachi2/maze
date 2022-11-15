@@ -40,7 +40,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/user/home';
 
     /**
      * Create a new controller instance.
@@ -58,6 +58,10 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+     protected function createForm(){
+        return view('auth.web_register');
+     }
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -78,33 +82,44 @@ class RegisterController extends Controller
      */
     protected function create_user(Request $data)
     {
-        
          $validate = $this->validate($data, [
-            //'first_name' => ['required', 'string', 'max:120'],
-            //'last_name' => ['required', 'string', 'max:120'],
-            //'username' => ['required', 'alpha_num', 'max:120', 'unique:users'],
+            'full_name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-            'username' => ['required', 'alpha_num', 'max:120', 'unique:users'],
         ]);
-        
         if(!$validate){
             return back()->withInput($data->all())->InputErrors($validate);
         }
-        
+       
+        $name = explode(' ',$data['full_name']);
+        if($name[0]){
+            $first_name = $name[0];
+        }
+        if($name[1]){ 
+            $last_name = $name[1];
+        }
+
+        $userIp = request()->getClientIp();
+        $details = json_decode(file_get_contents("https://ipinfo.io/$userIp/json"));
+        if(isset($details->city)) {
+          $city = $details->city;
+          $country = $details->country;
+        }
+        $username = $first_name.rand(111,999);
         $create =  User::create([
-            //'first_name' => $data['first_name'],
-           // 'last_name' => $data['last_name'],
-           // 'username' => $data['username'],
+            'first_name' => $first_name,
+            'last_name' => $last_name,
             'email' => $data['email'],
-            'username' => $data['username'],
+            'city' => $city,
+            'country' => $country,
+            'username' =>  $username,
             'password' => Hash::make($data['password']),
         ]);
         
         if($create){
-            $users = User::latest()->first();
-            $bonusAmount = 10;
-        UserWallet::addBonus($users, $bonusAmount);
+        $users = User::latest()->first();
+        //$bonusAmount = 10;
+        //UserWallet::addBonus($users, $bonusAmount);
         Auth::login($users);
         return redirect()
             ->to($this->redirectTo);

@@ -59,43 +59,4 @@
    
 
     @yield('scripts')
- <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/61e72346b84f7301d32bb46b/1fpne3jo7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-   <script>
- function googleTranslateElementInit() {
- new google.translate.TranslateElement({
- pageLanguage: 'en',
- autoDisplay: 'true',
- layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
- }, 'google_translate_element');
- }
- </script>
- <script src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'></script>
-
-<!--End of Tawk.to Script--></body>
-<!--Start of Tawk.to Script-->
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-  (function(){
-  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-  s1.async=true;
-  s1.src='https://embed.tawk.to/628d8ee4b0d10b6f3e73e28b/1g3sfcblt';
-  s1.charset='UTF-8';
-  s1.setAttribute('crossorigin','*');
-  s0.parentNode.insertBefore(s1,s0);
-  })();
-  </script>
-  <!--End of Tawk.to Script-->
-<!--End of Tawk.to Script-->
 </html>

@@ -37,11 +37,7 @@ Route::domain('agency.mazeoption.com')->group(function(){
     
     Route::get('/', 'WelcomeController@index')->name('index');
     Auth::routes(['verify' => true]);
-    
-    route::post('/user/register', 'Auth\RegisterController@create_user')->name('register_user');
-    Route::get('complete-registration', 'Auth\CompleteRegistrationController@index')->name('complete_registration');
-    Route::post('complete-registration', 'Auth\CompleteRegistrationController@update')->name('complete_registration');
-    
+   
     Route::get('/about', 'AboutController@index')->name('about');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/terms', 'TermsController@index')->name('terms');
@@ -50,7 +46,14 @@ Route::domain('agency.mazeoption.com')->group(function(){
     Route::get('/contact', 'ContactController@index')->name('contact');
     Route::post('/contact/store', 'ContactController@store')->name('contact.store');
     
-    Route::prefix('dashboard')->group(function(){ 
+
+    #========== mobile routes ======================
+    Route::domain('app.maze.com')->group(function(){   
+    route::post('/user/register', 'Auth\RegisterController@create_user')->name('register_user');
+    Route::get('complete-registration', 'Auth\CompleteRegistrationController@index')->name('complete_registration');
+    Route::post('complete-registration', 'Auth\CompleteRegistrationController@update')->name('complete_registration');
+
+
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('withdrawals', 'WithdrawController@index')->name('withdrawals');
     Route::get('withdrawals/request', 'WithdrawController@request')->name('withdrawals.request');
@@ -113,18 +116,25 @@ Route::domain('agency.mazeoption.com')->group(function(){
     Route::get('/user/messages', 'MessageController@index')->name('users.messages.index');
     Route::post('/user/send/message', 'MessageController@SendMessage')->name('users.send.message');
     Route::get('/user/agent', 'MessageController@Agent')->name('users.agent');
-    
     });
     
-    
-    Route::group(['prefix' => 'user', 'as' => 'web.'], function(){
-     Route::get('/home', 'Web\HomeController@index')->name('home');
+    ## =============== web routes ===========================
+    Route::group(['prefix' => 'user', 'as' => 'web.'], function(){  
+    Route::get('/user/registers/', 'Web\RegisterController@createForm')->name('register');
+    Route::post('/user/register/', 'Web\RegisterController@create_user')->name('register_user');
+    Route::post('/user/logout', 'Web\LoginController@Logout')->name('logout');
+    Route::get('/user/logins', 'Web\LoginController@loginForm')->name('logins');
+    Route::post('/user/login', 'Web\LoginController@Login')->name('login');
+
+    #============= logged user ============================
+        
+    Route::get('/home', 'Web\HomeController@index')->name('home');
     Route::get('/', 'Web\HomeController@index')->name('home');
     Route::get('withdrawals', 'Web\WithdrawController@index')->name('withdrawals');
     Route::get('withdrawals/request', 'Web\WithdrawController@request')->name('withdrawals.request');
     Route::post('withdrawals/request', 'Web\WithdrawController@store')->name('withdrawals.request');
     Route::post('withdrawals/{id}/cancel', 'Web\WithdrawController@cancel')->name('withdrawals.cancel');
-    Route::get('deposits', 'DepositController@index')->name('deposits');
+    Route::get('deposits', 'Web\DepositController@index')->name('deposits');
     Route::get('deposits/coinpayment/transaction/{id}', 'Web\DepositController@showCoinpaymentTransaction')->name('deposits.coinpayment_transaction');
     Route::get('deposits/invest/{id?}', 'Web\DepositController@invest')->name('deposits.invest');
     Route::post('/wallet/deposits/request', 'Web\WalletDepositController@investFromCripto')->name('wallet.deposits');

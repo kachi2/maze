@@ -8,13 +8,13 @@
                                     <div class="nk-block-between">
                                         @if($profile == 100)
                                         <div class="nk-block-head-content">
-                                            <h6 class="nk-block-title page-title">Howdy!, {{strtoupper(auth()->user()->username)}}!</h6>
+                                            <h6 class="nk-block-title page-title">Howdy!, {{strtoupper(auth()->user()->first_name)}}!</h6>
                                             <div class="nk-block-des text-soft">
                                                 <p> @php $timeOfDay = date('a');
                                                     if($timeOfDay == 'am'){
                                                         echo 'Good Morning, Welcome back';
                                                     }else{
-                                                        echo 'Good Afternoon, Welcome back';
+                                                        echo 'Good Day, Welcome back';
                                                     }
                                                     @endphp </p>
                                             </div>

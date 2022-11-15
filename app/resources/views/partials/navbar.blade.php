@@ -78,7 +78,7 @@
                                                          @if(auth()->user()->email_verified_at == null)
                                                         <div class="user-status user-status-unverified"> <span style="color:#526484" >  Account Status:</span> Unverified </div> 
                                                         
-                                                        <form method="POST" action="{{route('web.verification.resend')}}" class="authentication-form" id="verify">
+                                                        <form method="POST" action="{{route('verification.resend')}}" class="authentication-form" id="verify">
                                                @csrf
                                            <em> <button type="submit" class="icon ni ni-external btn btn-primay">Resend Verification link</button></em>
                                             </form>
@@ -236,7 +236,7 @@
                                                          @if(auth()->user()->email_verified_at == null)
                                                         <div class="user-status user-status-unverified"> <span style="color:#526484" >  Account Status:</span> Unverified </div> 
                                                         
-                                                        <form method="POST" action="{{route('web.verification.resend')}}" class="authentication-form" id="verify">
+                                                        <form method="POST" action="{{route('verification.resend')}}" class="authentication-form" id="verify">
                                                @csrf
                                            <em> <button type="submit" class="icon ni ni-external btn btn-primay">Resend Verification link</button></em>
                                             </form>

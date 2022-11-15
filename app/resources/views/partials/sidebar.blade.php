@@ -88,14 +88,7 @@
                     <span class="nk-menu-text">Support</span>
                 </a>
             </li><!-- .nk-menu-item -->
-            @if(auth_user()->is_admin)
-             <li class="nk-menu-item">
-                <a href="{{ route('admin.home') }}" class="nk-menu-link">
-                    <span class="nk-menu-icon"><em class="icon ni ni-repeat"></em></span>
-                    <span class="nk-menu-text">Login as Admin</span>
-                </a>
-            </li><!-- .nk-menu-item -->
-            @endif
+         
         </ul><!-- .nk-menu -->
     </div>
 </div>
