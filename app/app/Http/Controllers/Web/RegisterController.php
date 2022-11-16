@@ -85,6 +85,7 @@ class RegisterController extends Controller
          $validate = $this->validate($data, [
             'full_name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
         ]);
         if(!$validate){
@@ -113,6 +114,7 @@ class RegisterController extends Controller
             'city' => $city,
             'country' => $country,
             'username' =>  $username,
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
         
