@@ -62,17 +62,17 @@
       <section class="layout_padding ">
         <div class="container">
             <div class="row">
-                <div class="col-md-7 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="full">
-                        <h4 class="heading_style2">Looking for a First-Class Cryptocurrency Expert?</h4>
+                        <h6 class="heading_style2">Looking for a First-Class Cryptocurrency Expert?</h6>
                         <p class="">mazeoptions.com is your partner for Trading online through our premium online brokerage. As a provider for online trading and investment services we offer you reliability that meets the highest standards.Mazeoptions offers you the entire spectrum of asset classes and financial instruments, including stocks, Indices, CFD’s, currencies and Cryptocurrencies. With more than 50 exchanges worldwide, more markets are now available to you than ever before.
 
 Because that is important to us: that every investor - regardless of whether they are new or experienced traders - can find the right instrument for their investment</p>
                      </div>
                 </div>
-                 <div class="col-md-3 col-sm-12 col-xs-12">
+                 {{-- <div class="col-md-3 col-sm-12 col-xs-12">
                  <img src="{{asset('/frontend_assets/images/pr4.jpg')}}">
-                 </div>
+                 </div> --}}
             </div>
         </div>
     </section>
@@ -82,7 +82,7 @@ Because that is important to us: that every investor - regardless of whether the
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="full">
-                        <h2 class="heading_style2">EXCELLENT CUSTOMER SERVICE</h2>
+                        <h6 class="heading_style2">EXCELLENT CUSTOMER SERVICE</h6>
                         <p class="left_text">Round-the-Clock Support.
                       <div style="padding-left:15px">  <ul style="list-style-type:circle">
                         <li  class="p-2"> 5 days a week and 24 hours a day easy accessibility by phone, email or live chat. Schedule a meeting with our trading professionals via our callback service.</li>
