@@ -92,7 +92,7 @@
                                             </div>
                                             <div class="pay-info text-center">
                                                 <h5 class="title text-dark mb-0 clipboard-init" data-clipboard-text=" {{$transaction->amount2}}">
-                                                   {{$transaction->amount2)}} {{$transaction->currency2}} <em class="click-to-copy icon ni ni-copy-fill nk-tooltip" title="" data-original-title="Click to Copy"></em>
+                                                   {{$transaction->amount2}} {{$transaction->currency2}} <em class="click-to-copy icon ni ni-copy-fill nk-tooltip" title="" data-original-title="Click to Copy"></em>
                                                 </h5>
                                                     <p class="text-soft">{{number_format($transaction->amount,2)}} {{$transaction->currency1}}</p>
                                                      </div>
