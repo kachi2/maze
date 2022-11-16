@@ -19,12 +19,12 @@
     <div class="body-content row">
 
       
-        <div class="col-lg-5">
-            <div class="card">
+        <div class="col-lg-10">
+            <div class="card ml-5 ">
                 <div class="card-body" style="border:1px solid #eee">
                    
                     <dl class="row mb-4 mt-3">
-                        <dt class="col-sm-9 font-weight-bold"> Transfer Earnings to Wallet</dt>
+                        <dt class="col-sm-12 font-weight-bold"> Transfer Earnings to Wallet</dt>
                         
                     </dl>
 
