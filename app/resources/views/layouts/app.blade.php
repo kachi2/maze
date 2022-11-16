@@ -7,7 +7,7 @@
    <meta name="keywords" content="crypto, Trading, Cryptocurrency, Cryptocurrency Trading, Investments, Trading comapany, Brokers, Bitcoin, Bitcoin trading">
     <meta name="description" content="{{config('app.name')}} is a highly trusted crypto Trading comapany, helping millions of individuals and firms across the globe to safely Trade and earn more with crypto currency.">
  <!-- Fav Icon  -->
- <link rel="icon" href="{{asset('/logo2.png')}}" type="image/gif" />
+ <link rel="icon" href="{{asset('/fav.png')}}" type="image/gif" />
     <!-- Page Title  -->
     <title> @if(isset($title)) {{$title}} @else Home  @endif | {{config('app.name')}}</title>
     <!-- StyleSheets  -->
