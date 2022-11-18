@@ -18,12 +18,8 @@
                                                     }
                                                     @endphp </p>
                                             </div>
-                                        </div><!-- .nk-block-head-content -->
-                                     
-                                        
+                                        </div><!-- .nk-block-head-content -->   
                                                @else
-                                       
-    
                                                 <div class="alert alert-primary alert-thick alert-plain">
                                                 <div class="alert-cta flex-wrap flex-md-nowrap g-2">
                                                     <div class="alert-text has-icon">

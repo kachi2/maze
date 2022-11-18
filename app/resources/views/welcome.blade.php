@@ -58,7 +58,7 @@
                            <div class="slide-text slide_style_left white_fonts">
                               <h2 data-animation="animated">Secured  and <span style="color: #e9d16f;"> Easy </span><br> Way to <span style="color: #e9d16f;"> Trade  </span><br> <span style="color: #e9d16f;">Crytocurrency</span></h2>
                               <a href="{{route('register')}}" class="btn btn-default active">Get started</a>
-                                <span > <img style="margin-top:-350px; margin-left:500px; width:70%" src="{{asset('/images.png')}}"  ></span>
+                                <span > <img style="margin-top:-30%; margin-left:48%; width:70%" src="{{asset('/images.png')}}"  ></span>
                            </div>
                         </div>
                      </div>
@@ -72,7 +72,7 @@
                            <div class="slide-text slide_style_left white_fonts">
                               <h2 data-animation="animated">Crypto <span style="color: #e9d16f;">Trading</span><br> Platform You can  <br><span style="color: #e9d16f;">Trust</span> Always</h2>
                               <a href="{{route('register')}}" class="btn btn-default active">Get started</a>
-                               <span > <img style="margin-top:-370px; margin-left:500px; width:70%" src="{{asset('/ima.png')}}"  ></span>
+                               <span > <img style="margin-top:-30%; margin-left:48%; width:70%" src="{{asset('/ima.png')}}"  ></span>
                            </div>
                         </div>
                      </div>
@@ -203,7 +203,7 @@
                      </div>
                 </div>
                  <div class="col-md-6 col-sm-12 col-xs-12">
-                 <img src="{{asset('/imas.png')}}" style="margin-left:180px; width:80%">
+                 <img src="{{asset('/imas.png')}}" style=" width:100%">
                  </div>
             </div>
         </div>
@@ -221,7 +221,7 @@
                      </div>
                 </div>
                  <div class="col-md-6 col-sm-12 col-xs-12">
-                  <img src="{{asset('/pays.png')}}" style="margin-left:180px; width:60%">
+                  <img src="{{asset('/pays.png')}}" style=" width:100%">
                  </div>
             </div>
         </div>

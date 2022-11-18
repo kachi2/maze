@@ -10,12 +10,10 @@
 */
 
 use Illuminate\Support\Facades\Route;
-#==================agent app routes =========================
-
 
     #========== mobile routes ======================
     Route::domain('app.mazeoptions.com')->group(function(){   
-        route::post('/user/register', 'Auth\RegisterController@create_user')->name('register_user');
+        Route::post('/user/register', 'Auth\RegisterController@create_user')->name('register_user');
         Route::get('complete-registration', 'Auth\CompleteRegistrationController@index')->name('complete_registration');
         Route::post('complete-registration', 'Auth\CompleteRegistrationController@update')->name('complete_registration');
         Route::get('/home', 'HomeController@index')->name('home');
@@ -40,13 +38,11 @@ use Illuminate\Support\Facades\Route;
         Route::post('/update/depo/hash/{id}', 'HomeController@DepositHash')->name('deposits.tnxHash');
         Route::get('deposits/transactions/{ref}', 'DepositController@showTransaction')->name('deposits.transaction');
         Route::get('deposits/payment/confirmation/{id}','DepositController@saveHashNo')->name('saveHashNo');
-        
         Route::get('payouts', 'PayoutController@index')->name('payouts');
         Route::get('referral', 'ReferralController@index')->name('referral');
         Route::get('bonus/initate/{id}', 'ReferralController@BonusInvest')->name('bonus.initate');
         Route::get('referrals/refer', 'ReferralController@refer')->name('referrals.refer');
         Route::post('referrals/refer', 'ReferralController@send')->name('referrals.refer');
-        
         Route::get('/martets', 'HomeController@Markets')->name('home.markets');
         Route::get('user/notifications', 'AccountController@UserNotifications')->name('user.notifications');
         
@@ -70,8 +66,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('settings/wallet', 'Settings\WalletController@index')->name('setting.wallet');
         Route::post('settings/wallet', 'Settings\WalletController@update')->name('setting.wallet');
         Route::get('token', 'TokenController@index')->name('token');
-        Route::post('token', 'TokenController@generate')->name('token');
-        
+        Route::post('token', 'TokenController@generate')->name('token');  
         Route::get('user-photo/{id}/{file_name}', 'AccountController@showPhoto')->name('user.photo');
         Route::post('user-photo/store', 'AccountController@StorePhoto')->name('Store.photo');
         Route::get('perfect-money/callback', 'PerfectMoneyController@validateIpn')->name('perfect_money.callback');
@@ -108,7 +103,6 @@ Route::domain('agency.mazeoption.com')->group(function(){
     
     Route::get('/', 'WelcomeController@index')->name('index');
     Auth::routes(['verify' => true]);
-   
     Route::get('/about', 'AboutController@index')->name('about');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/terms', 'TermsController@index')->name('terms');
@@ -116,9 +110,6 @@ Route::domain('agency.mazeoption.com')->group(function(){
     Route::get('/plans', 'WelcomeController@plans')->name('plans');
     Route::get('/contact', 'ContactController@index')->name('contact');
     Route::post('/contact/store', 'ContactController@store')->name('contact.store');
-    
-
-
     ## =============== web routes ===========================
     Route::group(['prefix' => 'user', 'as' => 'web.'], function(){  
     Route::get('/user/registers/', 'Web\RegisterController@createForm')->name('register');
@@ -126,9 +117,7 @@ Route::domain('agency.mazeoption.com')->group(function(){
     Route::post('/user/logout', 'Web\LoginController@Logout')->name('logout');
     Route::get('/user/logins', 'Web\LoginController@loginForm')->name('logins');
     Route::post('/user/login', 'Web\LoginController@Login')->name('login');
-
-    #============= logged user ============================
-        
+    #============= logged user ============================ 
     Route::get('/home', 'Web\HomeController@index')->name('home');
     Route::get('/', 'Web\HomeController@index')->name('home');
     Route::get('withdrawals', 'Web\WithdrawController@index')->name('withdrawals');
@@ -154,15 +143,12 @@ Route::domain('agency.mazeoption.com')->group(function(){
     Route::get('bonus/initate/{id}', 'Web\ReferralController@BonusInvest')->name('bonus.initate');
     Route::get('referrals/refer', 'Web\ReferralController@refer')->name('referrals.refer');
     Route::post('referrals/refer', 'Web\ReferralController@send')->name('referrals.refer');
-    
     Route::get('/martets', 'Web\HomeController@Markets')->name('home.markets');
     Route::get('/notifications', 'Web\AccountController@UserNotifications')->name('user.notifications');
-    
     Route::get('internal-transfer', 'Web\WalletController@transfer')->name('transfer');
     Route::post('internal-transfer', 'Web\WalletController@doTransfer')->name('transfer');
     Route::post('bonus-transfer', 'Web\WalletController@TransferEarnings')->name('transfer.earnings');
     Route::get('earnbonus', 'Web\WalletController@Bonus')->name('earn.bonus'); 
-    
     Route::get('account', 'Web\AccountController@index')->name('account');
     Route::get('account/activities', 'Web\AccountController@activity')->name('account.activities');
     Route::get('settings/profile', 'Web\Settings\ProfileController@index')->name('setting.profile');
@@ -173,7 +159,6 @@ Route::domain('agency.mazeoption.com')->group(function(){
     Route::post('settings/wallet', 'Web\Settings\WalletController@update')->name('setting.wallet');
     Route::get('token', 'Web\TokenController@index')->name('token');
     Route::post('token', 'Web\TokenController@generate')->name('token');
-    
     Route::get('user-photo/{id}/{file_name}', 'Web\AccountController@showPhoto')->name('user.photo');
     Route::post('user-photo/store', 'Web\AccountController@StorePhoto')->name('Store.photo');
     Route::get('perfect-money/callback', 'Web\PerfectMoneyController@validateIpn')->name('perfect_money.callback');
@@ -183,7 +168,6 @@ Route::domain('agency.mazeoption.com')->group(function(){
     Route::get('/user/messages', 'Web\MessageController@index')->name('users.messages.index');
     Route::post('/user/send/message', 'Web\MessageController@SendMessage')->name('users.send.message');
     Route::get('/user/agent', 'Web\MessageController@Agent')->name('users.agent');
-    
     });
     
 
