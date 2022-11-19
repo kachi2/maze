@@ -65,6 +65,7 @@ class HomeController extends Controller
             'pending_withdrawals' => $pendingWithdrawals,
             'last_withdrawal' => $lastWithdrawal,
             'total_invest' => $totalInvest,
+            'payouts' => $totalInvest,
             'activities' => UserActivity::where('user_id', $user->id)->latest()->take(5)->get()
         ], $data);
     }

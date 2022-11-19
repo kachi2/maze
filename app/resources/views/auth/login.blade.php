@@ -1,5 +1,9 @@
 
-       @extends('layouts.auth')
+
+  @desktop
+  @include('auth.web_login');
+@elsedesktop
+      @extends('layouts.auth')
        @section('content')
        <!-- Appbar -->
         <div class="fixed-top">
@@ -75,7 +79,5 @@
             </div>
         </div>
         <!-- Body-content -->
-
-       
-
     @endsection
+  @enddesktop

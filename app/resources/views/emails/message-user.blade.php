@@ -23,7 +23,7 @@
         <tr>
             <td style="padding:0 30px">
                 <p>{!! nl2br($text) !!} </p>
-<p>If you have any issues or complaints regarding any transaction, kindly send us an email at support@Mazeoptions.cc</p>
+<p>If you have any issues or complaints regarding any transaction, kindly send us an email at support@Mazeoptions.com</p>
 
             </td>
         </tr>

@@ -82,7 +82,7 @@
                                         <button class="btn btn-lg btn-primary btn-block">Register</button>
                                     </div>
                                 </form>
-                                <div class="form-note-s2 text-center pt-4"> Don't have account? <a href="html/pages/auths/auth-register-v2.html">Create an account</a>
+                                <div class="form-note-s2 text-center pt-4"> Already have account? <a href="{{route('web.logins')}}">Login</a>
                                 </div>
                             </div>
                         </div>

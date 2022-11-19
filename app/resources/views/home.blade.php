@@ -1,3 +1,9 @@
+
+  @mobile
+  @include('mobile.home');
+@elsemobile
+
+
 @extends('layouts.app')
 @section('content')
  <div class="nk-content ">
@@ -366,3 +372,5 @@
                     </div>
                 </div>
 @endsection
+
+@endmobile

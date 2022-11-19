@@ -14,6 +14,7 @@ use App\PlanProfit;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\User;
+
 use App\UserActivity;
 use Kevupton\LaravelCoinpayments\Models\Withdrawal as ModelsWithdrawal;
 

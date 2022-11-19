@@ -1,3 +1,9 @@
+
+
+@mobile
+@include('auth.login')
+@elsemobile
+
 <!DOCTYPE html>
 <html lang="zxx" class="js">
 
@@ -67,6 +73,12 @@
                                         <button class="btn btn-lg btn-primary btn-block">Login</button>
                                     </div>
                                 </form>
+                                <div class="authentication-account-access-item">
+                                    <div class="authentication-link">
+                                        @if (Route::has('password.request'))
+                                        <a class="link link-primary link-sm" tabindex="-1" href="{{ route('password.request') }}">Forgot Password?</a>
+                                        @endif</div>
+                                </div>
                                 <div class="form-note-s2 text-center pt-4"> Don't have account? <a href="{{route('web.register')}}">Create an account</a>
                                 </div>
                             </div>
@@ -122,3 +134,5 @@
     <script src="{{asset('/asset/js/scripts.js?ver=2.2.0 ')}}"></script>
 
 </html>
+
+@endmobile

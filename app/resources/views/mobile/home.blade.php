@@ -1,4 +1,9 @@
   <!-- Body-content -->
+  @desktop
+
+  @include('home')
+  @elsedesktop
+  
   @extends('layouts.mobile')
   
   @section('content')
@@ -328,3 +333,5 @@ $('#hashNo').submit(function(e){
         });
 </script>
 @endpush
+
+@enddesktop

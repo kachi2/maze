@@ -2,9 +2,9 @@
 <html lang="zxx">
 <head>
         <meta charset="utf-8">
-        <meta name="description" content="Oban">
+        <meta name="description" content="">
         <meta name="keywords" content="HTML,CSS,JavaScript">
-        <meta name="author" content="HiBootstrap">
+        <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <title></title>
