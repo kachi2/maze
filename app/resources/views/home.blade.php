@@ -1,7 +1,5 @@
 
-  @mobile
-  @include('mobile.home');
-@elsemobile
+
 
 
 @extends('layouts.app')
@@ -373,4 +371,3 @@
                 </div>
 @endsection
 
-@endmobile
