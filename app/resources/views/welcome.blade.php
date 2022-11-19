@@ -90,10 +90,12 @@
                <span class="fa fa-angle-right" aria-hidden="true"></span>
                <span class="sr-only">Next</span>
                </a>
-            </div>
+            </div> 
             <!-- End  bootstrap-touch-slider Slider -->
          </div>
       </section>
+
+      
        <section class="layout_padding">
          <div class="container">
             <div class="row">

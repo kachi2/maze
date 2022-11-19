@@ -36,6 +36,7 @@
         "laravel/tinker": "^2.0",
         "moneyphp/money": "^3.3",
         "realrashid/sweet-alert": "^5.0",
+        "riverskies/laravel-mobile-detect": "^1.3",
         "rukhsar/laravel-active-route": "^1.4"
     },
     "require-dev": {

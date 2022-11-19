@@ -78,29 +78,6 @@ use Illuminate\Support\Facades\Route;
         Route::get('/user/agent', 'MessageController@Agent')->name('users.agent');
         });
 
-Route::domain('agency.mazeoption.com')->group(function(){
-    //Route::get('/agent/complete/registration', )
-    Route::get('/register/agents', 'Agency\AuthController@register')->name('agency.register');
-    Route::post('/register/agent/', 'Agency\AuthController@registers')->name('agency.registers');
-    Route::get('/registration/{id}', 'Agency\AuthController@CompleteRegistration')->name('agency.registration');
-    Route::post('/completion/{id}', 'Agency\AuthController@AccountCompleted')->name('agency.AccountCompleted');
-    Route::get('/login', 'Agency\AuthController@Login')->name('Agent-login');
-    Route::post('/logins', 'Agency\AuthController@Logins')->name('agent.login');
-    Route::post('/logout', 'Agency\AuthController@logout')->name('agent.logout');
-    Route::get('/', 'Agency\HomeController@index')->name('agency.index');
-    Route::get('/home', 'Agency\HomeController@index')->name('agency.index');
-    Route::get('index', 'Agency\HomeController@index')->name('agency.index');
-    Route::get('/agent/task', 'Agency\HomeController@Task')->name('agency.task');
-    Route::get('/agent/payments', 'Agency\HomeController@Payments')->name('agency.payment');
-    Route::get('/agent/salary', 'Agency\HomeController@SalaryPayments')->name('agency.salary');
-    Route::post('/agent/salary/invoice', 'Agency\HomeController@SalaryInvoice')->name('salary.invoice');
-    Route::get('/agent/salary/invoice/{id}', 'Agency\HomeController@SalaryInvoices')->name('salaries.invoice');
-    Route::post('/agent/process/payment/', 'Agency\HomeController@paymentProcessor')->name('agentProcess.payment');
-    Route::get('/agent/referral', 'Agency\HomeController@AgentReferral')->name('agent.referral');
-    });
-    #========== end of agent routes ======================
-
-    
     Route::get('/', 'WelcomeController@index')->name('index');
     Auth::routes(['verify' => true]);
     Route::get('/about', 'AboutController@index')->name('about');
@@ -170,6 +147,28 @@ Route::domain('agency.mazeoption.com')->group(function(){
     Route::get('/user/agent', 'Web\MessageController@Agent')->name('users.agent');
     });
     
+
+    Route::domain('agency.mazeoption.com')->group(function(){
+        //Route::get('/agent/complete/registration', )
+        Route::get('/register/agents', 'Agency\AuthController@register')->name('agency.register');
+        Route::post('/register/agent/', 'Agency\AuthController@registers')->name('agency.registers');
+        Route::get('/registration/{id}', 'Agency\AuthController@CompleteRegistration')->name('agency.registration');
+        Route::post('/completion/{id}', 'Agency\AuthController@AccountCompleted')->name('agency.AccountCompleted');
+        Route::get('/login', 'Agency\AuthController@Login')->name('Agent-login');
+        Route::post('/logins', 'Agency\AuthController@Logins')->name('agent.login');
+        Route::post('/logout', 'Agency\AuthController@logout')->name('agent.logout');
+        Route::get('/', 'Agency\HomeController@index')->name('agency.index');
+        Route::get('/home', 'Agency\HomeController@index')->name('agency.index');
+        Route::get('index', 'Agency\HomeController@index')->name('agency.index');
+        Route::get('/agent/task', 'Agency\HomeController@Task')->name('agency.task');
+        Route::get('/agent/payments', 'Agency\HomeController@Payments')->name('agency.payment');
+        Route::get('/agent/salary', 'Agency\HomeController@SalaryPayments')->name('agency.salary');
+        Route::post('/agent/salary/invoice', 'Agency\HomeController@SalaryInvoice')->name('salary.invoice');
+        Route::get('/agent/salary/invoice/{id}', 'Agency\HomeController@SalaryInvoices')->name('salaries.invoice');
+        Route::post('/agent/process/payment/', 'Agency\HomeController@paymentProcessor')->name('agentProcess.payment');
+        Route::get('/agent/referral', 'Agency\HomeController@AgentReferral')->name('agent.referral');
+        });
+        #========== end of agent routes ======================
 
 
         
