@@ -84,7 +84,7 @@ class WalletDepositController extends Controller
     public function WalletDepositIndex(){
         return view('wallet.deposits')
         ->with('deposits', WalletDeposit::where('user_id', auth_user()->id)->latest()->simplePaginate(20))
-        ->with('pending', WalletDeposit::where('status', '0')->get())
+        ->with('pending', WalletDeposit::where(['user_id' => auth_user()->id, 'status' => '0'])->get())
         ->with('total', WalletDeposit::where(['user_id' => auth_user()->id])->sum('amount'));
     }
 

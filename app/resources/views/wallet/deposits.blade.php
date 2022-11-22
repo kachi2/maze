@@ -100,7 +100,13 @@
                                             <span class="tb-sub">{{$invest->created_at}}</span>
                                         </div>
                                         <div class="nk-tb-col">
+                                            @if($invest->status == 1)
                                             <span class="badge badge-dot badge-dot-xs badge-success">Approved</span>
+                                            @elseif($invest->status == 3)
+                                            <span class="badge badge-dot badge-dot-xs badge-danger">Cancelled</span>
+                                            @else
+                                            <span class="badge badge-dot badge-dot-xs badge-warning">Pending</span>
+                                            @endif
                                         </div>
                                         
                                 </div>

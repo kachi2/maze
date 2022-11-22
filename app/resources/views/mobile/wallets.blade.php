@@ -23,7 +23,7 @@
                     </div>
                     @forelse ($deposits as $invst )
                     <div class="transaction-card mb-15">
-                        <a href="{{route('payouts.details', encrypt($invst->id))}}">
+                        <a href="#">
                             <div class="transaction-card-info">
                                 <div class="transaction-info-thumb" style="border-radius: 100%">
                                     <span class="text-white" style="font-size:15px">{{substr($invst->ref,0,2)}}</span>
