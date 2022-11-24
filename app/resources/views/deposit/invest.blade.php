@@ -20,7 +20,7 @@
                                          </div>
                                          <div class="pricing-body"><ul class="pricing-features"><li><span class="w-50">Min Deposit</span> - <span class="ml-auto">{{ moneyFormat($plan->min_deposit, 'USD') }}</span></li>
                                          <li><span class="w-50">Max Deposit</span> - <span class="ml-auto">{{ moneyFormat($plan->max_deposit, 'USD') }}</span></li>
-                                         <li ><span class="w-50">Duration</span> - <span class="ml-auto">{{ $plan->package->formatted_duration }}</span>
+                                          <li ><span class="w-50">Duration</span> - <span class="ml-auto">{{ $plan->package->formatted_duration }}</span>
                                        
                                          </ul>
                                          <div class="buysell-field form-group">

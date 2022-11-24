@@ -10,6 +10,7 @@ use App\WalletAddress;
 use App\Models\UserWallet;
 use Exception;
 use App\WalletDeposit;
+use Illuminate\Support\Facades\Session;
 
 class WalletDepositController extends Controller
 {
@@ -83,15 +84,27 @@ class WalletDepositController extends Controller
 
     public function WalletDepositIndex(){
         return view('wallet.deposits')
-        ->with('deposits', WalletDeposit::where('user_id', auth_user()->id)->latest()->simplePaginate(20))
+        ->with('deposits', WalletDeposit::where('user_id', auth_user()->id)->latest()->simplePaginate(10))
         ->with('pending', WalletDeposit::where(['user_id' => auth_user()->id, 'status' => '0'])->get())
         ->with('total', WalletDeposit::where(['user_id' => auth_user()->id])->sum('amount'));
     }
 
-    public function WalletDeposit(){
      
-
+    public function saveHashNo(Request $request){
+        $deposit = WalletDeposit::where('ref', $request->ref)->first()
+                   ->update(['hash_no' => $request->hash]);
+        //dd($deposit);
+           if($deposit){
+                   Session::flash('alert', 'success');
+                   Session::flash('done', 'readonly');
+                   Session::flash('message', 'Your request is pending, Your deposit will be approved once confirmed');
+                return redirect()->route('web.wallets.deposit.index');
+        }else{
+            return back();
+        }
+                   
     }
+
 
 
 }

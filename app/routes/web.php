@@ -113,6 +113,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('deposits/{ref}', 'Web\DepositController@show')->name('deposit');
     Route::get('deposits/transactions/{ref}', 'Web\DepositController@showTransaction')->name('deposits.transaction');
     Route::post('deposits/payment/confirm/','Web\DepositController@saveHashNo')->name('saveHashNo');
+    Route::post('wallet/deposits/payment/confirm/','Web\WalletDepositController@saveHashNo')->name('wallet.saveHashNo');
     Route::get('/wallets/deposit/index', 'Web\WalletDepositController@WalletDepositIndex')->name('wallets.deposit.index');
     Route::get('/wallet/deposits', 'Web\WalletDepositController@WalletDeposit')->name('wallets.deposit');
     Route::get('payouts', 'Web\PayoutController@index')->name('payouts');

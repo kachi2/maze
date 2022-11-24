@@ -364,7 +364,6 @@ class DepositController extends Controller
      */
      
      public function saveHashNo(Request $request){
-      // dd(decrypt($id));
          $deposit = PendingDeposit::where('ref', $request->ref)->first()
                     ->update(['hash_no' => $request->hash]);
             if($deposit){

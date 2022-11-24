@@ -113,8 +113,8 @@
                                                     <div class="popup-content">
                                                         <h6 class="mb-2">Confirm your payment</h6>
                                                         <p>If you already paid, please provide us your payment reference to speed up verification procces.</p>
-                                                         <form  action="{{route('web.saveHashNo')}}" method="post">
-                                                            @csrf
+                                                         <form  action="{{route('web.wallet.saveHashNo')}}" method="post">
+                                                            @csrf 
                                                             <div class="form-group">
                                                                 <div class="form-label">Payment Reference <span class="text-danger">*</span></div>
                                                                 <div class="form-control-wrap">
