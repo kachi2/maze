@@ -122,7 +122,7 @@ class UserController extends Controller
      */
     public function showUser(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail(decrypt($id));
        // dd($user);
 
         $breadcrumb = [
@@ -677,8 +677,8 @@ class UserController extends Controller
 
     public function activity($id){
         return view('admin.user-edit.activities')
-                ->with('user', User::where('id', $id)->first())
-                ->with('users', UserActivity::where('user_id', $id)->get());
+                ->with('user', User::where('id', decrypt($id))->first())
+                ->with('users', UserActivity::where('user_id', decrypt($id))->get());
     }
 
     public function pass($id){
@@ -701,5 +701,54 @@ class UserController extends Controller
             ->back()
             ->with('success', 'Password updated successfully');
     }
+
+        public function SuspendUser($id){
+            //dd(decrypt($id));
+            $user = User::whereId(decrypt($id))->first()
+            ->update(['status' => 1]);
+          //  dd($user);
+            if($user){
+                Session::flash('alert', 'error');
+                Session::flash('message', 'User Suspend Successfully');
+                return back();
+            }
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Something went wrong, try again');
+            return back();
+        }
+
+        public function UnsuspendUser($id){
+            $user = User::whereId(decrypt($id))->first()
+            ->update(['status' => 0]);
+
+     
+            if($user){
+                Session::flash('alert', 'success');
+                Session::flash('message', 'User Unsuspended Successfully');
+                return back();
+            }
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Something went wrong, try again');
+            return back();
+        }
+
+
+     
+
+        public function Terminate(Request $request){
+            dd(decrypt($request->id));
+            $deposit = Deposit::where('id', decrypt($request->id))->first()
+                    ->update(['status' => 1, 'expires_at' => Carbon::now()
+                      ]);
+            if($deposit){
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Investment Terminated Successfully');
+                return back(); 
+            }else{
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Something went wrong, try again');
+                return back(); 
+            }
+        }
     }
 

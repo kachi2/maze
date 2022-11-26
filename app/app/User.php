@@ -92,7 +92,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'last_login',
         'is_kyc_verify',
         'image_path',
-        'image'
+        'image',
+        'status'
     ];
 
     /**

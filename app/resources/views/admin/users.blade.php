@@ -72,6 +72,7 @@
                                                         <div class="nk-tb-col tb-col-lg"><span class="sub-text">Withdrawals</span></div>
                                                          <div class="nk-tb-col tb-col-lg"><span class="sub-text">Payouts</span></div>
                                                          <div class="nk-tb-col tb-col-lg"><span class="sub-text">Active Deposits</span></div>
+                                                         <div class="nk-tb-col tb-col-lg"><span class="sub-text">Status</span></div>
                                                         
                                                         <div class="nk-tb-col nk-tb-col-tools text-right">
                                                             <span class="sub-text">+</span>
@@ -109,6 +110,12 @@
                                                         <div class="nk-tb-col tb-col-md">
                                                             <span>{{ moneyFormat($user->deposits()->where('status', \App\Models\Deposit::STATUS_ACTIVE)->sum('amount'), 'USD') }}</span>
                                                         </div>
+
+                                                        <div class="nk-tb-col tb-col-md">
+                                                            @if($user->status == 1) <span class="badge badge-danger">Suspended</span>@else 
+                                                            <span class="badge badge-success">Active</span>
+                                                            @endif
+                                                        </div>
                                                         <div class="nk-tb-col nk-tb-col-tools">
                                                             <ul class="nk-tb-actions gx-1">
                                                                 <li>
@@ -116,8 +123,13 @@
                                                                         <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                                         <div class="dropdown-menu dropdown-menu-right">
                                                                             <ul class="link-list-opt no-bdr">
-                                                                                <li><a href="{{ route('admin.users.show', ['id' => $user->id]) }}"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
-                                                                                <li><a href="{{ route('admin.users.activity',  $user->id) }}"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li>
+                                                                                @if($user->status == 0)
+                                                                                <li><a href="{{ route('admin.users.suspend', ['id' => encrypt($user->id)]) }}"><em class="icon ni ni-user"></em><span style="color:red">Suspend User</span></a></li>
+                                                                                @else 
+                                                                                <li><a href="{{ route('admin.users.unsuspend', ['id' => encrypt($user->id)]) }}"><em class="icon ni ni-eye"></em><span>Unsuspend User</span></a></li>
+                                                                                @endif
+                                                                                <li><a href="{{ route('admin.users.show', ['id' => encrypt($user->id)]) }}"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                <li><a href="{{ route('admin.users.activity',  encrypt($user->id)) }}"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li>
                                                                             </ul>
                                                                         </div>
                                                                     </div>
@@ -143,9 +155,20 @@
                     </div>
                 </div>
 @endsection
-@push('scripts')
+@section('scripts')
     <script>
-        function deleteUser(url) {
+    
+let message = {!! json_encode(Session::get('message')) !!};
+let msg = {!! json_encode(Session::get('alert')) !!};
+if(message != null){
+toastr.clear();
+    NioApp.Toast(message , msg, {
+      position: 'top-right',
+        timeOut: 5000,
+    });
+}
+
+       /** function deleteUser(url) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'You wont be able to reveres this',
@@ -157,6 +180,10 @@
                     postDummy(url)
                 }
             })
+
+       
         }
+     **/
+
     </script>
-@endpush
+@endsection

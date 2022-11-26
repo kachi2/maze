@@ -30,6 +30,9 @@ Route::post('users/{id}/unrank-admin', 'UserController@UnRankUserAdmin')->name('
 Route::get('users/add', 'UserController@addUser')->name('admin.users.add');
 Route::post('users/add', 'UserController@storeUser')->name('admin.users.add');
 Route::get('users/{id}', 'UserController@showUser')->name('admin.users.show');
+Route::get('users/suspend/{id}', 'UserController@SuspendUser')->name('admin.users.suspend');
+Route::get('users/unsuspend/{id}', 'UserController@UnsuspendUser')->name('admin.users.unsuspend');
+Route::post('users/terminate', 'UserController@Terminate')->name('admin.users.terminate');
 
 Route::get('packages', 'PackageController@index')->name('admin.packages');
 Route::get('packages/add', 'PackageController@addPackage')->name('admin.packages.add');

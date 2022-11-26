@@ -57,6 +57,7 @@
                                 </span>
                             </div>
                         </div>
+
                         <div class="authentication-account-access pb-15">
                             <div class="authentication-account-access-item">
                                 <div class="input-checkbox">
@@ -71,6 +72,9 @@
                                     @endif</div>
                             </div>
                         </div>
+                        @if(Session::has('error_msg'))
+                        <p> <span class="alert alert-danger"> {{Session::get('error_msg')}} </span></p> 
+                          @endif
                         <button class="btn main-btn main-btn-lg full-width mb-10">Sign In</button>
                     </form>
                     <div class="form-desc">Don’t have an account? <a href="{{route('register')}}">Sign Up Now!</a></div>

@@ -1,9 +1,5 @@
 
-
-@mobile
-@include('auth.login')
-@elsemobile
-
+@desktop
 <!DOCTYPE html>
 <html lang="zxx" class="js">
 
@@ -37,6 +33,7 @@
                                 <img class="logo-dark logo-img" src="{{asset('/logo.png')}}" srcset="{{asset('/logo.png')}} 2x" alt="logo-dark">
                             </a>
                         </div>
+                       
                         <div class="card card-bordered">
                             <div class="card-inner card-inner-lg">
                                 <div class="nk-block-head">
@@ -47,6 +44,7 @@
                                         </div>
                                     </div>
                                 </div>
+                          
                                 <form class="text-left" method="post" action="{{ route('web.login') }}">
                                     @csrf
                                     <div class="form-group">
@@ -69,6 +67,9 @@
                                             @showError('password')
                                         </div>
                                     </div>
+                                    @if(Session::has('error_msg'))
+                                  <p> <span class="alert alert-danger"> {{Session::get('error_msg')}} </span></p> 
+                                    @endif
                                     <div class="form-group">
                                         <button class="btn btn-lg btn-primary btn-block">Login</button>
                                     </div>
@@ -135,4 +136,6 @@
 
 </html>
 
-@endmobile
+@elsedesktop
+@include('auth.login')
+@enddesktop

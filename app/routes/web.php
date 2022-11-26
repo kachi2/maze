@@ -10,9 +10,8 @@
 */
 
 use Illuminate\Support\Facades\Route;
-
     #========== mobile routes ======================
-    Route::domain('app.mazeoptions.com')->group(function(){   
+    Route::domain('app.maze.com')->group(function(){   
         Route::post('/user/register', 'Auth\RegisterController@create_user')->name('register_user');
         Route::get('complete-registration', 'Auth\CompleteRegistrationController@index')->name('complete_registration');
         Route::post('complete-registration', 'Auth\CompleteRegistrationController@update')->name('complete_registration');
@@ -89,11 +88,11 @@ use Illuminate\Support\Facades\Route;
     Route::post('/contact/store', 'ContactController@store')->name('contact.store');
     ## =============== web routes ===========================
     Route::group(['prefix' => 'user', 'as' => 'web.'], function(){  
-    Route::get('/user/registers/', 'Web\RegisterController@createForm')->name('register');
-    Route::post('/user/register/', 'Web\RegisterController@create_user')->name('register_user');
-    Route::post('/user/logout', 'Web\LoginController@Logout')->name('logout');
-    Route::get('/user/logins', 'Web\LoginController@loginForm')->name('logins');
-    Route::post('/user/login', 'Web\LoginController@Login')->name('login');
+    Route::get('registers/', 'Web\RegisterController@createForm')->name('register');
+    Route::post('register/', 'Web\RegisterController@create_user')->name('register_user');
+    Route::post('/logout', 'Web\LoginController@Logout')->name('logout');
+    Route::get('/logins', 'Web\LoginController@loginForm')->name('logins');
+    Route::post('/login', 'Web\LoginController@Login')->name('login');
     #============= logged user ============================ 
     Route::get('/home', 'Web\HomeController@index')->name('home');
     Route::get('/', 'Web\HomeController@index')->name('home');

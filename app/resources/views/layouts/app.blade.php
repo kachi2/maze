@@ -16,7 +16,7 @@
       <style type="text/css">
  /*google translate Dropdown */
  #google_translate_element select{
- background:#f6edfd;
+ background:#f6edfd; 
  color:#383ffa;
  border: none;
  border-radius:3px;

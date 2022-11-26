@@ -143,10 +143,31 @@
                                                          <div class="nk-tb-col  tb-col-sm">
                                                             <span class="tb-amount">{{$deposit->expires_at->diffForHumans()}}</span>
                                                         </div>
+                                                        <div class="nk-tb-col nk-tb-col-tools">
+                                                            <ul class="nk-tb-actions gx-1">
+                                                                <li>
+                                                                    <div class="drodown">
+                                                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                                            <ul class="link-list-opt no-bdr">
+                                                                               
+                                                                                <li><a  class="data-item" data-toggle="modal" data-target="#deposit_id{{$deposit->id}}" href="javascript();"><em class="icon ni ni-user"></em><span >View Details</span></a></li>
+                                                                                @if($deposit->status == 0)
+                                                                                <form method="get" action="{{route('admin.users.terminate',encrypt($deposit->id))}}" id="form{{$deposit->id}}">
+                                                                                <input type="hidden" value="{{$deposit->id}}" class="depositId">
+                                                                                <li><button type="button"  class="btn btn-outline-none" onclick=""><em class="icon ni ni-pen"></em><span style="color:red">Terminate</span></button></li>
+                                                                                 </form>
+                                                                                @endif
+                                                                                <li><a  href="{{ route('admin.users.show', ['id' => encrypt($deposit->user->id)]) }}"><em class="icon ni ni-eye"></em><span>View User</span></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </div><!-- .nk-tb-item --> 
-                                                @endforeach
-
-                                                    
+                                                    @include('admin.misc.deposit-details')
+                                                @endforeach          
                                                 </div><!-- .nk-tb-list -->
                                             </div><!-- .card-inner -->
                                             <div class="card-inner">
@@ -162,17 +183,19 @@
                
 @endsection
 
+
+
+
+
 @section('scripts')
     <script>
-
- 
           function markDepositExpired() {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
                 type: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, mark expired!',
+                confirmButtonText: 'Yes, Terminate',
                 cancelButtonText: 'No, cancel!'
             }).then(function (result) {
                 if (result.value) {

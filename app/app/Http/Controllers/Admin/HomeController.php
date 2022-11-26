@@ -67,7 +67,7 @@ class HomeController extends Controller
         return view('admin.wallet')
         ->with('wallets', WalletAddress::latest()->get());
     }
-
+ 
     public function WalletAddressDelete($id){
         $wallet = WalletAddress::findorfail(decrypt($id));
         $wallet->delete();

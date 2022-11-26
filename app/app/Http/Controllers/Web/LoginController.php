@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request;
 use App\UserActivity;
 
@@ -56,6 +57,5 @@ class LoginController extends Controller
             'last_login' => Carbon::now()->toDateTimeString(),
             'login_ip' => $request->Ip(),
         ]);
-        //dd($user);
     }
 }

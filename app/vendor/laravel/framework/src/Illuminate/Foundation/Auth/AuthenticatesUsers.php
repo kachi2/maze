@@ -3,7 +3,9 @@
 namespace Illuminate\Foundation\Auth;
 
 use Illuminate\Http\Request;
+use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
 trait AuthenticatesUsers
@@ -30,6 +32,14 @@ trait AuthenticatesUsers
      */
     public function login(Request $request)
     {
+
+        $user = User::where('email', $request->email)->first();
+        if(!empty($user)){
+        if($user->status == 1){
+            Session::flash('error_msg', 'Account suspended, please contact administrator');
+            return redirect()->back()->withInput($request->all());
+        }
+    }
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
