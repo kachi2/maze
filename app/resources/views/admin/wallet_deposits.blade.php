@@ -125,7 +125,7 @@
                                                              @if( $deposit->status == 1)
                                                             <span class="badge badge-sm badge-dim badge-outline-success d-none d-md-inline-flex">Approved</span>
                                                             @elseif ($deposit->status == -1)
-                                                            <span class="badge badge-sm badge-dim badge-outline-warning d-none d-md-inline-flex">Cancelled</span>
+                                                            <span class="badge badge-sm badge-dim badge-outline-danger d-none d-md-inline-flex">Cancelled</span>
                                                             @else
                                                              <span class="badge badge-sm badge-dim badge-outline-primary d-none d-md-inline-flex">Pending</span>
                                                             @endif
@@ -147,9 +147,20 @@
                                                                                 <form id="formMark" action="{{ route('admin.wallet.update', ['id' => encrypt($deposit->id)]) }}" method="post">
                                                                                 @csrf
                                                                                 
-                                                                                <li><button type="submit" onclick="return confirm('Are you Sure')" class="btn btn-outline-primary">
+                                                                                <li><button type="submit" onclick="return confirm('Are you Sure')" class="btn btn-outline-none">
                                                                                 <em class="icon ni ni-shield-off"></em><span> Approve Payment</span> </button></li>
                                                                                 </form>
+                                                                                
+                                                                                <li><a  class="data-item" data-toggle="modal" data-target="#pending_deposit{{$deposit->id}}" href="javascript();"><em class="icon ni ni-user"></em><span >View Details</span></a></li>
+                                                                                @if($deposit->status == 0)
+                                                                                <form method="post" action="{{route('admin.wallet.cancel')}}">
+                                                                                    @csrf
+                                                                                <input type="hidden" value="{{encrypt($deposit->id)}}" name="id">
+                                                                                <li><button type="submit"  class="btn btn-outline-none"><em class="icon ni ni-pen"></em><span style="color:red">Cancel</span></button></li>
+                                                                                 </form>
+                                                                                @endif
+                                                                                <li><a  href="{{ route('admin.users.show', ['id' => encrypt($deposit->user->id)]) }}"><em class="icon ni ni-eye"></em><span>View User</span></a></li>
+                                                                          
                                                                                  
                                                                             </ul>
                                                                         </div>
@@ -159,6 +170,8 @@
                                                             </ul>
                                                         </div>
                                                     </div><!-- .nk-tb-item --> 
+
+                                                    @include('admin.misc.wallet')
                                                 @endforeach
 
                                                     

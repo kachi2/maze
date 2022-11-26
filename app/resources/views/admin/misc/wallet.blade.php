@@ -33,8 +33,8 @@
 </div>
 <div class="col-md-6">
 <div class="form-group">
-<label class="form-label" for="display-name">Plan</label><br>
-<span id="tnxid" class="caption-text">{{$deposit->plan->name}}</span>
+<label class="form-label" for="display-name">Ref</label><br>
+<span id="tnxid" class="caption-text">{{$deposit->ref}}</span>
 </div>
 
 </div>

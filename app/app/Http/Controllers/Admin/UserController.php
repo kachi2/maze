@@ -17,6 +17,7 @@ use App\Models\Plan;
 use App\Models\Resource;
 use App\Models\State;
 use App\Models\Trade;
+use App\Models\PendingDeposit;
 use App\Models\UserWallet;
 use App\Models\Withdrawal;
 use App\Notifications\InvestmentCreated;
@@ -736,13 +737,38 @@ class UserController extends Controller
      
 
         public function Terminate(Request $request){
-            dd(decrypt($request->id));
+            //dd(decrypt($request->id));
+            $deposit = Deposit::where('id', decrypt($request->id))->first();
             $deposit = Deposit::where('id', decrypt($request->id))->first()
                     ->update(['status' => 1, 'expires_at' => Carbon::now()
                       ]);
             if($deposit){
                 Session::flash('alert', 'error');
                 Session::flash('message', 'Investment Terminated Successfully');
+                $notify = new UserNotify;
+                $notify->user_id = $deposit->user->id;
+                $notify->message = 'Dear '.$deposit->user->username.','.' Your Investment has been terminated, if you are not sure about contact Us'; 
+                $notify->save();
+                return back(); 
+            }else{
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Something went wrong, try again');
+                return back(); 
+            }
+        }
+
+        public function DepositTerminate(Request $request){
+        //dd($request->all());
+            $deposit = PendingDeposit::where('id', decrypt($request->id))->first();
+            $deposit = PendingDeposit::where('id', decrypt($request->id))->first()
+            ->update(['status' => -1 ]);
+            if($deposit){
+                Session::flash('alert', 'error');
+                Session::flash('message', 'Deposit Cancelled Successfully');
+                $notify = new UserNotify;
+                $notify->user_id = $deposit->user->id;
+                $notify->message = 'Dear '.$deposit->user->username.','.' Your Deposit has been cancelled, if you are not sure about contact Us'; 
+                $notify->save();
                 return back(); 
             }else{
                 Session::flash('alert', 'error');

@@ -33,6 +33,7 @@ Route::get('users/{id}', 'UserController@showUser')->name('admin.users.show');
 Route::get('users/suspend/{id}', 'UserController@SuspendUser')->name('admin.users.suspend');
 Route::get('users/unsuspend/{id}', 'UserController@UnsuspendUser')->name('admin.users.unsuspend');
 Route::post('users/terminate', 'UserController@Terminate')->name('admin.users.terminate');
+Route::post('users/pending/deposit/cancel', 'UserController@DepositTerminate')->name('admin.users.deposit-terminate');
 
 Route::get('packages', 'PackageController@index')->name('admin.packages');
 Route::get('packages/add', 'PackageController@addPackage')->name('admin.packages.add');
@@ -94,6 +95,7 @@ Route::post('tokens/{id}/delete', 'TokenController@destroy')->name('admin.tokens
 
 Route::get('/wallet/deposits/index', 'DepositController@WalletDeposit')->name('admin.wallet.deposit');
 Route::post('/wallet/deposits/update/{id}', 'DepositController@WalletDepositUpdate')->name('admin.wallet.update');
+Route::post('/wallet/deposits/cancel', 'DepositController@WalletDepositCancel')->name('admin.wallet.cancel');
 Route::get('/wallet/address/index', 'HomeController@WalletAddresses')->name('admin.wallet.addresses');
 Route::get('/wallet/address/delete/{id}', 'HomeController@WalletAddressDelete')->name('wallet.address.delete');
 

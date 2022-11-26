@@ -122,6 +122,25 @@ class DepositController extends Controller
             return redirect()->back();
     }
 
+    public function WalletDepositCancel(Request $request){
+        $deposit = WalletDeposit::where('id', decrypt($request->id))->first();
+        WalletDeposit::where('id', decrypt($request->id))->first()->update(['status' => -1 ]);
+      //  dd($deposit->user->id);
+        if($deposit){
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Investment Terminated Successfully');
+            $notify = new UserNotify;
+            $notify->user_id = $deposit->user->id;
+            $notify->message = 'Dear '.$deposit->user->username.','.' Your Deposit has been cancelled, if you are not sure about contact Us'; 
+            $notify->save();
+            return back(); 
+        }else{
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Something went wrong, try again');
+            return back(); 
+}
+ }
+
     /**
      *  Delete user.
      *

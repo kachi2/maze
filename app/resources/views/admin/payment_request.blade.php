@@ -125,7 +125,7 @@
                                                              @if( $deposit->status == 1)
                                                             <span class="badge badge-sm badge-dim badge-outline-success d-none d-md-inline-flex">Approved</span>
                                                             @elseif ($deposit->status == -1)
-                                                            <span class="badge badge-sm badge-dim badge-outline-warning d-none d-md-inline-flex">Cancelled</span>
+                                                            <span class="badge badge-sm badge-dim badge-outline-danger d-none d-md-inline-flex">Cancelled</span>
                                                             @else
                                                              <span class="badge badge-sm badge-dim badge-outline-primary d-none d-md-inline-flex">Pending</span>
                                                             @endif
@@ -153,9 +153,10 @@
                                                                                
                                                                                     <li><a  class="data-item" data-toggle="modal" data-target="#pending_deposit{{$deposit->id}}" href="javascript();"><em class="icon ni ni-user"></em><span >View Details</span></a></li>
                                                                                     @if($deposit->status == 0)
-                                                                                    <form method="get" action="{{route('admin.users.terminate',encrypt($deposit->id))}}" id="form{{$deposit->id}}">
-                                                                                    <input type="hidden" value="{{$deposit->id}}" class="depositId">
-                                                                                    <li><button type="button"  class="btn btn-outline-none" onclick=""><em class="icon ni ni-pen"></em><span style="color:red">Cancel</span></button></li>
+                                                                                    <form method="post" action="{{route('admin.users.deposit-terminate')}}">
+                                                                                        @csrf
+                                                                                    <input type="hidden" value="{{encrypt($deposit->id)}}" name="id">
+                                                                                    <li><button type="submit"  class="btn btn-outline-none"><em class="icon ni ni-pen"></em><span style="color:red">Cancel</span></button></li>
                                                                                      </form>
                                                                                     @endif
                                                                                     <li><a  href="{{ route('admin.users.show', ['id' => encrypt($deposit->user->id)]) }}"><em class="icon ni ni-eye"></em><span>View User</span></a></li>
