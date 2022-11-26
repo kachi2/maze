@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Deposit;
 use App\Models\Package;
+use Intervention\Image\Facades\Image;
 use App\Models\Plan;
 use App\Models\RateHistory;
 use App\Models\Resource;
@@ -392,7 +393,7 @@ class PackageController extends Controller
                 $image = $request->file('image');
                 $file = $image->getClientOriginalExtension();
                 $ext = time(). ".".$file;
-                $image->move('images', $ext);
+                Image::make($request->file('image'))->resize(295,298)->save('mobile/images/'.$ext);
             }
             $rd = rand(11,99);
             if($request->duration){
@@ -482,7 +483,7 @@ class PackageController extends Controller
             $image = $request->file('image');
             $file = $image->getClientOriginalExtension();
             $ext = time(). ".".$file;
-            $image->move('images', $ext);
+            Image::make($request->file('image'))->resize(295,298)->save('mobile/images/'.$ext);
             $plan->image = $ext;
         }
         if($request->duration){

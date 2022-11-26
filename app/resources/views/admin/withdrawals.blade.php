@@ -1,6 +1,5 @@
 @extends('layouts.admin', ['page_title' => 'Withdrawals'])
 @section('content')
-
     <div class="nk-content nk-content-fluid">
                     <div class="container-xl wide-lg">
                         <div class="nk-content-body">
@@ -8,10 +7,8 @@
                                  <div class="nk-block-head">
                                 <div class="nk-block-between-md g-4">
                                     <div class="nk-block-head-content">
-                                        <h5 class="nk-block-title fw-normal">Users List</h5>
-                                        
-                                    </div>
-                                   
+                                        <h5 class="nk-block-title fw-normal">Users List</h5>   
+                                    </div>  
                                 </div>
                             </div><!-- .nk-block-head -->
                                 
@@ -29,8 +26,6 @@
                                                         <th class="nk-tb-col "><span class="sub-text">Method</th>
                                                         <th class="nk-tb-col "><span class="sub-text">Status</th>
                                                         <th class="nk-tb-col "><span class="sub-text">Date</th>
-                                                    
-                                                        
                                                         <th class="nk-tb-col nk-tb-col-tools text-right"> 
                                                         </th>
                                                     </tr>
@@ -80,7 +75,7 @@
                                                                             @if($withdrawal->status == \App\Models\Withdrawal::STATUS_PENDING)
                                                                                  <form id="formCancel" action="{{ route('admin.withdrawals.cancel', ['id' => $withdrawal->id]) }}" method="post">
                                                                                 @csrf
-                                                                                <li><button type="submit"  class="btn btn-outline-none" onclick="return confirm('Are you Sure')"><em class="icon ni ni-user"></em><span>Cancel</span></button></li>
+                                                                                <li><button type="submit"  class="btn btn-outline-none" onclick="return confirm('Are you Sure')"><em class="icon ni ni-pen"></em><span>Cancel</span></button></li>
                                                                                     
                                                                                  </form>
                                                                                  @if(!$withdrawal->paid)
@@ -121,7 +116,6 @@
 @endsection
 @section('scripts')
     <script>
-    
           function cancelWithdrawal() {
             Swal.fire({
                 title: 'Are you sure?',

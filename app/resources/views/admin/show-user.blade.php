@@ -178,20 +178,20 @@
                                                         
                                                     </div><!-- .user-card -->
                                                 </div><!-- .card-inner -->
-                                                {{-- <div class="card-inner">
+                                                <div class="card-inner">
                                                     <div class="user-account-info py-0">
                                                         
                                                         <div class="user-balance">
                                                         
-                                                         <a href="{{ route('admin.users.send_bonus', ['id' => $user->id]) }}" class="btn btn-primary btn-sm mr-1 pr-3">Send Bonus </a>
-                                                        <a href="{{ route('admin.users.send_message', ['id' => $user->id]) }}" class="btn btn-primary btn-sm mr-1">Send Message</a> </div>
+                                                         <a href="{{ route('admin.users.send_bonus', ['id' => $user->id]) }}" class="btn btn-primary btn-sm mr-1 pr-3">Send User Bonus </a>
+                                                        {{-- <a href="{{ route('admin.users.send_message', ['id' => $user->id]) }}" class="btn btn-primary btn-sm mr-1">Send Message</a> </div> --}}
                                                     </div>
-                                                </div><!-- .card-inner --> --}}
+                                                </div><!-- .card-inner -->
                                                 <div class="card-inner p-0">
                                                     <ul class="link-list-menu">
-                                                        <li><a class="active" href="{{ route('admin.users.show', ['id' => $user->id]) }}"><em class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a></li>
-                                                        <li><a href="{{ route('admin.users.activity', ['id' => $user->id]) }}"><em class="icon ni ni-activity-round-fill"></em><span>Account Activity</span></a></li>
-                                                        <li><a href="{{ route('admin.users.settings', ['id' => $user->id]) }}"><em class="icon ni ni-lock-alt-fill"></em><span>Security Settings</span></a></li>
+                                                        <li><a class="active" href="{{ route('admin.users.show', ['id' => encrypt($user->id)]) }}"><em class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a></li>
+                                                        <li><a href="{{ route('admin.users.activity', ['id' => encrypt($user->id)]) }}"><em class="icon ni ni-activity-round-fill"></em><span>Account Activity</span></a></li>
+                                                        <li><a href="{{ route('admin.users.settings', ['id' => encrypt($user->id)]) }}"><em class="icon ni ni-lock-alt-fill"></em><span>Security Settings</span></a></li>
                                                     </ul>
                                                 </div><!-- .card-inner -->
                                             </div><!-- .card-inner-group -->

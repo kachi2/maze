@@ -7,7 +7,7 @@
                                  <div class="nk-block-head">
                                 <div class="nk-block-between-md g-4">
                                     <div class="nk-block-head-content">
-                                        <h5 class="nk-block-title fw-normal">Send Bonus</h5>
+                                        <h5 class="nk-block-title fw-normal">Send Message</h5>
                                         
                                     </div>
                                     <div class="nk-block-head-content">
@@ -20,52 +20,8 @@
                                 </div>
                             </div>
     <div class="body-content row">
-        <div class="col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="text-center mt-3">
-                        <img src="{{ $user->photo_url }}" alt="{{ $user->username }}"
-                             class="img-thumbnail" />
-                        <h5 class="mt-2 mb-0">{{ $user->name }}</h5>
-                        <h6 class="text-muted font-weight-normal mt-1 mb-0">{{ '@' }}{{ $user->username }}</h6>
-                        <h6 class="text-muted font-weight-normal mt-2 mb-4">{{ $user->location }}</h6>
-                        <a href="{{ route('admin.users.send_bonus', ['id' => $user->id]) }}" class="btn btn-primary btn-sm mr-1 pr-3">Send Bonus </a>
-                        <a href="{{ route('admin.users.edit', ['id' => $user->id]) }}" class="btn btn-primary btn-sm mr-1">Edit</a>
-                    </div>
-
-                    <!-- profile  -->
-                    <div class="mt-5 pt-2 border-top">
-                        <h4 class="mb-3 font-size-15">About</h4>
-                        <p class="text-muted mb-4">{{ $user->about }}</p>
-                    </div>
-                    <div class="mt-3 pt-2 border-top">
-                        <h4 class="mb-3 font-size-15">Contact Information</h4>
-                        <div class="table-responsive">
-                            <table class="table table-borderless mb-0 text-muted">
-                                <tbody>
-                                <tr>
-                                    <th scope="row">Email</th>
-                                    <td>{{ $user->email }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Phone</th>
-                                    <td>{{ $user->phone }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Address</th>
-                                    <td>{{ $user->location }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Registered At</th>
-                                    <td>{{ $user->created_at }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="mb-xl-5"></div>
-                </div>
-            </div>
+        <div class="col-lg-1">
+          
             <!-- end card -->
         </div>
         <div class="col-lg-9">

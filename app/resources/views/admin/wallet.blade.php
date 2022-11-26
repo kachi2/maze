@@ -61,7 +61,7 @@
                                                         <div class="nk-tb-col"><span>Name</span></div>
                                                         <div class="nk-tb-col"><span>Adress</span></div>
                                                         <div class="nk-tb-col"><span>Barcode</span></div>
-                                                        <div class="nk-tb-col  "><span>Created At </span></div>
+                                                        <div class="nk-tb-col  "><span>Updated At </span></div>
                                                             <div class="nk-tb-col  "></div>
                                                        
                                                     </div><!-- .nk-tb-item -->
@@ -77,11 +77,11 @@
                                                             <span class="tb-amount"> {{ $wallet->address }}</span>
                                                         </div>
                                                         <div class="nk-tb-col ">
-                                                            <span class="tb-amount"><img src="{{asset('/mobile/images/'.$wallet->barcode)}}" style="width:80px"> </span>
+                                                            <span class="tb-amount"><img src="{{asset('mobile/images/'.$wallet->barcode)}}" style="width:80px"> </span>
                                                         </div>
 
                                                          <div class="nk-tb-col tb-col-sm">
-                                                            <span class="tb-amount">{{$wallet->created_at}}</span>
+                                                            <span class="tb-amount">{{$wallet->updated_at}}</span>
                                                         </div>
 
                                                         <div class="nk-tb-col tb-col-sm">

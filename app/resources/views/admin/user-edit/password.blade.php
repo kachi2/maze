@@ -97,9 +97,9 @@
                                                 </div><!-- .card-inner -->
                                                 <div class="card-inner p-0">
                                                     <ul class="link-list-menu">
-                                                      <li><a class="active" href="{{ route('admin.users.show', ['id' => $user->id]) }}"><em class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a></li>
-                                                        <li><a href="{{ route('admin.users.activity', $user->id) }}"><em class="icon ni ni-activity-round-fill"></em><span>Account Activity</span></a></li>
-                                                        <li><a href="{{ route('admin.users.settings',  $user->id) }}"><em class="icon ni ni-lock-alt-fill"></em><span>Security Settings</span></a></li>
+                                                      <li><a class="active" href="{{ route('admin.users.show', ['id' => encrypt($user->id)]) }}"><em class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a></li>
+                                                        <li><a href="{{ route('admin.users.activity', encrypt($user->id)) }}"><em class="icon ni ni-activity-round-fill"></em><span>Account Activity</span></a></li>
+                                                        <li><a href="{{ route('admin.users.settings',  encrypt($user->id)) }}"><em class="icon ni ni-lock-alt-fill"></em><span>Security Settings</span></a></li>
                                                      </ul>
                                                 </div><!-- .card-inner -->
                                             </div><!-- .card-inner-group -->

@@ -110,13 +110,13 @@
                                                             </div>
                                                         </div>
                                                         <div class="nk-tb-col tb-col-lg">
-                                                            <span class="tb-lead-sub">  <a href="{{ route('admin.users.show', ['id' => $payout->user->id]) }}">
+                                                            <span class="tb-lead-sub">  <a href="{{ route('admin.users.show', ['id' => encrypt($payout->user->id)]) }}">
                                                                 {{ $payout->user->username }}
                                                             </a></span>
                                                         </div>
                                                          <div class="nk-tb-col tb-col-lg">
                                                             <span class="">
-                                                               <a href="{{ $payout->deposit->url }}">{{ $payout->deposit->ref }}</a>
+                                                               <a href="#">{{ $payout->deposit->ref }}</a>
                                                             </span>
                                                         </div>
                                                        
@@ -157,28 +157,9 @@
 @section('scripts')
     <script>
 
- 
-          function markDepositExpired() {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, mark expired!',
-                cancelButtonText: 'No, cancel!'
-            }).then(function (result) {
-                if (result.value) {
-                    $('#formMark').submit();
-                }
-            });
-        }
- 
- 
-
 let message = {!! json_encode(Session::get('message')) !!};
 let msg = {!! json_encode(Session::get('alert')) !!};
 
-//alert(msg);
 if(message != null){
 toastr.clear();
     NioApp.Toast(message , msg, {

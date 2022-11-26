@@ -167,22 +167,4 @@
 
 
 @endsection
-@section('scripts')
-    <script>
- 
-          function markDepositExpired(url) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, Approve!',
-                cancelButtonText: 'No, cancel!'
-            }).then(function (result) {
-                if (result.value) {
-                  document.getElementById('formMark').submit();
-                }
-            });
-        }
-    </script>
-@endsection
+

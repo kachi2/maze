@@ -123,7 +123,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn main-btn main-btn-lg full-width">  <span class="preloader"> </span>Proceed to Payment</button>
+                                <button type="submit" class="btn main-btn main-btn-lg full-width" id="proceedPay">  
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    <span class="sr-only">Loading...</span>
+                                </button>
                             
                         </div>
                     </div>
@@ -170,7 +173,7 @@
         </div>
     </div>
    
-    <!-- end of payment modal -->
+    <!-- end of payment modal --> 
     <form method="post" action="{{ route('transfer.payouts', encrypt($plan->id)) }}">
         @csrf
     <div class="modal fade" id="transfer" tabindex="-1" aria-labelledby="passwordModal" aria-hidden="true">
@@ -239,14 +242,14 @@
 @endsection
 
 @push('scripts')
-<script src="{{asset('/mobile/js/custom.js')}}"></script>
-@endpush
-
-@push('scripts')
 
 <script>
-   var img_url = {!! json_encode(asset('/mobile/images/')) !!};
 
+    $('#proceedPay').on('click', function(){
+        $('#proceedPay').html(
+        )
+    });
+   var img_url = {!! json_encode(asset('/mobile/images/')) !!};
    url = {!! json_encode(route('deposits.tnxHash','')) !!}
 $('#DepositForm').submit(function(e){
             e.preventDefault();
