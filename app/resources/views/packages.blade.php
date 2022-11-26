@@ -1,45 +1,76 @@
 @extends('layouts.app')
 @section('content')
-<div class="nk-content nk-content-fluid">
-                    <div class="container-xl wide-lg">
-                        <div class="nk-content-body">
-                           <div class="nk-block-between g-3 p-2">
-                               <div class="nk-block-head-content">
-                                   <h3 class="nk-block-title page-title">Investment Packages</h3>
-                                   <div class="nk-block-des text-soft"><p>Select Investment Package and start enjoying our service.</p>
-                                   </div></div></div><!-- .nk-block-head -->
-                            <div class="nk-block">
-                                <div class="card card-custom-s1 ">
-                                    <div class="row no-gutters">
-                                    @forelse($packages as $package)
-                                        @foreach($package->plans as $plan)
-                                      <div class="col-md-6 col-xxl-3 p-5"><div class="card card-bordered pricing">
-                                <div class="pricing-head"><div class="pricing-title">
-                                    <h4 class="card-title title">{{ $plan->name }}</h4>
-                                    <p class="sub-text">  Invest  in {{ $plan->name }} &amp; earn {{ $plan->profit_rate }}% interest.</p></div>
-                                    <div class="card-text"><div class="row"><div class="col-6">
-                                        <span class="h4 fw-500">{{ $plan->profit_rate }}%</span><span class="sub-text">{{ $package->formatted_payment_period_alt2 }} Interest</span></div>
-                                        <div class="col-6"><span class="h4 fw-500">{{ $package->duration }}</span><span class="sub-text">Days</span></div></div></div>
-                                        </div><div class="pricing-body"><ul class="pricing-features"><li><span class="w-50">Min Deposit</span> - <span class="ml-auto">{{ moneyFormat($plan->min_deposit, 'USD') }}</span></li>
-                                        <li><span class="w-50">Max Deposit</span> - <span class="ml-auto">{{ moneyFormat($plan->max_deposit, 'USD') }}</span></li>
-                                        <li ><span class="w-50">24x7 Support</span> - <span class="ml-auto">Yes</span></li>
-                                        <li><span class="w-50">Automatic Withdrawal</span> - <span class="ml-auto">Yes</span></li>
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Investment Plans</h3>
+                            <div class="nk-block-des text-soft">
+                                <p>Choose the Investment plan that suits you</p>
+                            </div>
+                        </div><!-- .nk-block-head-content -->
+                        
+                    </div><!-- .nk-block-between -->
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="row g-gs">
+                        @forelse($packages as $package)
+                        @foreach($package->plans as $plan)
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered h-100">
+                                <div class="card-inner">
+                                    <div class="project">
+                                        <div class="project-head">
+                                            <a href="html/apps-kanban.html" class="project-title">
+                                                <div class="user-avatar sq bg-purple"><span>{{strtoupper(substr($package->name,0,2))}}</span></div>
+                                                <div class="project-info">
+                                                    <h6 class="title">{{$package->plans[0]->name}}</h6>
+                                                    <span class="sub-text">{{$package->duration}} Days</span>
+                                                </div>
+                                            </a>
+                                            
+                                        </div>
+                                        <div class="project-details">
+                                            <p></p>
+                                        </div>
+                                        <div class="project-progress">
+                                            <div class="project-progress-details">
+                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span> Max Deposit</span></div>
+                                                <div class="project-progress-percent">{{moneyFormat($package->plans[0]->min_deposit,'USD')}}</div>
+                                            </div>
+                                            <div class="project-progress-details">
+                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span> Min Deposit</span></div>
+                                                <div class="project-progress-percent">{{moneyFormat($package->plans[0]->max_deposit,'USD')}}</div>
+                                            </div>
+                                            <div class="project-progress-details">
+                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span> Daily Payouts</span></div>
+                                                <div class="project-progress-percent">{{$package->plans[0]->profit_rate,'USD'}}%</div>
+                                            </div>
                                         
-                                        </ul>
-                                        <div class="pricing-action">
-                                            <a href="{{ route('web.deposits.invest', ['id' => encrypt($plan->id)]) }}" class="btn btn-primary">Choose this plan</a>
-                                            </div></div></div></div>
-                                     @endforeach
-                                        @empty
-                                         @endforelse 
-                                        <!-- .col -->
-                                        <!-- .col -->
-                                    </div><!-- .row -->
-                                </div><!-- .card -->
-                            </div><!-- .nk-block -->
-                           
-                        </div>
+                                            <div class="project-progress-details">
+                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span> Profit Rate</span></div>
+                                                <div class="project-progress-percent">{{$package->plans[0]->profit,'USD'}}%</div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="project-meta">
+                                            <a href="{{ route('web.deposits.invest', ['id' => encrypt($plan->id)]) }}" class="btn btn-outline-primary">Choose this plan</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> @endforeach
+                        @empty
+                         @endforelse 
+                     
                     </div>
-                </div>
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection

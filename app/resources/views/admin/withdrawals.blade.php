@@ -80,13 +80,14 @@
                                                                             @if($withdrawal->status == \App\Models\Withdrawal::STATUS_PENDING)
                                                                                  <form id="formCancel" action="{{ route('admin.withdrawals.cancel', ['id' => $withdrawal->id]) }}" method="post">
                                                                                 @csrf
-                                                                                <li><button type="submit" style="border:none" onclick="return confirm('Are you Sure')">
-                                                                                <em class="icon ni ni-shield-off"></em><span>Cancel</span></button></li>
+                                                                                <li><button type="submit"  class="btn btn-outline-none" onclick="return confirm('Are you Sure')"><em class="icon ni ni-user"></em><span>Cancel</span></button></li>
+                                                                                    
                                                                                  </form>
                                                                                  @if(!$withdrawal->paid)
                                                                                  <form id="formMark" action="{{ route('admin.withdrawals.mark_paid', ['id' => $withdrawal->id]) }}" method="post">
                                                                                 @csrf
-                                                                                <li><button  type="submit" style="border:none" onclick="return confirm('Are you Sure')"><em class="icon ni ni-na"></em><span>Mark Paid</span></a></li>
+                                                                                  <li><button type="submit"  class="btn btn-outline-none" onclick="return confirm('Are you Sure')"><em class="icon ni ni-pen"></em><span>Approve</span></button></li>
+                                                                                    
                                                                                 <li class="divider"></li>
                                                                                  </form>
                                                                                   @endif
