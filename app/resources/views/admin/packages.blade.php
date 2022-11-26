@@ -18,7 +18,7 @@
                                 <div class="toggle-expand-content" data-content="pageMenu">
                                     <ul class="nk-block-tools g-3">
                                        
-                                        <li class="nk-block-tools-opt"><a href="#" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add New Plan</span></a></li>
+                                        <li class="nk-block-tools-opt"><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalAdd"><em class="icon ni ni-plus"></em><span>Add New Plan</span></a></li>
                                     </ul>
                                 </div>
                             </div><!-- .toggle-wrap -->
@@ -74,7 +74,7 @@
                                             </div>
                                         </div>
                                         <div class="project-meta">
-                                            <span class="badge badge-dim badge-warning"><em class="icon ni ni-clock"></em><span>{{$package->plans[0]->created_at}}</span></span>
+                                            <span class="badge badge-dim badge-warning"><em class="icon ni ni-clock"></em><span>{{$package->plans[0]->updated_at}}</span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -82,6 +82,7 @@
                         </div>
 
                         @include('admin.misc.edit-package')
+                        
                         @empty
 
                         @endforelse
@@ -93,7 +94,7 @@
     </div>
 </div>
 
-   
+@include('admin.misc.add_plan')
 
 @endsection
 @section('scripts')

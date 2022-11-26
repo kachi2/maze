@@ -1,5 +1,4 @@
-<form method="post" action="{{ route('setting.profile') }}" enctype="multipart/form-data">
-    @csrf
+
 <div class="modal fade" tabindex="-1" role="dialog" id="pending_deposit{{$deposit->id}}">
 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 <div class="modal-content">
@@ -78,4 +77,3 @@
 </div><!-- .modal-content -->
 </div><!-- .modal-dialog -->
 </div>
-</form>  

@@ -136,21 +136,21 @@
                                                         </div>
                                                         <div class="nk-tb-col nk-tb-col-tools">
                                                             <ul class="nk-tb-actions gx-1"> 
-                                                                @if($deposit->status == 0)
+                                                             
                                                                 <li>
                                                                     <div class="drodown">
                                                                         <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                                         <div class="dropdown-menu dropdown-menu-right">
                                                                             <ul class="link-list-opt no-bdr">
                                                                                 
-                                                                                
+                                                                                @if($deposit->status == 0)
                                                                                 <form id="formMark" action="{{ route('admin.deposits.approve', ['id' => encrypt($deposit->id)]) }}" method="post">
                                                                                 @csrf
                                                                                 
                                                                                 <li><button type="submit" onclick="return confirm('Are you Sure')" class="btn btn-outline-none">
                                                                                 <em class="icon ni ni-shield-off"></em><span> Approve Payment</span> </button></li>
                                                                                 </form>
-                                                                               
+                                                                                @endif
                                                                                     <li><a  class="data-item" data-toggle="modal" data-target="#pending_deposit{{$deposit->id}}" href="javascript();"><em class="icon ni ni-user"></em><span >View Details</span></a></li>
                                                                                     @if($deposit->status == 0)
                                                                                     <form method="post" action="{{route('admin.users.deposit-terminate')}}">
@@ -166,7 +166,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </li>
-                                                                @endif
+                                                             
                                                             </ul>
                                                         </div>
 

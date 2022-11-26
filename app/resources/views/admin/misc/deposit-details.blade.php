@@ -1,5 +1,4 @@
-<form method="post" action="{{ route('setting.profile') }}" enctype="multipart/form-data">
-    @csrf
+
 <div class="modal fade" tabindex="-1" role="dialog" id="deposit_id{{$deposit->id}}">
 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 <div class="modal-content">
@@ -57,7 +56,7 @@
 <div class="col-12">
 <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
 <li>
-<button type="submit" class="btn btn-lg btn-primary">Close</button>
+<button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
 </li>
 </ul>
 </div>
@@ -69,4 +68,3 @@
 </div><!-- .modal-content -->
 </div><!-- .modal-dialog -->
 </div>
-</form>  

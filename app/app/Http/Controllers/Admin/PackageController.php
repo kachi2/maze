@@ -385,16 +385,35 @@ class PackageController extends Controller
             'name' => 'required',
             'min_deposit' => 'required|numeric',
             'max_deposit' => 'required|numeric',
-            'package' => 'required|exists:packages,id',
             'profit_rate' => 'required',
         ]);
 
+            if($request->file('image')){
+                $image = $request->file('image');
+                $file = $image->getClientOriginalExtension();
+                $ext = time(). ".".$file;
+                $image->move('images', $ext);
+            }
+            $rd = rand(11,99);
+            if($request->duration){
+                $package = Package::create([
+                    'name' => 'Package'. " ".$rd,
+                    'duration' => $request->duration,
+                    'payment_period' => 2,
+                    'desc' => 'Package'. " ".$rd,
+                ]);
+            }
+
+            sleep(2);
+        $package_id = Package::latest()->first();
         $resource = Plan::create([
             'name' => $request->input('name'),
             'min_deposit' => $request->input('min_deposit'),
             'max_deposit' => $request->input('max_deposit'),
-            'package_id' => $request->input('package'),
+            'package_id' => $package_id->id,
             'profit_rate' => $request->input('profit_rate'),
+            'profit' => number_format($request->profit / $request->duration,2),
+            'image' => $ext,
         ]);
 
         return redirect()
@@ -442,6 +461,7 @@ class PackageController extends Controller
      */
     public function updatePlan(Request $request, $id)
     {
+       // dd($request->all());
         $plan = Plan::findOrFail($id);
         session()->flash('is-editing-plan', true);
         session()->flash('editing-plan-id', $plan->id);
@@ -451,12 +471,27 @@ class PackageController extends Controller
             'max_deposit' => 'required|numeric',
             'profit_rate' => 'required',
         ]);
-
         $plan->name = $request->input('name');
         $plan->min_deposit = $request->input('min_deposit');
         $plan->max_deposit = $request->input('max_deposit');
         $plan->profit_rate = $request->input('profit_rate');
+       if($request->profit){
+        $plan->profit = number_format($request->profit / $request->duration,2);
+        }
+        if($request->file('image')){
+            $image = $request->file('image');
+            $file = $image->getClientOriginalExtension();
+            $ext = time(). ".".$file;
+            $image->move('images', $ext);
+            $plan->image = $ext;
+        }
+        if($request->duration){
+            $package = Package::whereId($plan->package_id)->first();
+            $package->duration = $request->duration;
+            $package->save();
+        }
 
+        
         $plan->save();
 
         return redirect()

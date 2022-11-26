@@ -45,6 +45,8 @@ class Plan extends Model
         'min_deposit',
         'max_deposit',
         'package_id',
+        'image',
+        'profit'
     ];
 
     /**

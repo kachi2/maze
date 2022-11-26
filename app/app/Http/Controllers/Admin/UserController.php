@@ -760,9 +760,9 @@ class UserController extends Controller
         public function DepositTerminate(Request $request){
         //dd($request->all());
             $deposit = PendingDeposit::where('id', decrypt($request->id))->first();
-            $deposit = PendingDeposit::where('id', decrypt($request->id))->first()
+                $update = PendingDeposit::where('id', decrypt($request->id))->first()
             ->update(['status' => -1 ]);
-            if($deposit){
+            if($update){
                 Session::flash('alert', 'error');
                 Session::flash('message', 'Deposit Cancelled Successfully');
                 $notify = new UserNotify;
