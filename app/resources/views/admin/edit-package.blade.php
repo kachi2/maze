@@ -4,12 +4,11 @@
         <div class="col-xl-3">
             <div class="card">
                 <div class="card-body">
-
                     <div class="row">
                         <div class="col-sm-12">
-
                             <form method="post" action="{{ route('admin.packages.edit', ['id' => $package->id]) }}">
-                                @csrf
+                              
+                                
                                 <div class="form-group">
                                     <label for="inputName">Package Name</label>
                                     <input type="text" name="name"
@@ -48,75 +47,6 @@
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-9">
-            <div class="card">
-                <div class="card-body">
-
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h5>Rates</h5>
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="float-sm-right mt-3 mt-sm-0">
-                                <button onclick="addPlan({{ $package->id }})" class="btn btn-primary"><i
-                                        class='uil uil-plus mr-1'></i>Add Plan</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-4">
-                        <div class="col">
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#Id</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Min. Deposit</th>
-                                        <th scope="col">Max. deposit</th>
-                                        <th scope="col">Percent</th>
-                                        <th scope="col">Active Trades</th>
-                                        <th scope="col">Created At</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @forelse($package->plans as $plan)
-                                        <tr>
-                                            <th scope="row">{{ $plan->id }}</th>
-                                            <td>{{ $plan->name }}</td>
-                                            <td>{{ moneyFormat($plan->min_deposit, 'USD') }}</td>
-                                            <td>{{ moneyFormat($plan->max_deposit, 'USD') }}</td>
-                                            <td>{{ $plan->profit_rate }}%</td>
-                                            <td>{{ $plan->activeTrades()->count() }} Trades</td>
-                                            <td>{{ $plan->created_at }}</td>
-                                            <td>
-                                                <a href="{{ route('admin.plans.show', ['id' => $plan->id]) }}" class="btn btn-sm btn-danger">
-                                                    <i class='uil uil-eye'></i>
-                                                </a>
-                                                <button  onclick="editPlan('{{ route('admin.plans.edit', ['id' => $plan->id]) }}', '{{ $plan->name }}', {{ $plan->min_deposit }}, {{ $plan->max_deposit }}, {{ $plan->profit_rate }})" class="btn btn-sm btn-danger">
-                                                    <i class='uil uil-edit'></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-danger" onclick="deletePlan('{{ route('admin.plans.delete', ['id' => $plan->id]) }}')">
-                                                    <i class='uil uil-trash'></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td><span>No Plans Yet</span>
-                                            <td>
-                                        </tr>
-                                    @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

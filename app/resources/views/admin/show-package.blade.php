@@ -1,5 +1,8 @@
 @extends('layouts.admin', ['page_title' => 'Package: ' . $package->id])
 @section('content')
+
+
+
     <div class="body-content row">
         <div class="col-xl-3">
             <div class="card">

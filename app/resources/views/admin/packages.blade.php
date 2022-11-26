@@ -1,86 +1,99 @@
 @extends('layouts.admin', ['page_title' => 'Packages'])
 @section('content')
-    <div class="nk-content nk-content-fluid">
-                    <div class="container-xl wide-lg">
-                        <div class="nk-content-body">
-                            <div class="components-preview wide-md mx-auto">
-                                 <div class="nk-block-head">
-                                <div class="nk-block-between-md g-4">
-                                    <div class="nk-block-head-content">
-                                        <h5 class="nk-block-title fw-normal">Packages </h5>
-                                        
-                                    </div>
-                                  
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Investment Plans</h3>
+                            <div class="nk-block-des text-soft">
+                                <p>Investment Plans.</p>
+                            </div>
+                        </div><!-- .nk-block-head-content -->
+                        <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                                <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+                                <div class="toggle-expand-content" data-content="pageMenu">
+                                    <ul class="nk-block-tools g-3">
+                                       
+                                        <li class="nk-block-tools-opt"><a href="#" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add New Plan</span></a></li>
+                                    </ul>
                                 </div>
-                            </div><!-- .nk-block-head -->
-                                
-                                <div class="nk-block nk-block-lg">
-                                    <div class="card card-preview">
-                                        <div class="card-inner">
-                                            <table class="datatable-init nk-tb-list nk-tb-ulist" data-auto-responsive="true">
-                                                <thead>
-                                                    <tr class="nk-tb-item nk-tb-head">
-
-                                                        <th class="nk-tb-col "><span class="sub-text">#Id</th>
-                                                        <th class="nk-tb-col "><span class="sub-text">Package Name</th>
-                                                       <th class="nk-tb-col "><span class="sub-text">Duration</th>
-                                                        <th class="nk-tb-col "><span class="sub-text">Payment Period</th>
-                                                        <th class="nk-tb-col "><span class="sub-text">Plans</th>
-                                                        <th class="nk-tb-col "><span class="sub-text">Created At</th>
-                                                        <th class="nk-tb-col "><span class="sub-text">Action</th>
-                                                        <th class="nk-tb-col nk-tb-col-tools text-right"> 
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                              @forelse($packages as $package)
-                                        <tr>
-                                            
-                                            <td class="nk-tb-col ">{{ $package->id }}</th>
-                                            <td class="nk-tb-col ">{{ $package->name }}</td>
-                                            <td class="nk-tb-col ">{{ $package->formatted_duration }}</td>
-                                            <td class="nk-tb-col ">{{ $package->formatted_payment_period }}</td>
-                                            <td class="nk-tb-col ">{{ $package->plans()->count() }} Plans</td>
-                                            <td class="nk-tb-col ">{{ $package->created_at }}</td>
-                                            <td class="nk-tb-col nk-tb-col-tools">
-                                            <ul class="nk-tb-actions gx-1"> 
-                                                <li>
-                                                    <div class="drodown">
-                                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <ul class="link-list-opt no-bdr">   
-                                                            <form id="formMark" action="{{ route('admin.packages.delete', ['id' => $package->id]) }}" method="post">
-                                                                @csrf
-                                                                </form>
-{{--                                                   
-                                                                <li><a href="{{ route('admin.packages.edit', ['id' => $package->id]) }}" >
-                                                                <em class="icon ni ni-user-cross-fill"></em><span>Edit</span></a></li> --}}
-                                                                <li><a href="#" onclick="event.preventDefault()"><button style="border:none; background:none" onclick="deletePackage('{{ route('admin.packages.delete', ['id' => $package->id]) }}')" >
-                                                                <em class="icon ni ni-na"></em><span>Delete</span></button></li></a>
-                                                                   
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                        @empty
-                                            <tr>
-                                                <td><span>No Withdrawals Yet</span>
-                                                <td>
-                                            </tr>
-                                        @endforelse
-                                                </tbody>
-                                            </table>
+                            </div><!-- .toggle-wrap -->
+                        </div><!-- .nk-block-head-content -->
+                    </div><!-- .nk-block-between -->
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="row g-gs">
+                        @forelse($packages as $package)
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered h-100">
+                                <div class="card-inner">
+                                    <div class="project">
+                                        <div class="project-head">
+                                            <a href="html/apps-kanban.html" class="project-title">
+                                                <div class="user-avatar sq bg-purple"><span>{{strtoupper(substr($package->name,0,2))}}</span></div>
+                                                <div class="project-info">
+                                                    <h6 class="title">{{$package->plans[0]->name}}</h6>
+                                                    <span class="sub-text">{{$package->duration}} Days</span>
+                                                </div>
+                                            </a>
+                                            <div class="drodown">
+                                                <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger mt-n1 mr-n1" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li><a href="#" class="" data-toggle="modal" data-target="#modalForm{{$package->id}}"><em class="icon ni ni-edit"></em><span>Edit Plan</span></a></li>
+                                                       
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div><!-- .card-preview -->
-                                </div> <!-- nk-block -->
-                            </div><!-- .components-preview -->
+                                        <div class="project-details">
+                                            <p></p>
+                                        </div>
+                                        <div class="project-progress">
+                                            <div class="project-progress-details">
+                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span> Max Deposit</span></div>
+                                                <div class="project-progress-percent">{{moneyFormat($package->plans[0]->min_deposit,'USD')}}</div>
+                                            </div>
+                                            <div class="project-progress-details">
+                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span> Min Deposit</span></div>
+                                                <div class="project-progress-percent">{{moneyFormat($package->plans[0]->max_deposit,'USD')}}</div>
+                                            </div>
+                                            <div class="project-progress-details">
+                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span> Daily Payouts</span></div>
+                                                <div class="project-progress-percent">{{$package->plans[0]->profit_rate,'USD'}}%</div>
+                                            </div>
+                                        
+                                            <div class="project-progress-details">
+                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span> Profit Rate</span></div>
+                                                <div class="project-progress-percent">{{$package->plans[0]->profit,'USD'}}%</div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="project-meta">
+                                            <span class="badge badge-dim badge-warning"><em class="icon ni ni-clock"></em><span>{{$package->plans[0]->created_at}}</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
+                        @include('admin.misc.edit-package')
+                        @empty
+
+                        @endforelse
+                     
+                    </div>
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+</div>
+
+   
 
 @endsection
 @section('scripts')
