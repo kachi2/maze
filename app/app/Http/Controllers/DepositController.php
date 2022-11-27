@@ -424,14 +424,22 @@ class DepositController extends Controller
      }
      public function TransferPayouts(Request $request, $id){
 
-        $payouts = PlanProfit::where(['user_id' => auth_user()->id, 'plan_id' => decrypt($id)])->first();
-      //  dd($payouts);
-        if($request->amount < 0){
+
+        if($request->amounts < 0){
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Payout amount cannot be zero or negative value');
             return back();
         }
-        if($payouts->balance < $request->amount){
 
-            //return balance is too low for this service
+        $payouts = PlanProfit::where(['user_id' => auth_user()->id, 'plan_id' => decrypt($id)])->first();
+      //  dd($payouts);
+        if($request->amounts < 0){
+            return back();
+        }
+        if($payouts->balance < $request->amounts){
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Payout balance is too low for this request');
+            return back();
         }
         $balance = $payouts->balance;
         $newBalance = $balance - $request->amounts;
@@ -441,6 +449,9 @@ class DepositController extends Controller
                         'balance' => $newBalance
                     ]);
                 UserWallet::addAmount(auth_user(), $request->amounts);
+                Session::flash('alert', 'success');
+                Session::flash('message', 'Payout transfered to wallet successfully');
+               
                 return back();
      }
 

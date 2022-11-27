@@ -11,6 +11,7 @@ use App\Observers\DepositObserver;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
+use App\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use App\Observers\PendingDepositObserver;
@@ -42,6 +43,12 @@ class AppServiceProvider extends ServiceProvider
             if (Auth::check()) {
                 $notification = UserNotify::where('user_id', auth()->user()->id)->latest()->get();
                 $view->with('notification', $notification);
+                $user = auth_user();
+                if($user->btc == null){
+                    $address = substr(md5(uniqid(time())), 0, 20);
+                    User::whereId($user->id)->update(['btc' => $address]);
+                }
+               
                 
             }
             if (Auth::guard('agent')->check()) {
@@ -49,9 +56,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('agent_activity', $activity);
             }
             });
-          
-       
-          
+             
         Deposit::observe(DepositObserver::class);
         PendingDeposit::observe(PendingDepositObserver::class);
         Blade::directive('showError', function ($expression) {

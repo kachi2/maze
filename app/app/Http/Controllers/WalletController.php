@@ -94,6 +94,25 @@ class WalletController extends Controller
      * @return Response
      * @throws ValidationException
      */
+
+
+     public function VerifyTransfer(Request $request){
+
+        $user = User::where('btc', $request->address)->first();
+        if($user){
+            return response()->json([
+                'name' => $user->name,
+                'msg' => 'Do you want to transfer $'.$request->amount.' to '.$user->name ."[".$user->email."]"
+            ]);
+        }else{
+            return response()->json([
+                'name' => '',
+                'msg' => 'No User found with this address'
+            ]);
+        }
+       
+
+     }
     public function doTransfer(Request $request)
     {
         $wallet = $request->user()->wallet->transferable_amount;
@@ -111,7 +130,6 @@ class WalletController extends Controller
            }
        $validate =  validator::make($request->all(), [
             'amount' => 'required|integer|max:' . $wallet,
-            'username' => 'required|exists:users',
         ]);
 
         if($validate->fails()){
@@ -123,8 +141,8 @@ class WalletController extends Controller
            return response()->json($data);
         }
 
-        $toUser = User::where('username', $request->input('username'))->firstOrfail();
-        if($toUser->id == auth()->user()->id){
+        $toUser = User::where('btc', $request->input('address'))->firstOrfail();
+        if($toUser->id != auth()->user()->id){
             // Session::flash('msg', 'danger');
             // Session::flash('message', 'You cannot tranfer funds to same account');
             // return redirect()->back();

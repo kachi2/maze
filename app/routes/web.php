@@ -75,6 +75,8 @@ use Illuminate\Support\Facades\Route;
         Route::get('/user/messages', 'MessageController@index')->name('users.messages.index');
         Route::post('/user/send/message', 'MessageController@SendMessage')->name('users.send.message');
         Route::get('/user/agent', 'MessageController@Agent')->name('users.agent');
+
+        Route::get('/verify/user/transfer', 'WalletController@VerifyTransfer')->name('verify-transfer');
         });
 
     Route::get('/', 'WelcomeController@index')->name('index');

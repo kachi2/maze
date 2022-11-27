@@ -126,3 +126,6 @@
 
 
 @endsection
+@section('preloader')
+@include('partials.preloader')
+@endsection

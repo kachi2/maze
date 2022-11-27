@@ -42,15 +42,20 @@
             </div>
             @forelse ($transfers as $transfer )
             <div class="transaction-card mb-15">
-                <a href="transaction-details.html">
+                <a href="#">
                     <div class="transaction-card-info">
                         <div class="transaction-info-thumb" style="border-radius: 100%">
                             <span class="text-white" style="font-size:15px"><?php if(isset($transfer->receiver_id) &&  $transfer->receiver_id != auth()->user()->id){ echo strtoupper(substr($transfer->receiver->username,0,2));}else{echo strtoupper(substr($transfer->sender->username,0,2)) ;}?></span>
                         </div>
                         <div class="transaction-info-text">
-                            <h3><?php if(isset($transfer->receiver_id) && $transfer->receiver_id == auth()->user()->id){echo "Received from "."<small>".$transfer->sender->username."</small>"; }else{echo "Transferred  to "."<small>".$transfer->receiver->username."</small>";}   ?>
-                            </h3>
+                            <p><?php if(isset($transfer->receiver_id) && $transfer->receiver_id == auth()->user()->id){echo "Received from "."<small>".$transfer->sender->name. "<br>". $transfer->sender->email. "<br>". $transfer->sender->btc."</small>"; 
+                         
+                          }else{echo "Transferred  to "."<small>".$transfer->receiver->username."</small>";}   ?>
+                            </p>
+                            
                             <p><small class="positive-number">{{$transfer->created_at->format('d/m/y h:s A')}}<small></p>
+                                <span style="color:green; font-size:12px"> completed</span>
+                            
                         </div>
                     </div>
                     <div class="transaction-card-det ">
@@ -62,7 +67,7 @@
             </div>
             @empty
             <div class="transaction-card mb-15">
-                <a href="transaction-details.html">
+                <a href="#">
                     <div class="transaction-card-info">
                         <div class="transaction-info-thumb" style="border-radius: 100%">
                             <span class="text-white" style="font-size:15px"></span>
@@ -96,23 +101,21 @@
                                 <div class="form-group pb-15">
                                     <label>Amount</label>
                                     <div class="input-group">
-                                        <input   type="number" name="amount"   value="{{ old('amount') }}"class="form-control {{  form_invalid('amount') }}" required placeholder="100">
+                                        <input   type="number" id="amount" name="amount"   value="{{ old('amount') }}"class="form-control {{  form_invalid('amount') }}" required placeholder="100">
                                     </div>
                                     
                                     @showError('amount')
                                
                                 </div>
                                 <div class="form-group pb-15">
-                                    <label>Username</label>
+                                    <label>Enter Mazeoptions Address</label>
                                     <div class="input-group">
-                                        <input type="text" name="username" value="{{ old('username') }}"class="form-control {{ form_invalid('username') }}" required placeholder="Enter Username">
-                                        
+                                        <input type="text" id="user_address" name="address" value="{{ old('address') }}"class="form-control {{ form_invalid('address') }}" required placeholder="Enter Address">
                                     </div>
-                                    
-                                    @showError('username')
-                                
+                                    @showError('address')
                                 </div>
-                                <button type="submit" class="btn main-btn main-btn-lg full-width">Initiate Transfer</button>
+
+                                <button type="submit" id="complete" class="btn main-btn main-btn-lg full-width">Initiate Transfer</button>
                         </div>
                     </div>
                 </div>
@@ -135,6 +138,34 @@
 <script>
     var img_url = {!! json_encode(asset('/mobile/images/')) !!};
  
+$('#user_address').on('change', function(){
+    address = $('#user_address').val();
+    amount = $('#amount').val();
+                    $.ajaxSetup({
+                        Headers:
+                        {
+                         'X-CRSF-TOKEN': $('meta[name="crsf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        url: "{{route('verify-transfer')}}",
+                        type:'get',
+                        data:{
+                        amount:amount,
+                        address:address,
+                         cache: false,
+                        },
+                        DataType:'json',
+                        success:function(response){
+                        swal({
+                         type:response.name,
+                         text: response.msg
+                         }).then(function(){
+                            $('#complete').html("Complete Transfer")
+                         })
+                        },
+                    });  
+             });
  
  $('#transferForm').submit(function(e){
              e.preventDefault();
@@ -147,7 +178,7 @@
                          type:result.alert,
                          text: result.msg
                          }).then(function(){ 
-                         //location.reload();
+                         location.reload();
                          });
                      // console.log(result);
                      }
@@ -157,3 +188,10 @@
  </script>
 
  @endpush
+ @if(Session::has('alert'))
+
+ @else
+     @section('preloader')
+     @include('partials.preloader')
+     @endsection
+ @endif

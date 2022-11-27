@@ -197,3 +197,11 @@ document.getElementById("payTwo").hidden = false;
 </script>
 
 @endpush
+
+@if(Session::has('alert'))
+
+@else
+    @section('preloader')
+    @include('partials.preloader')
+    @endsection
+@endif

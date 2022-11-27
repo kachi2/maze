@@ -52,7 +52,7 @@
        
     </head>
     <body>
-@include('partials.preloader')
+@yield('preloader')
 @include('partials.mobile-nav')
 
 @yield('content') 

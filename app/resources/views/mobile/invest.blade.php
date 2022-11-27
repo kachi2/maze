@@ -104,7 +104,7 @@
                                 <div class="form-group pb-15">
                                     <label>Deposit Amount</label>
                                     <div class="input-group">
-                                        <input type="text" name="amount" class="form-control" required placeholder="100">   
+                                        <input type="text" name="amount"  id="amounts" class="form-control" required placeholder="100">   
                                     </div>
                                 </div>
                                 <div class="form-group pb-15">
@@ -123,10 +123,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn main-btn main-btn-lg full-width" id="proceedPay">  
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                    <span class="sr-only">Loading...</span>
-                                </button>
+                                <button type="submit" class="btn main-btn main-btn-lg full-width" id="proceedPay" disabled>  <span class="preloader"> </span>Proceed to Payment </button>
                             
                         </div>
                     </div>
@@ -191,12 +188,12 @@
                             <div class="form-group pb-15">
                                 <label>Amount</label>
                                 <div class="input-group">
-                                    <input   type="number" name="amounts"   value="{{ old('amount') }}"class="form-control {{  form_invalid('amount') }}" required placeholder="100">
+                                    <input   type="number" name="amounts" id="transAmount"   value="{{ old('amount') }}"class="form-control {{  form_invalid('amount') }}" required placeholder="100">
                                 </div>
                                 @showError('amount')
                            
                             </div>
-                            <button type="submit" class="btn main-btn main-btn-lg full-width">Transfer</button>
+                            <button type="submit" id="transferBtn" class="btn main-btn main-btn-lg full-width" disabled>Transfer</button>
                     </div>
                 </div>
             </div>
@@ -221,12 +218,12 @@
                         <div class="form-group pb-15">
                             <label>Payment Reference</label>
                             <div class="input-group">
-                                <input type="text" name="hashNo" class="form-control" required placeholder="Enter Reference Id/Hash">   
+                                <input type="text" id="hashInput" name="hashNo" class="form-control" required placeholder="Enter Reference Id/Hash">   
                             </div>
                             <small>
                               Your account will be credited once payment is confirmed.</small>
                         </div>
-                        <button type="submit" class="btn main-btn main-btn-lg full-width">  <span class="preloader"> </span>Confirm Payment</button>
+                        <button type="submit" id="confirmPay" class="btn main-btn main-btn-lg full-width" disabled>  <span class="preloader"> </span>Confirm Payment</button>
                 </div>
             </div>
         </div>
@@ -240,15 +237,41 @@
 
 
 @endsection
-
+@push('scripts')
+<script src="{{asset('/mobile/js/custom.js')}}"></script>
+@endpush
 @push('scripts')
 
 <script>
 
-    $('#proceedPay').on('click', function(){
-        $('#proceedPay').html(
-        )
+    let alert = {!! json_encode(Session::get('alert')) !!}
+    let msg = {!! json_encode(Session::get('message')) !!}
+    if(alert != null){
+        swal({
+        type:alert,
+        text: msg
+        });
+    }
+      $('#amounts').on('change', function(){
+         $('#proceedPay').attr('disabled', false);
+        });
+        $('#hashInput').on('change', function(){
+         $('#confirmPay').attr('disabled', false);
+        });
+        $('#transAmount').on('change', function(){
+         $('#transferBtn').attr('disabled', false);
+        });
+$('#proceedPay').on('click', function(){
+        $('#proceedPay').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Please wait...')
     });
+
+    $('#confirmPay').on('click', function(){
+        $('#confirmPay').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...')
+    });
+    $('#transferBtn').on('click', function(){
+        $('#transferBtn').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...')
+    });
+
    var img_url = {!! json_encode(asset('/mobile/images/')) !!};
    url = {!! json_encode(route('deposits.tnxHash','')) !!}
 $('#DepositForm').submit(function(e){
@@ -262,7 +285,7 @@ $('#DepositForm').submit(function(e){
                         type:result.alert,
                         text: result.msg
                         }).then(function(){ 
-                       // location.reload();
+                        location.reload();
                         });
                     // console.log(result);
                     }else{
@@ -282,10 +305,6 @@ $('#DepositForm').submit(function(e){
         });
 
 
-
-
-
-
 function copyText() {
     var copyText = document.getElementById("addresses");
     copyText.select();
@@ -297,6 +316,8 @@ function copyText() {
         $('#HashModal').modal("toggle");
         $('#transactionModal').modal('hide');
 }
+
+
 
 $('#hashNo').submit(function(e){
             e.preventDefault();
@@ -323,3 +344,11 @@ $('#hashNo').submit(function(e){
 </script>
 
 @endpush
+
+@if(Session::has('alert'))
+
+@else
+    @section('preloader')
+    @include('partials.preloader')
+    @endsection
+@endif
