@@ -120,7 +120,7 @@
                                                         </div>
                                                         <div class="nk-tb-col tb-col-lg">
                                                             <span class="tb-lead-sub">{{ $deposit->plan->name }}</span>
-                                                            <span class="badge badge-dot badge-success">{{ $deposit->plan->profit_rate}}% {{$deposit->package->formatted_duration}} for {{ $deposit->plan->package->duration}}</span>
+                                                            <span class="badge badge-dot badge-success">{{ $deposit->plan->profit}}% </span>
                                                         </div>
                                                         <div class="nk-tb-col ">
                                                             <span class="tb-amount">{{moneyFormat($deposit->amount,'USD')}}</span>
