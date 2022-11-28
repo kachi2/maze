@@ -102,7 +102,8 @@ class WalletController extends Controller
         if($user){
             return response()->json([
                 'name' => $user->name,
-                'msg' => 'Do you want to transfer $'.$request->amount.' to '.$user->name ."[".$user->email."]"
+                'msg' => 'Do you want to transfer $'.$request->amount.' to '.$user->name ."[".$user->email."]",
+                'success' => 'success'
             ]);
         }else{
             return response()->json([
@@ -170,7 +171,8 @@ class WalletController extends Controller
         $msg = 'Transfer Completed Successfully';
         $data = [
            'msg' => $msg,
-           'alert' => 'success'
+           'alert' => 'success',
+          
        ];
        return response()->json($data);
     }

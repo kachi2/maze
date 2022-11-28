@@ -161,8 +161,14 @@ $('#user_address').on('change', function(){
                          type:response.name,
                          text: response.msg
                          }).then(function(){
-                            $('#complete').html("Complete Transfer")
-                         })
+                            if(response.success){
+                                $('#complete').html("Complete Transfer")
+                            }else{
+                                $('#passwordModal').modal('hide')
+                                $('#complete').html("Close Window")
+                            }
+                         });
+                         $('#complete').html("Close Window")
                         },
                     });  
              });
