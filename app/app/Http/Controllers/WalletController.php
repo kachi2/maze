@@ -143,7 +143,7 @@ class WalletController extends Controller
         }
 
         $toUser = User::where('btc', $request->input('address'))->firstOrfail();
-        if($toUser->id != auth()->user()->id){
+        if($toUser->id == auth()->user()->id){
             // Session::flash('msg', 'danger');
             // Session::flash('message', 'You cannot tranfer funds to same account');
             // return redirect()->back();
