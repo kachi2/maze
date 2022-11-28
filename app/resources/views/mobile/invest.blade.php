@@ -7,7 +7,7 @@
             <div class="add-card-inner">
                 <div class="add-card-item add-card-info">
                     <h3>{{ $plan->name }}</h3>
-                    <p> {{($plan->profit * $plan->package->duration) }}% ROI </p>
+                    <p> ({{($plan->profit * $plan->package->duration) }}% ROI) </p>
                     <p>({{ $plan->profit }}% interest Daily)</p>
                     <p>Min Deposit - {{ moneyFormat($plan->min_deposit, 'USD') }} <br>
                       Max Deposit - {{ moneyFormat($plan->max_deposit, 'USD') }}</p>
