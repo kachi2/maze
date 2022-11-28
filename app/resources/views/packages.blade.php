@@ -46,7 +46,7 @@
                                                 <div class="project-progress-percent">{{moneyFormat($package->plans[0]->max_deposit,'USD')}}</div>
                                             </div>
                                             <div class="project-progress-details">
-                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span> Daily Payouts</span></div>
+                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span>% {{$package->formatted_duration}} Payouts</span></div>
                                                 <div class="project-progress-percent">{{$package->plans[0]->profit_rate,'USD'}}%</div>
                                             </div>
                                         

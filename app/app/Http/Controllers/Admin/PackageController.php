@@ -14,6 +14,7 @@ use App\Models\Package;
 use Intervention\Image\Facades\Image;
 use App\Models\Plan;
 use App\Models\RateHistory;
+use Illuminate\Support\Facades\DB;
 use App\Models\Resource;
 use Exception;
 use Illuminate\Http\Request;
@@ -386,9 +387,11 @@ class PackageController extends Controller
             'name' => 'required',
             'min_deposit' => 'required|numeric',
             'max_deposit' => 'required|numeric',
-            'profit_rate' => 'required',
+          
         ]);
-
+    DB::beginTransaction();
+ try{
+        $ext = null;
             if($request->file('image')){
                 $image = $request->file('image');
                 $file = $image->getClientOriginalExtension();
@@ -397,29 +400,44 @@ class PackageController extends Controller
             }
             $rd = rand(11,99);
             if($request->duration){
-                $package = Package::create([
+                Package::create([
                     'name' => 'Package'. " ".$rd,
                     'duration' => $request->duration,
-                    'payment_period' => 2,
+                    'payment_period' => $request->invest_period,
                     'desc' => 'Package'. " ".$rd,
+                    'invest_type' => $request->invest_type
                 ]);
             }
 
             sleep(2);
         $package_id = Package::latest()->first();
-        $resource = Plan::create([
+
+        $profit_rate = (100/$request->duration) + ($request->profit);
+          $plan = Plan::create([
             'name' => $request->input('name'),
             'min_deposit' => $request->input('min_deposit'),
             'max_deposit' => $request->input('max_deposit'),
             'package_id' => $package_id->id,
-            'profit_rate' => $request->input('profit_rate'),
-            'profit' => number_format($request->profit / $request->duration,2),
+            'profit_rate' => number_format($profit_rate,2),
+            'profit' => $request->profit,
             'image' => $ext,
         ]);
-
-        return redirect()
-            ->back()
-            ->with('success', 'Plan added successfully');
+        if($plan){
+            DB::commit();
+            \Session::flash('alert', 'success');
+            \Session::flash('message', 'Plan added Successfully');
+            return redirect()
+            ->back();
+        } 
+    }
+    catch(\Exception $e)
+        {
+         
+            DB::rollBack();
+        \Session::flash('alert', 'error');
+        \Session::flash('message', 'An error occured, try again');
+            return back();
+        }
     }
 
     /**
@@ -462,42 +480,57 @@ class PackageController extends Controller
      */
     public function updatePlan(Request $request, $id)
     {
-       // dd($request->all());
-        $plan = Plan::findOrFail($id);
-        session()->flash('is-editing-plan', true);
-        session()->flash('editing-plan-id', $plan->id);
+       //dd($request->all());
+    //    $plans = Plan::findOrFail($id);
+    //     session()->flash('is-editing-plan', true);
+    //     session()->flash('editing-plan-id', $plans->id);
         $this->validate($request, [
             'name' => 'required',
             'min_deposit' => 'required|numeric',
             'max_deposit' => 'required|numeric',
-            'profit_rate' => 'required',
+            'profit' => 'required',
         ]);
+        $profit_rate = (100/$request->duration) + ($request->profit);
+        DB::beginTransaction();
+       // dd($request->all());
+        try{
+        $plan = Plan::where('id', $id)->first();
         $plan->name = $request->input('name');
         $plan->min_deposit = $request->input('min_deposit');
         $plan->max_deposit = $request->input('max_deposit');
-        $plan->profit_rate = $request->input('profit_rate');
-       if($request->profit){
-        $plan->profit = number_format($request->profit / $request->duration,2);
-        }
-        if($request->file('image')){
+        $plan->profit_rate =  number_format($profit_rate,2);
+        $plan->profit = $request->profit;
+        if($request->file('image'))
+        {
             $image = $request->file('image');
             $file = $image->getClientOriginalExtension();
             $ext = time(). ".".$file;
             Image::make($request->file('image'))->resize(295,298)->save('mobile/images/'.$ext);
             $plan->image = $ext;
         }
-        if($request->duration){
+        $plan->save();
+        if($request->duration)
+        {
             $package = Package::whereId($plan->package_id)->first();
             $package->duration = $request->duration;
+            $package->payment_period = $request->invest_period;
             $package->save();
         }
-
-        
-        $plan->save();
-
+        DB::commit();
+        \Session::flash('alert', 'success');
+        \Session::flash('message', 'Plan updated Successfully');
         return redirect()
-            ->back()
-            ->with('success', 'Plan details updated successfully');
+        ->back();
+    } 
+    catch(\Exception $e)
+    {
+    DB::rollBack();
+    \Session::flash('alert', 'error');
+    \Session::flash('message', 'An error occured, try again');
+    return back();
+    }
+
+       
     }
 
     /**

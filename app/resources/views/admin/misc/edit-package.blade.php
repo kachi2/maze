@@ -17,35 +17,40 @@
                         <div class="form-control-wrap">
                             <input type="text" name="name" class="form-control"  value="{{$package->plans[0]->name}}" id="full-name" required>
                         </div>
+                    </div> 
+
+                       <div class="form-group">
+                        <label class="form-label" for="pay-amount">Package Duration</label>
+                        <div class="form-control-wrap">
+                            <input type="text" name="duration" value="{{$package->duration}}"  placeholder="Package Duration" class="form-control"  id="pay-amount">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="pay-amount">Interest Period</label>
+                        <div class="form-control-wrap">
+                          <select class="form-control" aria-placeholder="Interest Period" name="invest_period">
+                            <option value="1"> Hourly</option>
+                            <option value="2"> Daily</option>
+                            <option value="3"> Monthly</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="pay-amount">Profit Rate (%) </label>
+                        <div class="form-control-wrap">
+                            <input type="text" name="profit" value="{{$package->plans[0]->profit}}" placeholder="0.0%" class="form-control"  id="pay-amount">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="email-address">Min Deposit</label>
                         <div class="form-control-wrap">
-                            <input type="text" name="min_deposit"  class="form-control" value="{{$package->plans[0]->min_deposit}}"  id="email-address" required>
+                            <input type="text" name="min_deposit" value="{{$package->plans[0]->min_deposit}}" placeholder="100"  class="form-control"  id="email-address" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="phone-no">Max Deposit</label>
                         <div class="form-control-wrap">
-                            <input type="text" name="max_deposit" class="form-control" value="{{$package->plans[0]->max_deposit}}"  id="phone-no">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="pay-amount">Package Duration</label>
-                        <div class="form-control-wrap">
-                            <input type="text" name="duration"  class="form-control" value="{{$package->duration}}" id="pay-amount">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="pay-amount">Profit Rate (%)</label>
-                        <div class="form-control-wrap">
-                            <input type="text" name="profit_rate"  class="form-control" value="{{$package->plans[0]->profit_rate}}" id="pay-amount">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="pay-amount">Profit (%) </label>
-                        <div class="form-control-wrap">
-                            <input type="text" name="profit"  class="form-control" value="{{$package->plans[0]->profit}}" id="pay-amount">
+                            <input type="text" name="max_deposit" placeholder="0" value="{{$package->plans[0]->max_deposit}}"class="form-control"   id="phone-no">
                         </div>
                     </div>
                         <div class="form-group">

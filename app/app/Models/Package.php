@@ -53,7 +53,8 @@ class Package extends Model
         'name',
         'desc',
         'payment_period',
-        'duration'
+        'duration',
+        'duration_type'
     ];
 
     /**

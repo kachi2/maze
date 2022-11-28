@@ -64,8 +64,8 @@
                             <span class="text-white" style="font-size:15px">{{substr($invst->plan->name,0,2)}}</span>
                         </div>
                         <div class="transaction-info-text">
-                            <h3>{{$invst->ref}} - <small>Daily {{$invst->profit_rate}}% </small></h3>
-                            <p> {{$invst->payment_method}} | Expires:<small>{{$invst->expires_at->diffForHumans()}} </small></p>
+                            <h3> <small> Payment Ref: {{$invst->ref}} </small><br> <small> {{$invst->profit_rate}}% {{$invst->plan->package->formatted_payment_period}} for {{$invst->plan->package->formatted_duration}} </small></h3>
+                            <p> {{$invst->payment_method}} | @if($invst->expires_at > now())Expires : {{$invst->expires_at->diffInDays()}} days from now @else Expired : {{$invst->expires_at->diffForHumans()}} @endif </small></p>
                             <small style="font-size: 10px; color:#999"> {{$invst->created_at}}</small><small style="font-size:12px"> view payouts</small>
                         </div>
                     </div>

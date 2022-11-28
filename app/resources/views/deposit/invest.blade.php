@@ -16,7 +16,7 @@
                                      <p class="sub-text">  Invest  in {{ $plan->name }} &amp; earn {{ $plan->profit_rate }}% interest.</p></div>
                                      <div class="card-text"><div class="row"><div class="col-6">
                                          <span class="h4 fw-500">{{ $plan->profit_rate }}%</span><span class="sub-text">{{ $plan->package->formatted_payment_period_alt2 }} Interest</span></div>
-                                         <div class="col-6"><span class="h4 fw-500">{{ $plan->package->duration }}</span><span class="sub-text">Days</span></div></div></div>
+                                         <div class="col-6"><span class="h4 fw-500">{{ $plan->package->duration }}</span><span class="sub-text">{{$plan->package->formatted_duration}} </span></div></div></div>
                                          </div>
                                          <div class="pricing-body"><ul class="pricing-features"><li><span class="w-50">Min Deposit</span> - <span class="ml-auto">{{ moneyFormat($plan->min_deposit, 'USD') }}</span></li>
                                          <li><span class="w-50">Max Deposit</span> - <span class="ml-auto">{{ moneyFormat($plan->max_deposit, 'USD') }}</span></li>

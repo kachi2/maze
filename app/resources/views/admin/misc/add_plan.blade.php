@@ -15,37 +15,52 @@
                     <div class="form-group">
                         <label class="form-label" for="full-name">Plan Name</label>
                         <div class="form-control-wrap">
-                            <input type="text" name="name" class="form-control"  value="{{old('name')}}" id="full-name" required>
+                            <input type="text" name="name" placeholder="plan name" class="form-control"  value="{{old('name')}}" id="full-name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="pay-amount">Package Duration</label>
+                        <div class="form-control-wrap">
+                            <input type="text" name="duration"  placeholder="Package Duration" class="form-control" value="{{old('duration')}}" id="pay-amount">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"  for="pay-amount">Duration Type</label>
+                        <div class="form-control-wrap">
+                            <select class="form-control" placeholder="Duration Type" name="invest_type">
+                                <option value="1"> Hours</option>
+                                <option value="2"> Days</option>
+                                <option value="3"> Monthly</option>
+                              </select>
+                              </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="pay-amount">Interest Period</label>
+                        <div class="form-control-wrap">
+                          <select class="form-control" aria-placeholder="Interest Period" name="invest_period">
+                            <option value="1"> Hourly</option>
+                            <option value="2"> Daily</option>
+                            <option value="3"> Monthly</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="pay-amount">Profit Rate (%) </label>
+                        <div class="form-control-wrap">
+                            <input type="text" name="profit" placeholder="0.0%" class="form-control" value="{{old('profit')}}" id="pay-amount">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="email-address">Min Deposit</label>
                         <div class="form-control-wrap">
-                            <input type="text" name="min_deposit"  class="form-control" value="{{old('min_deposit')}}"  id="email-address" required>
+                            <input type="text" name="min_deposit"  placeholder="100"  class="form-control" value="{{old('min_deposit')}}"  id="email-address" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="phone-no">Max Deposit</label>
                         <div class="form-control-wrap">
-                            <input type="text" name="max_deposit" class="form-control" value="{{old('max_deposit')}}"  id="phone-no">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="pay-amount">Package Duration</label>
-                        <div class="form-control-wrap">
-                            <input type="text" name="duration"  class="form-control" value="{{old('duration')}}" id="pay-amount">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="pay-amount">Profit Rate (%)</label>
-                        <div class="form-control-wrap">
-                            <input type="text" name="profit_rate"  class="form-control" value="{{old('profit_rate')}}" id="pay-amount">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="pay-amount">Profit (%) </label>
-                        <div class="form-control-wrap">
-                            <input type="text" name="profit"  class="form-control" value="{{old('profit')}}" id="pay-amount">
+                            <input type="text" name="max_deposit" placeholder="0" class="form-control" value="{{old('max_deposit')}}"  id="phone-no">
                         </div>
                     </div>
                         <div class="form-group">
