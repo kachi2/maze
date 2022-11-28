@@ -7,10 +7,10 @@
             <div class="add-card-inner">
                 <div class="add-card-item add-card-info">
                     <h3>{{ $plan->name }}</h3>
-                    <p>({{ $plan->profit_rate }}% interest Daily)</p>
-                   
+                    <p> {{($plan->profit * $plan->package->duration) }}% ROI </p>
+                    <p>({{ $plan->profit }}% interest Daily)</p>
                     <p>Min Deposit - {{ moneyFormat($plan->min_deposit, 'USD') }} <br>
-                     Max Deposit - {{ moneyFormat($plan->max_deposit, 'USD') }}</p>
+                      Max Deposit - {{ moneyFormat($plan->max_deposit, 'USD') }}</p>
                 </div>
                 <div class="add-card-item add-balance" data-bs-toggle="modal" data-bs-target="#addBalance">
                    
@@ -64,8 +64,8 @@
                             <span class="text-white" style="font-size:15px">{{substr($invst->plan->name,0,2)}}</span>
                         </div>
                         <div class="transaction-info-text">
-                            <h3> <small> Payment Ref: {{$invst->ref}} </small><br> <small> {{$invst->profit_rate}}% {{$invst->plan->package->formatted_payment_period}} for {{$invst->plan->package->formatted_duration}} </small></h3>
-                            <p> {{$invst->payment_method}} | @if($invst->expires_at > now())Expires : {{$invst->expires_at->diffInDays()}} days from now @else Expired : {{$invst->expires_at->diffForHumans()}} @endif </small></p>
+                            <h3> <small> Payment Ref: {{$invst->ref}} </small><br> <small> {{$invst->plan->profit}}% {{$invst->plan->package->formatted_payment_period}} for {{$invst->plan->package->formatted_duration}} </small></h3>
+                            <p> {{$invst->payment_method}} | @if($invst->expires_at > now()) @if($invst->plan->package->payment_period == 1) Expires in {{$invst->expires_at->diffInHours()}} Hours  @else Expires in {{$invst->expires_at->diffInDays()}} Days @endif  @else Expired : {{$invst->expires_at->diffForHumans()}} @endif </small></p>
                             <small style="font-size: 10px; color:#999"> {{$invst->created_at}}</small><small style="font-size:12px"> view payouts</small>
                         </div>
                     </div>
