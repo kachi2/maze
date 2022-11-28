@@ -40,7 +40,7 @@
                                                             <span class="tb-amount">{{ $withdrawal->ref }} </span>
                                                         </td>
                                                         <td class="nk-tb-col ">
-                                                            <span> <a href="{{ route('admin.users.show', ['id' => $withdrawal->user->id]) }}">
+                                                            <span> <a href="{{ route('admin.users.show', ['id' => encrypt($withdrawal->user->id)]) }}">
                                                         {{ $withdrawal->user->username }}
                                                     </a></span>
                                                         </td>
