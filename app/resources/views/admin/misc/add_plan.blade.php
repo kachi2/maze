@@ -26,16 +26,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label"  for="pay-amount">Duration Type</label>
-                        <div class="form-control-wrap">
-                            <select class="form-control" placeholder="Duration Type" name="invest_type">
-                                <option value="1"> Hours</option>
-                                <option value="2"> Days</option>
-                                <option value="3"> Monthly</option>
-                              </select>
-                              </div>
-                    </div>
-                    <div class="form-group">
                         <label class="form-label" for="pay-amount">Interest Period</label>
                         <div class="form-control-wrap">
                           <select class="form-control" aria-placeholder="Interest Period" name="invest_period">
