@@ -110,7 +110,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('deposits/invests/{id?}', 'Web\DepositController@doInvest')->name('deposits.invests');  
     Route::post('payouts/transfer/{id?}', 'Web\WalletDepositController@transferPayouts')->name('transferPayouts'); 
     Route::get('/payouts/details/{id?}', 'Web\DepositController@PayoutsDetails')->name('payouts.details');
-    Route::post('/transfer/payouts/{id}', 'Web\DepositController@TransferPayouts')->name('transfer.payouts');
+    Route::post('/user/transfer/payouts/{id}', 'Web\DepositController@TransferPayouts')->name('transfer.payouts');
     Route::get('/withdrawals/details/{id}', 'Web\WithdrawController@Details')->name('withdrawals.details');
     Route::get('deposits/transactions', 'Web\DepositController@showTransactions')->name('deposits.transactions');
     Route::get('deposits/{ref}', 'Web\DepositController@show')->name('deposit');
