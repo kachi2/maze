@@ -11,7 +11,7 @@
         </span>
         </p>
        
-    <form method="post" action="{{route('web.transferPayouts', encrypt($invest->plan_id))}}">
+    <form method="post" action="{{route('web.transferPayouts', encrypt($investment[0]->plan_id))}}">
     @csrf
     <div class="tab-content">
     <div class="tab-pane active" id="personal">
