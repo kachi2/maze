@@ -306,7 +306,7 @@ class DepositController extends Controller
     }
 
     public function depositApprove($id){
-       // $id = decrypt($id);
+       $id = decrypt($id);
         $deposit = PendingDeposit::whereId($id)->first();
         //dd($deposit);
         $update =  PendingDeposit::whereId($id)

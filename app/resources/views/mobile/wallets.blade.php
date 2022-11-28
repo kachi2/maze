@@ -145,12 +145,12 @@
                             <div class="form-group pb-15">
                                 <label>Payment Reference</label>
                                 <div class="input-group">
-                                    <input type="text" name="hashNo" class="form-control" required placeholder="Enter Reference Id/Hash">   
+                                    <input type="text" id="HasNo" name="hashNo" class="form-control" required placeholder="Enter Reference Id/Hash">   
                                 </div>
                                 <small>
                                   Your account will be credited once payment is confirmed.</small>
                             </div>
-                            <button type="submit" class="btn main-btn main-btn-lg full-width">  <span class="preloader"> </span>Confirm Payment</button>
+                            <button type="submit"  id="confirmPay" class="btn main-btn main-btn-lg full-width">  <span class="preloader"> </span>Confirm Payment</button>
                     </div>
                 </div>
             </div>
@@ -168,6 +168,15 @@
 
 @push('scripts')
 <script>
+      $('#HasNo').on('change', function(){
+        $('#confirmPay').attr('disabled', false);
+        });
+
+$('#confirmPay').on('click', function(){
+        $('#confirmPay').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...')
+    });
+
+
    var img_url = {!! json_encode(asset('/mobile/images/')) !!};
 
    url = {!! json_encode(route('update.tnxHash','')) !!}
