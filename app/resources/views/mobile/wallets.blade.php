@@ -32,7 +32,7 @@
                                     <h3><small>Ref: {{$invst->ref}}</small></h3>
                                     <p> {{$invst->currency2}} | {{substr($invst->amount2,0,8)}} </small></p>
                                     <p> <small>Hash No: {{$invst->hashNo}} </small> <br>
-                                        <small> @if($invst->status == 0) <span class="alert-danger p-1"> Pending </span> @else  <span class=" alert-success p-1"> Success </span> @endif </small> 
+                                        <small> @if($invst->status == 0) <span style="color:rgb(234, 186, 147)"> Pending </span> @else  <span style="color:rgb(99, 199, 239)"> Success </span> @endif </small> 
                                     <small style="font-size: 10px; color:#999"> {{$invst->created_at}}</small>
                                 </p>
                                 </div>
@@ -150,7 +150,7 @@
                                 <small>
                                   Your account will be credited once payment is confirmed.</small>
                             </div>
-                            <button type="submit"  id="confirmPay" class="btn main-btn main-btn-lg full-width">  <span class="preloader"> </span>Confirm Payment</button>
+                            <button type="submit"  id="confirmPay" class="btn main-btn main-btn-lg full-width"> Confirm Payment</button>
                     </div>
                 </div>
             </div>
