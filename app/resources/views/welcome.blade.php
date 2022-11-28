@@ -174,7 +174,8 @@
                   <div class="full">
                      <div class="coin_selling_bt">
                         <ul>
-                           <li><a class="active" href="#">{{ $plan->name }}</a></li>
+                           <li><a class="active" href="#">{{ $plan->name }}</a> </li>
+                           <li>  <a  href="#">{{($package->plans[0]->profit * $package->duration) }}% ROI</a></li>
                            
                         </ul>
                         <div class="coin_price_table">
