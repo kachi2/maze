@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\WalletAddress;
 use App\Models\UserWallet;
+use App\PlanProfit;
 use Exception;
 use App\WalletDeposit;
 use Illuminate\Support\Facades\Session;
@@ -92,8 +93,8 @@ class WalletDepositController extends Controller
      
     public function saveHashNo(Request $request){
         $deposit = WalletDeposit::where('ref', $request->ref)->first()
-                   ->update(['hash_no' => $request->hash]);
-        //dd($deposit);
+                   ->update(['hashNo' => $request->hash]);
+       // dd($request->hash);
            if($deposit){
                    Session::flash('alert', 'success');
                    Session::flash('done', 'readonly');
@@ -103,6 +104,40 @@ class WalletDepositController extends Controller
             return back();
         }
                    
+    }
+
+    public function transferPayouts(Request $request, $id){
+
+        $payouts = PlanProfit::where(['user_id' => auth_user()->id, 'plan_id' => decrypt($id)])->first();
+        if(empty($payouts)){
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Payout balance is too low for this request');
+            return back();
+        }
+        if($request->amount < 0){
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Payout amount cannot be zero or negative value');
+            return back();
+        }
+
+        if($payouts->balance < $request->amount){
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Payout balance is too low for this request');
+            return back();
+        }
+        $balance = $payouts->balance;
+        $newBalance = $balance - $request->amount;
+        PlanProfit::where(['user_id' => auth_user()->id, 'plan_id' => decrypt($id)])
+                    ->update([
+                        'prev_balance' => $balance,
+                        'balance' => $newBalance
+                    ]);
+                UserWallet::addAmount(auth_user(), $request->amount);
+                Session::flash('alert', 'success');
+                Session::flash('message', 'Payout transfered to wallet successfully');
+               
+                return back();
+
     }
 
 

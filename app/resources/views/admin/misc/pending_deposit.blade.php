@@ -27,7 +27,7 @@
 <div class="col-md-6">
 <div class="form-group">
 <label class="form-label" for="tnxid">Reference / Hash</label> <br>
-<span id="tnxid"> {{$deposit->hash_no?$deposit->hash_no : 'No hash number' }}</span>
+<span id="tnxid"> {{$deposit->hash_no != null?$deposit->hash_no : 'No hash number' }}</span>
 </div>
 </div>
 <div class="col-md-6">

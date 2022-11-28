@@ -13,10 +13,10 @@
                                  <div class="card card-bordered pricing">
                                  <div class="pricing-head"><div class="pricing-title">
                                      <h4 class="card-title title">{{ $plan->name }}</h4>
-                                     <p class="sub-text">  Invest  in {{ $plan->name }} &amp; earn {{ $plan->profit_rate }}% interest.</p></div>
+                                     <p class="sub-text">  Invest  in {{ $plan->name }} &amp; earn {{ $plan->profit }}% interest.</p></div>
                                      <div class="card-text"><div class="row"><div class="col-6">
-                                         <span class="h4 fw-500">{{ $plan->profit_rate }}%</span><span class="sub-text">{{ $plan->package->formatted_payment_period_alt2 }} Interest</span></div>
-                                         <div class="col-6"><span class="h4 fw-500">{{ $plan->package->duration }}</span><span class="sub-text">{{$plan->package->formatted_duration}} </span></div></div></div>
+                                         <span class="h4 fw-500">{{ $plan->profit }}%</span><span class="sub-text">{{ $plan->package->formatted_payment_period_alt2 }} Interest</span></div>
+                                         <div class="col-6"><span class="h6 fw-200">{{$plan->package->formatted_duration}} </span></div></div></div>
                                          </div>
                                          <div class="pricing-body"><ul class="pricing-features"><li><span class="w-50">Min Deposit</span> - <span class="ml-auto">{{ moneyFormat($plan->min_deposit, 'USD') }}</span></li>
                                          <li><span class="w-50">Max Deposit</span> - <span class="ml-auto">{{ moneyFormat($plan->max_deposit, 'USD') }}</span></li>
@@ -70,8 +70,8 @@
                         <div class="col-12 col-md-7 ">
                             <div class="card card-full">
                                 <div class="card-inner">
-                                    Total Payouts:  <button type="button" class="btn btn-outline-primary">{{moneyFormat($payouts, 'USD')}}</button>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#transfer" style="font-size:12px"> Transfer to Main Wallet</a> <br>
+                                    Total Payouts:  <span type="button" class="badge badge-sm">{{moneyFormat($payouts, 'USD')}}</span> 
+                                        <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#payoutsTransfer"> Transfer to Main Wallet</a> <br>
                                       
                                 </div>
                                 <div class="nk-tb-list mt-n2">
@@ -79,10 +79,10 @@
                                         <div class="nk-tb-col"><span>Ref</span></div>
                                         
                                         <div class="nk-tb-col tb-col-sm"><span>Amount</span></div>
-                                        <div class="nk-tb-col"><span>Total Return</span></div>
+                                        <div class="nk-tb-col"><span>Payout</span></div>
                                         <div class="nk-tb-col tb-col-sm"><span>Payment Method</span></div>
                                         <div class="nk-tb-col"><span>Date Created</span></div>
-                                        <div class="nk-tb-col"><span>Expiry Date</span></div>
+                                        <div class="nk-tb-col"><span>Expiry</span></div>
                                         <div class="nk-tb-col"><span class="d-none d-sm-inline">Status</span></div>
                                         <div class="nk-tb-col"></div>
                                     </div>
@@ -109,10 +109,14 @@
                                             <span class="tb-sub">{{$invest->created_at}}</span>
                                         </div>
                                         <div class="nk-tb-col">
-                                            <span class="tb-sub tb-amount">{{$invest->expires_at}}</span></span>
+                                            <span class="tb-sub tb-amount">{{$invest->expires_at->diffForHumans()}}</span></span>
                                         </div>
                                         <div class="nk-tb-col">
+                                            @if($invest->status == 1) 
                                             <span class="badge badge-dot badge-dot-xs badge-success">Completed</span>
+                                            @else 
+                                            <span class="badge badge-dot badge-dot-xs badge-warning">Active</span>
+                                            @endif
                                         </div>
                                         <div class="nk-tb-col">
                                         
@@ -140,7 +144,7 @@
         </div>
     </div>
 </div>
-
+@include('deposit.transfer_wallet')
       
 @endsection
 @section('scripts')

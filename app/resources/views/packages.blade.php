@@ -26,9 +26,11 @@
                                         <div class="project-head">
                                             <a href="html/apps-kanban.html" class="project-title">
                                                 <div class="user-avatar sq bg-purple"><span>{{strtoupper(substr($package->name,0,2))}}</span></div>
+                                                
                                                 <div class="project-info">
                                                     <h6 class="title">{{$package->plans[0]->name}}</h6>
-                                                    <span class="sub-text">{{$package->duration}} Days</span>
+                                                    <span class="sub-text">({{($package->plans[0]->profit * $package->duration) }}% ROI)</span>
+                                                    <span class="sub-text">{{$package->plans[0]->profit.'%'}} {{$package->formatted_payment_period}} for {{$package->formatted_duration}}</span>
                                                 </div>
                                             </a>
                                             
@@ -46,7 +48,7 @@
                                                 <div class="project-progress-percent">{{moneyFormat($package->plans[0]->max_deposit,'USD')}}</div>
                                             </div>
                                             <div class="project-progress-details">
-                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span>% {{$package->formatted_duration}} Payouts</span></div>
+                                                <div class="project-progress-task"><em class="icon ni ni-check-round-cut"></em><span> {{$plan->package->formatted_payment_period}}  Payouts</span></div>
                                                 <div class="project-progress-percent">{{$package->plans[0]->profit_rate,'USD'}}%</div>
                                             </div>
                                         
