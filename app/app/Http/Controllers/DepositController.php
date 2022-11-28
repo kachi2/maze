@@ -424,7 +424,12 @@ class DepositController extends Controller
      }
      public function TransferPayouts(Request $request, $id){
 
-
+        $tes = PlanProfit::where(['user_id' => auth_user()->id, 'plan_id' => decrypt($id)])->first();
+        if(empty($test)){
+            Session::flash('alert', 'error');
+            Session::flash('message', 'Payout balance is too low for this request');
+            return back();
+        }
         if($request->amounts < 0){
             Session::flash('alert', 'error');
             Session::flash('message', 'Payout amount cannot be zero or negative value');

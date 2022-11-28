@@ -102,8 +102,8 @@ class RegisterController extends Controller
         
         if($create){
             $users = User::latest()->first();
-            $bonusAmount = 10;
-        UserWallet::addBonus($users, $bonusAmount);
+          //  $bonusAmount = 10;
+       // UserWallet::addBonus($users, $bonusAmount);
         Auth::login($users);
         return redirect()
             ->to($this->redirectTo);

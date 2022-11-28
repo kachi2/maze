@@ -115,8 +115,14 @@ class DepositController extends Controller
     }
 
     public function WalletDepositUpdate($id){
-           WalletDeposit::where('id', decrypt($id))->first()
-            ->update(['status' => 1]);
+           $deposit = WalletDeposit::where('id', decrypt($id))->first();
+           WalletDeposit::where('id', decrypt($id))->first()->update(['status' => 1]);
+            $user = User::where('id', $deposit->user_id)->first();
+            UserWallet::addAmount( $user, $deposit->amount);
+            $notify = new UserNotify;
+            $notify->user_id = $user->id;
+            $notify->message = 'Dear '.$user->username.','.'Your Deposit has been approved successfully'; 
+            $notify->save();
             Session::flash('msg', 'success');
             Session::flash('message', 'Deposit Approved Successfully'); 
             return redirect()->back();
@@ -300,7 +306,7 @@ class DepositController extends Controller
     }
 
     public function depositApprove($id){
-        $id = decrypt($id);
+       // $id = decrypt($id);
         $deposit = PendingDeposit::whereId($id)->first();
         //dd($deposit);
         $update =  PendingDeposit::whereId($id)
