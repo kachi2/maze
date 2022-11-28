@@ -77,10 +77,23 @@
                 <div class="payment-list-item payment-list-title">Mazeoptions Address <br> <small>Receive funds using this address</small></div>
                 <div class="payment-list-item payment-list-info pr-2"> <input type="text" id="addresses" style="border:none" value="{{$user->btc}} " readonly> <br> <button class="btn btn-outline-primary btn-sm" onclick="copyText()"> copy</button></div>
             </div>
+
             <div class="payment-list-details">
-                    <div class="payment-list-item payment-list-title"><a href="#"  class="btn btn-info" data-bs-toggle="modal" data-bs-target="#passwordModal">Change Password</a></div>
-                    <div class="payment-list-item payment-list-info">  <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatedetails">Update Details  </a></div>
-                    </div>
+                <div class="payment-list-item payment-list-title"><a class="btn btn-outline-primary"  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout4').submit();"><i class="flaticon-logout"></i> Logout</a></div>
+                {{-- <div class="payment-list-item payment-list-info">  <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatedetails"> </a></div> --}}
+            </ul>
+            <form id="frm-logout4" action="{{ route('logout') }}" method="POST" style="display: none;"> {{ csrf_field() }}
+            </form> 
+        </div>
+
+
+            <div class="payment-list-details">
+                    <div class="payment-list-item payment-list-title"><a href="#"  class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#passwordModal">Change Password</a></div>
+                    <div class="payment-list-item payment-list-info">  <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#updatedetails">Update Details  </a></div>
+            </div>
+
+            
+            
             </div>
         </div>
         <form method="post" action="{{ route('setting.profile') }}" enctype="multipart/form-data">
