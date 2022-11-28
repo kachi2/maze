@@ -178,7 +178,7 @@
                            
                         </ul>
                         <div class="coin_price_table">
-                           <h3> {{$plan->profit_rate }}% Daily - {{$package->duration}} Days</h3>
+                           <h4 style="color:#fff"> {{$package->plans[0]->profit.'%'}} {{$package->formatted_payment_period}} for {{$package->formatted_duration}}</h4>
                              <p>Min Investment: {{ moneyFormat($plan->min_deposit, 'USD') }}</p>
                            <p>MaxInvestment: {{ moneyFormat($plan->max_deposit, 'USD') }}</p>
                            <div class="center">
