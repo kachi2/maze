@@ -91,7 +91,7 @@ class Plan extends Model
      */
     public function getFormattedNameAttribute()
     {
-        return $this->package->name . '(' . $this->profit_rate . '% ' . get_payment_period_name_alt2($this->package->payment_period, $this->package->duration) . ' For ' . $this->package->formatted_duration . ')';
+        return  $this->profit . '% ' . get_payment_period_name_alt2($this->package->payment_period, $this->package->duration) . ' For ' . $this->package->formatted_duration ;
     }
 
     /**

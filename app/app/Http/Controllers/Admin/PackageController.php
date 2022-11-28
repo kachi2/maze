@@ -480,10 +480,6 @@ class PackageController extends Controller
      */
     public function updatePlan(Request $request, $id)
     {
-       //dd($request->all());
-    //    $plans = Plan::findOrFail($id);
-    //     session()->flash('is-editing-plan', true);
-    //     session()->flash('editing-plan-id', $plans->id);
         $this->validate($request, [
             'name' => 'required',
             'min_deposit' => 'required|numeric',
@@ -492,7 +488,6 @@ class PackageController extends Controller
         ]);
         $profit_rate = (100/$request->duration) + ($request->profit);
         DB::beginTransaction();
-       // dd($request->all());
         try{
         $plan = Plan::where('id', $id)->first();
         $plan->name = $request->input('name');
