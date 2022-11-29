@@ -37,7 +37,7 @@
 <div class="col-md-6">
     <div class="form-group">
         <label class="form-label" for="display-name">Duration</label><br>
-        <span id="tnxid" class="caption-text">{{$deposit->duration}}</span>
+        <span id="tnxid" class="caption-text">{{$deposit->plan->package->formatted_payment_period}} for {{$deposit->plan->package->formatted_duration}}</span>
         </div>
 </div>
 <div class="col-md-6">
