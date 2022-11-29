@@ -12,7 +12,7 @@
 use Illuminate\Support\Facades\Route;
     #========== mobile routes ======================
    // Route::domain('mazeoptions.site')->group(function(){   
-    Route::group(['prefix' => 'mob'], function(){  
+    Route::group(['prefix' => 'app.mazeoptions.com'], function(){  
         Route::post('/user/register', 'Auth\RegisterController@create_user')->name('register_user');
         Route::get('complete-registration', 'Auth\CompleteRegistrationController@index')->name('complete_registration');
         Route::post('complete-registration', 'Auth\CompleteRegistrationController@update')->name('complete_registration');

@@ -1,8 +1,4 @@
-
-
-  @desktop
-  @include('auth.web_login');
-@elsedesktop
+  @mobile
       @extends('layouts.auth')
        @section('content')
        <!-- Appbar -->
@@ -84,4 +80,7 @@
         </div>
         <!-- Body-content -->
     @endsection
-  @enddesktop
+
+    @elsemobile
+    @include('auth.web_login');
+  @endmobile

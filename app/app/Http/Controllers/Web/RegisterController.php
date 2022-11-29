@@ -97,7 +97,7 @@ class RegisterController extends Controller
             $first_name = $name[0];
         }
         if($name[1]){ 
-            $last_name = $name[1];
+            $last_name = $name[1]; 
         }
 
         $userIp = request()->getClientIp();
@@ -120,8 +120,8 @@ class RegisterController extends Controller
         
         if($create){
         $users = User::latest()->first();
-        //$bonusAmount = 10;
-        //UserWallet::addBonus($users, $bonusAmount);
+        $bonusAmount = 0;
+        UserWallet::addBonus($users, $bonusAmount);
         Auth::login($users);
         return redirect()
             ->to($this->redirectTo);

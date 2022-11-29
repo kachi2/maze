@@ -36,10 +36,10 @@
                     <form class="text-left" method="post" action="{{ route('register_user') }}">
                         @csrf
                         <div class="form-group pb-15">
-                            <label>Username</label>
+                            <label>Full Name</label>
                             <div class="input-group">
-                                <input type="text" name="username" value="{{old('username')}}" class="form-control form-control-lg {{ form_invalid('username') }}" id="default-01" placeholder="Enter username">
-                                @showError('username')
+                                <input type="text" name="full_name" value="{{old('full_name')}}" class="form-control form-control-lg {{ form_invalid('username') }}" id="default-01" placeholder="Enter Full Name">
+                                @showError('full_name')
                                  <span class="input-group-text"><i class="flaticon-user-picture"></i></span>
                             </div>
                         </div>
