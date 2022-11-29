@@ -93,6 +93,7 @@ class UpdatePayouts
            }
 
            if ($deposit->expires_at <= now()) {
+            $amountToPay = $deposit->profit;
                if ($deposit->paid_amount < $deposit->profit) {
                    $amountToPay = $deposit->profit - $deposit->paid_amount;
                    Payout::create([
@@ -103,11 +104,13 @@ class UpdatePayouts
                        'plan_id' => $deposit->plan_id,
                        'deposit_id' => $deposit->id,
                    ]);
+               }
+
                    $deposit->paid_amount = $deposit->profit;
                    $deposit->status = 1;
                    $deposit->save();
-                   PlanProfit::addAmount($deposit->user, $amountToPay,$deposit->plan_id);
-               }
+                   PlanProfit::addAmount($deposit->user,  $deposit->profit,$deposit->plan_id);
+               
           }
        }
     }
