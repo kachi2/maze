@@ -49,7 +49,7 @@ class InvestmentCompleted extends Notification
         return (new MailMessage)
                     ->subject('Investment Completed #'.$this->trade->ref)
                     ->from('support@mazeoptions.com', 'mazeoptions')
-                    ->view('emails.deposit-created', ['deposit' => $this->trade]);
+                    ->view('emails.invesmentCompleted', ['deposit' => $this->trade]);
     }
 
     /**

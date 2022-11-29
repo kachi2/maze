@@ -520,7 +520,7 @@ class DepositController extends Controller
             return redirect()->route('home')->withInput()->with('error', 'Unable to invest on plan');
         }
         try {
-            $request->user()->notify(new InvestmentCreated($deposit));
+            $request->user()->notify(new InvestmentCreated($deposit)); 
         } catch (Exception $exception) {
 
         }

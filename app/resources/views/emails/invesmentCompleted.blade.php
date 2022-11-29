@@ -48,9 +48,9 @@
 <td width="150">Status</td>
 <td width="25">&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 <td style="padding:15px 10px;border:1px solid #f5f5f5;width:65%">
-                            @if( $deposit->status == \App\Models\Deposit::STATUS_COMPLETED)
+                            @if( $deposit->status == 1)
                                 <span style="color: green;">Completed</span>
-                            @elseif ($deposit->status == \App\Models\Deposit::STATUS_CANCELED)
+                            @elseif ($deposit->status == -1)
                                 <span style="color: red;">Canceled</span>
                             @else
                                 <span style="color: green;">Active</span>
@@ -58,12 +58,12 @@
 </td>
 </tr>
 <tr>
-<td width="150">Expires</td>
+<td width="150">Expired</td>
 <td width="25">&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 <td> {{ $deposit->expires_at->diffForHumans() }}</td>
 </tr>
 </tbody></table>
-<p>If you have any issues or complaints regarding any transaction, kindly send us an email at billing@Mazeoptions.cc</p>
+<p>If you have any issues or complaints regarding any transaction, kindly send us an email at billing@Mazeoptions.com</p>
 
             </td>
         </tr>

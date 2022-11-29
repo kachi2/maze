@@ -8,6 +8,7 @@ use App\Models\Payout;
 use App\Models\UserWallet;
 use App\PlanProfit;
 use Closure;
+use App\Notifications\InvestmentCompleted;
 use Illuminate\Support\Facades\Cache;
 
 class UpdatePayouts
@@ -91,7 +92,6 @@ class UpdatePayouts
                    PlanProfit::addAmount($deposit->user, $payableAmount,$deposit->plan_id);
                }
            }
-
            if ($deposit->expires_at <= now()) {
             $amountToPay = $deposit->profit;
                if ($deposit->paid_amount < $deposit->profit) {
@@ -105,10 +105,11 @@ class UpdatePayouts
                        'deposit_id' => $deposit->id,
                    ]);
                }
-
+            
                    $deposit->paid_amount = $deposit->profit;
                    $deposit->status = 1;
                    $deposit->save();
+                   request()->user()->notify(new InvestmentCompleted($deposit));
                    PlanProfit::addAmount($deposit->user,  $deposit->profit,$deposit->plan_id);
                
           }
