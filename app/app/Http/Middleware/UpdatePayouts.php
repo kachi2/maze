@@ -21,7 +21,7 @@ class UpdatePayouts
      */
     public function handle($request, Closure $next)
     {
-        Cache::remember('update_payout', now()->addMinutes(15), function () {
+        Cache::remember('update_payout', now()->addMinutes(1), function () {
            $this->updatePayouts();
             return 'foo';
         });
@@ -32,6 +32,7 @@ class UpdatePayouts
     protected function updatePayouts() {
         $deposits = Deposit::with('user')->whereStatus(Deposit::STATUS_ACTIVE)->get();
        foreach ($deposits as $deposit) {
+       
            $payableAmount = 0;
            switch ($deposit->payment_period) {
                case Package::PERIOD_HOURLY:
@@ -107,7 +108,7 @@ class UpdatePayouts
                    $deposit->save();
                    PlanProfit::addAmount($deposit->user, $amountToPay,$deposit->plan_id);
                }
-           }
+          }
        }
     }
 }
