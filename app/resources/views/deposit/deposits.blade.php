@@ -100,7 +100,7 @@
                                                         <div class="nk-tb-col"><span>#Ref</span></div>
                                                         <div class="nk-tb-col"><span>Plan</span></div>
                                                         <div class="nk-tb-col tb-col-lg"><span>Paid</span></div>
-                                                        <div class="nk-tb-col "><span>Profit</span></div>
+                                                        <div class="nk-tb-col "><span> ROI</span></div>
                                                         <div class="nk-tb-col  tb-col-sm"><span>Method</span></div>
                                                          <div class="nk-tb-col nk-tb-col-status"><span >Status</span></div>
                                                         <div class="nk-tb-col  tb-col-sm"><span>Created At</span></div>
