@@ -57,7 +57,7 @@
                            <!-- Slide Text Layer -->
                            <div class="slide-text slide_style_left white_fonts">
                               <h2 data-animation="animated">Secured  and <span style="color: #e9d16f;"> Easy </span><br> Way to <span style="color: #e9d16f;"> Trade  </span><br> <span style="color: #e9d16f;">Crytocurrency</span></h2>
-                              <a target="_blank" href="https://play.google.com/store/apps/details?id=com.mazeoption.mazeoptions" class="btn btn-default active">Download App <img style="width:50px" src="{{asset('/store.png')}}"  > </a>
+                              <a target="_blank" href="https://play.google.com/store/apps/details?id=com.mazeoption.mazeoptions" class=" btn-default active" style="border-radius: 50px; height:50px">Download App <img style="width:30px" height="30px" src="{{asset('/store.png')}}"  > </a>
                                 <span > <img style="margin-top:-30%; margin-left:48%; width:70%" src="{{asset('/images.png')}}"  ></span>
                            </div>
                         </div>
@@ -71,7 +71,7 @@
                            <!-- Slide Text Layer -->
                            <div class="slide-text slide_style_left white_fonts">
                               <h2 data-animation="animated">Crypto <span style="color: #e9d16f;">Trading</span><br> Platform You can  <br><span style="color: #e9d16f;">Trust</span> Always</h2>
-                              <a target="_blank" href="https://play.google.com/store/apps/details?id=com.mazeoption.mazeoptions" class="btn btn-default active">Download  App<img style="width:50px" src="{{asset('/store.png')}}"  > </a>
+                              <a target="_blank" href="https://play.google.com/store/apps/details?id=com.mazeoption.mazeoptions" class=" btn-default active" style="border-radius: 50px; height:50px">Download App <img style="width:30px" height="30px" src="{{asset('/store.png')}}"  > </a>
                                <span > <img style="margin-top:-30%; margin-left:48%; width:70%" src="{{asset('/ima.png')}}"  ></span>
                            </div>
                         </div>

@@ -567,7 +567,8 @@ ul.social-links {
 }
 
 .slide-text a.btn {
-    display: none;
+    display: inline;
+    
 }
 
 #main-content {
