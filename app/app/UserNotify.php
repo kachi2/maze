@@ -8,7 +8,8 @@ class UserNotify extends Model
 {
     protected $fillable = [
         'user_id',
-        'message'
+        'message',
+        'is_read'
     ];
 
     public function User(){

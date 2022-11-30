@@ -20,7 +20,9 @@
                     </a>
                 </div>
             </div>
+            
            @empty
+        
            <div class="notification-item">
             <div class="notification-card">
                 <a href="#" >
@@ -33,9 +35,13 @@
                     </div>
                 </a>
             </div>
+            @endforelse
+            @if(count($notifications) > 0)
+           <div class="notification-card-details">  
+            <a href="{{route('create.notifications')}}">Clear Notification</a>
         </div>
-           @endforelse
-
+        @endif
+        </div>
         </div>
         <!-- Notification-section -->
     </div>

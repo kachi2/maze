@@ -17,13 +17,15 @@
                         <div class="appbar-item appbar-options">
                             <div class="appbar-option-item appbar-option-notification">
                                 <a href="{{route('user.notifications')}}"><i class="flaticon-bell"></i></a>
-                                <span class="option-badge">{{count($notification)}}</span>
+                                <span class="option-badge">{{count($notify_count)}}</span>
                             </div>
                             <div class="appbar-option-item appbar-option-profile">
                                 <a href="{{route('account')}}">
                                     <img data-cfsrc="{{asset('images/'.auth()->user()->image_path)}}" alt="profile" src="{{asset('images/'.auth()->user()->image_path)}}">
                                 </a>
                             </div>
+
+                        
                         </div>
                     </div>
                 </div>

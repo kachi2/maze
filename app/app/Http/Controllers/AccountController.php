@@ -178,8 +178,8 @@ class AccountController extends Controller
         $image = request()->file('image');
         $ext = $image->getClientOriginalExtension();
         $file = md5(time()).'.'.$ext;
-        $image->move('images', $file);
-        //Image::make($request->file('image'))->resize(200,200)->save('images',$file);
+       // $image->move('images', $file);
+        Image::make($request->file('image'))->resize(200,200)->save('images',$file);
         $user->update([
         'image_path' => $file
         ]);
@@ -193,6 +193,16 @@ class AccountController extends Controller
 
     public function UserNotifications(){
         $notifications = UserNotify::where('user_id', auth_user()->id)->latest()->paginate(10);
+        $notify = UserNotify::where('user_id', auth_user()->id)->get();
+        foreach($notify as $notf){
+            if($notf->is_read == 0){
+                $notf->update([
+                    'is_read' => 1
+                ]);
+            }
+        }
+
+
         return view('mobile.notify', [
             'notifications' => $notifications
         ]);

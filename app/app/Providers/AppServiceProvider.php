@@ -42,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
             view()->composer('*', function($view){
             if (Auth::check()) {
                 $notification = UserNotify::where('user_id', auth()->user()->id)->latest()->get();
+                $notify = UserNotify::where(['user_id' => auth()->user()->id, 'is_read' => 0])->get();
+                $view->with('notify_count', $notify);
                 $view->with('notification', $notification);
                 $user = auth_user();
                 if($user->btc == null){
