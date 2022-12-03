@@ -19,6 +19,7 @@ use App\Models\UserWallet;
 use App\Modules\BlockChain;
 use App\Modules\PerfectMoney;
 use App\Notifications\InvestmentCreated;
+use App\PayoutsHistory;
 use App\PlanProfit;
 use App\User;
 use App\WalletAddress;
@@ -453,11 +454,22 @@ class DepositController extends Controller
                         'prev_balance' => $balance,
                         'balance' => $newBalance
                     ]);
+            PayoutsHistory::create([
+                'ref' => generate_reference(),
+                'user_id' => auth_user()->id,
+                'amount' => $request->amounts,
+                'prev_balance' => $balance,
+                'avail_balance' => $newBalance
+            ]);
                 UserWallet::addAmount(auth_user(), $request->amounts);
                 Session::flash('alert', 'success');
                 Session::flash('message', 'Payout transfered to wallet successfully');
-               
                 return back();
+     }
+
+     public function PayoutsTransfer(){
+        return view('mobile.payouttransfers')
+        ->with('payouts', PayoutsHistory::where('user_id', auth_user()->id)->latest()->get());
      }
 
     public function invest(Request $request, $id = null)

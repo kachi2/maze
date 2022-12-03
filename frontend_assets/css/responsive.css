@@ -291,7 +291,7 @@ ul.social-links {
 }
 
 .slide-text a.btn {
-    display: none;
+    display: block;
 }
 
 #main-content {
@@ -567,8 +567,8 @@ ul.social-links {
 }
 
 .slide-text a.btn {
-    display: inline;
-    
+    display: block;
+
 }
 
 #main-content {

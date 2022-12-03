@@ -1,11 +1,8 @@
 @extends('layouts.mobile')
 @section('content')
-
 <div class="body-content">
     <div class="container">
-        <!-- Notification-section -->
         <div class="notification-section pb-15">
-
             @forelse($notifications as $notify)
             <div class="notification-item">
                 <div class="notification-card">
@@ -20,9 +17,7 @@
                     </a>
                 </div>
             </div>
-            
            @empty
-        
            <div class="notification-item">
             <div class="notification-card">
                 <a href="#" >
@@ -46,7 +41,4 @@
         <!-- Notification-section -->
     </div>
 </div>
-
-
-
 @endsection

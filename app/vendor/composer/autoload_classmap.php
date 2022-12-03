@@ -133,6 +133,7 @@ return array(
     'App\\Observers\\DepositObserver' => $baseDir . '/app/Observers/DepositObserver.php',
     'App\\Observers\\PendingDepositObserver' => $baseDir . '/app/Observers/PendingDepositObserver.php',
     'App\\Payment' => $baseDir . '/app/Payment.php',
+    'App\\PayoutsHistory' => $baseDir . '/app/PayoutsHistory.php',
     'App\\PlanProfit' => $baseDir . '/app/PlanProfit.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
