@@ -35,7 +35,7 @@
                                         <div class="nk-tb-col tb-col-sm">
                                             <div class="user-card">
                                                 <div class="user-name">
-                                                    <span class="tb-lead">{{moneyFormat($invest->pre_balance, 'USD')}}</span>
+                                                    <span class="tb-lead">{{moneyFormat($invest->prev_balance, 'USD')}}</span>
                                                 </div>
                                             </div>
                                         </div>

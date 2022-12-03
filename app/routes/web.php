@@ -12,7 +12,7 @@
 use Illuminate\Support\Facades\Route;
     #========== mobile routes ======================
    // Route::domain('mazeoptions.site')->group(function(){   
-    Route::group(['prefix' => 'app.mazeoptions.com'], function(){  
+    Route::group(['prefix' => 'mobl'], function(){  
         Route::post('/user/register', 'Auth\RegisterController@create_user')->name('register_user');
         Route::get('complete-registration', 'Auth\CompleteRegistrationController@index')->name('complete_registration');
         Route::post('complete-registration', 'Auth\CompleteRegistrationController@update')->name('complete_registration');
@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
         Route::post('deposits/invest/{id?}', 'DepositController@doInvest')->name('deposits.invests');
         Route::get('/payouts/details/{id?}', 'DepositController@PayoutsDetails')->name('payouts.details');
         Route::post('/transfer/payouts/{id}', 'DepositController@TransferPayouts')->name('transfer.payouts');
+        Route::get('/payouts/transfer/history', 'DepositController@PayoutsTransfer')->name('payoutsTransfer.history');
         Route::get('/withdrawals/details/{id}', 'WithdrawController@Details')->name('withdrawals.details');
         Route::post('/wallet/deposits/request', 'WalletDepositController@investFromCripto')->name('wallet.deposits');
         Route::get('deposits/transactions', 'DepositController@showTransactions')->name('deposits.transactions');
@@ -109,8 +110,9 @@ use Illuminate\Support\Facades\Route;
     Route::post('/wallet/deposits/request', 'Web\WalletDepositController@investFromCripto')->name('wallet.deposits');
     Route::post('deposits/invests/{id?}', 'Web\DepositController@doInvest')->name('deposits.invests');  
     Route::post('payouts/transfer/{id?}', 'Web\WalletDepositController@transferPayouts')->name('transferPayouts'); 
+    Route::get('payouts/transfer/history/', 'Web\WalletDepositController@PayoutsTransfer')->name('PayoutsTransfer.history'); 
     Route::get('/payouts/details/{id?}', 'Web\DepositController@PayoutsDetails')->name('payouts.details');
-    Route::post('/user/transfer/payouts/{id}', 'Web\DepositController@TransferPayouts')->name('transfer.payouts');
+   // Route::post('/user/transfer/payouts/{id}', 'Web\DepositController@TransferPayouts')->name('transfer.payouts');
     Route::get('/withdrawals/details/{id}', 'Web\WithdrawController@Details')->name('withdrawals.details');
     Route::get('deposits/transactions', 'Web\DepositController@showTransactions')->name('deposits.transactions');
     Route::get('deposits/{ref}', 'Web\DepositController@show')->name('deposit');
@@ -124,7 +126,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('bonus/initate/{id}', 'Web\ReferralController@BonusInvest')->name('bonus.initate');
     Route::get('referrals/refer', 'Web\ReferralController@refer')->name('referrals.refer');
     Route::post('referrals/refer', 'Web\ReferralController@send')->name('referrals.refer');
-    Route::get('/martets', 'Web\HomeController@Markets')->name('home.markets');
+    Route::get('/markets', 'Web\HomeController@Markets')->name('home.markets');
     Route::get('/notifications', 'Web\AccountController@UserNotifications')->name('user.notifications');
     Route::get('internal-transfer', 'Web\WalletController@transfer')->name('transfer');
     Route::post('internal-transfer', 'Web\WalletController@doTransfer')->name('transfer');

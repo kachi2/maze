@@ -71,7 +71,7 @@
                             <div class="card card-full">
                                 <div class="card-inner">
                                     Total Payouts:  <span type="button" class="badge badge-sm">{{moneyFormat($payouts, 'USD')}}</span> 
-                                        <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#payoutsTransfer"> Transfer to Main Wallet</a>  <a href=""> View Transfer History</a><br>
+                                        <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#payoutsTransfer"> Transfer to Main Wallet</a>  <a href="{{route('web.PayoutsTransfer.history')}}"> View Transfer History</a><br>
                                       
                                 </div>
                                 <div class="nk-tb-list mt-n2">

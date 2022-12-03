@@ -31,7 +31,6 @@
                             <p>Payouts Earned</p>
                             <h3>{{moneyFormat($payouts, 'USD')}}</h3>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#transfer" style="font-size:12px"> Transfer</a>
-                            
                         </div>
                     </div>
                 </div>
@@ -43,8 +42,7 @@
                         <div class="feature-card-details">
                             <p>Active Deposits</p>
                             <h3>{{moneyFormat($total, 'USD')}} </h3>
-                            <br>
-                            
+                            <a href="{{route('payoutsTransfer.history')}}" style="font-size:12px"> Transfer History </a>
                         </div>
                     </div>
                 </div>

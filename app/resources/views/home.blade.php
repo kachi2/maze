@@ -68,8 +68,8 @@
                                                                 <div class="amount text-light "><span class="currency currency-ng text-light ">{{ moneyFormat(auth()->user()->wallet->bonus, 'USD')}}</span></div>
                                                             </div>
                                                             <div class="invest-data-history">
-                                                                <div class="title text-light ">Referral Balance</div>
-                                                                <div class="amount text-light "> <span class="currency currency-NG text-light ">{{ moneyFormat(auth()->user()->wallet->referrals, 'USD')}}</span></div>
+                                                                <div class="title text-light ">Payouts Balance</div>
+                                                                <div class="amount text-light "> <span class="currency currency-NG text-light ">{{ moneyFormat($payouts, 'USD')}}</span></div>
                                                             </div>
                                                         </div>
                                                         <div class="invest-data-ck">
@@ -84,7 +84,7 @@
                                                 <div class="card-inner">
                                                     <div class="card-title-group align-start mb-0">
                                                         <div class="card-title">
-                                                            <h6 class="subtitle text-light ">TOTAL DEPOSIT</h6>
+                                                            <h6 class="subtitle text-light ">TOTAL INVESTMENTS</h6>
                                                         </div>
                                                         <div class="card-tools">
                                                             <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Overview of your deposits and investments"></em>
@@ -97,7 +97,7 @@
                                                     <div class="invest-data">
                                                         <div class="invest-data-amount g-2">
                                                             <div class="invest-data-history">
-                                                                <div class="title text-light ">Total Invested</div>
+                                                                <div class="title text-light ">Amount Invested</div>
                                                                 <div class="amount text-light "><span class="currency currency-ng text-light ">{{ moneyFormat($total_deposits, 'USD') }}</span></div>
                                                             </div>
                                                             <div class="invest-data-history">
@@ -134,8 +134,8 @@
                                                                 <div class="amount text-light "><span class="currency currency-usd text-light ">{{ moneyFormat($pending_withdrawals, 'USD') }}</span></div>
                                                             </div>
                                                             <div class="invest-data-history">
-                                                                <div class="title text-light ">Last Withdrawal</div>
-                                                                <div class="amount text-light "> <span class="currency currency-usd text-light ">{{ moneyFormat($last_withdrawal, 'USD') }}</span></div>
+                                                                <div class="title text-light ">Approved Withdrawal</div>
+                                                                <div class="amount text-light "> <span class="currency currency-usd text-light ">{{ moneyFormat($paid_withdrawal, 'USD') }}</span></div>
                                                             </div>
                                                         </div>
                                                         <div class="invest-data-ck">

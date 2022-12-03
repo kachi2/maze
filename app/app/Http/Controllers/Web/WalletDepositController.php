@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\WalletAddress;
 use App\Models\UserWallet;
+use App\PayoutsHistory;
 use App\PlanProfit;
 use Exception;
 use App\WalletDeposit;
@@ -106,6 +107,9 @@ class WalletDepositController extends Controller
                    
     }
 
+
+    #================ payouts transfer ========================
+
     public function transferPayouts(Request $request, $id){
 
         $payouts = PlanProfit::where(['user_id' => auth_user()->id, 'plan_id' => decrypt($id)])->first();
@@ -132,6 +136,13 @@ class WalletDepositController extends Controller
                         'prev_balance' => $balance,
                         'balance' => $newBalance
                     ]);
+                    PayoutsHistory::create([
+                        'ref' => generate_reference(),
+                        'user_id' => auth_user()->id,
+                        'amount' => $request->amount,
+                        'prev_balance' => $payouts->balance,
+                        'avail_balance' => $newBalance
+                    ]);
                 UserWallet::addAmount(auth_user(), $request->amount);
                 Session::flash('alert', 'success');
                 Session::flash('message', 'Payout transfered to wallet successfully');
@@ -140,6 +151,10 @@ class WalletDepositController extends Controller
 
     }
 
+    public function PayoutsTransfer(){
+        return view('deposit.transfers')
+        ->with('payouts', PayoutsHistory::where('user_id', auth_user()->id)->latest()->get());
+}
 
 
 }

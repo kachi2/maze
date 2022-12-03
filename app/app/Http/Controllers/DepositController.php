@@ -468,7 +468,7 @@ class DepositController extends Controller
      }
 
      public function PayoutsTransfer(){
-        return view('mobile.payouttransfers')
+        return view('mobile.payoutstransfer')
         ->with('payouts', PayoutsHistory::where('user_id', auth_user()->id)->latest()->get());
      }
 

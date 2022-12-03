@@ -8,7 +8,6 @@ use App\Models\Package;
 use App\Models\PendingDeposit;
 use App\Models\Plan;
 use Illuminate\Support\Facades\Validator;
-use App\PayoutsHistory;
 use App\Models\UserWallet;
 use App\Modules\PerfectMoney;
 use App\Notifications\InvestmentCreated;
@@ -396,23 +395,13 @@ class DepositController extends Controller
                         'prev_balance' => $balance,
                         'balance' => $newBalance
                     ]);
-                    PayoutsHistory::create([
-                        'ref' => generate_reference(),
-                        'user_id' => auth_user()->id,
-                        'amount' => $request->amounts,
-                        'prev_balance' => $balance,
-                        'avail_balance' => $newBalance
-                    ]);
-                        UserWallet::addAmount(auth_user(), $request->amounts);
-                        Session::flash('alert', 'success');
-                        Session::flash('message', 'Payout transfered to wallet successfully');
-                        return back();
-             }
-        
- public function PayoutsTransfer(){
-                return view('deposit.transfers')
-                ->with('payouts', PayoutsHistory::where('user_id', auth_user()->id)->latest()->get());
+                UserWallet::addAmount(auth_user(), $request->amounts);
+                Session::flash('alert', 'success');
+                Session::flash('message', 'Payouts processed and funds transfer to your main wallet successfully');
+                return back();
      }
+
+     
     public function invest(Request $request, $id = null)
     {
         $id = decrypt($id);

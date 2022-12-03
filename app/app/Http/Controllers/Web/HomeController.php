@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Deposit;
 use App\Models\Package;
 use App\Models\Withdrawal;
+use App\PlanProfit;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\User;
@@ -34,14 +35,15 @@ class HomeController extends Controller
     {
         $user = auth_user();
         $packages = Package::with('plans')->get();
-        $totalDeposits = Deposit::whereUserId($user->id)->sum('amount');
-        $totalInvest = Deposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->sum('amount');
+        $totalInvest = Deposit::whereUserId($user->id)->sum('amount');
+        $payouts = PlanProfit::where('user_id', $user->id)->sum('balance');
+         $totalDeposits = Deposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->sum('amount');
         $activeDeposits = Deposit::whereUserId($user->id)->whereStatus(Deposit::STATUS_ACTIVE)->sum('amount');
         $lastDeposit = Deposit::whereUserId($user->id)->latest()->take(1)->sum('amount');
 
         $totalWithdrawals = Withdrawal::whereUserId($user->id)->where('status', '!=', Withdrawal::STATUS_CANCELED)->sum('amount');
         $pendingWithdrawals = Withdrawal::whereUserId($user->id)->whereStatus(Withdrawal::STATUS_PENDING)->sum('amount');
-        $lastWithdrawal = Withdrawal::whereUserId($user->id)->where('status', '!=', Withdrawal::STATUS_CANCELED)->latest()->take(1)->sum('amount');
+        $paidWithdrawal = Withdrawal::whereUserId($user->id)->where('status', '=', 1)->sum('amount');
         $data['withdw'] = Withdrawal::where('user_id', $user->id)->latest()->take(2)->get();
         $data['depo'] =  Deposit::where('user_id', $user->id)->latest()->take(2)->get();
         $data['login'] = UserActivity::where('user_id', $user->id)->latest()->take(2)->get();
@@ -63,9 +65,9 @@ class HomeController extends Controller
             'last_deposit' => $lastDeposit,
             'total_withdrawals' => $totalWithdrawals,
             'pending_withdrawals' => $pendingWithdrawals,
-            'last_withdrawal' => $lastWithdrawal,
+            'paid_withdrawal' => $paidWithdrawal,
             'total_invest' => $totalInvest,
-            'payouts' => $totalInvest,
+            'payouts' =>  $payouts,
             'activities' => UserActivity::where('user_id', $user->id)->latest()->take(5)->get()
         ], $data);
     }
