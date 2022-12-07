@@ -149,6 +149,7 @@ return array(
     'App\\WalletAddress' => $baseDir . '/app/WalletAddress.php',
     'App\\WalletDeposit' => $baseDir . '/app/WalletDeposit.php',
     'App\\WalletTranfer' => $baseDir . '/app/WalletTranfer.php',
+    'App\\WithdrawalAccount' => $baseDir . '/app/WithdrawalAccount.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Barryvdh\\LaravelIdeHelper\\Alias' => $vendorDir . '/barryvdh/laravel-ide-helper/src/Alias.php',
     'Barryvdh\\LaravelIdeHelper\\Console\\EloquentCommand' => $vendorDir . '/barryvdh/laravel-ide-helper/src/Console/EloquentCommand.php',

@@ -8,11 +8,13 @@
 
 use App\Models\Deposit;
 use App\Models\Package;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Referral;
 use App\Models\UserWallet;
 use App\Models\Withdrawal;
 use App\User;
 use App\Agent;
+use App\WithdrawalAccount;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
@@ -140,6 +142,7 @@ if (!function_exists('getUsernameById')) {
         return $name;
     }
 }
+
 
 if (!function_exists('active_route')) {
     function active_route($routePattern, $class = 'active')

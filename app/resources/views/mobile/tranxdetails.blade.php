@@ -1,4 +1,7 @@
 @extends('layouts.mobile')
+@section('nav')
+  @include('partials.mobile_nav')
+  @endsection
 @section('content')
 
 <div class="body-content">
@@ -29,13 +32,16 @@
                 <div class="payment-list-item payment-list-title">Payment Method</div>
                 <div class="payment-list-item payment-list-info">{{$withdrawal->payment_method}}</div>
             </div>
+           
             <div class="payment-list-details">
                 <div class="payment-list-item payment-list-title">Status</div>
-                @if($withdrawal->status == 1)<div class="payment-list-item payment-list-info">Success</div>
-                 @elseif($withdrawal->status == 0) <div class="payment-list-item payment-list-info">Pending</div> 
+                @if($withdrawal->status == 1)
+                <div class="payment-list-item payment-list-info" style="color:rgb(13, 137, 239); font-size: 14px" >Success</div>
+                 @elseif($withdrawal->status == 0) 
+                 <div class="payment-list-item payment-list-info" style="color:rgb(11, 19, 26); font-size: 14px" >Pending</div> 
                   @else
-                <div class="payment-list-item payment-list-info">Cancelled</div> 
-                @endif
+                <div class="payment-list-item payment-list-info" style="color:rgb(189, 27, 9); font-size: 14px">Cancelled</div> 
+                @endif    
             </div>
             <div class="payment-list-details">
                 <div class="payment-list-item payment-list-title">Date</div>
@@ -43,7 +49,10 @@
             </div>
     
         </div>
-       <center>  <a href="{{route('withdrawals')}}" class="btn btn-primary"> return back</a></center>
+
+       <center> @if( $withdrawal->status == 0)
+         <a type="submit" class=" btn btn-warning " href="{{route('withdrawals.cancel',encrypt($withdrawal->id))}}"> Cancel</a>  
+         @endif <a href="{{route('withdrawals')}}" class="btn btn-primary"> return back</a></center>
         <!-- Payment-list -->
     </div>
 </div>

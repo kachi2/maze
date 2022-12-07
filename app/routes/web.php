@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('withdrawals', 'WithdrawController@index')->name('withdrawals');
         Route::get('withdrawals/request', 'WithdrawController@request')->name('withdrawals.request');
         Route::post('withdrawals/request', 'WithdrawController@store')->name('withdrawals.request');
-        Route::post('withdrawals/{id}/cancel', 'WithdrawController@cancel')->name('withdrawals.cancel');
+        Route::get('withdrawals/{id}/cancel', 'WithdrawController@cancel')->name('withdrawals.cancel');
         Route::get('deposits', 'DepositController@index')->name('deposits');
         Route::get('deposits/coinpayment/transaction/{id}', 'DepositController@showCoinpaymentTransaction')->name('deposits.coinpayment_transaction');
         Route::get('deposits/blockchain/transaction/{ref}', 'DepositController@showBlockChainTransaction')->name('deposits.blockchain_transaction');
@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Route;
         Route::post('/transfer/payouts/{id}', 'DepositController@TransferPayouts')->name('transfer.payouts');
         Route::get('/payouts/transfer/history', 'DepositController@PayoutsTransfer')->name('payoutsTransfer.history');
         Route::get('/withdrawals/details/{id}', 'WithdrawController@Details')->name('withdrawals.details');
+        Route::get('/withdrawals/delete/{id}', 'WithdrawalController@DeleteAddress')->name('wDeleteAddress');
         Route::post('/wallet/deposits/request', 'WalletDepositController@investFromCripto')->name('wallet.deposits');
         Route::get('deposits/transactions', 'DepositController@showTransactions')->name('deposits.transactions');
         Route::get('deposits/{ref}', 'DepositController@show')->name('deposit');
@@ -79,6 +80,8 @@ use Illuminate\Support\Facades\Route;
         Route::get('/user/agent', 'MessageController@Agent')->name('users.agent');
 
         Route::get('/verify/user/transfer', 'WalletController@VerifyTransfer')->name('verify-transfer');
+
+        Route::post('/withdrawals/add/', 'WithdrawalController@addWithdrawals')->name('addWithdrawals');
         });
 
     Route::get('/', 'WelcomeController@index')->name('index');
@@ -103,7 +106,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('withdrawals', 'Web\WithdrawController@index')->name('withdrawals');
     Route::get('withdrawals/request', 'Web\WithdrawController@request')->name('withdrawals.request');
     Route::post('withdrawals/request', 'Web\WithdrawController@store')->name('withdrawals.request');
-    Route::post('withdrawals/{id}/cancel', 'Web\WithdrawController@cancel')->name('withdrawals.cancel');
+    Route::get('withdrawals/{id}/cancel', 'Web\WithdrawController@cancel')->name('withdrawals.cancel');
     Route::get('deposits', 'Web\DepositController@index')->name('deposits');
     Route::get('deposits/coinpayment/transaction/{id}', 'Web\DepositController@showCoinpaymentTransaction')->name('deposits.coinpayment_transaction');
     Route::get('deposits/invest/{id?}', 'Web\DepositController@invest')->name('deposits.invest');

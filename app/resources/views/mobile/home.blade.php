@@ -1,5 +1,8 @@
   
   @extends('layouts.mobile')
+  @section('nav')
+  @include('partials.mobile-nav')
+  @endsection
   @section('content')
         <div class="body-content body-content-lg"> <!-- "body-content-lg" add this class if any cards inside this div has "section-to-header" class -->
             <div class="container">

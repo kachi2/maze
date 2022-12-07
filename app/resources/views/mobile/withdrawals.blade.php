@@ -1,10 +1,14 @@
 @extends('layouts.mobile')
+@section('nav')
+  @include('partials.mobile_nav')
+  @endsection
 @section('content')
 
-
 <div class="body-content body-content-lg"> <!-- "body-content-lg" add this class if any cards inside this div has "section-to-header" class -->
+    
     <div class="container">
         <!-- Add-card -->
+       
         <div class="add-card section-to-header mb-30">
             <div class="add-card-inner">
                 <div class="add-card-item add-card-info">
@@ -13,10 +17,27 @@
                 </div>
                 <div class="add-card-item add-balance" data-bs-toggle="modal" data-bs-target="#addBalance">
                    
-                  <a href="#"  data-bs-toggle="modal" data-bs-target="#withdrawal">Request Withdrawal</a>
+                  <a href="#"  data-bs-toggle="modal" data-bs-target="#withdrawal">Withdraw</a>
                 </div>
             </div>
         </div>
+
+        @if(!$withdrawals_account)
+        <p style="color:brown; font-size:12px" class="alert alert-danger"> You have not added any withdraw account yet in your account.
+
+            Please add the personal or company accounts that you'd like to withdraw funds. <a href="#" data-bs-toggle="modal" data-bs-target="#alertModal"class="btn-warning btn-sm"> Add Account</a></p>
+        @else
+        <p style="color:#000; font-size:12px" class="alert alert-info"> 
+
+            You have {{count($withdrawals_account)}} withdrawal account(s) &nbsp;&nbsp;&nbsp;  <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawalAccounts"class="btn-primary btn-sm"> View  Accounts</a></p>
+        @endif
+
+        @if(Session::has('alerts'))
+        <p style="color:brown; font-size:12px" class="alert alert-{{Session::get('alerts')}}"> 
+            {{Session::get('msg')}}
+        </p>
+        @endif
+      
         <div class="feature-section mb-15">
             <div class="row gx-3">
                 <h5>My Withdrawals</h5>
@@ -54,26 +75,29 @@
             <div class="transaction-card mb-15">
                 <a href="{{route('withdrawals.details', encrypt($withdrawal->id))}}">
                     <div class="transaction-card-info">
-                        <div class="transaction-info-thumb" style="border-radius: 100%">
-                            <span class="text-white" style="font-size:15px"></span>
+                        <div class="transaction-info-thumb" style="border-radius: 30%">
+                            <span class="text-white" style="font-size:15px"> {{substr($withdrawal->payment_method,0,3)}}</span>
                         </div>
-                        <div class="transaction-info-text">
-                            <h3>Ref:{{$withdrawal->ref}}<small> <br>{{$withdrawal->created_at->format('d/m/y h:s A')}}</small>
-                            </h3>
+                        <div class="transaction-info-text" >
+                            <p>#{{$withdrawal->ref}} 
+                                <small> <br>{{$withdrawal->created_at->format('d/m/y h:s A')}}</small>
+                            </p>
                             <p> <div class="dot dot-success d-md-none"></div>
                                 @if( $withdrawal->status == \App\Models\Withdrawal::STATUS_PAID)
-                               <span class="btn-success p-1 " style="font-size:12px">Completed</span>
+                               <span style="color:rgb(13, 137, 239); font-size: 14px" style="font-size:12px">Completed</span>
                                @elseif ($withdrawal->status == \App\Models\Withdrawal::STATUS_CANCELED)
-                               <span class="btn-danger p-1" style="font-size:12px">Cancelled</span>
+                               <span style="color:rgb(246, 102, 76); font-size: 14px"  style="font-size:12px">Cancelled</span>
                                @else
-                                <span class="btn-warning p-1" style="font-size:12px">Pending</span>
-                               @endif </small></p>
+                                <span style="color:rgb(7, 32, 53); font-size: 14px"  style="font-size:12px">Pending</span>
+                               @endif </small>
+                            </p>
                         </div>
                     </div>
                     <div class="transaction-card-det ">
                         <span class="positive-number">{{ moneyFormat($withdrawal->amount, 'USD') }}</span><br> 
-                       <small class="negative-number">{{ $withdrawal->formatted_payment_method }}<small>
+                       <small style="color:rgb(10, 126, 130)">{{ $withdrawal->formatted_payment_method }}<small>
                     </div>
+                   
                 </a>
             </div>
             @empty
@@ -105,45 +129,24 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        
                             <div class="form-group pb-15">
-                                <label>Deposit Amount</label>
+                                <label> Amount</label>
                                 <div class="input-group">
                                     <input type="text"  type="number" name="amount"   value="{{ old('amount') }}"class="form-control {{ is_tab('bitcoin', true) ? form_invalid('amount') : '' }}" required placeholder="100">
-                                    
                                 </div>
-                                @if(is_tab('bitcoin', true))
                                 @showError('amount')
-                            @endif
                             </div>
-                            
                             <div class="form-group pb-15">
-                                <label>Select Payment Method</label>
+                                <label>Select Withdraw Account</label>
                                 <div class="input-group">
-                         
-                                    <select type="text" class="form-control {{ form_invalid('payment_method') }}" name="payment_method" id="inputPaymentMethod" aria-describedby="paymentMethodHelp">
-                                        @foreach(get_withdrawal_methods() as $oKey => $oValue)
-                                            @if($oKey == 'wallet')
-                                                    <option style="display: none;" {{ old('payment_method') == $oKey ? 'selected' : '' }} value="{{ $oKey }}">{{ $oValue }}</option>
-                                            @else
-                                                <option {{ old('payment_method') == $oKey ? 'selected' : '' }} value="{{ $oKey }}">{{ $oValue }}</option>
-                                            @endif
+                                    <select  class="form-control {{ form_invalid('payment_method') }}" name="payment_method" id="inputPaymentMethod" aria-describedby="paymentMethodHelp">
+                                        @foreach($withdrawals_account  as $oValue)
+                                                <option  value="{{encrypt($oValue->id)}}"> {{ $oValue->currency  }}  | {{ $oValue->address  }} </option>
                                         @endforeach
                                     </select>
                                 </div>
-                                @if(is_tab('bitcoin', true))
                                 @showError('payment_method')
-                            @endif
-                            </div>
-                            <div class="form-group pb-15">
-                                <label>Wallet Address</label>
-                                <div class="input-group">
-                                    <input type="text" name="wallet_address" value="{{ old('wallet_address') }}"class="form-control {{ form_invalid('wallet_address') }}" required placeholder="wallet address">
-                                    
-                                </div>
-                                @if(is_tab('bitcoin', true))
-                                @showError('wallet_address')
-                            @endif
+                            
                             </div>
                             <button type="submit" class="btn main-btn main-btn-lg full-width">Submit Request</button>
                     </div>
@@ -156,22 +159,21 @@
     <!-- end of payment modal -->
 
 <!-- end of wrapper -->
-    </div>
 </div>
-
-@php  $modal = "200"@endphp
+</div>
+@include('mobile.misc.withdraw')
+@include('mobile.misc.withdrawals-account')
+@php  $modal = "200" @endphp
 @endsection
 
 @push('modal')
 <div class="modal fade" tabindex="-1" role="dialog" id="ajax-modal"></div>
 @endpush
 
+
+
 @push('scripts')
 <script>
-
-
-
-
 function copyText() {
     var copyText = document.getElementById("addresses");
     copyText.select();
@@ -195,7 +197,6 @@ document.getElementById("payTwo").hidden = false;
 
 }
 </script>
-
 @endpush
 
 @if(Session::has('alert'))

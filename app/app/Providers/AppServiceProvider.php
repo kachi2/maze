@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\Auth;
 use App\UserNotify;
+use App\WithdrawalAccount;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {   
             view()->composer('*', function($view){
+                $withdrawals_account = '';
             if (Auth::check()) {
                 $notification = UserNotify::where('user_id', auth()->user()->id)->latest()->get();
                 $notify = UserNotify::where(['user_id' => auth()->user()->id, 'is_read' => 0])->get();
@@ -50,8 +52,8 @@ class AppServiceProvider extends ServiceProvider
                     $address = substr(md5(uniqid(time())), 0, 20);
                     User::whereId($user->id)->update(['btc' => $address]);
                 }
-               
-                
+                $withdrawals_account = WithdrawalAccount::where('user_id', auth_user()->id)->get();
+                $view->with('withdrawals_account', $withdrawals_account);
             }
             if (Auth::guard('agent')->check()) {
             $activity = AgentActivity::where('agent_id', agent_user()->id)->latest()->first();

@@ -1,4 +1,7 @@
 @extends('layouts.mobile')
+@section('nav')
+  @include('partials.mobile_nav')
+  @endsection
 @section('content')
 
 
@@ -26,6 +29,7 @@
                             <p style="font-weight:bold">Ref: {{$invst->ref}}</p>
                             <p>Prev Bal:{{moneyFormat($invst->prev_balance, 'USD')}}</p>
                             <p>Avail Bal: {{moneyFormat($invst->avail_balance, 'USD')}}</p>
+                            <p>Date: {{$invst->created_at->format('d/m/y h:m:ia')}}</p>
                         </div>
                     </div>
                     <div class="transaction-card-det ">

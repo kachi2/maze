@@ -53,8 +53,7 @@
     </head>
     <body>
 @yield('preloader')
-@include('partials.mobile-nav')
-
+@yield('nav')
 @yield('content') 
 
 @include('partials.mobile-footbar')

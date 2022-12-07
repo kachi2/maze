@@ -68,7 +68,8 @@ class HomeController extends Controller
             'paid_withdrawal' => $paidWithdrawal,
             'total_invest' => $totalInvest,
             'payouts' =>  $payouts,
-            'activities' => UserActivity::where('user_id', $user->id)->latest()->take(5)->get()
+            'activities' => UserActivity::where('user_id', $user->id)->latest()->take(5)->get(),
+            'home_page' => ['this home page']
         ], $data);
     }
 

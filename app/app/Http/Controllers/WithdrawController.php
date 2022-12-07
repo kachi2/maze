@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 Use Alert;
+use App\WithdrawalAccount;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -67,6 +68,7 @@ class WithdrawController extends Controller
         $query = Withdrawal::whereUserId($request->user()->id);
         $pending = Withdrawal::where(['user_id' =>auth()->user()->id, 'status' => 0])->sum('amount');
         $success = Withdrawal::where(['user_id' =>auth()->user()->id, 'status' => 1])->sum('amount');
+        $Waccounts = WithdrawalAccount::where(['user_id' =>auth()->user()->id])->get();
 
         if ($request->input('search')) {
             $query->where(function (Builder $query) use ($request) {
@@ -112,7 +114,8 @@ class WithdrawController extends Controller
             'breadcrumb' => $breadcrumb,
             'pending' => $pending,
             'success' => $success,
-            'total' => $query->sum('amount')
+            'total' => $query->sum('amount'),
+            'Waccounts' => $Waccounts
         ]);
     }
 
@@ -156,25 +159,19 @@ class WithdrawController extends Controller
     {
         $wallet = $request->user()->wallet->amount;
 
+        if(!isset($request->payment_method)){
+            Session::flash('alerts', 'Please add payment method');
+            return back()->withInput($request->all());
+        }
         $this->validate($request, [
             'amount' => "required|numeric|min:10|max:{$wallet}",
         ]);
-
-        if (is_tab('perfect-money')) {
-            $this->validate($request, [
-                'pm_account_id' => "required"
-            ]);
-            $walletAddress = $request->input('pm_account_id');
-            $paymentMethod = Withdrawal::PAYMENT_METHOD_PM;
-        } else {
-            $this->validate($request, [
-                'wallet_address' => "required"
-            ]);
-            $walletAddress = $request->input('wallet_address');
-            $paymentMethod = $request->input('payment_method');
-        }
-
-        $amount = $request->input('amount');
+        
+        $wallet = WithdrawalAccount::where('id', decrypt($request->payment_method))->first();
+        
+            $walletAddress = $wallet->address;
+            $paymentMethod = $wallet->currency;
+            $amount = $request->input('amount');
 
         $withdrawal = Withdrawal::create([
             'ref' => generate_reference(),
@@ -191,36 +188,8 @@ class WithdrawController extends Controller
         } catch (Exception $exception) {
 
         }
-
-        if (config('app.automatic_withdrawal')) {
-            if ($withdrawal->payment_method == Withdrawal::PAYMENT_METHOD_PM) {
-                $perfectMoney = new PerfectMoney();
-                $res = $perfectMoney->createWithdrawal($withdrawal->amount, $withdrawal->wallet_address);
-                if ($res['status'] == 'success') {
-                    $withdrawal->status = Withdrawal::STATUS_PAID;
-                    $withdrawal->save();
-                } else {
-                    Log::error($res['message']);
-                    return redirect()
-                        ->back()
-                        ->withInput()
-                        ->with('error', 'Ann error occurred');
-                }
-            } elseif ($withdrawal->payment_method == $paymentMethod) {
-                $response = Coinpayments::createWithdrawal($withdrawal->amount - ($withdrawal->amount * 1 / 100), $withdrawal->payment_method, $withdrawal->payment_method, $withdrawal->wallet_address, true);
-                if ($response) {
-                    $withdrawal->status = Withdrawal::STATUS_PAID;
-                    $withdrawal->save();
-                } else {
-                    return redirect()
-                        ->back()
-                        ->withInput()
-                        ->with('error', 'An error occurred');
-                }
-            }
-        }
-        Session::flash('msg', 'success');
-        Session::flash('message', 'Withdrawal request sent successfully.');
+        Session::flash('alerts', 'success');
+        Session::flash('msg', 'Withdrawal request sent successfully.');
      //   Alert::html('Html Title', 'Html Code', 'Type');
         return redirect()
             ->route('withdrawals')
@@ -237,7 +206,7 @@ class WithdrawController extends Controller
      */
     public function cancel(Request $request, $id)
     {
-        $withdrawal = Withdrawal::whereUserId($request->user()->id)->where('id', $id)->firstOrFail();
+        $withdrawal = Withdrawal::whereUserId($request->user()->id)->where('id', decrypt($id))->firstOrFail();
         if ($withdrawal->status == Withdrawal::STATUS_PENDING) {
             $withdrawal->status = Withdrawal::STATUS_CANCELED;
             if($withdrawal->save()) {
@@ -246,10 +215,10 @@ class WithdrawController extends Controller
                     $withdrawal->user->notify(new WithdrawalCanceled($withdrawal));
                 } catch (Exception $exception) {
                 }
-                Session::flash('msg', 'success');
-                Session::flash('message', 'Withdrawal request canceled successfully.');
+                Session::flash('alerts', 'success');
+                Session::flash('msg', 'Withdrawal request canceled successfully.');
                 return redirect()
-                    ->back()->with('success', 'Withdrawal request canceled successfully.');
+                    ->back()->with('', 'Withdrawal request canceled successfully.');
             }
         }
 

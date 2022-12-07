@@ -1,5 +1,7 @@
 @extends('layouts.mobile')
-
+@section('nav')
+  @include('partials.mobile_nav')
+  @endsection
 @section('content')
 <div class="space-items"></div>
 
