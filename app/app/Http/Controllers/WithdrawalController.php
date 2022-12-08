@@ -36,7 +36,6 @@ class WithdrawalController extends Controller
     }
 
     public function DeleteAddress($id){
-
         $adr = WithdrawalAccount::where('id', decrypt($id))->first();
         if($adr){
             $adr->delete();

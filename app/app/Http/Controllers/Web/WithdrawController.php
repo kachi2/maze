@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use SweetAlert;
+use App\WithdrawalAccount;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -107,6 +108,7 @@ class WithdrawController extends Controller
                 'title' => 'Withdrawals'
             ]
         ];
+   
 
         return view('withdrawal.withdrawals', [
             'withdrawals' => $withdrawals,
@@ -154,25 +156,19 @@ class WithdrawController extends Controller
     {
         $wallet = $request->user()->wallet->amount;
 
+        if(!isset($request->payment_method)){
+            Session::flash('alerts', 'Please add payment method');
+            return back()->withInput($request->all());
+        }
         $this->validate($request, [
             'amount' => "required|numeric|min:10|max:{$wallet}",
         ]);
-
-        if (is_tab('perfect-money')) {
-            $this->validate($request, [
-                'pm_account_id' => "required"
-            ]);
-            $walletAddress = $request->input('pm_account_id');
-            $paymentMethod = Withdrawal::PAYMENT_METHOD_PM;
-        } else {
-            $this->validate($request, [
-                'wallet_address' => "required"
-            ]);
-            $walletAddress = $request->input('wallet_address');
-            $paymentMethod = $request->input('payment_method');
-        }
-
-        $amount = $request->input('amount');
+        
+        $wallet = WithdrawalAccount::where('id', decrypt($request->payment_method))->first();
+        
+            $walletAddress = $wallet->address;
+            $paymentMethod = $wallet->currency;
+            $amount = $request->input('amount');
 
         $withdrawal = Withdrawal::create([
             'ref' => generate_reference(),
@@ -183,44 +179,16 @@ class WithdrawController extends Controller
         ]);
 
         UserWallet::reducePayoutAmount($request->user(), $amount);
-
+      
         try {
             $withdrawal->user->notify(new WithdrawalRequested($withdrawal));
         } catch (Exception $exception) {
 
         }
-
-        if (config('app.automatic_withdrawal')) {
-            if ($withdrawal->payment_method == Withdrawal::PAYMENT_METHOD_PM) {
-                $perfectMoney = new PerfectMoney();
-                $res = $perfectMoney->createWithdrawal($withdrawal->amount, $withdrawal->wallet_address);
-                if ($res['status'] == 'success') {
-                    $withdrawal->status = Withdrawal::STATUS_PAID;
-                    $withdrawal->save();
-                } else {
-                    Log::error($res['message']);
-                    return redirect()
-                        ->back()
-                        ->withInput()
-                        ->with('error', 'Ann error occurred');
-                }
-            } elseif ($withdrawal->payment_method == $paymentMethod) {
-                $response = Coinpayments::createWithdrawal($withdrawal->amount - ($withdrawal->amount * 1 / 100), $withdrawal->payment_method, $withdrawal->payment_method, $withdrawal->wallet_address, true);
-                if ($response) {
-                    $withdrawal->status = Withdrawal::STATUS_PAID;
-                    $withdrawal->save();
-                } else {
-                    return redirect()
-                        ->back()
-                        ->withInput()
-                        ->with('error', 'An error occurred');
-                }
-            }
-        }
-        Session::flash('msg', 'success');
+        Session::flash('alert', 'success');
         Session::flash('message', 'Withdrawal request sent successfully.');
-        return redirect()
-            ->route('web.withdrawals')
+     //   Alert::html('Html Title', 'Html Code', 'Type');
+        return back()
             ->with('success', 'Withdrawal request successfully submitted.');
     }
 
@@ -254,5 +222,41 @@ class WithdrawController extends Controller
             ->back()->with('error', 'Unable to cancel the withdrawal request');
     }
     
-    
+    public function AddAccount(){
+            return view('withdrawal.accounts')
+            ->with('Waccount', WithdrawalAccount::where('user_id', auth_user()->id)->get());
+    }
+    public function addWithdrawals(Request $req){
+           $this->validate($req, [
+              'account_type' => 'required',
+              'address' => 'required',
+              'payment_method' => 'required'
+          ]);
+  
+          $withdraw = new WithdrawalAccount;
+          $withdraw->user_id = auth_user()->id;
+          $withdraw->type = $req->account_type;
+          $withdraw->address = $req->address;
+          $withdraw->currency = $req->payment_method;
+  
+          if($withdraw->save()){
+              Session::flash('alert', 'success');
+              Session::flash('message', 'Withdrawal Account Added successfully.');
+              return back();
+          };
+  
+          return back();
+      }
+  
+      public function DeleteAddress($id){
+  
+          $adr = WithdrawalAccount::where('id', decrypt($id))->first();
+          if($adr){
+              $adr->delete();
+              Session::flash('alerts', 'success');
+              Session::flash('msg', 'Withdrawal Account Deleted Successfully.');
+              return back();   
+          }
+          return back();
+      }
 }

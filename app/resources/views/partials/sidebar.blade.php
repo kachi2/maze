@@ -54,15 +54,21 @@
             <li class="nk-menu-item ">
                 <a href="{{ route('web.transfer') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-                    <span class="nk-menu-text">Transfer Funds</span>
+                    <span class="nk-menu-text">Bonus Transfer</span>
                 </a><!-- .nk-menu-sub -->
             </li><!-- .nk-menu-item -->
+            <li class="nk-menu-item ">
+                <a href="{{ route('web.sendMoney') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon"><em class="icon ni ni-cc-alt2"></em></span>
+                    <span class="nk-menu-text">Send Money</span>
+                </a><!-- .nk-menu-sub -->
+            </li>
               <li class="nk-menu-heading">
                 <h6 class="overline-title text-primary-alt">My Referrals</h6>
             </li><!-- .nk-menu-heading -->
             <li class="nk-menu-item ">
                 <a href="{{ route('web.referral') }}" class="nk-menu-link">
-                    <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                    <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
                     <span class="nk-menu-text">Manage Referrals</span>
                 </a><!-- .nk-menu-sub -->
             </li><!-- .nk-menu-item -->

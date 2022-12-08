@@ -45,7 +45,6 @@
                             </div>
                         </a>
                     </div>
-                   
                     @empty
                     <div class="transaction-card mb-15">
                         <a href="#">
