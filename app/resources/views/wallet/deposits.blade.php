@@ -90,7 +90,7 @@
                                             <span class="tb-lead"><a href="#">#{{$invest->ref}}</a></span>
                                         </div>
                                         <div class="nk-tb-col">
-                                            <span class="tb-lead"><a href="#">{{$invest->hashNo}}</a></span>
+                                            <span class="tb-lead"><a href="#">{{substr($invest->hashNo,0,10)}}</a></span>
                                         </div>
                                         <div class="nk-tb-col">
                                             <span class="tb-lead">{{moneyFormat($invest->amount,'USD')}}</span>
