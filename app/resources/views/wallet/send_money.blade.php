@@ -39,7 +39,7 @@
                                                        value="{{ old('address') }}" 
                                                        class="form-control {{ form_invalid('address') }}" id="user_address" aria-describedby="AmountHelp" placeholder="Enter address">
                                                 <small id="AmountHelp" class="form-text text-muted">
-                                                 Wallet Address
+                                                 Your wallet address is located at the User Account Page
                                                 </small>
                                                 @showError('address')
                                             </div>

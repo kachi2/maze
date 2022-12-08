@@ -60,6 +60,7 @@
                                                         <div class="user-info">
                                                             <span class="lead-text">{{strtoupper(auth()->user()->username)}}</span>
                                                             <span class="sub-text">{{auth()->user()->email}}</span>
+                                                            <span class="sub-text"> Wallet Address: {{auth()->user()->btc}}</span>
                                                         </div>
                                                         
                                                     </div><!-- .user-card -->
@@ -67,9 +68,9 @@
                                              <!-- .card-inner -->
                                                 <div class="card-inner p-0">
                                                     <ul class="link-list-menu">
-                                                        <li><a class="active" href="{{ route('account') }}"><em class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a></li>
-                                                        <li><a href="{{ route('account.activities') }}"><em class="icon ni ni-activity-round-fill"></em><span>Account Activity</span></a></li>
-                                                        <li><a href="{{ route('setting.password') }}"><em class="icon ni ni-lock-alt-fill"></em><span>Security Settings</span></a></li>
+                                                        <li><a class="active" href="{{ route('web.account') }}"><em class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a></li>
+                                                        <li><a href="{{ route('web.account.activities') }}"><em class="icon ni ni-activity-round-fill"></em><span>Account Activity</span></a></li>
+                                                        <li><a href="{{ route('web.setting.password') }}"><em class="icon ni ni-lock-alt-fill"></em><span>Security Settings</span></a></li>
                                                     </ul>
                                                 </div><!-- .card-inner -->
                                             </div><!-- .card-inner-group -->

@@ -92,6 +92,7 @@
                                                         <div class="user-info">
                                                             <span class="lead-text">{{strtoupper(auth()->user()->username)}}</span>
                                                             <span class="sub-text">{{auth()->user()->email}}</span>
+                                                            <span class="sub-text"> Wallet Address: {{auth()->user()->btc}}</span>
                                                         </div>
                                                         
                                                     </div><!-- .user-card -->
