@@ -39,13 +39,13 @@
                                                        value="{{ old('address') }}" 
                                                        class="form-control {{ form_invalid('address') }}" id="user_address" aria-describedby="AmountHelp" placeholder="Enter address">
                                                 <small id="AmountHelp" class="form-text text-muted">
-                                                 Your wallet address is located at the User Account Page
+                                                 Your wallet address is located at the User Account Settings
                                                 </small>
                                                 @showError('address')
                                             </div>
                                         
                                               <div class="buysell-field form-action">
-                                                <button type="submit" id="complete" class="btn btn-primary">Transfer</button>
+                                                <button type="submit" id="complete" class="btn btn-primary" disabled>Transfer</button>
                                          </div>
                                  </form><!-- .buysell-block -->
                              </div><!-- .buysell -->
@@ -141,6 +141,7 @@ toastr.clear();
     var img_url = {!! json_encode(asset('/mobile/images/')) !!};
 $('#user_address').on('change', function(){
     address = $('#user_address').val();
+    $('#complete').attr('disabled', false)
     amount = $('#amount').val();
                     $.ajaxSetup({
                         Headers:
@@ -170,7 +171,7 @@ $('#user_address').on('change', function(){
                                 $('#complete').html("Complete Transfer");
                             }else{
                                 $('#complete').html("Close Window");
-                                $('#complete').attr('type', 'button');
+                                
                             }
                             });
                          

@@ -61,6 +61,7 @@
                                 <div class="nk-tb-list mt-n2">
                                     <div class="nk-tb-item nk-tb-head">
                                         <div class="nk-tb-col  tb-col-sm"><span>#ref</span></div>
+                                        <div class="nk-tb-col  tb-col-sm"><span>#type</span></div>
                                         <div class="nk-tb-col"><span>Amount</span></div>
                                         <div class="nk-tb-col"><span>Prev Balance</span></div>
                                         <div class="nk-tb-col"><span>Avail Balance</span></div>
@@ -79,8 +80,12 @@
                                             </div>
                                         </div>
                                         <div class="nk-tb-col tb-col-lg">
+                                            <span class="tb-lead-sub">{{ $acc->type }}</span>
+                                        </div>
+                                        <div class="nk-tb-col tb-col-lg">
                                             <span class="tb-lead-sub">{{ moneyFormat($acc->amount,'USD') }}</span>
                                         </div>
+
                                         <div class="nk-tb-col tb-col-lg">
                                             <span class="tb-lead-sub">{{ moneyFormat($acc->prev_balance,'USD') }}</span>
                                         </div>

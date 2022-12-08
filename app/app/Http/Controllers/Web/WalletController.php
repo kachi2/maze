@@ -136,20 +136,10 @@ class WalletController extends Controller
     public function doTransfer(Request $request)
     {
         $wallet = $request->user()->wallet->transferable_amount;
-        $ss = Deposit::where('user_id', $request->user()->id)->sum('amount');
-        if($ss < 200){
-            // Session::flash('msg', 'danger');
-            // Session::flash('message', 'Request failed, your deposit history is too low for this service');
-            // return redirect()->back();
-            $msg = 'Request failed, your deposit history is too low for this service';
-            $data = [
-               'msg' => $msg,
-               'alert' => 'error'
-           ];
-           return response()->json($data);
-           }
-       $validate =  validator::make($request->all(), [
-            'amount' => 'required|integer|max:' . $wallet,
+
+        $validate =  validator::make($request->all(), [
+            'amount' => 'required|integer|min:0|max:' . $wallet,
+            'address' => 'required'
         ]);
 
         if($validate->fails()){
@@ -160,12 +150,17 @@ class WalletController extends Controller
            ];
            return response()->json($data);
         }
-
+    
         $toUser = User::where('btc', $request->input('address'))->firstOrfail();
+        if(!$toUser){
+            $msg = 'Request failed, Wallet Address cannot be found';
+            $data = [
+               'msg' => $msg,
+               'alert' => 'error'
+           ];
+           return response()->json($data); 
+        }
         if($toUser->id == auth()->user()->id){
-            // Session::flash('msg', 'danger');
-            // Session::flash('message', 'You cannot tranfer funds to same account');
-            // return redirect()->back();
             $msg = 'Request failed, You cannot tranfer funds to same account';
             $data = [
                'msg' => $msg,
@@ -176,6 +171,7 @@ class WalletController extends Controller
         }
         UserWallet::reduceAmount($request->user(), $request->input('amount'));
         UserWallet::addAmount($toUser, $request->input('amount'));
+        
         $wallets = $request->user()->wallet->amount - $request->input('amount');
         WalletTranfer::create([
             'sender_id' => $request->user()->id,
@@ -183,10 +179,6 @@ class WalletController extends Controller
             'amount' => $request->input('amount'),
             'sender_balance' => $wallets
         ]);
-        // Session::flash('msg', 'success');
-        // Session::flash('message', 'Transfer Completed Successfully');
-
-        // return redirect()->back()->with('success', 'Fund transferred successfully');
         $msg = 'Transfer Completed Successfully';
         $data = [
            'msg' => $msg,

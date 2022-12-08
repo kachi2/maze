@@ -106,13 +106,6 @@ class UserWallet extends Model
     public static function reduceAmount($user, $amount)
     {
         $userWallet = (new UserWallet)->whereUserId($user->id)->firstOrFail();
-
-        $amount = self::removeFromBonus($userWallet, $amount);
-
-        if ($amount > 0) {
-            $amount = self::removeFromReferrals($userWallet, $amount);
-        }
-
         if ($amount > 0) {
             $amount = self::removeFromBaseAmount($userWallet, $amount);
         }
