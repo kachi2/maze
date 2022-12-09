@@ -220,7 +220,7 @@
                     <div class="full">
                         <h6 class="heading_style2"> 100% transparent system</h6>
                         <hr>
-                        <h3 class="">You can cleary monitor your daily payouts, our system is trusted by over 5000 investors across the globe</h3>
+                        <h3 class="">You can cleary monitor your daily payouts, our system is trusted by over 50,000 investors across the globe</h3>
                      </div>
                 </div>
                  <div class="col-md-6 col-sm-12 col-xs-12">
