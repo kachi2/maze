@@ -23,7 +23,7 @@
                   <div class="main-heading left_text">
                      <h2>Contact us</h2>
                   </div>
-                  <p>3718 S ISABELLA RD MT PLEASANT, MI 48858<br><a href="emailto:info@mazeoptions.com">info@mazeoptions.com</a></p>
+                  <p> 29th Floor, 40 Bank Street, London, England, E14 5NR <br><a href="emailto:info@mazeoptions.com">info@mazeoptions.com</a></p>
                </div>
                <div class="col-md-3 col-sm-6 col-xs-12">
                   <div class="main-heading left_text">
@@ -48,7 +48,7 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12 col-sm-12 col-xs-12 pull-left">
-                  <p class="text-center">All Rights Reserved.Mazeoptions &copy; 2019 - {{date('Y')}}.</p>
+                  <p class="text-center">All Rights Reserved. Mazeoptions &copy; 2019 - {{date('Y')}}.</p>
                </div>
             </div>
          </div>

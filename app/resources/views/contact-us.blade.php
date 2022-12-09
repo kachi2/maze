@@ -76,8 +76,8 @@
                                 <i class="fa fa-road" aria-hidden="true"></i>
                             </div>
                             <div class="info_cont">
-                                <h4> ENGLAND, DN119QU </h4>
-                                <p>1500 N LAMAR</p>
+                                <h4> 29th Floor, 40 Bank Street </h4>
+                                <p> London, England, E14 5NR</p>
                             </div>
                         </div>
                     </div>
