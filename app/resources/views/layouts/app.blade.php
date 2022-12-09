@@ -57,6 +57,16 @@
     <script src="{{asset('/asset/js/charts/gd-analytics.js?ver=2.2.0 ')}}"></script>
     <script src="{{asset('/asset/js/libs/jqvmap.js?ver=2.2.0 ')}}"></script>
    
-
+<!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+  var _smartsupp = _smartsupp || {};
+  _smartsupp.key = '083302cfd8f6e17040e981b3e09637a72b5f551b';
+  window.smartsupp||(function(d) {
+    var s,c,o=smartsupp=function(){ o..push(arguments)};o.=[];
+    s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+    c.type='text/javascript';c.charset='utf-8';c.async=true;
+    c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+  })(document);
+  </script>
     @yield('scripts')
 </html>

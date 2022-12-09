@@ -97,7 +97,7 @@
                                     <i class="flaticon-invoice"></i>
                                 </div>
                                 <div class="feature-card-details">
-                                    <p>Total Investments</p>
+                                    <p>Total Deposits</p>
                                     <h3>{{moneyFormat($total_invest, 'USD')}}</h3>
                                 </div>
                             </div>

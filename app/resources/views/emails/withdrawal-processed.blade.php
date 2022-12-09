@@ -22,10 +22,10 @@
                 
         <tr>
             <td style="padding:0 30px">
-                <p>Your Pay-out of {{ moneyFormat($withdrawal->amount, 'USD') }} was Successful!</p>
+                <p>Your Withdrawal of {{ moneyFormat($withdrawal->amount, 'USD') }} was Successful!</p>
 <table width="100%">
 <tbody><tr>
-<td width="150"> Pay-out Ref</td>
+<td width="150"> Withdrawal Ref</td>
 <td width="25">&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 <td> {{ $withdrawal->ref }}</td>
 </tr>
@@ -35,7 +35,7 @@
 <td>{{ moneyFormat($withdrawal->amount, 'USD') }} </td>
 </tr>
 <tr>
-<td width="150">Payout Method</td>
+<td width="150">Payment Method</td>
 <td width="25">&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 <td> {{ $withdrawal->formatted_payment_method }}</td>
 </tr>
@@ -52,7 +52,7 @@
                             </td>
 </tr>
 </tbody></table>
-<p>If you have any issues or complaints regarding any transaction, kindly send us an email at support@Mazeoptions.cc</p>
+<p>If you have any issues or complaints regarding any transaction, kindly send us an email at support@Mazeoptions.com</p>
 
             </td>
         </tr>

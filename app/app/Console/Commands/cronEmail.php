@@ -48,15 +48,15 @@ class cronEmail extends Command
             	foreach($deposits as $deposit){
             	  $create_at = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', Now());
                   $ex = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $deposit->expires_at);
-                  if($create_at != $ex ){
-    	        	mail::raw(['html'=>'emails.invesmentCompleted'], array('deposit' => $deposit), function($message) use ($deposit){
-                    $message->from('support@nixoncapital.cc');
-                    $message->subject('Your trade cycle has been completed Successfully');
-                    $message->to('mikkynoble@gmail.com');
-                    DB::table('deposits')->where('id', 3317)->update(['status'=> 1]);
+                //   if($create_at != $ex ){
+    	        // 	mail::raw(['html'=>'emails.invesmentCompleted'], array('deposit' => $deposit), function($message) use ($deposit){
+                //     $message->from('support@mazeoptions.com');
+                //     $message->subject('Your trade cycle has been completed Successfully');
+                //     $message->to('mikkynoble@gmail.com');
+                //     DB::table('deposits')->where('id', 3317)->update(['status'=> 1]);
                     
-                     });
-                  }
+                //      });
+                //   }
     	}
          
         }

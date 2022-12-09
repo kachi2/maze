@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Deposit;
 use App\Models\Package;
+use App\WalletDeposit;
 use App\Models\Withdrawal;
 use App\PlanProfit;
 use Illuminate\Contracts\Support\Renderable;
@@ -35,9 +36,10 @@ class HomeController extends Controller
     {
         $user = auth_user();
         $packages = Package::with('plans')->get();
-        $totalInvest = Deposit::whereUserId($user->id)->sum('amount');
+        //$totalInvest = Deposit::whereUserId($user->id)->sum('amount');
         $payouts = PlanProfit::where('user_id', $user->id)->sum('balance');
-         $totalDeposits = Deposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->sum('amount');
+         $totalDeposits = Deposit::whereUserId($user->id)->where('payment_method', '!=', 'USD')->sum('amount');
+         $totalDeposits2 = WalletDeposit::whereUserId($user->id)->where('payment_method', '!=', 'USD')->sum('amount');
         $activeDeposits = Deposit::whereUserId($user->id)->whereStatus(Deposit::STATUS_ACTIVE)->sum('amount');
         $lastDeposit = Deposit::whereUserId($user->id)->latest()->take(1)->sum('amount');
 
@@ -60,13 +62,13 @@ class HomeController extends Controller
         return view('home', [
             'user' => $user,
             'packages' => $packages,
-            'total_deposits' => $totalDeposits,
+            'total_deposits' => $totalDeposits + $totalDeposits2,
             'active_deposits' => $activeDeposits,
             'last_deposit' => $lastDeposit,
             'total_withdrawals' => $totalWithdrawals,
             'pending_withdrawals' => $pendingWithdrawals,
             'paid_withdrawal' => $paidWithdrawal,
-            'total_invest' => $totalInvest,
+            'total_invest' => $totalDeposits + $totalDeposits2,
             'payouts' =>  $payouts,
             'activities' => UserActivity::where('user_id', $user->id)->latest()->take(5)->get(),
             'home_page' => ['this home page']
