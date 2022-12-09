@@ -10,6 +10,7 @@ use App\Models\Package;
 use App\WalletDeposit;
 use App\Models\Withdrawal;
 use App\PlanProfit;
+use App\Models\PendingDeposit;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\User;
@@ -38,7 +39,7 @@ class HomeController extends Controller
         $packages = Package::with('plans')->get();
         //$totalInvest = Deposit::whereUserId($user->id)->sum('amount');
         $payouts = PlanProfit::where('user_id', $user->id)->sum('balance');
-         $totalDeposits = Deposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->where('status', 1)->sum('amount');
+         $totalDeposits = PendingDeposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->where('status', 1)->sum('amount');
          $totalDeposits2 = WalletDeposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->where('status', 1)->sum('amount');
         $activeDeposits = Deposit::whereUserId($user->id)->whereStatus(Deposit::STATUS_ACTIVE)->sum('amount');
         $lastDeposit = Deposit::whereUserId($user->id)->latest()->take(1)->sum('amount');
