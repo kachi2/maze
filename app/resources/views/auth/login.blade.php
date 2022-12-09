@@ -81,6 +81,6 @@
         <!-- Body-content -->
     @endsection
 
-    @elsemobile
+ @elsemobile
     @include('auth.web_login');
   @endmobile
