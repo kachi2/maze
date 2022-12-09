@@ -20,8 +20,8 @@
                   <div class="col-md-5 col-sm-5 col-xs-12">
                      <div class="full">
                         <ul class="pull-right header_top_menu user_login">
-                           <li><a href="{{route('login')}}"><i class="fa fa-sign-in"></i> Login</a></li>
-                           <li ><a href="{{route('register')}}"><i class="fa fa-lock"></i> Register</a></li>
+                           <li><a href="{{route('web.login')}}"><i class="fa fa-sign-in"></i> Login</a></li>
+                           <li ><a href="{{route('web.register')}}"><i class="fa fa-lock"></i> Register</a></li>
                           <div style="margin-right:5px"></div>
                            <div id='google_translate_element'></div>
                         </ul>
