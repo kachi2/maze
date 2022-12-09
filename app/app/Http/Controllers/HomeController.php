@@ -65,8 +65,8 @@ class HomeController extends Controller
         $user = auth_user();
         $packages = Package::with('plans')->get();
         $totalDeposits = Deposit::whereUserId($user->id)->sum('amount');
-        $totalInvest = Deposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->sum('amount');
-        $totalInvest2 = WalletDeposit::whereUserId($user->id)->where('payment_method', '!=', 'USD')->sum('amount');
+        $totalInvest = Deposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->where('status', 1)->sum('amount');
+        $totalInvest2 = WalletDeposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->where('status', 1)->sum('amount');
         $activeDeposits = Deposit::whereUserId($user->id)->whereStatus(Deposit::STATUS_ACTIVE)->sum('amount');
         $lastDeposit = Deposit::whereUserId($user->id)->latest()->take(1)->sum('amount');
         $data['withdrawals'] = Withdrawal::where(['status' => '1', 'user_id'=>$user->id])->sum('amount');
