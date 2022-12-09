@@ -37,7 +37,7 @@ class HomeController extends Controller
     {
         $user = auth_user();
         $packages = Package::with('plans')->get();
-        //$totalInvest = Deposit::whereUserId($user->id)->sum('amount');
+        $totalInvest = Deposit::whereUserId($user->id)->sum('amount');
         $payouts = PlanProfit::where('user_id', $user->id)->sum('balance');
          $totalDeposits = PendingDeposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->where('status', 1)->sum('amount');
          $totalDeposits2 = WalletDeposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->where('status', 1)->sum('amount');
@@ -69,7 +69,7 @@ class HomeController extends Controller
             'total_withdrawals' => $totalWithdrawals,
             'pending_withdrawals' => $pendingWithdrawals,
             'paid_withdrawal' => $paidWithdrawal,
-            'total_invest' => $totalDeposits + $totalDeposits2,
+            'total_invest' => $totalInvest,
             'payouts' =>  $payouts,
             'activities' => UserActivity::where('user_id', $user->id)->latest()->take(5)->get(),
             'home_page' => ['this home page']

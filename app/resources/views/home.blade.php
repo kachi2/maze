@@ -84,21 +84,21 @@
                                                 <div class="card-inner">
                                                     <div class="card-title-group align-start mb-0">
                                                         <div class="card-title">
-                                                            <h6 class="subtitle text-light ">TOTAL INVESTMENTS</h6>
+                                                            <h6 class="subtitle text-light ">TOTAL DEPOSITS</h6>
                                                         </div>
                                                         <div class="card-tools">
                                                             <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Overview of your deposits and investments"></em>
                                                         </div>
                                                     </div>
                                                     <div class="card-amount ">
-                                                        <span class="amount text-light"> <span class="currency currency-usd text-light">{{ moneyFormat($total_invest, 'USD') }}</span>
+                                                        <span class="amount text-light"> <span class="currency currency-usd text-light"> {{ moneyFormat($total_deposits, 'USD') }}</span>
                                                         </span>
                                                     </div>
                                                     <div class="invest-data">
                                                         <div class="invest-data-amount g-2">
                                                             <div class="invest-data-history">
                                                                 <div class="title text-light ">Amount Invested</div>
-                                                                <div class="amount text-light "><span class="currency currency-ng text-light ">{{ moneyFormat($total_deposits, 'USD') }}</span></div>
+                                                                <div class="amount text-light "><span class="currency currency-ng text-light ">{{ moneyFormat($total_invest, 'USD') }}</span></div>
                                                             </div>
                                                             <div class="invest-data-history">
                                                                 <div class="title text-light ">Active Investment</div>
