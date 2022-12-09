@@ -38,7 +38,7 @@ class HomeController extends Controller
         $packages = Package::with('plans')->get();
         //$totalInvest = Deposit::whereUserId($user->id)->sum('amount');
         $payouts = PlanProfit::where('user_id', $user->id)->sum('balance');
-         $totalDeposits = Deposit::whereUserId($user->id)->where('payment_method', '!=', 'USD')->sum('amount');
+         $totalDeposits = Deposit::whereUserId($user->id)->where('payment_method', '!=', 'WALLET')->sum('amount');
          $totalDeposits2 = WalletDeposit::whereUserId($user->id)->where('payment_method', '!=', 'USD')->sum('amount');
         $activeDeposits = Deposit::whereUserId($user->id)->whereStatus(Deposit::STATUS_ACTIVE)->sum('amount');
         $lastDeposit = Deposit::whereUserId($user->id)->latest()->take(1)->sum('amount');
