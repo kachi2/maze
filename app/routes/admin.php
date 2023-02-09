@@ -12,7 +12,7 @@ Route::get('users', 'UserController@index')->name('admin.users');
 
 Route::get('users/send-bonus/users', 'UserController@sendUsersBonus')->name('admin.users.send_users_bonus');
 Route::post('users/send-bonus/users', 'UserController@doSendUsersBonus')->name('admin.users.send_users_bonus');
-Route::get('users/send-bonus/{id}', 'UserController@sendBonus')->name('admin.users.send_bonus');
+Route::get('users/send-bonus/{id}', 'UserController@sendBonus')->name('admin.users.send_bonus'); 
 Route::post('users/send-bonus/{id}', 'UserController@doSendBonus')->name('admin.users.send_bonus');
 Route::get('users/send-message/{id}', 'UserController@sendMessage')->name('admin.users.send_message');
 Route::post('users/send-message/{id}', 'UserController@doSendMessage')->name('admin.users.send_message');

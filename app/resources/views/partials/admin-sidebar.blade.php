@@ -81,6 +81,12 @@
                                 <h6 class="overline-title text-primary-alt">Settings</h6>
                             </li><!-- .nk-menu-heading -->
                             <li class="nk-menu-item has-sub">
+                                <a href="{{route('admin.message_users')}}" class="nk-menu-link ">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-mail"></em></span>
+                                    <span class="nk-menu-text">Send Bulk Email</span>
+                                </a><!-- .nk-menu-sub -->
+                            </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-item has-sub">
                                 <a href="{{route('admin.wallet.addresses')}}" class="nk-menu-link ">
                                     <span class="nk-menu-icon"><em class="icon ni ni-signin"></em></span>
                                     <span class="nk-menu-text">Wallet Address</span>

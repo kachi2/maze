@@ -20,6 +20,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
+use App\Mail\UserEmail;
 
 class MessageController extends Controller
 {
@@ -62,46 +63,19 @@ class MessageController extends Controller
         $subject = $request->input('subject');
         $text = $request->input('message');
         $recipients = $request->input('recipients');
-        switch ($recipients) {
-            case 'deposited':
-                $users = User::leftJoin('deposits', 'users.id', '=', 'deposits.user_id')
-                    ->select('users.*')
-                    ->where('deposits.id', '!=', null);
-                break;
-            case 'non-deposited':
-                $users = User::leftJoin('deposits', 'users.id', '=', 'deposits.user_id')
-                    ->select('users.*')
-                    ->where('deposits.id', null);
-                break;
-            case 'admins':
-                $users = User::where('is_admin', '=', true)->get();
-                break;            
-            default:
-                $users = User::latest()->get();
-        }
-
         
-        foreach ($users as $user) {
-            try {
-               
-           $user->notify(new MessageUser($user, $text, $subject));
+        foreach ($recipients as $user) {
+            $usz = User::where('email', $user)->first();
            
-            $notify = new UserNotify;
-            $notify->user_id = $user->id;
-            $notify->message =  $text; 
-            $notify->save();
-            Session::flash('msg', 'success');
-            Session::flash('message', 'Message Sent Successfully'); 
-            
-
-            } catch (\Exception $e) {
-                
-              //  return $user;
-              //  Log::error($e);
-            }
+            if($usz){
+          //  try {  
+                //dd($usz);
+           // Mail::to($usz->email)->send( new UserEmail($usz));
+             $usz->notify(new MessageUser($usz, $text, $subject));
+           // } catch (\Exception $e) {
+           // }
         }
-        
-
+    }
         return redirect()->back()->with('success', 'Users messaged successfully');
     }
 }

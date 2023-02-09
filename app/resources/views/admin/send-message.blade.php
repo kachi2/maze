@@ -11,20 +11,28 @@
                                         
                                     </div>
                                     <div class="nk-block-head-content">
-                                        <ul class="nk-block-tools gx-3">
+                                        {{-- <ul class="nk-block-tools gx-3">
                                             <li class="order-md-last">
                                                    <a href="{{ route('admin.users') }}" class="btn btn-primary"><i
                                                     class='uil uil-plus mr-1'></i>User List</a> </li>
-                                       </ul>
+                                       </ul> --}}
                                     </div>
                                 </div>
                             </div>
     <div class="body-content row">
-        <div class="col-lg-5">
+        <div class="col-lg-10">
             <div class="card">
                 <div class="card-body">
                     <form method="post" action="{{ route('admin.message_users') }}">
                         @csrf
+                        <div class="form-group">
+                            <label for="inputSubject">Recipients</label>
+                            <textarea name="recipients[]"
+                                   class="form-control {{ form_invalid('message') }}" id="inputMessage"
+                                      placeholder="Enter Recipients seperated by coma" cols="5"
+                                      rows="5">{{ old('recipients') }}</textarea>
+                            @showError('recipients')
+                        </div>
                         <div class="form-group">
                             <label for="inputSubject">Subject</label>
                             <input type="text" name="subject"
@@ -43,24 +51,7 @@
                             @showError('message')
                         </div>
 
-                        <div class="form-group">
-                            <label for="inputRecipients">Recipients</label>
-                            <select name="recipients" id="inputRecipients" class="form-control {{ form_invalid('recipients') }}"
-                                    style="border-radius: 0 !important;">
-
-                                <option value="all" {{ old('recipients') == 'all' ? 'selected' : ''}}>All Users</option>
-                                <option value="admins" {{ old('recipients') == 'admins' ? 'selected' : ''}}>All Admins</option>
-                                <option value="deposited" {{ old('recipients') == 'deposited' ? 'selected' : ''}}>
-                                    Deposited Users
-                                </option>
-                                <option
-                                    value="non-deposited" {{ old('recipients') == 'non-deposited' ? 'selected' : ''}}>
-                                    Non-Deposited Users
-                                </option>
-
-                            </select>
-                            @showError('recipients')
-                        </div>
+                      
 
                         <button type="submit" class="btn btn-primary">Send message</button>
                     </form>

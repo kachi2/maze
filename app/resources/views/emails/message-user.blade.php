@@ -16,16 +16,18 @@
         <tbody>
                 <tr>
             <td style="padding:10px 30px 10px">
-                Hello  {{ $deposit->user->username }},
+                Hello  {{$user->username}},
             </td>
         </tr>
                 
         <tr>
             <td style="padding:0 30px">
                 <p>{!! nl2br($text) !!} </p>
-<p>If you have any issues or complaints regarding any transaction, kindly send us an email at support@Mazeoptions.com</p>
-
+                <div style="p-4">
+                <p>If you have any issues or complaints regarding any transaction, kindly send us an email at support@Mazeoptions.com</p>
+            </div>
             </td>
+    
         </tr>
 
                 </tbody>
@@ -33,6 +35,7 @@
                 <table style="width:100%;max-width:620px;margin:0 auto">
     <tbody>
     <tr>
+
         <td style="text-align:center;padding:25px 20px 0">
             <p style="font-size:13px">Mazeoptions © {{Date('Y')}}.</p>
                     </td>
