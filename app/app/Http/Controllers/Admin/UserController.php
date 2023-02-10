@@ -444,7 +444,7 @@ class UserController extends Controller
      */
     public function sendMessage(Request $request, $id)
     {
-        $user = User::findOrFail($id);        
+        $user = User::findOrFail(decrypt($id));        
 
         $breadcrumb = [
             [

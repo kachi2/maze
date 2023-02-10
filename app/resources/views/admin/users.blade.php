@@ -130,6 +130,7 @@
                                                                                 @endif
                                                                                 <li><a href="{{ route('admin.users.show', ['id' => encrypt($user->id)]) }}"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
                                                                                 <li><a href="{{ route('admin.users.activity',  encrypt($user->id)) }}"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li>
+                                                                                <li><a href="{{ route('admin.users.send_message',  encrypt($user->id)) }}"><em class="icon ni ni-mail"></em><span>Send Email</span></a></li>
                                                                             </ul>
                                                                         </div>
                                                                     </div>
