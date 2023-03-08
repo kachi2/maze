@@ -98,6 +98,7 @@ class RegisterController extends Controller
         }
         $userIp = request()->getClientIp();
         $details = json_decode(file_get_contents("https://ipinfo.io/$userIp/json"));
+        
         if(isset($details->city)) {
           $city = $details->city;
           $country = $details->country;
