@@ -99,6 +99,8 @@ class RegisterController extends Controller
         }
         if(!empty($name[1])){ 
             $last_name = $name[1]; 
+        }else{
+            $last_name =  $name[0];;
         }
 
         $userIp = request()->getClientIp();
