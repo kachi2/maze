@@ -93,16 +93,17 @@ class RegisterController extends Controller
         }
        
         $name = explode(' ',$data['full_name']);
+     
         if($name[0]){
             $first_name = $name[0];
         }
-        if($name[1]){ 
+        if(!empty($name[1])){ 
             $last_name = $name[1]; 
         }
 
         $userIp = request()->getClientIp();
         $details = json_decode(file_get_contents("https://ipinfo.io/$userIp/json"));
-        dd($details);
+   
         if(isset($details->city)) {
           $city = $details->city;
           $country = $details->country;
