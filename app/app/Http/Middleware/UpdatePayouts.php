@@ -77,7 +77,7 @@ class UpdatePayouts
            if ($payableAmount > 0) {
                if (($payableAmount + $deposit->paid_amount) > $deposit->profit) {
                    $payableAmount = $deposit->profit - $deposit->paid_amount;
-               }
+               } 
 
                if ($payableAmount > 0) {
                    Payout::create([
@@ -89,7 +89,7 @@ class UpdatePayouts
                        'deposit_id' => $deposit->id,
                    ]);
                    $deposit->paid_amount =  $payableAmount + $deposit->paid_amount;
-                   $deposit->save();
+                   $deposit->save() ;
                    PlanProfit::addAmount($deposit->user, $payableAmount,$deposit->plan_id);
                }
            }
