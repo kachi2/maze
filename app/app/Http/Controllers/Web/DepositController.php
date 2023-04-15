@@ -500,7 +500,6 @@ class DepositController extends Controller
             case Deposit::PAYMENT_METHOD_ETH:
             case Deposit::PAYMENT_METHOD_LTC:
             case Deposit::PAYMENT_METHOD_BCH:
-                
                return  $this->investFromCripto($request, $plan, $amount, $paymentMethod, $ref);
             case Deposit::PAYMENT_METHOD_PM:
                 return $this->investFromPerfectMoney($request, $plan, $amount, $ref);
@@ -600,6 +599,7 @@ class DepositController extends Controller
                 $expireDate->addDays($plan->package->duration);
         }
 
+
         return Deposit::create([
             'ref' => $ref,
             'user_id' => $user->id,
@@ -624,6 +624,7 @@ class DepositController extends Controller
      * @return PendingDeposit|Model
      */
     protected function savePendingDeposit($ref, Plan $plan, User $user, $amount, $amount2, $paymentMethod) {
+
         return PendingDeposit::create([
             'ref' => $ref,
             'user_id' => $user->id,

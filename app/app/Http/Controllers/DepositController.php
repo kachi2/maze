@@ -580,6 +580,7 @@ class DepositController extends Controller
             case Deposit::PAYMENT_METHOD_ETH:
             case Deposit::PAYMENT_METHOD_LTC:
             case Deposit::PAYMENT_METHOD_BCH:
+                
                 return $this->investFromCripto($request, $plan, $amount, $paymentMethod, $ref);
             case Deposit::PAYMENT_METHOD_PM:
                 return $this->investFromPerfectMoney($request, $plan, $amount, $ref);
@@ -622,6 +623,8 @@ class DepositController extends Controller
 
     protected function investFromCripto(Request $request, Plan $plan, $amount, $currency, $ref)
     {
+
+   
         $fee = $amount * self::ITEM_TAX_RATE/ 100;
         $cost = $amount + $fee;
         $coins = $currency;

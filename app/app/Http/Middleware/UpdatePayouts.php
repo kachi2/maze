@@ -31,7 +31,7 @@ class UpdatePayouts
 
 
     protected function updatePayouts() {
-        $deposits = Deposit::with('user')->whereStatus(Deposit::STATUS_ACTIVE)->get();
+        $deposits = Deposit::with('user')->whereStatus(1)->get();
         
        foreach ($deposits as $deposit) {
        
@@ -94,7 +94,7 @@ class UpdatePayouts
                }
            }
            
-           if ($deposit->expires_at <= now()) {
+           if ($deposit->expires_at >= now()) {
             $amountToPay = $deposit->profit;
                if ($deposit->paid_amount < $deposit->profit) {
                    $amountToPay = $deposit->profit - $deposit->paid_amount;
@@ -107,7 +107,6 @@ class UpdatePayouts
                        'deposit_id' => $deposit->id,
                    ]);
                }
-            
                    $deposit->paid_amount = $deposit->profit;
                    $deposit->status = 1;
                    $deposit->save();

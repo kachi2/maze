@@ -308,7 +308,6 @@ class DepositController extends Controller
     public function depositApprove($id){
        $id = decrypt($id);
         $deposit = PendingDeposit::whereId($id)->first();
-        //dd($deposit);
         $update =  PendingDeposit::whereId($id)
                     ->update([
                         'status' => 1,
@@ -332,6 +331,8 @@ class DepositController extends Controller
             case Package::PERIOD_AFTER_SPECIFIED_DAYS:
                 $expireDate->addDays($deposit->duration);
         }
+
+       // dd( $deposit->plan_id);
         $deposit = Deposit::create([
             'ref' => $deposit->ref,
             'user_id' => $deposit->user_id,
