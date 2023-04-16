@@ -31,15 +31,13 @@ class UpdatePayouts
 
 
     protected function updatePayouts() {
-        $deposits = Deposit::with('user')->whereStatus(1)->get();
+        $deposits = Deposit::with('user')->whereStatus(Deposit::STATUS_ACTIVE)->get();
         
        foreach ($deposits as $deposit) {
-       
            $payableAmount = 0;
            switch ($deposit->payment_period) {
                case Package::PERIOD_HOURLY:
                    $hoursGone = now()->diffInHours($deposit->created_at);
-                  // dd($hoursGone);
                    $payableAmount = (($deposit->amount * $deposit->profit_rate / 100) * $hoursGone) - $deposit->paid_amount;
                    break;
                case Package::PERIOD_DAILY:
@@ -74,11 +72,11 @@ class UpdatePayouts
                    break;
            }
 
+           
            if ($payableAmount > 0) {
                if (($payableAmount + $deposit->paid_amount) > $deposit->profit) {
                    $payableAmount = $deposit->profit - $deposit->paid_amount;
-               } 
-
+               }  
                if ($payableAmount > 0) {
                    Payout::create([
                        'ref' => generate_reference(),
@@ -94,8 +92,9 @@ class UpdatePayouts
                }
            }
            
-           if ($deposit->expires_at >= now()) {
-            $amountToPay = $deposit->profit;
+       
+           if ($deposit->expires_at <= now()) {
+                   $amountToPay = $deposit->profit;
                if ($deposit->paid_amount < $deposit->profit) {
                    $amountToPay = $deposit->profit - $deposit->paid_amount;
                    Payout::create([
@@ -110,10 +109,10 @@ class UpdatePayouts
                    $deposit->paid_amount = $deposit->profit;
                    $deposit->status = 1;
                    $deposit->save();
+                   PlanProfit::addAmount($deposit->user,  $amountToPay, $deposit->plan_id);
                    if(auth_user()){
                     request()->user()->notify(new InvestmentCompleted($deposit));
                    }
-                   PlanProfit::addAmount($deposit->user,  $amountToPay,$deposit->plan_id);
                
           }
        }

@@ -6,11 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PlanProfit extends Model
 {
-
-    //
-
     protected $fillable = [
-
         'plan_id', 'user_id', 'balance', 'prev_balance'
     ];
    
