@@ -739,10 +739,10 @@ class UserController extends Controller
         public function Terminate(Request $request){
             //dd(decrypt($request->id));
             $deposit = Deposit::where('id', decrypt($request->id))->first();
-            $deposit = Deposit::where('id', decrypt($request->id))->first()
-                    ->update(['status' => 1, 'expires_at' => Carbon::now()
+            $deposits = Deposit::where('id', decrypt($request->id))->first()
+                    ->update(['status' => -1, 'expires_at' => Carbon::now()
                       ]);
-            if($deposit){
+            if($deposits){
                 Session::flash('alert', 'error');
                 Session::flash('message', 'Investment Terminated Successfully');
                 $notify = new UserNotify;
@@ -758,7 +758,7 @@ class UserController extends Controller
         }
 
         public function DepositTerminate(Request $request){
-        //dd($request->all());
+      //  dd($request->all());
             $deposit = PendingDeposit::where('id', decrypt($request->id))->first();
                 $update = PendingDeposit::where('id', decrypt($request->id))->first()
             ->update(['status' => -1 ]);

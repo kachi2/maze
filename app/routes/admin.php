@@ -32,7 +32,7 @@ Route::post('users/add', 'UserController@storeUser')->name('admin.users.add');
 Route::get('users/{id}', 'UserController@showUser')->name('admin.users.show');
 Route::get('users/suspend/{id}', 'UserController@SuspendUser')->name('admin.users.suspend');
 Route::get('users/unsuspend/{id}', 'UserController@UnsuspendUser')->name('admin.users.unsuspend');
-Route::post('users/terminate', 'UserController@Terminate')->name('admin.users.terminate');
+Route::post('users/deposits/terminates', 'UserController@Terminate')->name('admin.users.terminate');
 Route::post('users/pending/deposit/cancel', 'UserController@DepositTerminate')->name('admin.users.deposit-terminate');
 
 Route::get('packages', 'PackageController@index')->name('admin.packages');

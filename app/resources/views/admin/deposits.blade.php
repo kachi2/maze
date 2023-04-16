@@ -153,9 +153,10 @@
                                                                                
                                                                                 <li><a  class="data-item" data-toggle="modal" data-target="#deposit_id{{$deposit->id}}" href="javascript();"><em class="icon ni ni-user"></em><span >View Details</span></a></li>
                                                                                 @if($deposit->status == 0)
-                                                                                <form method="get" action="{{route('admin.users.terminate',encrypt($deposit->id))}}" id="form{{$deposit->id}}">
-                                                                                <input type="hidden" value="{{$deposit->id}}" class="depositId">
-                                                                                <li><button type="button"  class="btn btn-outline-none" onclick=""><em class="icon ni ni-pen"></em><span style="color:red">Terminate</span></button></li>
+                                                                                <form method="post" action="{{route('admin.users.terminate')}}" id="form{{$deposit->id}}">
+                                                                                    @csrf
+                                                                                <input type="hidden" name="id" value="{{encrypt($deposit->id)}}" class="depositId">
+                                                                                <li><button type="submit"  class="btn btn-outline-none" ><em class="icon ni ni-pen"></em><span style="color:red">Terminate</span></button></li>
                                                                                  </form>
                                                                                 @endif
                                                                                 <li><a  href="{{ route('admin.users.show', ['id' => encrypt($deposit->user->id)]) }}"><em class="icon ni ni-eye"></em><span>View User</span></a></li>
