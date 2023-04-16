@@ -71,8 +71,6 @@ class UpdatePayouts
                    }
                    break;
            }
-
-           
            if ($payableAmount > 0) {
                if (($payableAmount + $deposit->paid_amount) > $deposit->profit) {
                    $payableAmount = $deposit->profit - $deposit->paid_amount;
@@ -91,8 +89,7 @@ class UpdatePayouts
                    PlanProfit::addAmount($deposit->user, $payableAmount,$deposit->plan_id);
                }
            }
-           
-       
+           sleep(1);
            if ($deposit->expires_at <= now()) {
                    $amountToPay = $deposit->profit;
                if ($deposit->paid_amount < $deposit->profit) {
