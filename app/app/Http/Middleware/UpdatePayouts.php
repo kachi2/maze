@@ -38,6 +38,8 @@ class UpdatePayouts
            switch ($deposit->payment_period) {
                case Package::PERIOD_HOURLY:
                    $hoursGone = now()->diffInHours($deposit->created_at);
+
+                  // dd($hoursGone);
                    $payableAmount = (($deposit->amount * $deposit->profit_rate / 100) * $hoursGone) - $deposit->paid_amount;
                    break;
                case Package::PERIOD_DAILY:
@@ -86,12 +88,13 @@ class UpdatePayouts
                    ]);
                    $deposit->paid_amount =  $payableAmount + $deposit->paid_amount;
                    $deposit->save();
-                   PlanProfit::addAmount($deposit->user, $payableAmount,$deposit->plan_id);
+                 //  PlanProfit::addAmount($deposit->user, $payableAmount,$deposit->plan_id);
                }
            }
-           sleep(1);
+
            if ($deposit->expires_at <= now()) {
                    $amountToPay = $deposit->profit;
+                   dd($amountToPay);
                if ($deposit->paid_amount < $deposit->profit) {
                    $amountToPay = $deposit->profit - $deposit->paid_amount;
                    Payout::create([
@@ -106,7 +109,7 @@ class UpdatePayouts
                    $deposit->paid_amount = $deposit->profit;
                    $deposit->status = 1;
                    $deposit->save();
-                //   PlanProfit::addAmount($deposit->user,  $amountToPay, $deposit->plan_id);
+                   PlanProfit::addAmount($deposit->user,  $amountToPay, $deposit->plan_id);
                    if(auth_user()){
                     request()->user()->notify(new InvestmentCompleted($deposit));
                    }

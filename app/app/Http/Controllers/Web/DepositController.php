@@ -128,7 +128,7 @@ class DepositController extends Controller
      */
 
     public function PayoutsDetails($id = null){
-        $payouts = Payout::where('deposit_id', decrypt($id))->latest()->simplePaginate(10);
+        $payouts = Payout::where('deposit_id', decrypt($id))->latest()->simplePaginate(20);
         $plan = Deposit::where('id', decrypt($id))->first();
         $sum = Payout::where('deposit_id', decrypt($id))->sum('amount');
         return view('deposit.payouts', 
