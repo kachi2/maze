@@ -106,7 +106,7 @@ class UpdatePayouts
                    $deposit->paid_amount = $deposit->profit;
                    $deposit->status = 1;
                    $deposit->save();
-                  // PlanProfit::addAmount($deposit->user,  $amountToPay, $deposit->plan_id);
+                //   PlanProfit::addAmount($deposit->user,  $amountToPay, $deposit->plan_id);
                    if(auth_user()){
                     request()->user()->notify(new InvestmentCompleted($deposit));
                    }
