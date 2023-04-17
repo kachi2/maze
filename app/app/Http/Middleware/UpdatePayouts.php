@@ -94,7 +94,7 @@ class UpdatePayouts
 
            if ($deposit->expires_at <= now()) {
                    $amountToPay = $deposit->profit;
-                   dd($amountToPay);
+                  // dd($amountToPay);
                if ($deposit->paid_amount < $deposit->profit) {
                    $amountToPay = $deposit->profit - $deposit->paid_amount;
                    Payout::create([
