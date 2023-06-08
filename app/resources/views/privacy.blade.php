@@ -93,10 +93,10 @@
                                 <p style="font-weight:bold; text-align:left">  What Rights Do I Have?</p>
                                 <ol>
                                 <li><strong> Right to access: </strong>you have the right to obtain confirmation that your Data are processed and to obtain a copy of it as well as certain information related to its processing</li>
-                                    <li style="font-weight:bold;"><strong> Right to rectify:</strong> you can request the rectification of your Data which are inaccurate, and also add to it. You can also change your personal information in your Account at any time</li>
-                                        <li style="font-weight:bold;"><strong> Right to delete:</strong> you can, in some cases, have your Data deleted</li>
-                                            <li style="font-weight:bold;"><strong> Right to object: </strong>you can object, for reasons relating to your particular situation, to the processing of your Data. For instance, you have the right to object to commercial prospection</li>
-                                            <li style="font-weight:bold;"><strong>Right to withdraw your consent:</strong> for processing requiring your consent, you have the right to withdraw your consent at any time. Exercising this right does not affect the lawfulness of the processing based on the consent given before the withdrawal of the latter;</li>
+                                    <li ><strong> Right to rectify:</strong> you can request the rectification of your Data which are inaccurate, and also add to it. You can also change your personal information in your Account at any time</li>
+                                        <li><strong> Right to delete:</strong> you can, in some cases, have your Data deleted</li>
+                                            <li><strong> Right to object: </strong>you can object, for reasons relating to your particular situation, to the processing of your Data. For instance, you have the right to object to commercial prospection</li>
+                                            <li><strong>Right to withdraw your consent:</strong> for processing requiring your consent, you have the right to withdraw your consent at any time. Exercising this right does not affect the lawfulness of the processing based on the consent given before the withdrawal of the latter;</li>
                             
                                         </ol> 
                     </div>
