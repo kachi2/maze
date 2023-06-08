@@ -67,7 +67,6 @@ class TokenController extends Controller
                 ->with('success', 'Mining token generated successfully');
         }
 
-
         return redirect()
             ->back()
             ->with('error', 'No mining Token at the Moment, contact Support');
