@@ -88,7 +88,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/about', 'AboutController@index')->name('about');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/terms', 'TermsController@index')->name('terms');
-    Route::get('/privacy', 'TermsController@Privacy')->name('privacy');
+    Route::get('/privacy-policy', 'TermsController@Privacy')->name('privacy');
     Route::get('/faq', 'FaqController@index')->name('faq');
     Route::get('/plans', 'WelcomeController@plans')->name('plans');
     Route::get('/contact', 'ContactController@index')->name('contact');
