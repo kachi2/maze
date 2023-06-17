@@ -65,16 +65,8 @@
     @yield('content')
     <!-- JavaScript -->
        <script src="{{asset('/asset/bundle.js?ver=2.2.0')}}"></script>
-    <script src="{{asset('/asset/scripts.js?ver=2.2.0')}}"></script>
-       <script>
- function googleTranslateElementInit() {
- new google.translate.TranslateElement({
- pageLanguage: 'en',
- autoDisplay: 'true',
- layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
- }, 'google_translate_element');
- }
- </script>
+    
+<script src="//code.tidio.co/yh3vbqayz74780fs7d4h2tvjorz0zr7l.js" async></script>
  <script src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'></script>
 
 </body>
