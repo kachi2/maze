@@ -69,7 +69,7 @@
                         <div class="about-content">
 							<h3>Risk Notice</h3>
                             <p style="text-align:left">Cryptocurrencies is a not backed or value guaranteed by any financial institution; when purchasing coins the customer assumes all risk the coins may become worthless in value.
-                            We at Acrabuscapital assumes this risk making it more safe for you to trade with us </p> </div>
+                            We at Mazeoptions assumes this risk making it more safe for you to trade with us </p> </div>
                     </div>
                     <!-- column end -->
                 </div>
@@ -134,7 +134,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="about-content">
 							<h3>Expired orders</h3>
-                             <p style="text-align:left">If the company receives payment for an order that has already expired, the company reserves the right to recalculate the Bitcoin to Thai Baht exchange rate at the time of processing the transfer to the customer. This may result in the customer receiving less bitcoins or Thai Baht than the original ordered amount</p>
+                             <p style="text-align:left">If the company receives payment for an order that has already expired, the company reserves the right to recalculate the Bitcoin to USDT exchange rate at the time of processing the transfer to the customer. This may result in the customer receiving less bitcoins or USDT than the original ordered amount</p>
                               
                         </div>
                     </div>
@@ -150,7 +150,15 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="about-content">
 							<h3>Choice of Law</h3>
-                         <p style="text-align:left">This Agreement, and its application and interpretation, shall be governed exclusively by the laws of the State of Georgia, without regard to its conflict of law rules. You consent to the exclusive jurisdiction of the federal and state courts located in or near Atlanta, Georgia for any dispute arising under this Agreement.</p>
+                         <p style="text-align:left">The following Choice of Law provision (the "Provision") shall govern any disputes or controversies arising out of or relating to the investment company named "MazeOptions", its operation, or any agreements, contracts, or transactions associated with the Company:
+
+                            Governing Law: This Provision shall be governed by and construed in accordance with the laws of the jurisdiction specified below.
+                            Jurisdiction: Any dispute, claim, or controversy arising out of or relating to the Company, its operation, or any agreements, contracts, or transactions associated with the Company shall be subject to the exclusive jurisdiction of the courts of the jurisdiction specified below.
+                            Choice of Law: The laws shall govern the interpretation, validity, and enforcement of this Provision, as well as any disputes or controversies arising from or in connection with the Company and its operations.
+                            Exclusive Jurisdiction: Any legal action, suit, or proceeding arising out of or relating to the Company, its operation, or any agreements, contracts, or transactions associated with the Company shall be instituted exclusively in the courts. Each party irrevocably submits to the exclusive jurisdiction of such courts in any such action, suit, or proceeding.
+                            Waiver of Other Jurisdictions: The parties agree to waive any objection to the jurisdiction of the courts as described in this Provision and agree not to seek a transfer or removal of any such action, suit, or proceeding to any other jurisdiction.
+                            Entire Agreement: This Provision constitutes the entire agreement between the parties regarding the choice of law and jurisdiction governing any disputes or controversies arising from or in connection with the Company, its operation, or any agreements, contracts, or transactions associated with the Company and supersedes any prior agreements or understandings, whether written or oral, relating to the same.
+                            By participating in or engaging with the Company, all parties agree to be bound by this Choice of Law Provision and acknowledge that any disputes or controversies shall be subject to the laws and jurisdiction specified herein..</p>
                               
                         </div>
                     </div>

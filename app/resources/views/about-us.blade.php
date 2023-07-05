@@ -98,7 +98,7 @@
                         </p>
                         <p class="left_text">Low Cost - Fair Trading Conditions and Transparency
                         <div style="padding-left:15px">  <ul style="list-style-type:circle">
-                        <li  class="p-2"> Trade withMazeoptions at low costs.</li>
+                        <li  class="p-2"> Trade with Mazeoptions at low costs.</li>
                          <li  class="p-2">We have received high customer satisfaction, among other things also thanks to the favorable Trading conditions..</li>
                         <li  class="p-2">The large product variety ofMazeoptions offers countless possibilities on the markets worldwide</li>
                         
