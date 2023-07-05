@@ -1,7 +1,7 @@
 <body id="default_theme" class="home_page_1">
       <!-- loader -->
       <div class="bg_load">
-         <img class="loader_animation" src="{{asset('/logo2.png')}}" alt="#" />
+         <img class="loader_animation" src="{{asset('/fav.png')}}" alt="#" />
       </div>
       <!-- end loader -->
       <!-- header -->
