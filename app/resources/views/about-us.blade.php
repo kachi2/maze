@@ -68,7 +68,6 @@
                         <p class="">Mazeoptions is a fully lincensed company, supervised by the UK Company House(GOV.UK) and Uk Financial Conduct Authority(FCA), with company number 13594472, providing a comprehensive investment services internationally. 
 
                             Mazeoptions work in the field of real estate and financing promising developments on cryptocurrency market with blockchain technology. According to experts, blockchain technologies currently have great opportunity. Lots of business ideas related to blockchain technologies become more successful and every day by day it bring high profits to their creator
-                            
                             We track and analyze most business ideas. It allows us to get high profits. For our investor do not need to research independently in which project it is more profitable. So our investor can invest their capital and then receive an interest on the profit.
                             
                             We want to provide each client with the best trading opportunities in multiple trading sectors such as Forex, Shares, Commodities and/or Indices offering innumerable financial instruments. The beginners among investors will value pleasant and comprehensive trading environment of the MT5 platform that also includes highly-developed and interactive trading tools for professionals. Mazeoptions gives you special trading opportunities in a dynamic financial environment
