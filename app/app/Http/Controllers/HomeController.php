@@ -41,7 +41,7 @@ class HomeController extends Controller
 
      public function Markets(){
         $cURLConnection = curl_init();
-        curl_setopt($cURLConnection, CURLOPT_URL, 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false');
+        curl_setopt($cURLConnection, CURLOPT_URL, 'https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false');
         curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
         ));

@@ -6,7 +6,9 @@ use App\Models\Deposit;
 use App\Models\Package;
 use App\Models\Payout;
 use App\Models\UserWallet;
+use App\MarketList;
 use App\PlanProfit;
+
 use Closure;
 use App\Notifications\InvestmentCompleted;
 use Illuminate\Support\Facades\Cache;
@@ -22,7 +24,7 @@ class UpdatePayouts
      */
     public function handle($request, Closure $next)
     {
-        Cache::remember('update_payout', now()->addMinutes(1), function () {
+        Cache::remember('update_payout', now()->addMinutes(2), function () {
            $this->updatePayouts();
             return 'foo';
         });
@@ -115,6 +117,44 @@ class UpdatePayouts
                    }
                
           }
+       }
+
+       $client = new \GuzzleHttp\Client();
+       $response = $client->get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd');
+       $res = $response->getBody()->getContents();
+       $resp = json_decode($res, true);
+       $num = 15;
+       if(count($resp) > 0){
+        $market = MarketList::get();
+        if(count($market) > 0){
+            for($x = 0; $x <=  $num; $x++){
+               $market[$x]->fill([
+                'name' => $resp[$x]['name'],
+                'symbol' => $resp[$x]['symbol'],
+                'image' => $resp[$x]['image'],
+                'current_price' => $resp[$x]['current_price'], 
+                'price_change_24h' => $resp[$x]['price_change_24h'], 
+                'price_change_percentage_24h'=> $resp[$x]['price_change_percentage_24h'], 
+                'market_cap_change_24h' => $resp[$x]['market_cap_change_24h'], 
+                'market_cap_change_percentage_24h' => $resp[$x]['market_cap_change_percentage_24h'],
+                'market_cap' => $resp[$x]['market_cap'],
+         ])->save();
+            }
+        }else {
+        for($x = 0; $x <=  $num; $x++){
+            MarketList::create([
+                'name' => $resp[$x]['name'],
+                'symbol' => $resp[$x]['symbol'],
+                'image' => $resp[$x]['image'],
+                'current_price' => $resp[$x]['current_price'], 
+                'price_change_24h' => $resp[$x]['price_change_24h'], 
+                'price_change_percentage_24h'=> $resp[$x]['price_change_percentage_24h'], 
+                'market_cap_change_24h' => $resp[$x]['market_cap_change_24h'], 
+                'market_cap_change_percentage_24h' => $resp[$x]['market_cap_change_percentage_24h'],
+                'market_cap' => $resp[$x]['market_cap'],
+            ]);
+        }
+     }
        }
     }
 }

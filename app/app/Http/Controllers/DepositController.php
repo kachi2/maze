@@ -655,7 +655,7 @@ class DepositController extends Controller
             // //dd($transaction);
             // Log::info($transaction);
             $cURLConnection = curl_init();
-        curl_setopt($cURLConnection, CURLOPT_URL, 'https://api.coingecko.com/api/v3/simple/price?ids='.$coins.'&vs_currencies=usd');
+        curl_setopt($cURLConnection, CURLOPT_URL, 'https://pro-api.coingecko.com/api/v3/simple/price?ids='.$coins.'&vs_currencies=usd');
         curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
         ));
@@ -663,6 +663,7 @@ class DepositController extends Controller
         $se = curl_exec($cURLConnection);
         curl_close($cURLConnection);  
         $resp = json_decode($se, true);
+        
         $amount2 = $amount / $resp[$coins]['usd'];
       $deposit = $this->savePendingDeposit($ref, $plan, $request->user(), $amount, $fee, $cost, $amount2, $currency);    
         $wallet = WalletAddress::where('name', $currency)->first();

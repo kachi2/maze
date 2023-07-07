@@ -35,7 +35,7 @@ class WalletDepositController extends Controller
         }
         try {
             $cURLConnection = curl_init();
-        curl_setopt($cURLConnection, CURLOPT_URL, 'https://api.coingecko.com/api/v3/simple/price?ids='.$coins.'&vs_currencies=usd');
+        curl_setopt($cURLConnection, CURLOPT_URL, 'https://pro-api.coingecko.com/api/v3/simple/price?ids='.$coins.'&vs_currencies=usd');
         curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
         ));
