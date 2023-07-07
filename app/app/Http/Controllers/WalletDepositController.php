@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\MarketList;
 use Illuminate\Http\Request;
 use App\User;
 use App\WalletAddress;
@@ -34,16 +36,8 @@ class WalletDepositController extends Controller
             break;
         }
         try {
-            $cURLConnection = curl_init();
-        curl_setopt($cURLConnection, CURLOPT_URL, 'https://pro-api.coingecko.com/api/v3/simple/price?ids='.$coins.'&vs_currencies=usd');
-        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json",
-        ));
-        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true); 
-        $se = curl_exec($cURLConnection);
-        curl_close($cURLConnection);  
-        $resp = json_decode($se, true);
-        $amount2 = $amount / $resp[$coins]['usd'];
+            $resp = MarketList::where('name',$coins)->first();
+        $amount2 = $amount / $resp['current_price'];
         $deposit = $this->savePendingDeposit($ref, $request->user(), $amount, $amount2, $fee, $paymentMethod);    
         $wallet = WalletAddress::where('name', $paymentMethod)->first();
         $msg = 'Fund Request initiated successfully';

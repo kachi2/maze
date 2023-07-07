@@ -14,6 +14,7 @@ use App\PlanProfit;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\User;
+use App\MarketList;
 
 use App\UserActivity;
 use Kevupton\LaravelCoinpayments\Models\Withdrawal as ModelsWithdrawal;
@@ -40,18 +41,7 @@ class HomeController extends Controller
      */
 
      public function Markets(){
-        $cURLConnection = curl_init();
-        curl_setopt($cURLConnection, CURLOPT_URL, 'https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false');
-        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json",
-        ));
-        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true); 
-        $se = curl_exec($cURLConnection);
-        curl_close($cURLConnection);  
-        $resp = json_decode($se, true);
-        if(empty($resp)){
-            $resp = [];
-        }
+        $resp = MarketList::get();
          return view('mobile.markets', [
              'coins' => $resp,
          ]);

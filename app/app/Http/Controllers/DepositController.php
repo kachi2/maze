@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: billi
@@ -14,6 +15,7 @@ use App\Models\Payout;
 use App\Models\PendingDeposit;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Validator;
+use App\MarketList;
 use App\Models\Plan;
 use App\Models\UserWallet;
 use App\Modules\BlockChain;
@@ -81,7 +83,7 @@ class DepositController extends Controller
     public function index(Request $request)
     {
         $chck = auth_user()->is_admin;
-        if($chck){
+        if ($chck) {
             return redirect('/admin');
         }
         $query = Deposit::whereUserId($request->user()->id);
@@ -290,9 +292,9 @@ class DepositController extends Controller
         ];
 
         $plan = $deposit->plan;
-        
+
         $qrcode = 'https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=bitcoin:' . $deposit->token . '?amount=' . $deposit->verifying_amount;
-            
+
         return view('deposit.show-blockchain-transaction-details', [
             'breadcrumb' => $breadcrumb,
             'deposit' => $deposit,
@@ -308,9 +310,9 @@ class DepositController extends Controller
      * @param Transaction $transaction
      * @return Factory|View
      */
-    public function showCoinpaymentTransaction($id = null, $ref=null)
+    public function showCoinpaymentTransaction($id = null, $ref = null)
     {
-            
+
         //         $breadcrumb = [
         //     [
         //         'link' => route('deposits'),
@@ -322,17 +324,17 @@ class DepositController extends Controller
         //     ]
         // ];
         $id = decrypt($id);
-       // dd($id);
+        // dd($id);
         $plans = Plan::with('package')->get();
         $balance = auth()->user()->wallet->amount;
         $bonus = auth()->user()->wallet->bonus;
-        $investment = Deposit::where(['plan_id' => $id, 'user_id'=>auth()->user()->id])->latest()->simplePaginate(5);
-        $sum = Deposit::where(['plan_id' => $id, 'user_id'=>auth()->user()->id])->sum('amount');
-        $total = Deposit::where(['plan_id' => $id, 'user_id'=>auth()->user()->id])->where('status', 0)->sum('amount');
-        $completed = Deposit::where(['plan_id' => $id, 'user_id'=>auth()->user()->id])->where('status', 1)->get();
-        $deposited = Deposit::where(['plan_id' => $id, 'user_id'=>auth()->user()->id])->where('payment_method', '!=','wallet')->get();
-        $payouts = PlanProfit::where(['user_id'=>auth()->user()->id, 'plan_id' => $id,])->sum('balance');
-       
+        $investment = Deposit::where(['plan_id' => $id, 'user_id' => auth()->user()->id])->latest()->simplePaginate(5);
+        $sum = Deposit::where(['plan_id' => $id, 'user_id' => auth()->user()->id])->sum('amount');
+        $total = Deposit::where(['plan_id' => $id, 'user_id' => auth()->user()->id])->where('status', 0)->sum('amount');
+        $completed = Deposit::where(['plan_id' => $id, 'user_id' => auth()->user()->id])->where('status', 1)->get();
+        $deposited = Deposit::where(['plan_id' => $id, 'user_id' => auth()->user()->id])->where('payment_method', '!=', 'wallet')->get();
+        $payouts = PlanProfit::where(['user_id' => auth()->user()->id, 'plan_id' => $id,])->sum('balance');
+
         $pending = PendingDeposit::where('ref', $ref)->first();
         $wallet = WalletAddress::where('name', $pending->currency2)->first();
 
@@ -349,7 +351,7 @@ class DepositController extends Controller
         // ];
         $plan = Plan::findOrFail($id);
         return view('mobile.invests', [
-          //  'breadcrumb' => $breadcrumb,
+            //  'breadcrumb' => $breadcrumb,
             'plan' => $plan,
             'plans' => $plans,
             'balance' => $balance,
@@ -360,11 +362,11 @@ class DepositController extends Controller
             'total' => $total,
             'deposited' => $deposited,
             'payouts' => $payouts,
-            'sum' => $sum, 
+            'sum' => $sum,
             'completed' => $completed
         ]);
-    
-        
+
+
         // $deposit = PendingDeposit::whereRef($transaction->invoice)->firstOrFail();
         // $plan = $deposit->plan;
         // return view('deposit.show-coinpayment-transaction-details', [
@@ -373,7 +375,7 @@ class DepositController extends Controller
         //     'deposit' => $deposit,
         //     'plan' => $plan
         // ]);
-   //}
+        //}
     }
     /**
      * Update payouts.
@@ -393,56 +395,59 @@ class DepositController extends Controller
      * @param $id
      * @return string
      */
-     
-     public function saveHashNo(Request $request, $id){
-       // dd(decrypt($id));
-         $deposit = PendingDeposit::where('ref', decrypt($id))->first();
-         if($deposit){
-             PendingDeposit::where('ref', $deposit->ref)->update(['hash_no' => $request->hash]);
-                    Session::flash('alert', 'success');
-                    Session::flash('done', 'readonly');
-                    Session::flash('message', 'Your request is pending, Your deposit will be approved once confirmed');
-                    return back();
-         }else{
-             return redirect()->route('home');
-         }
-                    
-     }
 
-     //payouts for individual investments 
+    public function saveHashNo(Request $request, $id)
+    {
+        // dd(decrypt($id));
+        $deposit = PendingDeposit::where('ref', decrypt($id))->first();
+        if ($deposit) {
+            PendingDeposit::where('ref', $deposit->ref)->update(['hash_no' => $request->hash]);
+            Session::flash('alert', 'success');
+            Session::flash('done', 'readonly');
+            Session::flash('message', 'Your request is pending, Your deposit will be approved once confirmed');
+            return back();
+        } else {
+            return redirect()->route('home');
+        }
+    }
 
-     public function PayoutsDetails($id = null){
+    //payouts for individual investments 
+
+    public function PayoutsDetails($id = null)
+    {
         $payouts = Payout::where('deposit_id', decrypt($id))->simplePaginate(5);
         $plan = Deposit::where('id', decrypt($id))->first();
         $sum = Payout::where('deposit_id', decrypt($id))->sum('amount');
-        return view('mobile.payouts', 
-        [
-            'payouts'=>$payouts,
-            'plan' => $plan,
-            'sum' => $sum
-        ]);
-
-     }
-     public function TransferPayouts(Request $request, $id){
+        return view(
+            'mobile.payouts',
+            [
+                'payouts' => $payouts,
+                'plan' => $plan,
+                'sum' => $sum
+            ]
+        );
+    }
+    public function TransferPayouts(Request $request, $id)
+    {
 
         $tes = PlanProfit::where(['user_id' => auth_user()->id, 'plan_id' => decrypt($id)])->first();
-        if(empty($tes)){
+        if (empty($tes)) {
             Session::flash('alert', 'error');
             Session::flash('message', 'Payout balance is too low for this request');
             return back();
         }
-        if($request->amounts < 0){
+        if ($request->amounts < 0) {
             Session::flash('alert', 'error');
             Session::flash('message', 'Payout amount cannot be zero or negative value');
             return back();
         }
 
         $payouts = PlanProfit::where(['user_id' => auth_user()->id, 'plan_id' => decrypt($id)])->first();
-      //  dd($payouts);
-        if($request->amounts < 0){
+        //  dd($payouts);
+        if ($request->amounts < 0) {
             return back();
         }
-        if($payouts->balance < $request->amounts){
+        if ($payouts->balance < $request->amounts) {
             Session::flash('alert', 'error');
             Session::flash('message', 'Payout balance is too low for this request');
             return back();
@@ -450,43 +455,44 @@ class DepositController extends Controller
         $balance = $payouts->balance;
         $newBalance = $balance - $request->amounts;
         PlanProfit::where(['user_id' => auth_user()->id, 'plan_id' => decrypt($id)])
-                    ->update([
-                        'prev_balance' => $balance,
-                        'balance' => $newBalance
-                    ]);
-            PayoutsHistory::create([
-                'ref' => generate_reference(),
-                'user_id' => auth_user()->id,
-                'amount' => $request->amounts,
+            ->update([
                 'prev_balance' => $balance,
-                'avail_balance' => $newBalance
+                'balance' => $newBalance
             ]);
-                UserWallet::addAmount(auth_user(), $request->amounts);
-                Session::flash('alert', 'success');
-                Session::flash('message', 'Payout transfered to wallet successfully');
-                return back();
-     }
+        PayoutsHistory::create([
+            'ref' => generate_reference(),
+            'user_id' => auth_user()->id,
+            'amount' => $request->amounts,
+            'prev_balance' => $balance,
+            'avail_balance' => $newBalance
+        ]);
+        UserWallet::addAmount(auth_user(), $request->amounts);
+        Session::flash('alert', 'success');
+        Session::flash('message', 'Payout transfered to wallet successfully');
+        return back();
+    }
 
-     public function PayoutsTransfer(){
+    public function PayoutsTransfer()
+    {
         return view('mobile.payoutstransfer')
-        ->with('payouts', PayoutsHistory::where('user_id', auth_user()->id)->latest()->get());
-     }
+            ->with('payouts', PayoutsHistory::where('user_id', auth_user()->id)->latest()->get());
+    }
 
     public function invest(Request $request, $id = null)
     {
-       $id = decrypt($id);
+        $id = decrypt($id);
         $plans = Plan::with('package')->get();
         $packages = Package::with('plans')->get();
         $balance = $request->user()->wallet->amount;
         $bonus = $request->user()->wallet->bonus;
-        $investment = Deposit::where(['plan_id' => $id, 'user_id'=>auth()->user()->id])->latest()->simplePaginate(5);
-        $sum = Deposit::where(['plan_id' => $id, 'user_id'=>auth()->user()->id])->sum('amount');
-     
-        $total = Deposit::where(['plan_id' => $id, 'user_id'=>auth()->user()->id])->where('status', 0)->sum('amount');
-        $completed = Deposit::where(['plan_id' => $id, 'user_id'=>auth()->user()->id])->where('status', 1)->get();
-        $deposited = Deposit::where(['plan_id' => $id, 'user_id'=>auth()->user()->id])->where('payment_method', '!=','wallet')->get();
-        $payouts = PlanProfit::where(['user_id'=>$request->user()->id, 'plan_id' => $id,])->sum('balance');
-       
+        $investment = Deposit::where(['plan_id' => $id, 'user_id' => auth()->user()->id])->latest()->simplePaginate(5);
+        $sum = Deposit::where(['plan_id' => $id, 'user_id' => auth()->user()->id])->sum('amount');
+
+        $total = Deposit::where(['plan_id' => $id, 'user_id' => auth()->user()->id])->where('status', 0)->sum('amount');
+        $completed = Deposit::where(['plan_id' => $id, 'user_id' => auth()->user()->id])->where('status', 1)->get();
+        $deposited = Deposit::where(['plan_id' => $id, 'user_id' => auth()->user()->id])->where('payment_method', '!=', 'wallet')->get();
+        $payouts = PlanProfit::where(['user_id' => $request->user()->id, 'plan_id' => $id,])->sum('balance');
+
 
         //adding more fields
         $breadcrumb = [
@@ -519,7 +525,7 @@ class DepositController extends Controller
             'total' => $total,
             'deposited' => $deposited,
             'payouts' => $payouts,
-            'sum' => $sum, 
+            'sum' => $sum,
             'completed' => $completed
         ]);
     }
@@ -540,34 +546,34 @@ class DepositController extends Controller
             'amount' => "required|numeric",
             'payment_method' => 'required'
         ]);
-        if($validte->fails()){
+        if ($validte->fails()) {
             return response()->json($validte->errors->first());
         }
- 
-        
-    if($plan->min_deposit > $request->amount){
-        //  Session::flash('msg', 'error');
-        //  Session::flash('message', 'Amount must be greater than $'.$plan->min_deposit); 
-         $msg = 'Amount must be greater than $'.$plan->min_deposit;
-         $data = [
-            'msg' => $msg,
-            'alert' => 'error'
-        ];
-        return response()->json($data);
+
+
+        if ($plan->min_deposit > $request->amount) {
+            //  Session::flash('msg', 'error');
+            //  Session::flash('message', 'Amount must be greater than $'.$plan->min_deposit); 
+            $msg = 'Amount must be greater than $' . $plan->min_deposit;
+            $data = [
+                'msg' => $msg,
+                'alert' => 'error'
+            ];
+            return response()->json($data);
             //return redirect()->back();
-    }
-    if($plan->max_deposit <  $request->amount){
-        
-        //  Session::flash('msg', 'error');
-        //       Session::flash('message', 'Amount must be less than $'.$plan->max_deposit); 
-        $msg = 'Amount must be less than $'.$plan->max_deposit;
-        $data = [
-           'msg' => $msg,
-           'alert' => 'error'
-       ];
-       return response()->json($data);
+        }
+        if ($plan->max_deposit <  $request->amount) {
+
+            //  Session::flash('msg', 'error');
+            //       Session::flash('message', 'Amount must be less than $'.$plan->max_deposit); 
+            $msg = 'Amount must be less than $' . $plan->max_deposit;
+            $data = [
+                'msg' => $msg,
+                'alert' => 'error'
+            ];
+            return response()->json($data);
             //return redirect()->back();
-    }
+        }
         $amount = $request->input('amount');
         $paymentMethod = $request->input('payment_method');
         $ref = generate_reference();
@@ -580,7 +586,7 @@ class DepositController extends Controller
             case Deposit::PAYMENT_METHOD_ETH:
             case Deposit::PAYMENT_METHOD_LTC:
             case Deposit::PAYMENT_METHOD_BCH:
-                
+
                 return $this->investFromCripto($request, $plan, $amount, $paymentMethod, $ref);
             case Deposit::PAYMENT_METHOD_PM:
                 return $this->investFromPerfectMoney($request, $plan, $amount, $ref);
@@ -592,9 +598,9 @@ class DepositController extends Controller
         $userWallet = $request->user()->wallet;
         if ($userWallet->total_amount < $amount) {
             //  Session::flash('msg', 'error');
-             // Session::flash('message', 'You dont have enough fund to invest on this plan'); 
+            // Session::flash('message', 'You dont have enough fund to invest on this plan'); 
             $msg = 'You dont have enough fund to invest on this plan';
-             $data = [
+            $data = [
                 'msg' => $msg,
                 'alert' => 'error'
             ];
@@ -614,33 +620,33 @@ class DepositController extends Controller
         // Session::flash('message', 'Investment Initiated successfully'); 
         $msg = 'Investment added successfully';
         $data = [
-           'msg' => $msg,
-           'alert' => 'success'
-       ];
-       return response()->json($data);
-       // return redirect()->back()->with('success', 'Investment added successfully');
+            'msg' => $msg,
+            'alert' => 'success'
+        ];
+        return response()->json($data);
+        // return redirect()->back()->with('success', 'Investment added successfully');
     }
 
     protected function investFromCripto(Request $request, Plan $plan, $amount, $currency, $ref)
     {
 
-   
-        $fee = $amount * self::ITEM_TAX_RATE/ 100;
+
+        $fee = $amount * self::ITEM_TAX_RATE / 100;
         $cost = $amount + $fee;
         $coins = $currency;
-        switch ($coins){
+        switch ($coins) {
             case "BTC":
-            $coins = "bitcoin";
-            break;
+                $coins = "bitcoin";
+                break;
             case "ETH":
-            $coins = "ethereum";
-            break;
+                $coins = "ethereum";
+                break;
             case "LTC":
-            $coins = "litecoin";
-            break;   
+                $coins = "litecoin";
+                break;
             case "USDT":
-            $coins = "tether";
-            break;
+                $coins = "tether";
+                break;
         }
         // $additionalFields = [
         //     'buyer_email' => 'mirandemyyichelle@gmail.com',
@@ -654,20 +660,12 @@ class DepositController extends Controller
             // $transaction = Coinpayments::createTransactionSimple($cost, self::ITEM_CURRENCY, $currency, $additionalFields);
             // //dd($transaction);
             // Log::info($transaction);
-            $cURLConnection = curl_init();
-        curl_setopt($cURLConnection, CURLOPT_URL, 'https://pro-api.coingecko.com/api/v3/simple/price?ids='.$coins.'&vs_currencies=usd');
-        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json",
-        ));
-        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true); 
-        $se = curl_exec($cURLConnection);
-        curl_close($cURLConnection);  
-        $resp = json_decode($se, true);
-        
-        $amount2 = $amount / $resp[$coins]['usd'];
-      $deposit = $this->savePendingDeposit($ref, $plan, $request->user(), $amount, $fee, $cost, $amount2, $currency);    
-        $wallet = WalletAddress::where('name', $currency)->first();
-        $msg = 'Investment added successfully';
+            
+            $resp = MarketList::where('name', $coins)->first();
+            $amount2 = $amount / $resp['current_price'];
+            $deposit = $this->savePendingDeposit($ref, $plan, $request->user(), $amount, $fee, $cost, $amount2, $currency);
+            $wallet = WalletAddress::where('name', $currency)->first();
+            $msg = 'Investment added successfully';
             $data = [
                 'wallet' => $wallet,
                 'deposit' => $deposit,
@@ -681,18 +679,17 @@ class DepositController extends Controller
             // Session::flash('message', 'Unable to create deposit transaction'); 
             $msg = 'Unable to create deposit transaction';
             $data = [
-               'msg' => $msg,
-               'alert' => 'error'
-           ];
-           return response()->json($data);
+                'msg' => $msg,
+                'alert' => 'error'
+            ];
+            return response()->json($data);
             // return redirect()
             //     ->back()
             //     ->withInput();
         }
-        
     }
 
- 
+
 
     /**
      * @param string $ref
@@ -702,7 +699,8 @@ class DepositController extends Controller
      * @param string $paymentMethod
      * @return Deposit|Model
      */
-    protected function saveDeposit($ref, Plan $plan, User $user, $amount, $paymentMethod) {
+    protected function saveDeposit($ref, Plan $plan, User $user, $amount, $paymentMethod)
+    {
         $expireDate = Carbon::now();
 
         switch ($plan->package->payment_period) {
@@ -743,12 +741,13 @@ class DepositController extends Controller
      * @param $paymentMethod
      * @return PendingDeposit|Model
      */
-    protected function savePendingDeposit($ref, Plan $plan, User $user, $amount, $fee, $verifying_amount, $amount2, $paymentMethod) {
+    protected function savePendingDeposit($ref, Plan $plan, User $user, $amount, $fee, $verifying_amount, $amount2, $paymentMethod)
+    {
         return PendingDeposit::create([
             'ref' => $ref,
             'user_id' => $user->id,
             'fee' => $fee,
-            'amount2'=> $amount2,
+            'amount2' => $amount2,
             'amount1' => $amount,
             'currency1' => 'USD',
             'currency2' => $paymentMethod,
@@ -763,30 +762,30 @@ class DepositController extends Controller
     }
     protected function investFromPerfectMoney(Request $request, Plan $plan, $amount, $ref)
     {
-    //     $fee = $amount * self::ITEM_TAX_RATE/ 100;
-    //     $cost = $amount + $fee;
-    //    // $deposit = $this->savePendingDeposit($ref, $plan, $request->user(), $amount, $fee,  $cost, Deposit::PAYMENT_METHOD_PM);
-    //     $perfectMoney = new PerfectMoney();
+        //     $fee = $amount * self::ITEM_TAX_RATE/ 100;
+        //     $cost = $amount + $fee;
+        //    // $deposit = $this->savePendingDeposit($ref, $plan, $request->user(), $amount, $fee,  $cost, Deposit::PAYMENT_METHOD_PM);
+        //     $perfectMoney = new PerfectMoney();
 
-    //     $breadcrumb = [
-    //         [
-    //             'link' => route('deposits'),
-    //             'title' => 'Deposits'
-    //         ],
-    //         [
-    //             'link' => route('deposits.invest', ['id' => $plan->id]),
-    //             'title' => 'Invest'
-    //         ]
-    //     ];
+        //     $breadcrumb = [
+        //         [
+        //             'link' => route('deposits'),
+        //             'title' => 'Deposits'
+        //         ],
+        //         [
+        //             'link' => route('deposits.invest', ['id' => $plan->id]),
+        //             'title' => 'Invest'
+        //         ]
+        //     ];
 
-    //     return view('deposit.perfectmoney-proceed', [
-    //         'proceed_form' => $perfectMoney->makePayment([
-    //             'PAYMENT_AMOUNT' => $cost,
-    //             'PAYMENT_ID' => $deposit->id
-    //         ]),
-    //         'deposit' => $deposit,
-    //         'breadcrumb' => $breadcrumb
-    //     ]);
-    // 
-}
+        //     return view('deposit.perfectmoney-proceed', [
+        //         'proceed_form' => $perfectMoney->makePayment([
+        //             'PAYMENT_AMOUNT' => $cost,
+        //             'PAYMENT_ID' => $deposit->id
+        //         ]),
+        //         'deposit' => $deposit,
+        //         'breadcrumb' => $breadcrumb
+        //     ]);
+        // 
+    }
 }
