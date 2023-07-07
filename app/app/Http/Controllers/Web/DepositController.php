@@ -459,8 +459,8 @@ class DepositController extends Controller
             'payment_method' => 'required'
         ]);
         if ($validte->fails()) {
-            \Session::flash('msg', 'error');
-            \Session::flash('message', 'Some fields are missing');
+            Session::flash('msg', 'error');
+            Session::flash('message', 'Some fields are missing');
             return  redirect()->back()->withInput($request->all())->withErrors($validte);
         }
 
@@ -473,8 +473,8 @@ class DepositController extends Controller
                 'msg' => $msg,
                 'alert' => 'error'
             ];
-            \Session::flash('msg', 'error');
-            \Session::flash('message', 'Amount must be greater than $' . $plan->min_deposit);
+            Session::flash('msg', 'error');
+            Session::flash('message', 'Amount must be greater than $' . $plan->min_deposit);
             return  redirect()->back();
         }
         if ($plan->max_deposit <  $request->amount) {
@@ -486,8 +486,8 @@ class DepositController extends Controller
                 'msg' => $msg,
                 'alert' => 'error'
             ];
-            \Session::flash('msg', 'error');
-            \Session::flash('message', 'Amount must be less than $' . $plan->max_deposit);
+            Session::flash('msg', 'error');
+            Session::flash('message', 'Amount must be less than $' . $plan->max_deposit);
             return  redirect()->back();
         }
         $amount = $request->input('amount');
@@ -553,8 +553,8 @@ class DepositController extends Controller
             $amount2 = $amount / $resp['current_price'];
             $transaction = $this->savePendingDeposit($ref, $plan, $request->user(), $amount, $amount2, $currency);
             $wallet = WalletAddress::where('name', $currency)->first();
-            \Session::flash('msg', 'success');
-            \Session::flash('message', 'Investment Initiated Successfully');
+            Session::flash('msg', 'success');
+            Session::flash('message', 'Investment Initiated Successfully');
             return view('deposit.payment')->with('wallet', $wallet)->with('transaction', $transaction)
                 ->with('plan', $plan);
         } catch (Exception $exception) {

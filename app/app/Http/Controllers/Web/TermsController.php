@@ -10,6 +10,8 @@ use Illuminate\View\View;
 
 class TermsController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +19,7 @@ class TermsController extends Controller
      */
     public function index()
     {
-       {
             $resp = MarketList::get();
-       
         return view('terms')->with('coins', $resp);
     }
 }
