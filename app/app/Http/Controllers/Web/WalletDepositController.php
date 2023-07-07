@@ -43,6 +43,7 @@ class WalletDepositController extends Controller
         try {
             $resp = MarketList::where('name',$coins)->first();
             $amount2 = $amount / $resp['current_price'];
+
         $transaction = $this->savePendingDeposit($ref, $request->user(), $amount, $amount2, $fee, $paymentMethod);    
         $wallet = WalletAddress::where('name', $paymentMethod)->first();
    
