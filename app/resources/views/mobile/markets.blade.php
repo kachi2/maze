@@ -14,7 +14,7 @@
                 </div>
                 @foreach ($coins as $coin )
             <div class="transaction-card mb-1">
-                <a href="transaction-details.html">
+                <a href="#">
                     <div class="transaction-card-info">
                         <div class="transaction-info-thumb">
                             <img src="{{$coin['image']}}" alt="user">
