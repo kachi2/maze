@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function __construct()
     {
        
-     //   return $this->middleware('agent');
+       return $this->middleware('agent');
        
     }
     public function Index(){

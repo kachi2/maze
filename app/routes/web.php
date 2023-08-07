@@ -163,7 +163,7 @@ use Illuminate\Support\Facades\Route;
     });
     
 
-    Route::domain('agency.mazeoption.com')->group(function(){
+    Route::group(['prefix' => 'affiliate'], function(){
         //Route::get('/agent/complete/registration', )
         Route::get('/register/agents', 'Agency\AuthController@register')->name('agency.register');
         Route::post('/register/agent/', 'Agency\AuthController@registers')->name('agency.registers');
@@ -172,6 +172,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('/login', 'Agency\AuthController@Login')->name('Agent-login');
         Route::post('/logins', 'Agency\AuthController@Logins')->name('agent.login');
         Route::post('/logout', 'Agency\AuthController@logout')->name('agent.logout');
+    Route::middleware(['agent'])->group(function(){
         Route::get('/', 'Agency\HomeController@index')->name('agency.index');
         Route::get('/home', 'Agency\HomeController@index')->name('agency.index');
         Route::get('index', 'Agency\HomeController@index')->name('agency.index');
@@ -183,6 +184,7 @@ use Illuminate\Support\Facades\Route;
         Route::post('/agent/process/payment/', 'Agency\HomeController@paymentProcessor')->name('agentProcess.payment');
         Route::get('/agent/referral', 'Agency\HomeController@AgentReferral')->name('agent.referral');
         });
+    });
         #========== end of agent routes ======================
 
 

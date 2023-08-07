@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Agency;
+use App\Http\Middleware\Agent;
 use App\Http\Middleware\CheckRegistrationComplete;
 use App\Http\Middleware\Referral;
 use App\Http\Middleware\UpdatePayouts;
@@ -70,6 +71,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => Admin::class,
+        'agent' => Agent::class,
     ];
 
     /**
