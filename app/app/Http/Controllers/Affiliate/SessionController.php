@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Agency;
+namespace App\Http\Controllers\Affiliate;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TaskController extends Controller
+class SessionController extends Controller
 {
     //
 }

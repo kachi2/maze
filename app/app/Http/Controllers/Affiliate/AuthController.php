@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Agency;
+namespace App\Http\Controllers\Affiliate;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -121,7 +121,7 @@ class AuthController extends Controller
 
    // dd($credentials);
    //dd(auth::guard('agent'));
-    if(Auth::guard('agent')->attempt($credentials)){
+    if(Auth::guard('affiliates')->attempt($credentials)){
         agent_user()->update([
             'last_login' => Carbon::now()->toDateTimeString(),
             'login_ip'  => $req->getClientIp(),
@@ -141,7 +141,7 @@ class AuthController extends Controller
 }
 
     public function logout(){
-        auth()->guard('agent')->logout();
+        auth()->guard('affiliates')->logout();
         Session::flush();
         return view('agency.login');
     }

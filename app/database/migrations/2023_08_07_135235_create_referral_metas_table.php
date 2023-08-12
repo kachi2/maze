@@ -14,7 +14,7 @@ class CreateReferralMetasTable extends Migration
     public function up()
     {
         Schema::create('referral_metas', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->integer('agent_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->double('user_deposit')->nullable();

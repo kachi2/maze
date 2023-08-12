@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Agency;
+namespace App\Http\Controllers\Affiliate;
 
 use AgentPayment;
 use App\Http\Controllers\Controller;
@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function __construct()
     {
        
-       return $this->middleware('agent');
+       return $this->middleware('affiliates');
        
     }
     public function Index(){

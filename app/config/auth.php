@@ -40,9 +40,9 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'agent' => [
+        'affiliates' => [
             'driver' => 'session',
-            'provider' => 'agents',
+            'provider' => 'affiliates',
         ],
 
         'api' => [
@@ -76,7 +76,7 @@ return [
             'model' => App\User::class,
         ],
 
-            'agents' => [
+            'affiliates' => [
                 'driver' => 'eloquent',
                 'model' => App\Agent::class,
             ],

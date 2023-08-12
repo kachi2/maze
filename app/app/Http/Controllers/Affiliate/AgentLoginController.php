@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Agency;
+namespace App\Http\Controllers\Affiliate;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -35,7 +35,7 @@ class AgentLoginController extends Controller
 
 
     protected function guard(){
-        return Auth::guard('agent');
+        return Auth::guard('affiliates');
     }
     /**
      * Create a new controller instance.
@@ -44,7 +44,7 @@ class AgentLoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:agent')->except('logout');
+        $this->middleware('guest:affiliates')->except('logout');
     }
 
     //

@@ -35,7 +35,7 @@ class AgentLoginController extends Controller
 
 
     protected function guard(){
-        return Auth::guard('agent');
+        return Auth::guard('affiliates');
     }
     /**
      * Create a new controller instance.

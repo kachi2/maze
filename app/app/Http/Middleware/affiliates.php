@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Agent
+class affiliates
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,9 @@ class Agent
      */
     public function handle($request, Closure $next)
     {
-        if(!auth()->guard('affiliates')){
-            return redirect()->route('Agent-login');
+       // dd(auth('affiliates')->user());
+        if(auth()->guard('affiliates')){
+          if()
         }
         return $next($request);
     }

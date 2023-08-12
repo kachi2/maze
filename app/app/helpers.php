@@ -191,7 +191,7 @@ if(!function_exists('agent_user')){
      */
 
      function agent_user(){
-        return auth('agent')->user();
+        return auth('affiliates')->user();
      }
 }
 
