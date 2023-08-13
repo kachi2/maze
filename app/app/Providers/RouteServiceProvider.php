@@ -83,7 +83,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapAgentRoutes()
     {
         Route::prefix('affiliates')
-            ->middleware(['affiliates'])
+            ->middleware(['affiliates', 'web'])
             ->namespace($this->agentNamespace)
             ->group(base_path('routes/affiliates.php'));
     }

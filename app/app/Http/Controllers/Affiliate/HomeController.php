@@ -14,7 +14,7 @@ use App\AgentTask;
 use Illuminate\Support\Facades\Session;
 use App\AgentWallet;
 use Illuminate\Support\Facades\Validator;
-use App\Salary;
+use App\AgentSalary;
 use Carbon\Carbon;
 
 
@@ -22,13 +22,8 @@ class HomeController extends Controller
 {
     //
 
-    public function __construct()
-    {
-       
-       return $this->middleware('affiliates');
-       
-    }
     public function Index(){
+   
         $date = Carbon::now()->addDays(-14);
         $data['agent'] = Agent::where('id', agent_user()->id)->first();
         $data['referrals'] = Referrals::where('agent_id', agent_user()->id)->get();
@@ -40,7 +35,7 @@ class HomeController extends Controller
         $data['completed_task'] = AgentTask::where(['agent_id' => agent_user()->id])->where('completion', '=', '100')->where('created_at', '>', $date)->get();
         $data['activity'] = AgentActivity::where('agent_id', agent_user()->id)->where('created_at', '>', $date)->latest()->get();
         $data['activities'] = AgentActivity::where('agent_id', agent_user()->id)->latest()->take(6)->get();
-        $data['next_salary'] = Salary::where('agent_id', agent_user()->id)->latest()->first();
+       // $data['next_AgentSalary'] = AgentSalary::where('agent_id', agent_user()->id)->latest()->first();
         return view('agency.home', $data);
     }
 
@@ -54,12 +49,12 @@ class HomeController extends Controller
         ->with('payments', Payment::where('agent_id', agent_user()->id)->latest()->get());
     }
 
-    public function SalaryPayments(){
-        return view('agency.salary')
-        ->with('payments', Salary::where('agent_id', agent_user()->id)->get());
+    public function AgentSalaryPayments(){
+        return view('agency.AgentSalary')
+        ->with('payments', AgentSalary::where('agent_id', agent_user()->id)->get());
     }
 
-    public function SalaryInvoice(Request $request){
+    public function AgentSalaryInvoice(Request $request){
 
         $valid = Validator::make($request->all(), [
             'amount' => 'required',
@@ -84,7 +79,7 @@ class HomeController extends Controller
             Session::flash('msg', "Amount is greater than your Available Balance");
             return back();
         }
-        $payment = Salary::where('agent_id', agent_user()->id)->latest()->first();
+        $payment = AgentSalary::where('agent_id', agent_user()->id)->latest()->first();
         $now = Carbon::now();
         if($payment->pay_day > $now){
         
@@ -96,27 +91,27 @@ class HomeController extends Controller
         #======deduct agent fund ========
        $wallet = AgentWallet::where('agent_id', agent_user()->id)->first();
 
-       $addToPending = $wallet->salary_pending + $request->amount;
+       $addToPending = $wallet->AgentSalary_pending + $request->amount;
        $removeWallet = $wallet->payments - $request->amount;
        $wallet->update([
-        'salary_pending' => $addToPending,
+        'AgentSalary_pending' => $addToPending,
         'payments' => $removeWallet
        ]);
 
         $ref = generate_reference();
-        $salary = new Salary;
-        $salary->ref = $ref;
-        $salary->agent_id = agent_user()->id;
-        $salary->amount = $request->amount;
-        $salary->total = $request->amount - ($request->amount * 0.075);
-        $salary->payment_method = $request->payment_method;
-        $salary->wallet_address = $request->wallet_address;
-        $salary->prev_balance = $wallet->payments;
-        $salary->avail_balance = $removeWallet;
-        $salary->is_approved = 0;
-        $salary->next_pay = Carbon::now()->addDays(14);
+        $AgentSalary = new AgentSalary;
+        $AgentSalary->ref = $ref;
+        $AgentSalary->agent_id = agent_user()->id;
+        $AgentSalary->amount = $request->amount;
+        $AgentSalary->total = $request->amount - ($request->amount * 0.075);
+        $AgentSalary->payment_method = $request->payment_method;
+        $AgentSalary->wallet_address = $request->wallet_address;
+        $AgentSalary->prev_balance = $wallet->payments;
+        $AgentSalary->avail_balance = $removeWallet;
+        $AgentSalary->is_approved = 0;
+        $AgentSalary->next_pay = Carbon::now()->addDays(14);
 
-        if($salary->save()){
+        if($AgentSalary->save()){
             Session::flash('alert', 'success');
             Session::flash('msg', 'Invoice Generated Successfully');
             return redirect()->back();
@@ -124,9 +119,9 @@ class HomeController extends Controller
 
     }
 
-    public function SalaryInvoices($id){
-        $salary = Salary::where('id', decrypt($id))->first();
-        return view('agency.invoice', compact('salary', $salary));
+    public function AgentSalaryInvoices($id){
+        $AgentSalary = AgentSalary::where('id', decrypt($id))->first();
+        return view('agency.invoice', compact('AgentSalary', $AgentSalary));
     }
 
     public function paymentProcessor(){

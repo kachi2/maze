@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
-class affiliates
+class Affiliate
 {
     /**
      * Handle an incoming request.
@@ -15,10 +16,10 @@ class affiliates
      */
     public function handle($request, Closure $next)
     {
-       // dd(auth('affiliates')->user());
-        if(auth()->guard('affiliates')){
-          if()
-        }
-        return $next($request);
+        if(!auth()->guard('affiliates')){
+                return redirect()->route('home');
+       }
+       return $next($request);
+   
     }
 }

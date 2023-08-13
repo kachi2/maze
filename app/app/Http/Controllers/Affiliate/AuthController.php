@@ -20,7 +20,7 @@ class AuthController extends Controller
     //
  
     public function register(){
-        return view('agency.register');
+        return view('affiliates.register');
     }
 
     public function registers(Request $req){
@@ -101,7 +101,7 @@ class AuthController extends Controller
         Auth::loginUsingId($agent->id);
         Session::flash('alert', 'success');
         Session::flash('msg', 'Account Setup Completed');
-        return redirect()->route('agency.index');
+        return redirect()->route('affiliates.index');
         }
     }
 
@@ -121,7 +121,8 @@ class AuthController extends Controller
 
    // dd($credentials);
    //dd(auth::guard('agent'));
-    if(Auth::guard('affiliates')->attempt($credentials)){
+    if(Auth::guard('affiliates')->attempt($credentials, true)){
+      //  dd( agent_user()->id);
         agent_user()->update([
             'last_login' => Carbon::now()->toDateTimeString(),
             'login_ip'  => $req->getClientIp(),
@@ -133,7 +134,10 @@ class AuthController extends Controller
             'browser' => $req->userAgent(),
             'login_ip' => $req->Ip(),
         ]);
-        return redirect()->route('agency.index');
+        //dd( agent_user()->id);
+
+    //  dd($ss);
+        return redirect()->route('affiliates.index');
     }else{
         return redirect()->back()->withInput($req->all())->withErrors($valid);
     }

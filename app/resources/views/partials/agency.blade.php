@@ -3,7 +3,7 @@
         <div class="left-sidenav">
             <!-- LOGO -->
             <div class="brand">
-                <a href="{{route('agency.index')}}" class="logo">
+                <a href="{{route('affiliates.index')}}" class="logo">
                     <span>
                         <img src="{{asset('/logo.png')}}" alt="logo-small" class="logo-sm">
                     </span>

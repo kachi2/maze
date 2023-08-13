@@ -130,11 +130,11 @@
                                 <div class="media">
                                     <img src="assets/images/money-beg.png" alt="" class="align-self-center" height="40">
                                     <div class="media-body align-self-center ms-3"> 
-                                        <h6 class="m-0 font-20">{{moneyFormat(agent_user()->wallets->payments, 'USD')}}</h6>
+                                        {{-- <h6 class="m-0 font-20">{{moneyFormat(agent_user()->wallets->payments, 'USD')}}</h6> --}}
                                         <p class="text-muted mb-0">Available Balance</p>   
-                                        <p class="m-0 font-15"> @php $next_pay = Date("M d", strtotime($next_salary->next_pay));
-                                            echo $next_pay;
-                                                @endphp 
+                                        {{-- <p class="m-0 font-15"> @php $next_pay = Date("M d", strtotime($next_salary->next_pay)); --}}
+                                            {{-- echo $next_pay;
+                                                @endphp  --}}
                                                 </p>     
                                         <p class=" mb-0" style="color:red">Next Withdrawal</p>                                                                                                                                         
                                     </div><!--end media body-->

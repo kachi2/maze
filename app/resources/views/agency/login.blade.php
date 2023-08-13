@@ -22,21 +22,21 @@
                                  <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div class="tab-pane active px-3 pt-3" id="Register_Tab" role="tabpanel">
-                                        <form class="form-horizontal auth-form" action="{{route('agent.login')}}" method="post">
+                                        <form class="form-horizontal auth-form" action="{{route('affiliates.login')}}" method="post">
                                             @csrf
                                            
                                             <div class="form-group mb-2">
                                                 <label class="form-label" for="useremail">Email</label>
                                                 <div class="input-group">                                                                                         
                                                     <input type="email" class="form-control {{ form_invalid('email') }}" value="{{old('email')}}" name="email" id="useremail" placeholder="Enter Email">
-                                                    @showError('email')
+                                                    {{-- @showError('email') --}}
                                                 </div>                                    
                                             </div><!--end form-group-->
                                             <div class="form-group mb-2">
                                                 <label class="form-label" for="mo_number">Password</label>                                            
                                                 <div class="input-group">                                 
                                                     <input type="password" class="form-control {{ form_invalid('password')}}" name="password" value="{{old('password')}}" id="mo_number" placeholder="******************">
-                                                    @showError('password')
+                                                    {{-- @showError('password') --}}
                                                 </div>                               
                                             </div><!--end form-group-->  
                                             <div class="form-group mb-0 row">

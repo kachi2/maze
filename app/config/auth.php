@@ -112,6 +112,15 @@ return [
         ],
     ],
 
+    'passwords' => [
+        'users' => [
+            'provider' => 'affiliates',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout

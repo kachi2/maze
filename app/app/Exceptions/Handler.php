@@ -56,8 +56,8 @@ class Handler extends ExceptionHandler
     {
         $gaurd = Arr::get($exception->guards(), 0);
         switch($gaurd){
-            case 'agent': 
-                $login = 'Agent-login';
+            case 'affiliates': 
+                $login = 'affiliates.loginform';
                 break;
             default: 
             $login = "login";

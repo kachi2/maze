@@ -10,26 +10,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', 'AuthController@register')->name('register');
+Route::group(['as' => 'affiliates.'], function(){
+Route::get('/register', 'AuthController@register')->name('register');
 Route::post('/register/agent/', 'AuthController@registers')->name('agency.registers');
-Route::get('/registration/{id}', 'AuthController@CompleteRegistration')->name('agency.registration');
-Route::post('/completion/{id}', 'AuthController@AccountCompleted')->name('agency.AccountCompleted');
-Route::get('/login', 'AuthController@Login')->name('Agent-login');
-Route::post('/logins', 'AuthController@Logins')->name('agent.login');
-
+Route::get('/registration/{id}', 'AuthController@CompleteRegistration')->name('registration');
+Route::post('/completion/{id}', 'AuthController@AccountCompleted')->name('AccountCompleted');
+Route::get('/login', 'AuthController@Login')->name('loginform');
+Route::post('/logins', 'AuthController@Logins')->name('login');
+Route::post('/logout', 'AuthController@logout')->name('logout');
 Route::middleware('affiliates')->group(function(){
-Route::post('/logout', 'AuthController@logout')->name('agent.logout');
-Route::get('/', 'HomeController@index')->name('agency.index');
-Route::get('/home', 'HomeController@index')->name('agency.index');
-Route::get('index', 'HomeController@index')->name('agency.index');
-Route::get('/agent/task', 'HomeController@Task')->name('agency.task');
-Route::get('/agent/payments', 'HomeController@Payments')->name('agency.payment');
-Route::get('/agent/salary', 'HomeController@SalaryPayments')->name('agency.salary');
-Route::post('/agent/salary/invoice', 'HomeController@SalaryInvoice')->name('salary.invoice');
-Route::get('/agent/salary/invoice/{id}', 'HomeController@SalaryInvoices')->name('salaries.invoice');
-Route::post('/agent/process/payment/', 'HomeController@paymentProcessor')->name('agentProcess.payment');
-Route::get('/agency/account', 'HomeController@account')->name('agency.account');
+    Route::get('/', 'HomeController@index')->name('index');
+Route::get('/home', 'HomeController@index')->name('index');
+Route::get('index', 'HomeController@index')->name('index');
+Route::get('/agent/task', 'HomeController@Task')->name('task');
+Route::get('/agent/payments', 'HomeController@Payments')->name('payment');
+Route::get('/agent/salary', 'HomeController@SalaryPayments')->name('salary');
+Route::post('/agent/salary/invoice', 'HomeController@SalaryInvoice')->name('invoice');
+Route::get('/agent/salary/invoice/{id}', 'HomeController@SalaryInvoices')->name('invoice');
+Route::post('/agent/process/payment/', 'HomeController@paymentProcessor')->name('payment');
+Route::get('/agency/account', 'HomeController@account')->name('account');
 Route::post('/agency/account/update', 'HomeController@UpdateAccount')->name('UpdateAccount');
 Route::post('/agency/password/update', 'HomeController@UpdatePassword')->name('UpdatePassword');
 
@@ -41,7 +40,7 @@ Route::get('/referral', 'ReferralController@AgentReferral')->name('agent.referra
 Route::get('/referral/ref/', 'ReferralController@register')->name('agent.referral.register'); 
 Route::get('/claim/bonus/{id}', 'ReferralController@ClaimBonus')->name('referal.claimBonus');
 
-
+});
 #============== Agent Admin Routes ===================
 Route::get('/admin/index', 'AdminController@Index')->name('agency.admin.index');
 Route::get('/admin/referals', 'AdminController@Referals')->name('agency.admin.referals');
