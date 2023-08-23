@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Affiliate
+class AgentMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class Affiliate
      */
     public function handle($request, Closure $next)
     {
-        if(!auth()->guard('affiliates')){
-                return redirect()->route('home');
-       }
-       return $next($request);
-   
+ 
+        if(!auth::guard('agent')->check()){
+            return redirect()->route('agents.loginform');
+        }
+        return $next($request);
     }
 }

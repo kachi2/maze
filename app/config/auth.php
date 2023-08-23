@@ -40,9 +40,9 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'affiliates' => [
+        'agent' => [
             'driver' => 'session',
-            'provider' => 'affiliates',
+            'provider' => 'agents',
         ],
 
         'api' => [
@@ -76,7 +76,7 @@ return [
             'model' => App\User::class,
         ],
 
-            'affiliates' => [
+            'agents' => [
                 'driver' => 'eloquent',
                 'model' => App\Agent::class,
             ],
@@ -113,8 +113,8 @@ return [
     ],
 
     'passwords' => [
-        'users' => [
-            'provider' => 'affiliates',
+        'agents' => [
+            'provider' => 'agents',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

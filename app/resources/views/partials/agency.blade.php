@@ -3,7 +3,7 @@
         <div class="left-sidenav">
             <!-- LOGO -->
             <div class="brand">
-                <a href="{{route('affiliates.index')}}" class="logo">
+                <a href="{{route('agents.index')}}" class="logo">
                     <span>
                         <img src="{{asset('/logo.png')}}" alt="logo-small" class="logo-sm">
                     </span>
@@ -18,14 +18,14 @@
                 <ul class="metismenu left-sidenav-menu">
                     <li class="menu-label mt-0">Main</li>
                     <li>
-                        <a href="{{route('agency.index')}}"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Dashboard</span></a>
+                        <a href="{{route('agents.index')}}"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Dashboard</span></a>
                         
                     </li>
                     <li>
-                        <a href="{{route('agent.referral')}}"><i data-feather="lock" class="align-self-center menu-icon"></i><span>My Referrals</span></a>
+                        <a href="{{route('agents.referral')}}"><i data-feather="lock" class="align-self-center menu-icon"></i><span>My Referrals</span></a>
                     </li> 
                     <li>
-                        <a href="{{route('agency.task')}}"><i data-feather="lock" class="align-self-center menu-icon"></i><span>My Task</span></a>
+                        <a href="{{route('agents.task')}}"><i data-feather="lock" class="align-self-center menu-icon"></i><span>My Task</span></a>
                     </li>
     
                     <hr class="hr-dashed hr-menu">
@@ -34,10 +34,10 @@
                    
     
                     <li>
-                        <a href="{{route('agency.payment')}}"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Payments</span></a>
+                        <a href="{{route('agents.payment')}}"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Payments</span></a>
                     </li>     
                     <li>
-                        <a href="{{route('agency.salary')}}"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Salary</span></a>
+                        <a href="{{route('agents.salary')}}"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Salary</span></a>
                     </li> 
                     <hr class="hr-dashed hr-menu">
                     <li class="menu-label my-2">Manage Account</li>   
@@ -45,7 +45,7 @@
                         <a href="widgets.html"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Account</span></a>
                     </li>   
                     <li>
-                        <a href="{{route('agency.register')}}"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Add Agent</span></a>
+                        <a href="{{route('agents.register')}}"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Add agents</span></a>
                     </li>   
                     <li>
                         <a href="widgets.html"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Logout</span><span class="badge badge-soft-success menu-arrow">New</span></a>
@@ -121,7 +121,7 @@
                      &nbsp;   &nbsp;   &nbsp;
                      <span style="float:right"> 
 
-                        <form method="post" action="{{route('agentProcess.payment')}}">
+                        {{-- <form method="post" action="{{route('agentsProcess.payment')}}"> --}}
                             @csrf
                             <button class="btn btn-primary" id="processPay" hidden> Process Payment </button>
                         

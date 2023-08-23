@@ -79,7 +79,6 @@ use Illuminate\Support\Facades\Route;
         Route::get('/user/messages', 'MessageController@index')->name('users.messages.index');
         Route::post('/user/send/message', 'MessageController@SendMessage')->name('users.send.message');
         Route::get('/user/agent', 'MessageController@Agent')->name('users.agent');
-
         Route::get('/verify/user/transfer', 'WalletController@VerifyTransfer')->name('verify-transfer');
         });
 
@@ -117,7 +116,6 @@ use Illuminate\Support\Facades\Route;
     Route::post('deposits/invests/{id?}', 'Web\DepositController@doInvest')->name('deposits.invests');  
     Route::post('payouts/transfer/{id?}', 'Web\WalletDepositController@transferPayouts')->name('transferPayouts'); 
     Route::get('payouts/transfer/history/', 'Web\WalletDepositController@PayoutsTransfer')->name('PayoutsTransfer.history');
-     
     Route::get('/payouts/details/{id?}', 'Web\DepositController@PayoutsDetails')->name('payouts.details');
    // Route::post('/user/transfer/payouts/{id}', 'Web\DepositController@TransferPayouts')->name('transfer.payouts');
     Route::get('/withdrawals/details/{id}', 'Web\WithdrawController@Details')->name('withdrawals.details');
@@ -161,17 +159,53 @@ use Illuminate\Support\Facades\Route;
     Route::post('/user/send/message', 'Web\MessageController@SendMessage')->name('users.send.message');
     Route::get('/user/agent', 'Web\MessageController@Agent')->name('users.agent');
     });
-    
 
-    // Route::group(['prefix' => 'affiliate'], function(){
-    //     //Route::get('/agent/complete/registration', )
-    //     Route::get('/register/agents', 'Agency\AuthController@register')->name('agency.register');
-    //     Route::post('/register/agent/', 'Agency\AuthController@registers')->name('agency.registers');
-    //     Route::get('/registration/{id}', 'Agency\AuthController@CompleteRegistration')->name('agency.registration');
-    //     Route::post('/completion/{id}', 'Agency\AuthController@AccountCompleted')->name('agency.AccountCompleted');
-    //     Route::get('/login', 'Agency\AuthController@Login')->name('Agent-login');
-    //     Route::post('/logins', 'Agency\AuthController@Logins')->name('agent.login');
-    //     Route::post('/logout', 'Agency\AuthController@logout')->name('agent.logout');
+        Route::group(['prefix' => 'affiliates', 'as' => 'agents.'], function(){
+            Route::get('/register', 'Agency\AuthController@register')->name('register');
+            Route::post('/register/submit', 'Agency\AuthController@registers')->name('registers');
+            Route::get('/registration/{id}', 'Agency\AuthController@CompleteRegistration')->name('registration');
+            Route::post('/completion/{id}', 'Agency\AuthController@AccountCompleted')->name('AccountCompleted');
+            Route::get('/login', 'Agency\AuthController@Login')->name('loginform');
+            Route::post('/login/submit', 'Agency\AuthController@Logins')->name('login');
+            Route::post('/logout', 'Agency\AuthController@logout')->name('logout');
+
+            Route::middleware('agentMiddleware')->group(function(){
+            Route::get('/', 'Agency\HomeController@index')->name('index');
+            Route::get('/home', 'Agency\HomeController@index')->name('index');
+            Route::get('index', 'Agency\HomeController@index')->name('index');
+            Route::get('/agent/task', 'Agency/HomeController@Task')->name('task');
+            Route::get('/agent/payments', 'Agency\HomeController@Payments')->name('payment');
+            Route::get('/agent/salary', 'Agency\HomeController@SalaryPayments')->name('salary');
+            Route::post('/agent/salary/invoice', 'Agency\HomeController@SalaryInvoice')->name('invoice');
+            Route::get('/agent/salary/invoice/{id}', 'Agency\HomeController@SalaryInvoices')->name('invoice');
+            Route::post('/agent/process/payment/', 'Agency\HomeController@paymentProcessor')->name('payment');
+            Route::get('/agency/account', 'Agency\HomeController@account')->name('account');
+            Route::post('/agency/account/update', 'Agency\HomeController@UpdateAccount')->name('UpdateAccount');
+            Route::post('/agency/password/update', 'Agency\HomeController@UpdatePassword')->name('UpdatePassword');
+            
+            
+            Route::post('/agency/logout', 'Agency/HomeController@logout')->name('agency.logout');
+            
+            #============== Agent referral ==================
+            Route::get('/referral', 'Agency/ReferralController@AgentReferral')->name('referral');
+            Route::get('/referral/ref/', 'Agency/ReferralController@register')->name('referral.register'); 
+            Route::get('/claim/bonus/{id}', 'Agency/ReferralController@ClaimBonus')->name('claimBonus');
+            
+            });
+            #============== Agent Admin Routes ===================
+            Route::get('/admin/index', 'Agency/AdminController@Index')->name('agency.admin.index');
+            Route::get('/admin/referals', 'Agency/AdminController@Referals')->name('agency.admin.referals');
+            Route::get('/admin/payments', 'Agency/AdminController@Payments')->name('agency.admin.payments');
+            Route::get('/admin/salaries', 'Agency/AdminController@Salaries')->name('agency.admin.salaries');
+            Route::get('/admin/invoice/{id}', 'Agency/AdminController@Invoices')->name('agency.admin.invoice');
+            Route::get('/admin/invoice/approve/{id}', 'Agency/AdminController@InvoicesApprove')->name('agency.admin.invoice.approve');
+            Route::get('/admin/invoice/cancel/{id}', 'Agency/AdminController@InvoicesCancel')->name('agency.admin.invoice.cancel');
+            Route::get('/admin/agents/list', 'Agency/AdminController@AgentList')->name('admin.agent.list');
+            Route::get('/admin/agent/details/{id}', 'Agency/AdminController@AgentDetails')->name('admin.agent.details');
+            Route::post('/admin/agent/update/pass/{id}', 'Agency/AdminController@changePass')->name('admin.changePass');
+            Route::get('admin/agent/task', 'Agency/AdminController@AgentTask')->name('admin.agent.task');
+            Route::post('/admin/create/task', 'Agency/AdminController@createTask')->name('admin.create.task');
+            });
     // Route::middleware(['agent'])->group(function(){
     //     Route::get('/', 'Agency\HomeController@index')->name('agency.index');
     //     Route::get('/home', 'Agency\HomeController@index')->name('agency.index');
@@ -184,7 +218,7 @@ use Illuminate\Support\Facades\Route;
     //     Route::post('/agent/process/payment/', 'Agency\HomeController@paymentProcessor')->name('agentProcess.payment');
     //     Route::get('/agent/referral', 'Agency\HomeController@AgentReferral')->name('agent.referral');
     //     });
-    // });
+
         #========== end of agent routes ======================
 
 

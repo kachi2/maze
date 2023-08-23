@@ -15,7 +15,13 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Session\TokenMismatchException::class,
+        \Illuminate\Validation\ValidationException::class,
+        \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException::class,
     ];
 
     /**
@@ -54,15 +60,18 @@ class Handler extends ExceptionHandler
 
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        $gaurd = Arr::get($exception->guards(), 0);
-        switch($gaurd){
-            case 'affiliates': 
-                $login = 'affiliates.loginform';
-                break;
-            default: 
-            $login = "login";
-            break;
-        }
-        return redirect()->guest(route($login));
-    }
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'],401);
+           }
+    
+            $guard = Arr::get($exception->guards(), 0);
+             switch ($guard) {
+               case 'agent': $login = 'agents.loginform';
+               break;
+               default: $login = 'login';
+               break;
+     }
+               return redirect()->guest(route($login));
+}
+
 }

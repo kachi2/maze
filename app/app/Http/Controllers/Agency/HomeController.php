@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Affiliate;
+namespace App\Http\Controllers\Agency;
 
 use AgentPayment;
 use App\Http\Controllers\Controller;
@@ -21,6 +21,11 @@ use Carbon\Carbon;
 class HomeController extends Controller
 {
     //
+
+    public function __construct()
+    {
+       // return $this->middleware('agent');
+    }
 
     public function Index(){
    

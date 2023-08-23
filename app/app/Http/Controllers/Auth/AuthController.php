@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Affiliate;
+namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +20,7 @@ class AuthController extends Controller
     //
  
     public function register(){
-        return view('affiliates.register');
+        return view('agents.register');
     }
 
     public function registers(Request $req){
@@ -101,7 +101,7 @@ class AuthController extends Controller
         Auth::loginUsingId($agent->id);
         Session::flash('alert', 'success');
         Session::flash('msg', 'Account Setup Completed');
-        return redirect()->route('affiliates.index');
+        return redirect()->route('agents.index');
         }
     }
 
@@ -121,7 +121,7 @@ class AuthController extends Controller
 
    // dd($credentials);
    //dd(auth::guard('agent'));
-    if(Auth::guard('affiliates')->attempt($credentials, true)){
+    if(Auth::guard('agents')->attempt($credentials, true)){
       //  dd( agent_user()->id);
         agent_user()->update([
             'last_login' => Carbon::now()->toDateTimeString(),
@@ -136,8 +136,8 @@ class AuthController extends Controller
         ]);
         //dd( agent_user()->id);
 
-    //  dd($ss);
-        return redirect()->route('affiliates.index');
+  
+        return redirect()->route('agents.index');
     }else{
         return redirect()->back()->withInput($req->all())->withErrors($valid);
     }
@@ -145,7 +145,7 @@ class AuthController extends Controller
 }
 
     public function logout(){
-        auth()->guard('affiliates')->logout();
+        auth()->guard('agents')->logout();
         Session::flush();
         return view('agency.login');
     }

@@ -15,7 +15,6 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
-    protected $agentNamespace = 'App\Http\Controllers\Affiliate';
 
     /**
      * This namespace is applied to your controller routes.
@@ -55,7 +54,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-        $this->mapAgentRoutes();
         //
     }
 
@@ -80,13 +78,7 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/admin.php'));
 
     }
-    protected function mapAgentRoutes()
-    {
-        Route::prefix('affiliates')
-            ->middleware(['affiliates', 'web'])
-            ->namespace($this->agentNamespace)
-            ->group(base_path('routes/affiliates.php'));
-    }
+   
     /**
      * Define the "api" routes for the application.
      *

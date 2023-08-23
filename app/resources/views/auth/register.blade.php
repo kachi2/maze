@@ -113,7 +113,7 @@
             <p>We use cookies and similar tools to enhance your user experience, provide our services, and understand how customers use our services so we can make improvements. Depending on applicable laws in the region you are located in, the cookie banner on your browser will tell you how to accept or refuse cookies.</p>
           
             <p style="font-weight:bold"> Does Mazeoptions Share My Personal Information?</p>
-            <p>Information about our users is an important part of our business and we are not in the business of selling our users' personal information to others.   Mazeoptions shares users' personal information only as described below and with the subsidiaries or affiliates of Mazeoptions that are either subject to this Privacy Notice or follow practices at least as protective as those described in this Privacy Notice..</p>
+            <p>Information about our users is an important part of our business and we are not in the business of selling our users' personal information to others.   Mazeoptions shares users' personal information only as described below and with the subsidiaries or agents of Mazeoptions that are either subject to this Privacy Notice or follow practices at least as protective as those described in this Privacy Notice..</p>
           
           
             <p style="font-weight:bold">How Secure is My Information?.</p>

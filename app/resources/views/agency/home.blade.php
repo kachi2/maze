@@ -36,10 +36,10 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Working Hours</p>
-                                        <h3 class="m-0">{{$agent->working_hours}}hrs Per Day</h3>
+                                        <p class="text-dark mb-0 fw-semibold">Affiliate Level</p>
+                                        <h3 class="m-0">Starter</h3>
                                         <p class="mb-0 text-truncate text-muted">
-                                            <span class="text-success">{{count($payments)}}hrs</span> Completed in 14 days</p>
+                                            <span class="text-success">12 people referred</p>
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
@@ -50,8 +50,8 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">                                                
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Weekly Task</p>
-                                        <h3 class="m-0">{{count($task)}} Tasks</h3>
+                                        <p class="text-dark mb-0 fw-semibold">Affiliate Bonus</p>
+                                        <h3 class="m-0">0.2$ per referral</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success">{{count($completed_task)}} Task</span> Completed in 14 Days</p>
                                     </div>
                                 </div>

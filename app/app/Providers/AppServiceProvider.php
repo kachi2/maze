@@ -55,7 +55,7 @@ class AppServiceProvider extends ServiceProvider
                 $withdrawals_account = WithdrawalAccount::where('user_id', auth_user()->id)->get();
                 $view->with('withdrawals_account', $withdrawals_account);
             }
-            if (Auth::guard('affiliates')->check()) {
+            if (Auth::guard('agent')->check()) {
             $activity = AgentActivity::where('agent_id', agent_user()->id)->latest()->first();
             $view->with('agent_activity', $activity);
             }

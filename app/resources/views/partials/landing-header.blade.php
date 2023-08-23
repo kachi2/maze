@@ -27,6 +27,7 @@
                         </ul>
                      </div>
                   </div>
+
                </div>
             </div>
          </div>
@@ -40,7 +41,7 @@
                      </div>
                      <!-- end logo -->
                   </div>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-10 col-sm-9 col-xs-12">
                      <!-- menu -->
                      <div class="main_menu">
                         <div id="cssmenu" class="dark_menu">
@@ -53,7 +54,7 @@
                               <li><a href="{{route('privacy')}}">Privacy Policy</a></li>
                               <li><a href="{{route('web.logins')}} " style="border-radius:10px;">Login</a></li>
                               <li><a href="{{route('web.register')}}"  style="border-radius:10px;">Register</a></li>
-                               
+                              <li><a href="{{route('privacy')}}"> Affiliates Program </a>
                            </ul>
                         </div>
                      </div>

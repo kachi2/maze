@@ -16,10 +16,11 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
+    
         switch($guard){
             case "agent":
                 if (Auth::guard($guard)->check()) {
-                    return redirect('/agent/home');
+                    return redirect('/agents/home');
                 }
                 break;
             default:

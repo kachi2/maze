@@ -29,13 +29,13 @@ class AgentLoginController extends Controller
      */
 
     public function ShowLogin(){
-        return view('affiliates.login');
+        return view('agents.login');
     }
     protected $redirectTo = '/ageny/index';
 
 
     protected function guard(){
-        return Auth::guard('affiliates');
+        return Auth::guard('agent');
     }
     /**
      * Create a new controller instance.
@@ -44,7 +44,7 @@ class AgentLoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:affiliates')->except('logout');
+        $this->middleware('guest:agents')->except('logout');
     }
 
     //

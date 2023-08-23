@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Mazeoptions Agent</title>
+        <title>Mazeoptions Affiliates</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="" name="author" />
@@ -80,34 +80,34 @@
 
 
 <script>
-   var time = 6; 
-var saved_countdown = localStorage.getItem('saved_countdown');
+//    var time = 6; 
+// var saved_countdown = localStorage.getItem('saved_countdown');
 
-if(saved_countdown == null) {
-    var new_countdown = new Date().getTime() + (time + 2) * 1000;
-    time = new_countdown;
-    localStorage.setItem('saved_countdown', new_countdown);
-} else {
-    time = saved_countdown;
-}
-var x = setInterval(() => {
-    var now = new Date().getTime();
-    var distance = time - now;
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+// if(saved_countdown == null) {
+//     var new_countdown = new Date().getTime() + (time + 2) * 1000;
+//     time = new_countdown;
+//     localStorage.setItem('saved_countdown', new_countdown);
+// } else {
+//     time = saved_countdown;
+// }
+// var x = setInterval(() => {
+//     var now = new Date().getTime();
+//     var distance = time - now;
+//   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById("countdowns").innerHTML = "<span style=\"color:green; font-size:18px; font-weight:bolder\">" + minutes + "m:"+ seconds +"s" + "</span>" ;
+//     document.getElementById("countdowns").innerHTML = "<span style=\"color:green; font-size:18px; font-weight:bolder\">" + minutes + "m:"+ seconds +"s" + "</span>" ;
         
-    // If the count down is over, write some text 
-    if (distance <= 0) {
-        $('#processPay').attr('hidden', false);
-        $('#info').attr('hidden', true);
-        localStorage.removeItem('saved_countdown');
-        clearInterval(x);
-        document.getElementById("countdowns").innerHTML = "Weldone!, An hour completed";
-    }
-}, 1000);
-    </script>
+//     // If the count down is over, write some text 
+//     if (distance <= 0) {
+//         $('#processPay').attr('hidden', false);
+//         $('#info').attr('hidden', true);
+//         localStorage.removeItem('saved_countdown');
+//         clearInterval(x);
+//         document.getElementById("countdowns").innerHTML = "Weldone!, An hour completed";
+//     }
+// }, 1000);
+//     </script>
 
 
             @yield('script')
