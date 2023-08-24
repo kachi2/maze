@@ -1,4 +1,4 @@
-@extends('layouts.agency')
+@extends('layouts.agency_auth')
 @section('content')
 
     <!-- Log In page -->
@@ -8,9 +8,13 @@
                 <div class="row">
                     <div class="col-lg-5 mx-auto">
                         <div class="card">
+
+                            @if(Session::has('msg'))
+                           <span class="alert alert-success"> {{Session::get('msg')}} </span> 
+                            @endif
                             <div class="card-body p-0 auth-header-box">
                                 <div class="text-center p-3">
-                                    <p class="text-muted  mb-0">Register New Agent.</p>  
+                                    <p class="text-muted  mb-0">Affiliates Register</p>  
                                 </div>
                             </div>
                             <div class="card-body p-0">
@@ -22,7 +26,7 @@
                                  <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div class="tab-pane active px-3 pt-3" id="Register_Tab" role="tabpanel">
-                                        <form class="form-horizontal auth-form" action="{{route('agency.registers')}}" method="post">
+                                        <form class="form-horizontal auth-form" action="{{route('affiliates.registers')}}" method="post">
                                             @csrf
                                             <div class="form-group mb-2">
                                                 <label class="form-label" for="useremail">Full Name</label>
@@ -45,6 +49,7 @@
                                                     @showError('phone')
                                                 </div>                               
                                             </div><!--end form-group-->  
+                                            
                                             <div class="form-group mb-0 row">
                                                 <div class="col-12">
                                                     <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Register <i class="fas fa-sign-in-alt ms-1"></i></button>

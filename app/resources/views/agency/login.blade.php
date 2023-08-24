@@ -22,7 +22,7 @@
                                  <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div class="tab-pane active px-3 pt-3" id="Register_Tab" role="tabpanel">
-                                        <form class="form-horizontal auth-form" action="{{route('agents.login')}}" method="post">
+                                        <form class="form-horizontal auth-form" action="{{route('affiliates.login')}}" method="post">
                                             @csrf
                                            
                                             <div class="form-group mb-2">

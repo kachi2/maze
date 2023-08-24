@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Agent;
 use App\AgentActivity;
+use App\AgentWallet;
 use Illuminate\Support\Facades\Mail;
 class AuthController extends Controller
 {
@@ -20,7 +21,7 @@ class AuthController extends Controller
     //
  
     public function register(){
-        return view('agents.register');
+        return view('agency.register');
     }
 
     public function registers(Request $req){
@@ -53,7 +54,7 @@ class AuthController extends Controller
         
         mail::to($req->email)->send(new AgentRegistration($data));
         Session::flash('alert', 'success');
-        Session::flash('msg', 'Agent Created Successully');
+        Session::flash('msg', 'Agent Created Successully, please check your email to complete registration process');
         return redirect()->back();
         }
     }
@@ -67,9 +68,7 @@ class AuthController extends Controller
 
         $valid = Validator::make($req->all(), [
                 'password' => 'required|min:8|confirmed',
-                'address' => 'required',
                 'image' => 'required',
-                'state' => 'required',
                 'country' => 'required',
         ]);
         if($valid->fails()){
@@ -92,16 +91,33 @@ class AuthController extends Controller
                 'city' => $req->address,
                 'doc' => $filename ,
                 'is_accepted' => 1,
-                'city' => $req->address,
-                'state' => $req->state,
                 'country' => $req->country,
             ]);
         if($update){
+
+        AgentWallet::create([
+            'agent_id' =>$agent->id, 
+            'payment' => 0,
+            'salary_paid' => 0,
+            'salary_pending' => 0,
+            'status' => 1
+        ]);
+
+        AgentActivity::create([
+            'agent_id' => $agent->id,
+            'last_login' => Carbon::now()->toDateTimeString(),
+            'browser' => $req->userAgent(),
+            'login_ip' => $req->Ip(),
+        ]);
+
+        $agent->update([
+            'login_counts' => 1
+        ]);
         
         Auth::loginUsingId($agent->id);
         Session::flash('alert', 'success');
         Session::flash('msg', 'Account Setup Completed');
-        return redirect()->route('agents.index');
+        return redirect()->route('affiliates.index');
         }
     }
 
@@ -137,7 +153,7 @@ class AuthController extends Controller
         //dd( agent_user()->id);
 
   
-        return redirect()->route('agents.index');
+        return redirect()->route('affiliates.index');
     }else{
         return redirect()->back()->withInput($req->all())->withErrors($valid);
     }

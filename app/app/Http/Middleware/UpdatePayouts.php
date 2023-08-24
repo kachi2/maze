@@ -24,7 +24,7 @@ class UpdatePayouts
      */
     public function handle($request, Closure $next)
     {
-        Cache::remember('update_payout', now()->addMinutes(2), function () {
+        Cache::remember('update_payout', now()->addMinutes(60), function () {
            $this->updatePayouts();
             return 'foo';
         });

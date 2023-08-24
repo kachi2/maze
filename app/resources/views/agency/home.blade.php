@@ -36,7 +36,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Affiliate Level</p>
+                                        <p class="text-dark mb-0 fw-semibold">Affiliate Package</p>
                                         <h3 class="m-0">Starter</h3>
                                         <p class="mb-0 text-truncate text-muted">
                                             <span class="text-success">12 people referred</p>
@@ -136,7 +136,7 @@
                                             {{-- echo $next_pay;
                                                 @endphp  --}}
                                                 </p>     
-                                        <p class=" mb-0" style="color:red">Next Withdrawal</p>                                                                                                                                         
+                                        <p class=" mb-0" style="color:rgb(10, 19, 148)">Accumulated Balances</p>                                                                                                                                         
                                     </div><!--end media body-->
                                 </div><!--end media-->
                             </div><!--end col-->  

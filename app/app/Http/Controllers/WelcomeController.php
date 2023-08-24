@@ -58,4 +58,10 @@ class WelcomeController
             'packages' => $packages
         ]);
     }
+
+
+    public function Affiliates(){
+        $coins = MarketList::get();
+        return view('affiliates',compact( 'coins'));
+    }
 }

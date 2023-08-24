@@ -12,8 +12,8 @@
             </tr>
             </tbody>
         </table>
-                        <table style="width:100%;max-width:620px;margin:0 auto;background-color:#ffffff">
-            <tbody>
+            <table style="width:100%;max-width:720px;margin:0 auto;background-color:#ffffff">
+            <tbody style="padding:15px">
                     <tr>
                 <td>
                     Dear Mr./Ms.   {{ $data['name'] }},
@@ -22,34 +22,21 @@
                     
             <tr>
                 <td style="padding:5px"> 
-
-                   <p> We are please to offer you a Part-Time position as Digital Marketing agent at Mazeoptions. After reviewing your request, we are certain you are perfect fit to our company. 
-                    We believe that your knowledge, skills and experience would be an ideal fit for our marketing team. We hope you will enjoy your role and make a significant contribution to the overall success of Mazeoptions.
-                    Please take the time to review our offer. It includes important details about your compensation, benefits and the terms and conditions of your anticipated employment with Mazeoptions.
-                </p>
-                <p>  <span span style="font-weight: 600"> Working Hours</span> <br>
-                   This position requiring approximately eight (4) working hours per daily.
-                    There is no fix hours to work, you can work at the best hours to suits you.</p>
-                    <p> 
-                    <span span style="font-weight: 600">Compensation and Salary </span> <br>
-                   For digital marketing position your salary is $10 per hour which can be reviewed higher if you meets your daily targets for 60 days. Salaries are paid every 14days.
-                    </p>
-                   
-                    <p><span span style="font-weight: 600"> Bonus </span><br>
-                   As part of your compensation, Mazeoptions is also offering extra $10 daily on every achieved targets.</p> 
-                   <p><span span style="font-weight: 600"> Benefits </span><br>
-                    As an employee of Mazeoptions you will be eligible for benefits your Mazeoptions offers, such as health/life/disability/dental insurance; stock options etc. 
-                </p> 
-                    <p> <span span style="font-weight: 600"> Commencement date </span><br>
-                    You must complete your profile and upload all necessary documents to complete your onboarding process on the agency monitoring website. 
-                    </p>
+                   <p>Thank you for joining our Affiliate Program! </p> 
+                   <p> We are excited to have you on board and can’t wait to see the results we will achieve together.</p>
+                   <p>As a reminder, our program offers a commission rate of 10% for starter package, 20% for professional and 40% for premium packages.</p>
+                   <p> Your account will be upgrade to the next package as your referrals grow. </p>
+                   <p> You will have access to our affiliate dashboard where you can find your unique tracking link and marketing materials. </p>
                     
-                    <p> To complete this request, click on <a href="{{route('agency.registration', encrypt($data['id']))}}">this link </a>, ensure to use a secured password on your account. 
-                    Sincerely,
-                    Daniels Rodriguez
-                    Head of Human Resources
-                    Mazeoptions Team
-                </p>
+                   <p> We provide regular updates on promotions and special deals that can offer to your audience.</p>
+                   <p> To get started, click <a href="{{route('affiliates.registration', encrypt($data['id']))}}"> link here </a> complete registration
+                   
+                    
+                   <p> If you have any questions or need assistance, please don’t hesitate to reach out to our team.</p>
+                   <p>  We are here to support you every step of the way</p>
+                    
+                   <p>  Best Regards
+                    Mazeoptions Team </p>
                     </td>
                     
     </tr>
@@ -76,3 +63,4 @@
         </tbody></table>
     </center><div class="yj6qo"></div><div class="adL">
     </div></div>
+

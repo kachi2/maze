@@ -54,7 +54,7 @@
                               <li><a href="{{route('privacy')}}">Privacy Policy</a></li>
                               <li><a href="{{route('web.logins')}} " style="border-radius:10px;">Login</a></li>
                               <li><a href="{{route('web.register')}}"  style="border-radius:10px;">Register</a></li>
-                              <li><a href="{{route('privacy')}}"> Affiliates Program </a>
+                              <li><a href="{{route('affiliates.welcome')}}"> Affiliates Program </a>
                            </ul>
                         </div>
                      </div>

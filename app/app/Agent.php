@@ -35,5 +35,16 @@ class Agent  extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'is_admin' => 'bool'
     ];
+
+
+    public function wallets(){
+        return $this->hasOne(AgentWallet::class, 'agent_id', 'id');
+    }
+    public function Ref(){
+        return $this->hasMany(Referrals::class);
+    }
+    public function referred(){
+        return $this->hasMany(Referrals::class);
+    }
     
 }

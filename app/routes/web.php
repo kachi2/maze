@@ -92,6 +92,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/plans', 'WelcomeController@plans')->name('plans');
     Route::get('/contact', 'ContactController@index')->name('contact');
     Route::post('/contact/store', 'ContactController@store')->name('contact.store');
+    Route::get('/activity/affiliates/', 'WelcomeController@Affiliates')->name('affiliates.welcome');
     ## =============== web routes ===========================
     Route::group(['prefix' => 'user', 'as' => 'web.'], function(){  
     Route::get('registers/', 'Web\RegisterController@createForm')->name('register');
@@ -160,7 +161,10 @@ use Illuminate\Support\Facades\Route;
     Route::get('/user/agent', 'Web\MessageController@Agent')->name('users.agent');
     });
 
-        Route::group(['prefix' => 'affiliates', 'as' => 'agents.'], function(){
+
+
+
+        Route::group(['prefix' => 'affiliates', 'as' => 'affiliates.'], function(){
             Route::get('/register', 'Agency\AuthController@register')->name('register');
             Route::post('/register/submit', 'Agency\AuthController@registers')->name('registers');
             Route::get('/registration/{id}', 'Agency\AuthController@CompleteRegistration')->name('registration');
@@ -173,7 +177,7 @@ use Illuminate\Support\Facades\Route;
             Route::get('/', 'Agency\HomeController@index')->name('index');
             Route::get('/home', 'Agency\HomeController@index')->name('index');
             Route::get('index', 'Agency\HomeController@index')->name('index');
-            Route::get('/agent/task', 'Agency/HomeController@Task')->name('task');
+            Route::get('/agent/task', 'Agency\HomeController@Task')->name('task');
             Route::get('/agent/payments', 'Agency\HomeController@Payments')->name('payment');
             Route::get('/agent/salary', 'Agency\HomeController@SalaryPayments')->name('salary');
             Route::post('/agent/salary/invoice', 'Agency\HomeController@SalaryInvoice')->name('invoice');
@@ -187,9 +191,9 @@ use Illuminate\Support\Facades\Route;
             Route::post('/agency/logout', 'Agency/HomeController@logout')->name('agency.logout');
             
             #============== Agent referral ==================
-            Route::get('/referral', 'Agency/ReferralController@AgentReferral')->name('referral');
-            Route::get('/referral/ref/', 'Agency/ReferralController@register')->name('referral.register'); 
-            Route::get('/claim/bonus/{id}', 'Agency/ReferralController@ClaimBonus')->name('claimBonus');
+            Route::get('/referral', 'Agency\ReferralController@AgentReferral')->name('referral');
+            Route::get('/referral/ref/', 'Agency\ReferralController@register')->name('referral.register'); 
+            Route::get('/claim/bonus/{id}', 'Agency\ReferralController@ClaimBonus')->name('claimBonus');
             
             });
             #============== Agent Admin Routes ===================
