@@ -16,31 +16,35 @@
             <!--end logo-->
             <div class="menu-content h-100" data-simplebar style="background:#0c213a">
                 <ul class="metismenu left-sidenav-menu">
-                    <li class="menu-label mt-0">Main</li>
+                    <li class="menu-label mt-0" style="color:#fff" >Main</li>
                     <li>
-                        <a href="{{route('affiliates.index')}}"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Dashboard</span></a>
+                        <a style="color:#fff" href="{{route('affiliates.index')}}"> <i data-feather="home" style="color:#fff"  class="align-self-center menu-icon"></i><span>Dashboard</span></a>
                         
                     </li>
                     <li>
-                        <a href="{{route('affiliates.referral')}}"><i data-feather="lock" class="align-self-center menu-icon"></i><span>My Referrals</span></a>
+                        <a style="color:#fff" href="{{route('affiliates.referral')}}"><i data-feather="lock" style="color:#fff"  class="align-self-center menu-icon"></i><span>My Referrals</span></a>
                     </li> 
                    
     
                     <hr class="hr-dashed hr-menu">
-                    <li class="menu-label my-2">Income and Bonus</li>
+                    <li class="menu-label my-2" style="color:#fff" >Income and Bonus</li>
     
                    
     
                     <li>
-                        <a href="{{route('affiliates.payment')}}"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Payments</span></a>
+                        <a style="color:#fff" href="{{route('affiliates.payment')}}"><i data-feather="layers" style="color:#fff"  class="align-self-center menu-icon"></i><span>Payments</span></a>
                     </li>  
                     <hr class="hr-dashed hr-menu">
-                    <li class="menu-label my-2">Manage Account</li>   
+                    <li class="menu-label my-2" style="color:#fff"  >Manage Account</li>   
                     <li>
-                        <a href="widgets.html"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Account</span></a>
+                        <a style="color:#fff" href="widgets.html"><i data-feather="user" style="color:#fff"  class="align-self-center menu-icon"></i><span>Account</span></a>
                     </li>  
                     <li>
-                        <a href="widgets.html"><i data-feather="layers" class="align-self-center menu-icon"></i><span>Logout</span><span class="badge badge-soft-success menu-arrow">New</span></a>
+                        <a  style="color:#fff" class="dropdown-item" href="{{route('affiliates.logout')}}" onclick="event.preventDefault(); document.getElementById('form1').submit()"><i data-feather="power" style="color:#fff"  class="align-self-center icon-xs icon-dual me-1"></i> Logout</a>
+                        <form id="form1" method="post" action="{{route('affiliates.logout')}}">
+                        @csrf
+                        </form>
+                      
                     </li>       
                 </ul>
             </div>
@@ -59,8 +63,8 @@
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
-                                <span class="ms-1 nav-user-name hidden-sm">@if(auth('agent')) {{auth('agent')->user()->name}} @endif</span>
-                                <img src="assets/images/users/user-5.jpg" alt="profile-user" class="rounded-circle thumb-xs" />                                 
+                                <span class="ms-1 nav-user-name hidden-sm">@if(auth('agent')) {{strtoupper(auth('agent')->user()->name)}} @endif</span>
+                                <i   class="fa fa-users rounded-circle thumb-xs" >  </i>                                
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a class="dropdown-item" href="#"><i data-feather="user" class="align-self-center icon-xs icon-dual me-1"></i> Profile</a>
@@ -74,7 +78,7 @@
                         </li>
                     </ul><!--end topbar-nav-->
         
-                    <ul class="list-unstyled topbar-nav mb-0">                        
+                    {{-- <ul class="list-unstyled topbar-nav mb-0">                        
                         <li>
                             <button class="nav-link button-menu-mobile">
                                 <i data-feather="menu" class="align-self-center topbar-icon"></i>
@@ -86,7 +90,7 @@
                      &nbsp;   &nbsp;   &nbsp;
                      <span style="float:right"> 
 
-                        {{-- <form method="post" action="{{route('affiliatesProcess.payment')}}"> --}}
+                        <form method="post" action="{{route('affiliatesProcess.payment')}}">
                             @csrf
                             <button class="btn btn-primary" id="processPay" hidden> Process Payment </button>
                         
@@ -95,7 +99,7 @@
                             </div>       
                                             
                         </li>                           
-                    </ul>
+                    </ul> --}}
                 </nav>
                 <!-- end navbar-->
             </div>
