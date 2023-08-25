@@ -22,7 +22,10 @@
                         
                     </li>
                     <li>
-                        <a style="color:#fff" href="{{route('affiliates.referral')}}"><i data-feather="lock" style="color:#fff"  class="align-self-center menu-icon"></i><span>My Referrals</span></a>
+                        <a style="color:#fff" href="{{route('affiliates.referral')}}"><i data-feather="lock" style="color:#fff"  class="align-self-center menu-icon"></i><span>Referrals</span></a>
+                    </li> 
+                    <li>
+                        <a style="color:#fff" href="{{route('affiliates.referral')}}"><i data-feather="lock" style="color:#fff"  class="align-self-center menu-icon"></i><span>Campaign</span></a>
                     </li> 
                    
     
@@ -30,9 +33,11 @@
                     <li class="menu-label my-2" style="color:#fff" >Income and Bonus</li>
     
                    
-    
                     <li>
-                        <a style="color:#fff" href="{{route('affiliates.payment')}}"><i data-feather="layers" style="color:#fff"  class="align-self-center menu-icon"></i><span>Payments</span></a>
+                        <a style="color:#fff" href="{{route('affiliates.payment')}}"><i data-feather="layers" style="color:#fff"  class="align-self-center menu-icon"></i><span>Commission</span></a>
+                    </li>  
+                    <li>
+                        <a style="color:#fff" href="{{route('affiliates.payment')}}"><i data-feather="layers" style="color:#fff"  class="align-self-center menu-icon"></i><span>Payment</span></a>
                     </li>  
                     <hr class="hr-dashed hr-menu">
                     <li class="menu-label my-2" style="color:#fff"  >Manage Account</li>   

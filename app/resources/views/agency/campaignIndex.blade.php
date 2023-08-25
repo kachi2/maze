@@ -36,8 +36,8 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Active Campaign</p>
-                                        <h3 class="m-0">{{$data['']}}</h3>
+                                        <p class="text-dark mb-0 fw-semibold">Affiliate Package</p>
+                                        <h3 class="m-0">Starter</h3>
                                         <p class="mb-0 text-truncate text-muted">
                                             <span class="text-success">12 people referred</p>
                                     </div>
@@ -85,6 +85,8 @@
                         </div><!--end card--> 
                     </div> <!--end col-->                               
                 </div><!--end row-->
+
+                
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
@@ -121,7 +123,9 @@
                         </div><!--end /div-->
                     </div><!--end card-body--> 
                 </div><!--end card--> 
+
             </div><!--end col-->
+
             <div class="col-lg-3">
                 <div class="card overflow-hidden"> 
                     <div class="card-body">                                    
@@ -145,52 +149,7 @@
                     </div><!--end card-body-->
                    
                 </div> <!--end card-->  
-                <div class="card">   
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">                      
-                                <h4 class="card-title">Activity</h4>                      
-                            </div><!--end col-->
-                            <div class="col-auto"> 
-                                <div class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="las la-angle-down ms-1"></i>
-                                    </a>
-                                </div>          
-                            </div><!--end col-->
-                        </div>  <!--end row-->                                  
-                    </div><!--end card-header-->                                              
-                    <div class="card-body"> 
-                        <div class="analytic-dash-activity" data-simplebar>
-                            <div class="activity">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th class="border-top-0">Login Ip</th>                                                            
-                                                <th class="border-top-0">Location</th>
-                                              
-                                                <th class="border-top-0">Date</th>
-                                                <th class="border-top-0">Browser</th>
-                                            </tr><!--end tr-->
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($activities as $act )
-                                            <tr>                                                
-                                                <td><small> {{$act->login_ip}}</small></td>                                                            
-                                                <td><small>USA</small></td>
-                                                <td><small>{{$act->created_at->format('h:m:i d/m/y')}}</small></td>
-                                                <td><small>{{substr($act->browser, 0,23)}}</small></td>
-                                            </tr>    
-                                            @endforeach                    
-                                        </tbody>
-                                    </table> <!--end table-->                                               
-                                </div><!--end /div-->
-                                                                                                                                                                    
-                            </div><!--end activity-->
-                        </div><!--end analytics-dash-activity-->
-                    </div>  <!--end card-body-->                                     
-                </div><!--end card--> 
+              
             </div><!-- end col-->    
         </div><!--end row-->
     </div><!-- container -->
