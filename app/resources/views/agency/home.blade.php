@@ -37,9 +37,9 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
                                         <p class="text-dark mb-0 fw-semibold">Active Campaign</p>
-                                        <h3 class="m-0">{{$data['']}}</h3>
+                                        <h3 class="m-0">{{$campaign->campaign->name}}</h3>
                                         <p class="mb-0 text-truncate text-muted">
-                                            <span class="text-success">12 people referred</p>
+                                            <span class="text-success">{{$campaign->referrals}} people referred</p>
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
@@ -50,9 +50,9 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">                                                
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Affiliate Bonus</p>
-                                        <h3 class="m-0">0.2$ per referral</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">{{count($completed_task)}} Task</span> Completed in 14 Days</p>
+                                        <p class="text-dark mb-0 fw-semibold">Campaign Commisions</p>
+                                        <h3 class="m-0">{{$campaign->campaign->commission}}% per referral</h3>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">${{ $commission? number_format($commission[0]->avail_balance, 2) : '$0'}}</span> Total Earned</p>
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
@@ -64,8 +64,8 @@
                                 <div class="row d-flex justify-content-center">                                                
                                     <div class="col">
                                         <p class="text-dark mb-0 fw-semibold">Login Counts</p>
-                                        <h3 class="m-0">{{$agent->login_counts}}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-danger">{{count($activity)}}</span> Logins in last 14 Days</p>
+                                        <h3 class="m-0"></h3>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-danger"></span> Logins in last 14 Days</p>
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
@@ -77,8 +77,8 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">  
                                         <p class="text-dark mb-0 fw-semibold">Registered Users</p>                                         
-                                        <h3 class="m-0">{{count($referrals)}}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">{{count($referral)}}</span> Users in Last 14 Days</p>
+                                        <h3 class="m-0"></h3>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"></span> Users in Last 14 Days</p>
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
@@ -99,21 +99,25 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th class="border-top-0">Date</th>                                                            
-                                        <th class="border-top-0">Reference</th>
+                                        <th class="border-top-0">User</th>
                                       
-                                        <th class="border-top-0">Status</th>
-                                        <th class="border-top-0">Earnings</th>
+                                        <th class="border-top-0">Amount</th>
+                                        <th class="border-top-0">Source</th>
+                                        <th class="border-top-0">Previous Balance</th>
+                                        <th class="border-top-0">Available Balance</th>
                                     </tr><!--end tr-->
                                 </thead>
                                 <tbody>
-                                    @foreach ($payments  as $pay )
+                                    @foreach ($commission  as $pay )
                                     <tr>                                                
                                         <td>{{$pay->created_at->format('d/m/y h:m:i')}}</td>                                                            
-                                        <td>{{$pay->ref}}</td>
-                                      
-                                       <td class="text-success">Paid</td>
-                                       
+                                        <td>{{$pay->users->username}}</td>
                                         <td>{{moneyFormat($pay->amount, 'USD')}}</td>
+                                        <td>{{$pay->source == 'registration'? 'Registration Commission' : 'Trade Commission'}}</td>
+                                      
+                                        <td>{{moneyFormat($pay->float_balance, 'USD')}}</td>
+                                       
+                                        <td>{{moneyFormat($pay->avail_balance, 'USD')}}</td>
                                     </tr>    
                                     @endforeach                    
                                 </tbody>
@@ -130,13 +134,10 @@
                                 <div class="media">
                                     <img src="assets/images/money-beg.png" alt="" class="align-self-center" height="40">
                                     <div class="media-body align-self-center ms-3"> 
-                                        {{-- <h6 class="m-0 font-20">{{moneyFormat(agent_user()->wallets->payments, 'USD')}}</h6> --}}
+                                        <h6 class="m-0 font-20 badge bg-info p-1" >{{moneyFormat(agent_user()->wallets->payments, 'USD')}}</h6>
                                         <p class="text-muted mb-0">Available Balance</p>   
-                                        {{-- <p class="m-0 font-15"> @php $next_pay = Date("M d", strtotime($next_salary->next_pay)); --}}
-                                            {{-- echo $next_pay;
-                                                @endphp  --}}
-                                                </p>     
-                                        <p class=" mb-0" style="color:rgb(10, 19, 148)">Accumulated Balances</p>                                                                                                                                         
+                                        <h6 class="m-0 font-20 badge bg-success p-1" >{{moneyFormat(agent_user()->wallets->salary_paid, 'USD')}}</h6>   
+                                        <p class=" mb-0" style="color:rgb(10, 19, 148)">Total Paid</p>                                                                                                                                         
                                     </div><!--end media body-->
                                 </div><!--end media-->
                             </div><!--end col-->  
