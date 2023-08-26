@@ -64,8 +64,13 @@
                                 <div class="row d-flex justify-content-center">                                                
                                     <div class="col">
                                         <p class="text-dark mb-0 fw-semibold">Affiliates Link</p>
-                                        <h3 class="m-0"><a href="{{route('affiliates.referral.register').'/'.$agent->ref_code}}"> Referral Link </a></h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-danger"></span> Click Copy referral Link</p>
+                                        {{-- <h3 class="m-0"><a href="{{route('affiliates.referral').'/ref?='.$agent->ref_code}}"> Referral Link </a></h3> --}}
+                                        <input  aria-describedby="button-addon2" value="{{route('affiliates.referral').'/ref?='.$agent->ref_code}}" id="clipboardInput" readonly> 
+                                        {{-- <p class="mb-0 text-truncate text-muted">  </p> --}}
+                                        <button class="btn btn-outline-secondary" 
+                                        type="button" id="button-addon2" data-clipboard-action="copy"
+                                         data-clipboard-target="#clipboardInput"><i class="far fa-copy me-2"></i>Copy</button>
+                                         
                                     </div>
                                 </div>
                             </div><!--end card-body--> 

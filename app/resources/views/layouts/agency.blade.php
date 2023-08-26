@@ -48,6 +48,9 @@
 <script src="{{asset('/agency/plugins/jvectormap/jquery-jvectormap-us-aea-en.js')}}"></script>
 <script src="{{asset('/agency/pages/jquery.analytics_dashboard.init.js')}}"></script>
 <script src="{{asset('/agency/js/app.js')}}"></script>
+<script src="{{asset('/agency/plugins/clipboard/clipboard.min.js')}}"></script>
+<script src="{{asset('/agency/pages/jquery.clipboard.init.js')}}"></script>
+
 
 
 <script src="{{asset('/assets/pages/jquery.animate.init.js')}}"></script>
