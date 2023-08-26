@@ -37,6 +37,7 @@ class HomeController extends Controller
             $data['referrals'] = Referrals::where('agent_id', agent_user()->id)->get();
             $data['referral'] = Referrals::where('agent_id', agent_user()->id)->where('created_at', '>', $date)->get();
             $data['campaign'] = CampaignStage::where(['agent_id' => agent_user()->id, 'status' => 1])->first();
+            $data['campaigns'] = CampaignStage::where(['agent_id' => agent_user()->id])->get();
             $data['commission'] = AffiliateCommission::whereAgentId(agent_user()->id)->latest()->get();
             $data['wallet'] = AgentWallet::where('agent_id', agent_user()->id)->first();
             $data['activities'] = AgentActivity::where('agent_id', agent_user()->id)->latest()->take(6)->get();

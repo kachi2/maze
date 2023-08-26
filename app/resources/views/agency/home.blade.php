@@ -63,9 +63,9 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">                                                
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Login Counts</p>
-                                        <h3 class="m-0"></h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-danger"></span> Logins in last 14 Days</p>
+                                        <p class="text-dark mb-0 fw-semibold">Affiliates Link</p>
+                                        <h3 class="m-0"><a href="{{route('affiliates.referral.register').'/'.$agent->ref_code}}"> Referral Link </a></h3>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-danger"></span> Click Copy referral Link</p>
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
@@ -77,8 +77,8 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">  
                                         <p class="text-dark mb-0 fw-semibold">Registered Users</p>                                         
-                                        <h3 class="m-0"></h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"></span> Users in Last 14 Days</p>
+                                        <h3 class="m-0">{{$campaigns->sum('referrals')}}</h3>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"></span> Total User Referred</p>
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
@@ -108,6 +108,7 @@
                                     </tr><!--end tr-->
                                 </thead>
                                 <tbody>
+                             
                                     @foreach ($commission  as $pay )
                                     <tr>                                                
                                         <td>{{$pay->created_at->format('d/m/y h:m:i')}}</td>                                                            
@@ -119,7 +120,8 @@
                                        
                                         <td>{{moneyFormat($pay->avail_balance, 'USD')}}</td>
                                     </tr>    
-                                    @endforeach                    
+                                    @endforeach   
+                                               
                                 </tbody>
                             </table> <!--end table-->                                               
                         </div><!--end /div-->
@@ -137,7 +139,7 @@
                                         <h6 class="m-0 font-20 badge bg-info p-1" >{{moneyFormat(agent_user()->wallets->payments, 'USD')}}</h6>
                                         <p class="text-muted mb-0">Available Balance</p>   
                                         <h6 class="m-0 font-20 badge bg-success p-1" >{{moneyFormat(agent_user()->wallets->salary_paid, 'USD')}}</h6>   
-                                        <p class=" mb-0" style="color:rgb(10, 19, 148)">Total Paid</p>                                                                                                                                         
+                                        <p class="text-muted mb-0">Total Amount Paid</p>                                                                                                                                           
                                     </div><!--end media body-->
                                 </div><!--end media-->
                             </div><!--end col-->  
