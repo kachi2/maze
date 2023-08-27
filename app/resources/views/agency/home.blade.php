@@ -114,7 +114,7 @@
                                 </thead>
                                 <tbody>
                              
-                                    @foreach ($commission  as $pay )
+                                    @forelse ($commission  as $pay )
                                     <tr>                                                
                                         <td>{{$pay->created_at->format('d/m/y h:m:i')}}</td>                                                            
                                         <td>{{$pay->users->username}}</td>
@@ -125,7 +125,10 @@
                                        
                                         <td>{{moneyFormat($pay->avail_balance, 'USD')}}</td>
                                     </tr>    
-                                    @endforeach   
+                                    @empty 
+                                    
+                                    <tr> <td> No Records Found</td></tr>
+                                    @endforelse
                                                
                                 </tbody>
                             </table> <!--end table-->                                               

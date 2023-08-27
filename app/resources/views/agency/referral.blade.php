@@ -100,7 +100,7 @@
                                 </thead>
                                 <tbody>
                              
-                                    @foreach ($referrals  as $refs )
+                                    @forelse ($referrals  as $refs )
                                     <tr>                                                                                                        
                                         <td>{{$refs->user->username}}</td>
                                         <td>{{ $refs->user->created_at->format('d/m/y h:m:i')}}</td>   
@@ -111,7 +111,11 @@
                                                 <span class='badge bg-success'> Active </span> 
                                                  @else<span class='badge bg-danger'> Not Active</span> @endif </td>
                                     </tr>    
-                                    @endforeach   
+                                    @empty 
+                                    <tr> 
+                                    <td>No Record found</td>
+                                </tr>
+                                    @endforelse
                                                
                                 </tbody>
                             </table> <!--end table-->                                               
