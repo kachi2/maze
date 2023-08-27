@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Deposit;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -46,5 +47,10 @@ class Agent  extends Authenticatable implements MustVerifyEmail
     public function referred(){
         return $this->hasMany(Referrals::class);
     }
+
+    public function UserAgent(){
+        return $this->hasMany(User::class, 'ref_code', 'ref_code');
+    }
+
     
 }

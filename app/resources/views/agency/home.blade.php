@@ -65,11 +65,11 @@
                                     <div class="col">
                                         <p class="text-dark mb-0 fw-semibold">Affiliates Link</p>
                                         {{-- <h3 class="m-0"><a href="{{route('affiliates.referral').'/ref?='.$agent->ref_code}}"> Referral Link </a></h3> --}}
-                                        <input  aria-describedby="button-addon2" value="{{route('affiliates.referral').'/ref?='.$agent->ref_code}}" id="clipboardInput" readonly> 
+                                        <input  class="form-control" aria-describedby="button-addon2" value="{{route('affiliates.referral').'/ref?='.$agent->ref_code}}" id="clipboardInput" readonly> 
                                         {{-- <p class="mb-0 text-truncate text-muted">  </p> --}}
-                                        <button class="btn btn-outline-secondary" 
+                                        <button class="btn btn-sm btn-outline-success" 
                                         type="button" id="button-addon2" data-clipboard-action="copy"
-                                         data-clipboard-target="#clipboardInput"><i class="far fa-copy me-2"></i>Copy</button>
+                                         data-clipboard-target="#clipboardInput"> <small> <i class="far fa-copy me-2"></i>Copy</small></button>
                                          
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">  
                                         <p class="text-dark mb-0 fw-semibold">Registered Users</p>                                         
-                                        <h3 class="m-0">{{$campaigns->sum('referrals')}}</h3>
+                                        <h3 class="m-0">{{$campaigns->sum('referrals')}} Users</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"></span> Total User Referred</p>
                                     </div>
                                 </div>

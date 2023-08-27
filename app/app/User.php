@@ -122,6 +122,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $this->hasOne(Referral::class, 'user_id', 'id');
     }
+
+    public function UserAgent(){
+        return $this->belongsTo(Agent::class, 'ref_code', 'ref_code');
+    }
+
+
     public function deposits()
     {
         return $this->hasMany(Deposit::class);

@@ -44,11 +44,6 @@ class HomeController extends Controller
             return view('agency.home', $data);
         }
     
-        public function Task(){
-            return view('agency.task')
-            ->with('tasks', AgentTask::where('agent_id', agent_user()->id)->get());
-        }
-    
         public function Payments(){
             return view('agency.payments')
             ->with('payments', Payment::where('agent_id', agent_user()->id)->latest()->get());

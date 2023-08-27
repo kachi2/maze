@@ -177,7 +177,7 @@ use Illuminate\Support\Facades\Route;
             Route::get('/', 'Agency\HomeController@index')->name('index');
             Route::get('/home', 'Agency\HomeController@index')->name('index');
             Route::get('index', 'Agency\HomeController@index')->name('index');
-            Route::get('/agent/task', 'Agency\HomeController@Task')->name('task');
+            Route::get('/referrals/Index', 'Agency\ReferralController@Index')->name('ref.index');
             Route::get('/agent/payments', 'Agency\HomeController@Payments')->name('payment');
             Route::get('/agent/salary', 'Agency\HomeController@SalaryPayments')->name('salary');
             Route::post('/agent/salary/invoice', 'Agency\HomeController@SalaryInvoice')->name('invoice');

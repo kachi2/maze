@@ -5,9 +5,32 @@ namespace App\Http\Controllers\Agency;
 use App\Http\Controllers\Controller;
 use App\Agent;
 use App\AgentWallet;
+use App\CampaignStage;
+use App\User;
+use App\AgentReferral;
+use App\AffiliateCampaign;
+use App\AffiliateCommission;
+use App\AffiliateReferrals;
+use App\Models\Deposit;
 use App\Referrals;
+use Carbon\Carbon;
+
 class ReferralController extends Controller
 {
+
+    public function Index(){
+    $data['total_referrals'] = Referrals::where('agent_id', agent_user()->id)->get();
+    $data['refer_weekly'] = Referrals::where(['agent_id' => agent_user()->id, ['created_at', '>=', Carbon::now()->addDays(-7)]])->get();
+    $data['active_referrals'] = User::where(['ref_code' => agent_user()->ref_code, 'status' => '0'])->get();
+    $data['referrals'] = AgentReferral::where(['agent_id' => agent_user()->id])->get();
+    $data['refs'] = AffiliateReferrals::where('agent_id', agent_user()->id)->first();
+    $data['campaign'] = CampaignStage::where(['agent_id' => agent_user()->id, 'status' => 1])->first();
+    $data['campaigns'] = CampaignStage::where(['agent_id' => agent_user()->id])->get();
+    $data['commission'] = AffiliateCommission::whereAgentId(agent_user()->id)->latest()->get();
+    $data['wallet'] = AgentWallet::where('agent_id', agent_user()->id)->first();
+    return view('agency.referral', $data);
+    }
+
      public function AgentReferral(){
         if(auth('agent')->user()->ref_code == null){
             $user = Agent::where('id', auth('agent')->user()->id)

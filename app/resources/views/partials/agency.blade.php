@@ -22,7 +22,7 @@
                         
                     </li>
                     <li>
-                        <a style="color:#fff" href="{{route('affiliates.referral')}}"><i data-feather="lock" style="color:#fff"  class="align-self-center menu-icon"></i><span>Referrals</span></a>
+                        <a style="color:#fff" href="{{route('affiliates.ref.index')}}"><i data-feather="lock" style="color:#fff"  class="align-self-center menu-icon"></i><span>Referrals</span></a>
                     </li> 
                     <li>
                         <a style="color:#fff" href="{{route('affiliates.referral')}}"><i data-feather="lock" style="color:#fff"  class="align-self-center menu-icon"></i><span>Campaign</span></a>
