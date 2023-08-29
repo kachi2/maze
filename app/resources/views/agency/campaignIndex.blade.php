@@ -10,7 +10,7 @@
                         <div class="col">
                             <h4 class="page-title">Analytics</h4>
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item active">Summary of your account</li>
+                                <li class="breadcrumb-item active">Downliner</li>
                             </ol>
                         </div><!--end col-->
                         <div class="col-auto align-self-center">
@@ -31,107 +31,49 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="row justify-content-center">
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-4">
                         <div class="card report-card">
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Active Campaign</p>
-                                        <h3 class="m-0">{{$campaign->campaign->name}}</h3>
+                                        <p class="text-dark mb-0 fw-semibold">Total Referrals</p>
+                                        <h3 class="m-0">{{count($direct_ref) + count($indirect_ref)}}</h3>
                                         <p class="mb-0 text-truncate text-muted">
-                                            <span class="text-success">{{$campaign->referrals}} people referred</p>
+                                            <span class="text-success"> people referred this week</p>
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
                         </div><!--end card--> 
                     </div> <!--end col--> 
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-4">
                         <div class="card report-card">
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">                                                
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Campaign Commisions</p>
-                                        <h3 class="m-0">{{$campaign->campaign->commission}}% per referral</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">${{ $commission? number_format($commission[0]->avail_balance, 2) : '$0'}}</span> Total Earned</p>
+                                        <p class="text-dark mb-0 fw-semibold">Direct Referals</p>
+
+                                        <h3 class="m-0">{{count($direct_ref)}}</h3>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"> Direct Referals</p>
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
                         </div><!--end card--> 
                     </div> <!--end col--> 
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-4">
                         <div class="card report-card">
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">                                                
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Affiliates Link</p>
-                                        {{-- <h3 class="m-0"><a href="{{route('affiliates.referral').'/ref?='.$agent->ref_code}}"> Referral Link </a></h3> --}}
-                                        <input  class="form-control" aria-describedby="button-addon2" value="{{route('affiliates.referral').'/ref?='.$agent->ref_code}}" id="clipboardInput" readonly> 
-                                        {{-- <p class="mb-0 text-truncate text-muted">  </p> --}}
-                                        <button class="btn btn-sm btn-outline-success" 
-                                        type="button" id="button-addon2" data-clipboard-action="copy"
-                                         data-clipboard-target="#clipboardInput"> <small> <i class="far fa-copy me-2"></i>Copy</small></button>
-                                         
-                                    </div>
+                                        <p class="text-dark mb-0 fw-semibold">Indirect Referalss</p>
+                                        <h3 class="m-0">{{count($indirect_ref)}}</h3>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"> Direct Referals</p>
+                                  </div>
                                 </div>
                             </div><!--end card-body--> 
                         </div><!--end card--> 
                     </div> <!--end col--> 
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">  
-                                        <p class="text-dark mb-0 fw-semibold">Registered Users</p>                                         
-                                        <h3 class="m-0">{{$campaigns->sum('referrals')}} Users</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"></span> Total User Referred</p>
-                                    </div>
-                                </div>
-                            </div><!--end card-body--> 
-                        </div><!--end card--> 
-                    </div> <!--end col-->                               
-                </div><!--end row-->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">                      
-                                <h4 class="card-title">Earnings Reports</h4>                      
-                            </div><!--end col-->                                        
-                        </div>  <!--end row-->                                  
-                    </div><!--end card-header-->
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table mb-0">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th class="border-top-0">Date</th>                                                            
-                                        <th class="border-top-0">User</th>
-                                      
-                                        <th class="border-top-0">Amount</th>
-                                        <th class="border-top-0">Source</th>
-                                        <th class="border-top-0">Previous Balance</th>
-                                        <th class="border-top-0">Available Balance</th>
-                                    </tr><!--end tr-->
-                                </thead>
-                                <tbody>
-                             
-                                    @foreach ($commission  as $pay )
-                                    <tr>                                                
-                                        <td>{{$pay->created_at->format('d/m/y h:m:i')}}</td>                                                            
-                                        <td>{{$pay->users->username}}</td>
-                                        <td>{{moneyFormat($pay->amount, 'USD')}}</td>
-                                        <td>{{$pay->source == 'registration'? 'Registration Commission' : 'Trade Commission'}}</td>
-                                      
-                                        <td>{{moneyFormat($pay->float_balance, 'USD')}}</td>
-                                       
-                                        <td>{{moneyFormat($pay->avail_balance, 'USD')}}</td>
-                                    </tr>    
-                                    @endforeach   
                                                
-                                </tbody>
-                            </table> <!--end table-->                                               
-                        </div><!--end /div-->
-                    </div><!--end card-body--> 
-                </div><!--end card--> 
+                </div><!--end row-->
             </div><!--end col-->
             <div class="col-lg-3">
                 <div class="card overflow-hidden"> 
@@ -153,54 +95,46 @@
                     </div><!--end card-body-->
                    
                 </div> <!--end card-->  
-                <div class="card">   
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">                      
-                                <h4 class="card-title">Activity</h4>                      
-                            </div><!--end col-->
-                            <div class="col-auto"> 
-                                <div class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="las la-angle-down ms-1"></i>
-                                    </a>
-                                </div>          
-                            </div><!--end col-->
-                        </div>  <!--end row-->                                  
-                    </div><!--end card-header-->                                              
-                    <div class="card-body"> 
-                        <div class="analytic-dash-activity" data-simplebar>
-                            <div class="activity">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th class="border-top-0">Login Ip</th>                                                            
-                                                <th class="border-top-0">Location</th>
-                                              
-                                                <th class="border-top-0">Date</th>
-                                                <th class="border-top-0">Browser</th>
-                                            </tr><!--end tr-->
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($activities as $act )
-                                            <tr>                                                
-                                                <td><small> {{$act->login_ip}}</small></td>                                                            
-                                                <td><small>USA</small></td>
-                                                <td><small>{{$act->created_at->format('h:m:i d/m/y')}}</small></td>
-                                                <td><small>{{substr($act->browser, 0,23)}}</small></td>
-                                            </tr>    
-                                            @endforeach                    
-                                        </tbody>
-                                    </table> <!--end table-->                                               
-                                </div><!--end /div-->
-                                                                                                                                                                    
-                            </div><!--end activity-->
-                        </div><!--end analytics-dash-activity-->
-                    </div>  <!--end card-body-->                                     
-                </div><!--end card--> 
+     
             </div><!-- end col-->    
         </div><!--end row-->
+
+        <div class="row">
+            <div class="col-12">                            
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Direct Referrals</h4>
+                        <p class="text-muted mb-0">Direct Referals using your referral link</p>
+                        <p class="text-muted mb-0">You get 0.40% on registration bonus and 0.20% on trade bonus</p>
+                    </div><!--end card-header-->
+                    <div class="card-body">        
+                        <div class="row text-center">
+                            @foreach ($direct_ref as $direct)
+                            <div class="col-sm-3"><span class="border py-2 bg-light d-block mb-2 mb-lg-0"><img src="{{asset('images',$direct->image_path)}}"> </span> {{$direct->username}}</div>
+                            @endforeach                                                                                       
+                        </div>
+                    </div><!--end card-body-->
+                </div><!--end card-->
+            </div> <!-- end col -->   
+            <div class="col-12">                            
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">In-direct Referrals</h4>
+                        <p class="text-muted mb-0">Referals from top direct referrals</p>
+                        <p class="text-muted mb-0">You get 0.20% on registration bonus and 0.10% on trade bonus</p>
+                    </div><!--end card-header-->
+                    <div class="card-body">        
+                        <div class="row text-center">
+                            <div class="col-sm-3"><span class="border py-2 bg-light d-block mb-2 mb-lg-0">.col-sm-3</span></div>
+                            <div class="col-sm-3"><span class="border py-2 bg-light d-block mb-2 mb-lg-0">.col-sm-3</span></div>
+                            <div class="col-sm-3"><span class="border py-2 bg-light d-block mb-2 mb-lg-0">.col-sm-3</span></div>
+                            <div class="col-sm-3"><span class="border py-2 bg-light d-block">.col-sm-3</span></div>                                                                                        
+                        </div>
+                    </div><!--end card-body-->
+                </div><!--end card-->
+            </div> <!-- end col -->  
+                
+        </div>
     </div><!-- container -->
     
 @endsection

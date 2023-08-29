@@ -53,7 +53,7 @@
                                         <p class="text-dark mb-0 fw-semibold">Traded Referrals</p>
 
                                         <h3 class="m-0">{{$refs->traded_referrals}}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">Number of Referrals that have invested</p>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">{{$refs->traded_referrals}} Referrals have traded</p>
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
@@ -71,7 +71,6 @@
                                         <button class="btn btn-sm btn-outline-success" 
                                         type="button" id="button-addon2" data-clipboard-action="copy"
                                          data-clipboard-target="#clipboardInput"> <small> <i class="far fa-copy me-2"></i>Copy</small></button>
-                                         
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
@@ -83,7 +82,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">                      
-                                <h4 class="card-title">Earnings Reports</h4>                      
+                                <h4 class="card-title">Referrals Reports</h4>                      
                             </div><!--end col-->                                        
                         </div>  <!--end row-->                                  
                     </div><!--end card-header-->

@@ -93,7 +93,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'is_kyc_verify',
         'image_path',
         'image',
-        'status'
+        'status',
+        'referral_id',
+        'sponsor_id'
     ];
 
     /**

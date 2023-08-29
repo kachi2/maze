@@ -178,14 +178,18 @@ use Illuminate\Support\Facades\Route;
             Route::get('/home', 'Agency\HomeController@index')->name('index');
             Route::get('index', 'Agency\HomeController@index')->name('index');
             Route::get('/referrals/Index', 'Agency\ReferralController@Index')->name('ref.index');
-            Route::get('/agent/payments', 'Agency\HomeController@Payments')->name('payment');
-            Route::get('/agent/salary', 'Agency\HomeController@SalaryPayments')->name('salary');
-            Route::post('/agent/salary/invoice', 'Agency\HomeController@SalaryInvoice')->name('invoice');
-            Route::get('/agent/salary/invoice/{id}', 'Agency\HomeController@SalaryInvoices')->name('invoice');
-            Route::post('/agent/process/payment/', 'Agency\HomeController@paymentProcessor')->name('payment');
-            Route::get('/agency/account', 'Agency\HomeController@account')->name('account');
-            Route::post('/agency/account/update', 'Agency\HomeController@UpdateAccount')->name('UpdateAccount');
-            Route::post('/agency/password/update', 'Agency\HomeController@UpdatePassword')->name('UpdatePassword');
+            Route::get('/payments', 'Agency\HomeController@Payments')->name('payment');
+            Route::get('/salary', 'Agency\HomeController@SalaryPayments')->name('salary');
+            Route::post('salary/invoice', 'Agency\HomeController@SalaryInvoice')->name('invoice');
+            Route::get('/salary/invoice/{id}', 'Agency\HomeController@SalaryInvoices')->name('invoice');
+            Route::post('/process/payment/', 'Agency\HomeController@paymentProcessor')->name('payment');
+            Route::get('/account', 'Agency\HomeController@account')->name('account');
+            Route::post('/account/update', 'Agency\HomeController@UpdateAccount')->name('UpdateAccount');
+            Route::post('/password/update', 'Agency\HomeController@UpdatePassword')->name('UpdatePassword');
+
+            //downliner 
+
+            Route::get('/downliner', 'Agency\DownlinerController@DownlinerIndex')->name('downliner');
             
             
             Route::post('/agency/logout', 'Agency/HomeController@logout')->name('agency.logout');
