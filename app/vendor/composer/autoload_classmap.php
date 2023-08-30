@@ -41,7 +41,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\UserController' => $baseDir . '/app/Http/Controllers/Admin/UserController.php',
     'App\\Http\\Controllers\\Admin\\WithdrawalController' => $baseDir . '/app/Http/Controllers/Admin/WithdrawalController.php',
     'App\\Http\\Controllers\\Agency\\AuthController' => $baseDir . '/app/Http/Controllers/Agency/AuthController.php',
-    'App\\Http\\Controllers\\Agency\\CampaignController' => $baseDir . '/app/Http/Controllers/Agency/CampaignController.php',
+    'App\\Http\\Controllers\\Agency\\DownlinerController' => $baseDir . '/app/Http/Controllers/Agency/DownlinerController.php',
     'App\\Http\\Controllers\\Agency\\HomeController' => $baseDir . '/app/Http/Controllers/Agency/HomeController.php',
     'App\\Http\\Controllers\\Agency\\ReferralController' => $baseDir . '/app/Http/Controllers/Agency/ReferralController.php',
     'App\\Http\\Controllers\\Agency\\SessionController' => $baseDir . '/app/Http/Controllers/Agency/SessionController.php',

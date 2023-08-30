@@ -644,7 +644,7 @@ class ComposerStaticInit98a2fba65c18f955685b79d9c12a9a48
         'App\\Http\\Controllers\\Admin\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/UserController.php',
         'App\\Http\\Controllers\\Admin\\WithdrawalController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/WithdrawalController.php',
         'App\\Http\\Controllers\\Agency\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agency/AuthController.php',
-        'App\\Http\\Controllers\\Agency\\CampaignController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agency/CampaignController.php',
+        'App\\Http\\Controllers\\Agency\\DownlinerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agency/DownlinerController.php',
         'App\\Http\\Controllers\\Agency\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agency/HomeController.php',
         'App\\Http\\Controllers\\Agency\\ReferralController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agency/ReferralController.php',
         'App\\Http\\Controllers\\Agency\\SessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agency/SessionController.php',

@@ -37,7 +37,7 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
                                         <p class="text-dark mb-0 fw-semibold">Total Referrals</p>
-                                        <h3 class="m-0">{{count($direct_ref) + count($indirect_ref)}}</h3>
+                                        <h3 class="m-0">{{count($direct_ref) + count($indirect_ref) + count($sponsor_two)}}</h3>
                                         <p class="mb-0 text-truncate text-muted">
                                             <span class="text-success"> people referred this week</p>
                                     </div>
@@ -65,7 +65,7 @@
                                 <div class="row d-flex justify-content-center">                                                
                                     <div class="col">
                                         <p class="text-dark mb-0 fw-semibold">Indirect Referalss</p>
-                                        <h3 class="m-0">{{count($indirect_ref)}}</h3>
+                                        <h3 class="m-0">{{count($indirect_ref) + count($sponsor_two) }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"> Direct Referals</p>
                                   </div>
                                 </div>
@@ -110,7 +110,8 @@
                     <div class="card-body">        
                         <div class="row text-center">
                             @foreach ($direct_ref as $direct)
-                            <div class="col-sm-3"><span class="border py-2 bg-light d-block mb-2 mb-lg-0"><img src="{{asset('images',$direct->image_path)}}"> </span> {{$direct->username}}</div>
+                            <div class="col-sm-3"><span class="border py-2 d-block mb-2 mb-lg-0"><i class="fa fa-user"> </i> {{$direct->username}} <br> Date Joined: {{$direct->created_at->format('d/m/yy')}} 
+                            <br><span class="badge bg-info"> @if($direct->deposits) Traded </span> @else <span class="badge bg-secondary"> Not Traded </span> @endif </span></div>
                             @endforeach                                                                                       
                         </div>
                     </div><!--end card-body-->
@@ -120,15 +121,36 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">In-direct Referrals</h4>
+                        <h4 class="card-title">Level Two Referals</h4>
                         <p class="text-muted mb-0">Referals from top direct referrals</p>
                         <p class="text-muted mb-0">You get 0.20% on registration bonus and 0.10% on trade bonus</p>
                     </div><!--end card-header-->
                     <div class="card-body">        
                         <div class="row text-center">
-                            <div class="col-sm-3"><span class="border py-2 bg-light d-block mb-2 mb-lg-0">.col-sm-3</span></div>
-                            <div class="col-sm-3"><span class="border py-2 bg-light d-block mb-2 mb-lg-0">.col-sm-3</span></div>
-                            <div class="col-sm-3"><span class="border py-2 bg-light d-block mb-2 mb-lg-0">.col-sm-3</span></div>
-                            <div class="col-sm-3"><span class="border py-2 bg-light d-block">.col-sm-3</span></div>                                                                                        
+                            @foreach ($indirect_ref as $indirect)
+                            <div class="col-sm-3"><span class="border py-2 d-block mb-2 mb-lg-0"><i class="fa fa-user"> </i> {{$indirect->username}} <br> Date Joined: {{$indirect->created_at->format('d/m/yy')}} 
+                            <br><span class="badge bg-info"> @if($indirect->deposits) Traded </span> @else <span class="badge bg-secondary"> Not Traded </span> @endif </span></div>
+                            @endforeach                                                                                       
+                        </div>
+                    </div><!--end card-body-->
+                </div><!--end card-->
+            </div> <!-- end col -->  
+
+
+            <div class="col-12">                            
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">In-direct Referrals</h4>
+                        <h4 class="card-title">Level Three Referals</h4>
+                        <p class="text-muted mb-0">Referals from level two referrals</p>
+                        <p class="text-muted mb-0">You get 0.20% on registration bonus and 0.10% on trade bonus</p>
+                    </div><!--end card-header-->
+                    <div class="card-body">        
+                        <div class="row text-center">
+                            @foreach ($sponsor_two as $indirects)
+                            <div class="col-sm-3"><span class="border py-2 d-block mb-2 mb-lg-0"><i class="fa fa-user"> </i> {{$indirects->username}} <br> Date Joined: {{$indirects->created_at->format('d/m/yy')}} 
+                            <br><span class="badge bg-info"> @if($indirects->deposits) Traded </span> @else <span class="badge bg-secondary"> Not Traded </span> @endif </span></div>
+                            @endforeach                                                                                       
                         </div>
                     </div><!--end card-body-->
                 </div><!--end card-->
