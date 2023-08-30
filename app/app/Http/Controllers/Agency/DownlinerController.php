@@ -17,6 +17,7 @@ class DownlinerController extends Controller
         return view('agency.downlinerIndex', $data);
     }
 
+    
 
 
 }
