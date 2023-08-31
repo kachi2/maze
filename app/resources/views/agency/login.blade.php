@@ -43,7 +43,9 @@
                                                 <div class="col-12">
                                                     <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Login <i class="fas fa-sign-in-alt ms-1"></i></button>
                                                 </div><!--end col--> 
-                                            </div> <!--end form-group-->                           
+                                            </div> <!--end form-group-->  
+                                            <div class="form-desc p-2">Don't have an account? <a href="{{route('affiliates.register')}}" class="btn btn-outline-primary">Register!</a></div>
+                                                                
                                         </form>              
                                     </div>
                                 </div>
