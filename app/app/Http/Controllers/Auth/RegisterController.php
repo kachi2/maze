@@ -96,24 +96,11 @@ class RegisterController extends Controller
         }else{
             $last_name =  $name[0];;
         }
-
-        //check the ref table 
-        $refCode = $this->GenerateRefCode();
-    
-        $ref = User::where('ref_code', $data['ref'])->exist();
-        $agent_ref = Agent::where('ref_code', $data['ref'])->exist();
-        if($ref){
-            $ref_code = $ref;
-        }elseif($agent_ref){
-            $ref_code = $agent_ref;
-        }else{
+        if(User::where('ref_code', $data['ref'])->first() == null && Agent::where('ref_code', $data['ref'])->first() == null){
             return back()->withInput($data->all())->withErrors(['ref' => 'Referral code does not exist']);
         }
-
-      #====== update referrals and create new user =========
-      if(!$agen)
-
-        
+ 
+        $refCode = $this->GenerateRefCode();
         // $userIp = request()->getClientIp();
         $userIp = '104.243.215.130';
         $details = json_decode(file_get_contents("https://ipinfo.io/$userIp/json"));
@@ -130,16 +117,41 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'city' => $city,
             'country' => $country,
+            'ref_code' => $refCode,
             'username' =>  $username,
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
         
         if($create){
-            $users = User::latest()->first();
+            $users = User::latest()->first(); 
            $bonusAmount = 0;
+           $user =  User::where('ref_code', $data['ref'])->first();
+           $agentWallet =  Agent::where(['ref_code' => $data['ref']])->first();
+           switch($data['ref']){
+            case $user->ref_code:
+            if($user->sponsor_id == null && $user->sponsor_two == null){
+                $user->addBonus($user, 10);
+                $users->update(['referral_id' => $user->ref_code ]);
+            }else{
+               $agentWallet =  Agent::where(['ref_code' => $user->sponsor_id])->orWhere('ref_code', $user->sponsor_two)->first();
+               $agentWallet->AddBonus($agentWallet->id,$agentWallet->campaign->reg_comm);
+               $agentWallet->affiliateCommision($agentWallet->id, $user, 'registration Bonus');
+               $users->update(['sponsor_two' => $agentWallet->ref_code ]);
+            }
+            break;
+            case $agentWallet->ref_code:
+            $agentWallet->AddBonus($agentWallet->id,$agentWallet->campaign->commission);
+            $agentWallet->affiliateCommision($agentWallet->id, $users, 'registration Bonus');
+            $users->update(['sponsor_id' => $agentWallet->ref_code ]);
+            break;
+
+            dd($users );
+        }
         UserWallet::addBonus($users, $bonusAmount);
         Auth::login($users);
+
+     
         return redirect()
             ->to($this->redirectTo);
     }

@@ -66,7 +66,7 @@ class Agent  extends Authenticatable implements MustVerifyEmail
     }
 
 
-    public function affiliateCommision($agent, $user){
+    public function affiliateCommision($agent, $user, $reason){
         $agent = Agent::whereId($agent)->first();
       return  AffiliateCommission::create([
             'agent_id' => $agent,
@@ -74,11 +74,29 @@ class Agent  extends Authenticatable implements MustVerifyEmail
             'amount' => $this->levelBonus($agent),
             'float_balance' => $agent->float_balance,
             'avail_balance' => $this->levelBonus($agent) + $agent->float_balance,
+            'source' => $reason
       ]);
 
       (new AgentWallet)->AddBonus($agent, $this->levelBonus($agent));
     }
 
+    public function AddBonus($agent, $amount){
+        $agent = (new AgentWallet)->whereAgentId($agent)->first();
+        if(!$agent){
+            AgentWallet::create([
+                'agent_id' => $agent,
+                'payments' => 0,
+                'salary_paid' => 0,
+                'salary_pending' => 0
+            ]);
+        }else{
+            $agent->update([
+                'payment' =>  $agent->payment + $amount, 
+                'salary_paid' => $agent->salary_paid,
+                'salary_pending' => $agent->salary_pending
+            ]);
+        } 
+    }
 
 
 }

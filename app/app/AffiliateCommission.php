@@ -9,7 +9,7 @@ class AffiliateCommission extends Model
     //
 
     protected $table = "affiliate_commissions";
-    protected $fillables = ['name', 'slug', 'description','commission', 'number_of_ref'];
+    protected $fillables = ['agent_id', 'user_id', 'amount', 'float_balance', 'avail_balance', 'source'];
 
     public function users(){
         return $this->belongsTo(User::class, 'user_id', 'id');

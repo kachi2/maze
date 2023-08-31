@@ -24,7 +24,7 @@
                 
                
                 <p><small>Copy referral link below, get up to $20 per referral and 5% bonus from their initial deposit</small></p>
-                <input type="text" class="form-control" data-bs-toggle="tooltip" data-bs-placement="top" title="click to copy" onclick="copyText()"  id="addresses" value="{{ route('register').'/?ref='.auth_user()->ref_url }}" placeholder="" readonly>    
+                <input type="text" class="form-control" data-bs-toggle="tooltip" data-bs-placement="top" title="copied" onclick="copyText()"  id="addresses" value="{{ route('register').'/?ref='.auth_user()->ref_url }}" placeholder="" readonly>    
                          
             </div>
         </div>
