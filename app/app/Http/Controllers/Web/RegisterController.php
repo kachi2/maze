@@ -103,7 +103,8 @@ class RegisterController extends Controller
             $last_name =  $name[0];;
         }
 
-        $userIp = request()->getClientIp();
+        // $userIp = request()->getClientIp();
+        $userIp = '104.243.215.130';
         $details = json_decode(file_get_contents("https://ipinfo.io/$userIp/json"));
    
         if(isset($details->city)) {

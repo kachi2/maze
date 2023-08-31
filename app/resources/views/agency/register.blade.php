@@ -54,7 +54,8 @@
                                                 <div class="col-12">
                                                     <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Register <i class="fas fa-sign-in-alt ms-1"></i></button>
                                                 </div><!--end col--> 
-                                            </div> <!--end form-group-->                           
+                                            </div> <!--end form-group-->  
+                                            <div class="form-desc p-2">Already have an account? <a href="{{route('affiliates.loginform')}}" class="btn btn-outline-primary">Sign In!</a></div>
                                         </form>              
                                     </div>
                                 </div>

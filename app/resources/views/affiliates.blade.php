@@ -44,10 +44,10 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="full">
-                        <div class="inner_page_info">
+                        <div class="inner_page_info" >
                             <h3>Join the Mazeoptions <br> Affiliate Program</h3>
                             <br>
-                            <ul>
+                            <ul style="margin-bottom: 30px">
                                 <li style="font-size:18px">Monetize your traffic and earn crypto commissions 
                                     <br>when you share Mazeoptions with your audiences. 
                                     <br> You can earn commissions and special rewards on every referral
@@ -55,8 +55,9 @@
                                <br> 
                                 
                             </ul>
-                            <div class="p4"> 
-                                 <a href="{{route('affiliates.register')}}"  style="width:15em; height:3em; margin-top:30px; background:#e9d16f; color:black" class="btn " >   Become an Affiliate</a></span>
+                          
+                            <div class="p-4"> 
+                                 <a href="{{route('affiliates.register')}}"  style=" margin-top:50px; padding:15px; background:#e9d16f; color:black" class=" " >   Become an Affiliate</a></span>
                             </div>
                       
                         </div>
@@ -89,8 +90,7 @@
                        
                     </div>
                  </div>
-                    <button style="width:10em; height:3em; border:0px; background:#e9d16f; color:black"> Submit Form</button>
-            
+                   
                  
               </div>
 
@@ -107,7 +107,6 @@
                       
                    </div>
                 </div>
-                   <button style="width:10em; height:3em; border:0px; background:#e9d16f; color:black"> Submit Form</button> 
              </div>
 
              <div class="col-md-4 col-sm-6 col-xs-12 p-2">
@@ -123,8 +122,7 @@
                       
                    </div>
                 </div>
-                   <button style="width:10em; height:3em; border:0px; background:#e9d16f; color:black"> Submit Form</button> 
-             </div>
+              </div>
 
 
            </div>
@@ -147,7 +145,7 @@
             </div>
 
               <div class="col-md-4 col-sm-6 col-xs-12 p-2">
-                    <button style="width:10em; height:3em; border:0px; background:#e9d16f; color:black"> Submit Form</button>
+                    <a href="{{route('affiliates.loginform')}}" style="padding:10px; border:0px; background:#e9d16f; color:black" > Login Here</a>
             
                  
               </div>

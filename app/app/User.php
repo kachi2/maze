@@ -95,7 +95,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'image',
         'status',
         'referral_id',
-        'sponsor_id'
+        'sponsor_id',
+        'ref_code'
     ];
 
     /**
@@ -195,9 +196,18 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return string
      */
+
+     public function GenerateRefCode(){
+        $refcode = strtolower(substr(str_replace(['/', '=', '%'], '', base64_encode(random_bytes(13))),0,10));
+        return $refcode;
+    }
+
     public function getRefUrlAttribute()
     {
-        return url('register') . '?ref=' . $this->username;
+        if($this->ref_code == '' || $this->ref_code == null){
+         auth_user()->update(['ref_code' => $this-> GenerateRefCode() ]);
+        }
+        return $this->ref_code;
     }
 
     /**

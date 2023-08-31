@@ -59,15 +59,40 @@
                                   <span class="input-group-text"><i class="flaticon-call-center-agent"></i></span>
                             </div>
                         </div>
+
+                       
                         <div class="form-group pb-15">
                             <label>Password</label>
                             <div class="input-group">
-                                <input type="password" name="password" class="form-control form-control-lg {{ form_invalid('password') }}" id="password" placeholder="Enter your pasword">
+                                <input type="password" name="password" class="form-control form-control-lg {{ form_invalid('password') }}" id="passw" placeholder="Enter your pasword">
                               @showError('password')
                                <span class="input-group-text reveal">
-                                    <i class="flaticon-invisible pass-close"></i>
-                                    <i class="flaticon-visibility pass-view"></i>
+                                    <i class="flaticon-invisible pass-close " onclick="togle()" ></i>
+                                    <i class="flaticon-visibility pass-view" onclick="togle()"></i>
                                 </span>
+                            </div>
+
+                            <script> 
+
+                            let passwd = document.getElementById('passw');
+                            function togle(){
+                             if(passwd.type === "password"){
+                                passwd.type = "text";
+                             }else{
+                                passwd.type = "password";
+                             }
+                            }
+
+                            </script>
+                        </div>
+                        <div class="form-group pb-15">
+                            <label>Referal Code</label>
+                            <div class="input-group">
+                                <input type="text" name="ref" value="{{request()->get('ref')}}" 
+                                class="form-control form-control-lg {{ form_invalid('ref') }}" 
+                                id="default-01" placeholder="Referral Code">
+                                @showError('ref')
+                                  <span class="input-group-text"><i class="flaticon-call-center-agent"></i></span>
                             </div>
                         </div>
                         <div class="authentication-account-access pb-15">

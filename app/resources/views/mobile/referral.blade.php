@@ -24,7 +24,7 @@
                 
                
                 <p><small>Copy referral link below, get up to $20 per referral and 5% bonus from their initial deposit</small></p>
-                <input type="text" class="form-control" data-bs-toggle="tooltip" data-bs-placement="top" title="click to copy" onclick="copyText()"  id="addresses" value="{{ auth_user()->ref_url }}" placeholder="" readonly>    
+                <input type="text" class="form-control" data-bs-toggle="tooltip" data-bs-placement="top" title="click to copy" onclick="copyText()"  id="addresses" value="{{ route('register').'/?ref='.auth_user()->ref_url }}" placeholder="" readonly>    
                          
             </div>
         </div>
@@ -38,7 +38,7 @@
                 <a href="transaction-details.html">
                     <div class="transaction-card-info">
                         <div class="transaction-info-thumb">
-                           <span style="color:aliceblue">{{strtoupper(substr($referral->user->username,0,2))}}</span> 
+                           <span style="color:aliceblue">{{strtoupper(substr($referral->user->ref_code,0,2))}}</span> 
                         </div>
                         <div class="transaction-info-text">
                             <h3>{{ $referral->user->username }}</h3>

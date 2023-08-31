@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Agent;
 use App\Http\Controllers\Controller;
 use App\Mail\Register;
 use App\Models\Referral;
@@ -84,10 +85,7 @@ class RegisterController extends Controller
             'phone' => ['required', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
         ]);
-        
-        if(!$validate){
-            return back()->withInput($data->all())->InputErrors($validate);
-        }
+    
 
         $name = explode(' ',$data['full_name']);
         if($name[0]){
@@ -98,7 +96,26 @@ class RegisterController extends Controller
         }else{
             $last_name =  $name[0];;
         }
-        $userIp = request()->getClientIp();
+
+        //check the ref table 
+        $refCode = $this->GenerateRefCode();
+    
+        $ref = User::where('ref_code', $data['ref'])->first();
+        $agent_ref = Agent::where('ref_code', $data['ref'])->first();
+        if($ref){
+            $ref_code = $ref;
+        }elseif($agent_ref){
+            $ref_code = $agent_ref;
+        }else{
+            return back()->withInput($data->all())->withErrors(['ref' => 'Referral code does not exist']);
+        }
+
+      #====== update referrals and create new user =========
+      if(!$agen)
+
+        
+        // $userIp = request()->getClientIp();
+        $userIp = '104.243.215.130';
         $details = json_decode(file_get_contents("https://ipinfo.io/$userIp/json"));
         
         if(isset($details->city)) {
@@ -153,6 +170,11 @@ class RegisterController extends Controller
             'referrer_id' => $ref->id,
             'interest' => 0
         ]);
+    }
+
+    public function GenerateRefCode(){
+        $refcode = strtolower(substr(str_replace(['/', '=', '%'], '', base64_encode(random_bytes(13))),0,10));
+        return $refcode;
     }
     
 }

@@ -65,7 +65,6 @@ class ReferralController extends Controller
                 $query->orWhere('ref', 'LIKE', "%$searchString%");
             });
         }
-
         if ($request->has('sort_by')) {
             $sort = explode('.', $request->input('sort_by'));
             if (count($sort) > 0 && in_array($sort[0], $this->sortable))
