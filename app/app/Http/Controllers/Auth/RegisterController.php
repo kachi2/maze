@@ -97,21 +97,21 @@ class RegisterController extends Controller
             $last_name =  $name[0];;
         }
 
-    //     //check the ref table 
-    //     $refCode = $this->GenerateRefCode();
+        //check the ref table 
+        $refCode = $this->GenerateRefCode();
     
-    //     $ref = User::where('ref_code', $data['ref'])->first();
-    //     $agent_ref = Agent::where('ref_code', $data['ref'])->first();
-    //     if($ref){
-    //         $ref_code = $ref;
-    //     }elseif($agent_ref){
-    //         $ref_code = $agent_ref;
-    //     }else{
-    //         return back()->withInput($data->all())->withErrors(['ref' => 'Referral code does not exist']);
-    //     }
+        $ref = User::where('ref_code', $data['ref'])->exist();
+        $agent_ref = Agent::where('ref_code', $data['ref'])->exist();
+        if($ref){
+            $ref_code = $ref;
+        }elseif($agent_ref){
+            $ref_code = $agent_ref;
+        }else{
+            return back()->withInput($data->all())->withErrors(['ref' => 'Referral code does not exist']);
+        }
 
-    //   #====== update referrals and create new user =========
-    //   if(!$agen)
+      #====== update referrals and create new user =========
+      if(!$agen)
 
         
         // $userIp = request()->getClientIp();

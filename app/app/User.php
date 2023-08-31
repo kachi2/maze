@@ -168,6 +168,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Testimony::class);
     }
 
+    public function ReferralRegBonus($data){
+        $ref = $this->GenerateRefCode().hex2bin(random_bytes(5));
+        return Referral::create([
+                    'ref' => $ref,
+                    'user_id' => $data['user_id'],
+                    'referral_id' => $data['refCode'],
+                    'interest' => 10
+        ]);
+    }
+
     /**
      * Get the user wallet attribute.
      *

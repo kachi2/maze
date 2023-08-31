@@ -48,9 +48,37 @@ class Agent  extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Referrals::class);
     }
 
-    public function UserAgent(){
+    public function userAgent(){
         return $this->hasMany(User::class, 'ref_code', 'ref_code');
     }
 
+ 
     
+    public function levelBonus($agent){
+        $stage = CampaignStage::where('agent_id', $agent)->first();
+        if($stage->exist()){
+            return  $stage->campaign->commission;
+        }else{
+           CampaignStage::create(['agent_id' => $agent, 'campaign_id' => 1, 'referral' => 0, 'commission' => 10]); 
+         return  10;
+
+        }
+    }
+
+
+    public function affiliateCommision($agent, $user){
+        $agent = Agent::whereId($agent)->first();
+      return  AffiliateCommission::create([
+            'agent_id' => $agent,
+            'user_id' => $user,
+            'amount' => $this->levelBonus($agent),
+            'float_balance' => $agent->float_balance,
+            'avail_balance' => $this->levelBonus($agent) + $agent->float_balance,
+      ]);
+
+      (new AgentWallet)->AddBonus($agent, $this->levelBonus($agent));
+    }
+
+
+
 }

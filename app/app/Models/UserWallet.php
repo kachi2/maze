@@ -60,7 +60,7 @@ class UserWallet extends Model
         if (!$userWallet) {
             $userWallet = UserWallet::create([
                 'user_id' => $user->id,
-                'amount' => $amount
+                'amount' => $amount 
             ]);
         } else {
             $userWallet->amount = $userWallet->amount + $amount;
