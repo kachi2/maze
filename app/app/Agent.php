@@ -56,7 +56,7 @@ class Agent  extends Authenticatable implements MustVerifyEmail
     
     public function levelBonus($agent){
         $stage = CampaignStage::where('agent_id', $agent)->first();
-        if($stage->exist()){
+        if(!empty($stage)){
             return  $stage->campaign->commission;
         }else{
            CampaignStage::create(['agent_id' => $agent, 'campaign_id' => 1, 'referral' => 0, 'commission' => 10]); 
@@ -83,18 +83,20 @@ class Agent  extends Authenticatable implements MustVerifyEmail
     public function AddBonus($agent, $amount){
         $agent = (new AgentWallet)->whereAgentId($agent)->first();
         if(!$agent){
-            AgentWallet::create([
+            $creat =  AgentWallet::create([
                 'agent_id' => $agent,
-                'payments' => 0,
+                'payments' => $amount,
                 'salary_paid' => 0,
                 'salary_pending' => 0
             ]);
+            return $creat;
         }else{
-            $agent->update([
-                'payment' =>  $agent->payment + $amount, 
+           $ss =  $agent->update([
+                'payments' =>  $agent->payment + $amount, 
                 'salary_paid' => $agent->salary_paid,
                 'salary_pending' => $agent->salary_pending
             ]);
+            return $ss;
         } 
     }
 

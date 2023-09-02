@@ -87,6 +87,22 @@ class UserWallet extends Model
         $user->wallet = $userWallet;
     }
 
+    public static function addRefBonus($user, $amount)
+    {
+        $userWallet = (new UserWallet)->whereUserId($user->id)->first();
+        if (!$userWallet) {
+            $userWallet = UserWallet::create([
+                'user_id' => $user->id,
+                'referrals' => $amount,
+            ]);
+        } else {
+            $userWallet->bonus = $userWallet->bonus + $amount;
+            $userWallet->save();
+        }
+
+        $user->wallet = $userWallet;
+    }
+
     public static function reducePayoutAmount($user, $amount)
     {
         $userWallet = (new UserWallet)->whereUserId($user->id)->first();

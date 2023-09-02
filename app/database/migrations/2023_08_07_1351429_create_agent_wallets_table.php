@@ -20,6 +20,7 @@ class CreateAgentWalletsTable extends Migration
             $table->double('salary_paid')->nullable();
             $table->double('salary_pending')->nullable();
             $table->integer('status')->nullable();
+            $table->timestamps();
         });
     }
 

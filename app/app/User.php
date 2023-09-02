@@ -169,12 +169,13 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function ReferralRegBonus($data){
-        $ref = $this->GenerateRefCode().hex2bin(random_bytes(5));
+        $ref = $this->GenerateRefCode();
         return Referral::create([
                     'ref' => $ref,
                     'user_id' => $data['user_id'],
-                    'referral_id' => $data['refCode'],
-                    'interest' => 10
+                    'referrer_id' => $data['referer_id'],
+                    'interest' => 10,
+                    'status' => 'success'
         ]);
     }
 
