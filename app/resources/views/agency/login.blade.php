@@ -1,6 +1,5 @@
 @extends('layouts.agency_auth')
 @section('content')
-
     <!-- Log In page -->
     <div class="container account-body accountbg">
         <div class="row vh-100 d-flex justify-content-center">
