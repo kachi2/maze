@@ -116,7 +116,7 @@
                              
                                     @forelse ($commission  as $pay )
                                     <tr>     
-                                        {{dd($commission)}}                                           
+                                                                               
                                         <td>{{$pay->created_at->format('d/m/y h:m:i')}}</td>                                                            
                                         <td>{{$pay->users->username}}</td>
                                         <td>{{moneyFormat($pay->amount, 'USD')}}</td>
