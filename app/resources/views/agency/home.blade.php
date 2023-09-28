@@ -52,7 +52,7 @@
                                     <div class="col">
                                         <p class="text-dark mb-0 fw-semibold">Campaign Commisions</p>
                                         <h3 class="m-0">{{$campaign->campaign->commission}}% per referral</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">${{ $commission? number_format($commission[0]->avail_balance, 2) : '$0'}}</span> Total Earned</p>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">${{ $commission != null? number_format($commission[0]->avail_balance, 2) : '$0'}}</span> Total Earned</p>
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
