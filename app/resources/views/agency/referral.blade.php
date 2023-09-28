@@ -37,7 +37,7 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
                                         <p class="text-dark mb-0 fw-semibold">Total Referrals</p>
-                                        <h3 class="m-0">{{$refs->total_referrals}}</h3>
+                                        <h3 class="m-0">{{count($referrals)}}</h3>
                                         <p class="mb-0 text-truncate text-muted">
                                             <span class="text-success">{{count($refer_weekly)}} people referred this week</p>
                                     </div>
@@ -52,12 +52,12 @@
                                     <div class="col">
                                         <p class="text-dark mb-0 fw-semibold">Traded Referrals</p>
 
-                                        <h3 class="m-0">{{$refs->traded_referrals}}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">{{$refs->traded_referrals}} Referrals have traded</p>
+                                        {{-- <h3 class="m-0">{{$refs->traded_referrals}}</h3>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">{{$refs->traded_referrals}} Referrals have traded</p> --}}
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
-                        </div><!--end card--> 
+                        </div><!--end card-->  
                     </div> <!--end col--> 
                     <div class="col-md-6 col-lg-4">
                         <div class="card report-card">
@@ -99,14 +99,14 @@
                                 </thead>
                                 <tbody>
                              
-                                    @forelse ($referrals  as $refs )
+                                    @forelse ($referrals  as $referals )
                                     <tr>                                                                                                        
-                                        <td>{{$refs->user->username}}</td>
-                                        <td>{{ $refs->user->created_at->format('d/m/y h:m:i')}}</td>   
-                                        <td>@if($refs->user->deposits) 
+                                        <td>{{$referals->username}}</td>
+                                        <td>{{ $referals->created_at->format('d/m/y h:m:i')}}</td>   
+                                        <td>@if($referals->hasDeposit($referals->id)) 
                                             <span class='badge bg-info'> Traded </span> 
                                              @else<span class='badge bg-warning'> Not Traded </span> @endif </td>
-                                             <td>@if($refs->user->status == 0) 
+                                             <td>@if($referals->status == 0) 
                                                 <span class='badge bg-success'> Active </span> 
                                                  @else<span class='badge bg-danger'> Not Active</span> @endif </td>
                                     </tr>    

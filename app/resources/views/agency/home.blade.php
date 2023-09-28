@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                             </div><!--end card-body--> 
-                        </div><!--end card--> 
+                        </div><!--end card-->  
                     </div> <!--end col--> 
                     <div class="col-md-6 col-lg-3">
                         <div class="card report-card">

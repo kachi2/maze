@@ -18,27 +18,31 @@ use Carbon\Carbon;
 class ReferralController extends Controller
 {
 
+    public function __construct()
+    {
+        
+        return $this->middleware('agentMiddleware');
+    }
+    
+
     public function Index(){
-    $data['total_referrals'] = Referrals::where('agent_id', agent_user()->id)->get();
-    $data['refer_weekly'] = Referrals::where(['agent_id' => agent_user()->id, ['created_at', '>=', Carbon::now()->addDays(-7)]])->get();
-    $data['active_referrals'] = User::where(['ref_code' => agent_user()->ref_code, 'status' => '0'])->get();
-    $data['referrals'] = AgentReferral::where(['agent_id' => agent_user()->id])->get();
-    $data['refs'] = AffiliateReferrals::where('agent_id', agent_user()->id)->first();
+    $data['refer_weekly'] = User::where(['referral_id' => agent_user()->ref_code, ['created_at', '>=', Carbon::now()->addDays(-7)]])->get();
+    $data['active_referrals'] = User::where(['referral_id' => agent_user()->ref_code, 'status' => '0'])->get();
+    $data['referrals'] = User::where(['referral_id' => agent_user()->ref_code])->get();
     $data['campaign'] = CampaignStage::where(['agent_id' => agent_user()->id, 'status' => 1])->first();
-    $data['campaigns'] = CampaignStage::where(['agent_id' => agent_user()->id])->get();
     $data['commission'] = AffiliateCommission::whereAgentId(agent_user()->id)->latest()->get();
     $data['wallet'] = AgentWallet::where('agent_id', agent_user()->id)->first();
     return view('agency.referral', $data);
     }
 
      public function AgentReferral(){
-        if(auth('agent')->user()->ref_code == null){
-            $user = Agent::where('id', auth('agent')->user()->id)
-            ->update(['ref_code' => $this->generateRefCode()]);
+        $agent = Agent::where('id', auth('agent')->user()->id)->first();
+        if($agent->ref_code == null){   
+            $agent->update(['ref_code' => $this->generateRefCode()]);
         }
-        $referals = Referrals::where('agent_id', auth('agent')->user()->id)->get();
+        $referals = AgentReferral::where('agent_id', auth('agent')->user()->id)->get();
      
-        $pending = Referrals::where(['agent_id' => auth('agent')->user()->id, 'status' => 0])->get();
+        $pending = AgentReferral::where(['agent_id' => auth('agent')->user()->id, 'status' => 0])->get();
         return view('agency.referral', compact('referals', $referals, 'pending',$pending));
         }
 
@@ -48,7 +52,7 @@ class ReferralController extends Controller
         }
 
         public function ClaimBonus($id){
-            $ref = Referrals::where(['agent_id' => auth('agent')->user()->id, 'id' => decrypt($id)])->first();
+            $ref = AgentReferral::where(['agent_id' => auth('agent')->user()->id, 'id' => decrypt($id)])->first();
             $bonus = ($ref->user->deposit[0]->amount*5)/100;
             $ref->update(['status' => 1, 'bonus' =>  $bonus]);
             $agentWallet = AgentWallet::where('agent_id', auth('agent')->user()->id)->first();

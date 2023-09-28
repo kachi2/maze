@@ -110,8 +110,11 @@
                     <div class="card-body">        
                         <div class="row text-center">
                             @forelse($direct_ref as $direct)
-                            <div class="col-sm-3"><span class="border py-2 d-block mb-2 mb-lg-0"><i class="fa fa-user"> </i> {{$direct->username}} <br> Date Joined: {{$direct->created_at->format('d/m/yy')}} 
-                            <br><span class="badge bg-info"> @if($direct->deposits) Traded </span> @else <span class="badge bg-secondary"> Not Traded </span> @endif </span></div>
+                            <div class="col-sm-3"><span class="border py-2 d-block mb-2 mb-lg-0">
+                                <i class="fa fa-user"> </i> {{$direct->username}} <br> 
+                                Date Joined: {{$direct->created_at->format('d/m/yy')}} 
+                            <br>  @if($direct->hasDeposit($direct->id)) <span class="badge bg-info"> Traded </span> @else 
+                            <span class="badge bg-warning"> Not Traded </span> @endif </div>
                             @empty 
 
                             <div class="col-sm-3"><span class="border py-2 d-block mb-2 mb-lg-0">No record Found </span></div>
@@ -133,7 +136,7 @@
                         <div class="row text-center">
                             @forelse ($indirect_ref as $indirect)
                             <div class="col-sm-3"><span class="border py-2 d-block mb-2 mb-lg-0"><i class="fa fa-user"> </i> {{$indirect->username}} <br> Date Joined: {{$indirect->created_at->format('d/m/yy')}} 
-                            <br><span class="badge bg-info"> @if($indirect->deposits) Traded </span> @else <span class="badge bg-secondary"> Not Traded </span> @endif </span></div>
+                            <br>@if($indirect->hasDeposit($indirect->id)) <span class="badge bg-info">  Traded </span> @else <span class="badge bg-warning"> Not Traded </span> @endif </div>
                             @empty 
 
                            <div class="col-sm-3"><span class="border py-2 d-block mb-2 mb-lg-0">No record Found </span></div>
@@ -157,7 +160,7 @@
                         <div class="row text-center">
                             @forelse($sponsor_two as $indirects)
                             <div class="col-sm-3"><span class="border py-2 d-block mb-2 mb-lg-0"><i class="fa fa-user"> </i> {{$indirects->username}} <br> Date Joined: {{$indirects->created_at->format('d/m/yy')}} 
-                            <br><span class="badge bg-info"> @if($indirects->deposits) Traded </span> @else <span class="badge bg-secondary"> Not Traded </span> @endif </span></div>
+                            <br>@if($indirects->hasDeposit($indirects->id))  <span class="badge bg-info"> Traded </span> @else <span class="badge bg-warning"> Not Traded </span> @endif </div>
                            @empty 
 
                            <div class="col-sm-3"><span class="border py-2 d-block mb-2 mb-lg-0">No record Found </span></div>

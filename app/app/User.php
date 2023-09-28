@@ -137,6 +137,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Deposit::class);
     }
 
+    public function hasDeposit($userId){
+        $deposit = Deposit::where('user_id', $userId)->get();
+        if(count($deposit) > 0){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Get the Withdrawals for the user.
      */

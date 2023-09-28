@@ -57,27 +57,33 @@ class Agent  extends Authenticatable implements MustVerifyEmail
     public function levelBonus($agent){
         $stage = CampaignStage::where('agent_id', $agent->id)->first();
         if(!empty($stage)){
-            return  $stage->campaign->commission;
+            $bonus = AffiliateCampaign::where('id', $stage->campaign_id)->first();
+            return $bonus;
         }else{
            CampaignStage::create(['agent_id' => $agent->id, 'campaign_id' => 1, 'referral' => 0, 'commission' => 10]); 
-         return  10;
+           $stage = CampaignStage::where('agent_id', $agent->id)->first();
+           $bonus = AffiliateCampaign::where('id', $stage->campaign_id)->first();
+         return  $bonus;
 
         }
     }
 
+    
+
 
     public function affiliateCommision($agent, $user, $reason){
         $agents = AffiliateCommission::whereId($agent->id)->latest()->first();
+        $bonus = $this->levelBonus($agent);
       AffiliateCommission::create([
             'agent_id' => $agent->id,
             'user_id' => $user->id,
-            'amount' => $this->levelBonus($agent),
+            'amount' => $bonus->reg_comm,
             'float_balance' => $agents->float_balance,
-            'avail_balance' => $this->levelBonus($agent) + $agents->float_balance,
+            'avail_balance' => $bonus->reg_comm+ $agents->float_balance,
             'source' => $reason
       ]);
 
-     $data = (new AgentWallet)->AddBonus($agent, $this->levelBonus($agent));
+     $data = (new AgentWallet)->AddBonus($agent, $bonus->reg_comm);
       return $data;
     }
 

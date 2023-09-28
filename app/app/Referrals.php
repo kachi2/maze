@@ -8,7 +8,7 @@ class Referrals extends Model
 {
     //
 
-    protected $table = "agent_referrals";
+    protected $table = "referrals";
 
     protected $fillable = [
         'agent_id', 'user_id','status','bonus'

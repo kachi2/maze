@@ -130,7 +130,7 @@ class DepositController extends Controller
             $agent = Agent::where('ref_code', $User->referral_id)->first();
             $reasons = 'Referral Wallet Deposit Bonus';
             $AgentCom = CampaignStage::where('agent_id', $agent->id)->first();
-            $Cal_amount = (($AgentCom->commissions/100)* $deposit->amount);
+            $Cal_amount = (($AgentCom->campaign->commissions/100)* $deposit->amount);
             $agent->InvesmentCommision($agent,$User, $reasons, $Cal_amount);
 
             Session::flash('msg', 'success');
@@ -360,7 +360,7 @@ class DepositController extends Controller
         $agent = Agent::where('ref_code', $User->referral_id)->first();
         $reasons = 'Referral Investment Bonus';
         $AgentCom = CampaignStage::where('agent_id', $agent->id)->first();
-        $Cal_amount = (($AgentCom->commissions/100)* $deposit->amount);
+        $Cal_amount = (($AgentCom->campaign->commission/100)* $deposit->amount);
         $agent->InvesmentCommision($agent,$User, $reasons, $Cal_amount);
 
         $ur = Referral::where('user_id', $deposit->user->id)->first();

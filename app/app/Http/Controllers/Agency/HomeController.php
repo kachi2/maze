@@ -8,8 +8,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Agent;
+use App\User;
 use App\AgentActivity;
 use App\Payment;
+use App\AgentReferral;
 use App\Referrals;
 use App\AgentTask;
 use Illuminate\Support\Facades\Session;
@@ -25,17 +27,17 @@ class HomeController extends Controller
 
         //
         public function __construct()
-        {
-           
-        // return $this->middleware('agent');
-           
-        }
+    {
+        
+        return $this->middleware('agentMiddleware');
+    }
+
         public function Index(){
             $date = Carbon::now()->addDays(-30);
 
             $data['agent'] = Agent::where('id', auth('agent')->user()->id)->first();
-            $data['referrals'] = Referrals::where('agent_id', agent_user()->id)->get();
-            $data['referral'] = Referrals::where('agent_id', agent_user()->id)->where('created_at', '>', $date)->get();
+            $data['referrals'] = User::where('referral_id', agent_user()->ref_code)->get();
+            $data['referral'] = User::where('referral_id', agent_user()->ref_code)->where('created_at', '>', $date)->get();
             $data['campaign'] = CampaignStage::where(['agent_id' => agent_user()->id, 'status' => 1])->first();
             $data['campaigns'] = CampaignStage::where(['agent_id' => agent_user()->id])->get();
             $data['commission'] = AffiliateCommission::whereAgentId(agent_user()->id)->latest()->get();
@@ -50,7 +52,6 @@ class HomeController extends Controller
         }
     
         public function SalaryPayments(){
-            
             return view('agency.salary')
             ->with('payments', Salary::where('agent_id', agent_user()->id)->get());
         }

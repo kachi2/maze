@@ -10,14 +10,17 @@ class DownlinerController extends Controller
 {
     //
 
-    public function DownlinerIndex(){
-        $data['direct_ref'] = User::where('ref_code',agent_user()->ref_code)->get();
-        $data['indirect_ref'] = User::where('sponsor_id', agent_user()->ref_code)->get();
-        $data['sponsor_two'] = User::where('sponsor_two', agent_user()->ref_code)->get();
-        return view('agency.downlinerIndex', $data);
+    public function __construct()
+    {
+        
+        return $this->middleware('agentMiddleware');
     }
 
-    
-
+    public function DownlinerIndex(){
+        $data['direct_ref'] = User::where(['referral_id' => agent_user()->ref_code, ['sponsor_id', '=', null], ['sponsor_two', '=', null]])->get();
+        $data['indirect_ref'] = User::where(['referral_id' => agent_user()->ref_code, ['sponsor_id', '!=', null], ['sponsor_two', '=', null]])->get();
+        $data['sponsor_two'] = User::where(['referral_id' => agent_user()->ref_code, ['sponsor_id', '!=', null], ['sponsor_two', '!=', null]])->get();
+        return view('agency.downlinerIndex', $data);
+    }
 
 }
