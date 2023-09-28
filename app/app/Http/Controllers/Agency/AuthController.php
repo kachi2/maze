@@ -94,7 +94,7 @@ class AuthController extends Controller
                 'is_accepted' => 1,
                 'country' => $req->country,
             ]);
-        if($update){
+      
 
         AgentWallet::create([
             'agent_id' =>$agent->id, 
@@ -120,7 +120,6 @@ class AuthController extends Controller
         Session::flash('msg', 'Account Setup Completed');
         return redirect()->route('affiliates.index');
         }
-    }
 
     public function Login(){
         return view('agency.login');

@@ -46,6 +46,8 @@ class HomeController extends Controller
             $data['commission'] = AffiliateCommission::whereAgentId(agent_user()->id)->latest()->get();
             $data['wallet'] = AgentWallet::where('agent_id', agent_user()->id)->first();
             $data['activities'] = AgentActivity::where('agent_id', agent_user()->id)->latest()->take(6)->get();
+
+            dd($data);
             return view('agency.home', $data);
         }
     
