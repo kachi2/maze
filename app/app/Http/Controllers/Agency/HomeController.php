@@ -34,7 +34,10 @@ class HomeController extends Controller
 
         public function Index(){
             $date = Carbon::now()->addDays(-30);
-
+            $agnt = CampaignStage::where('agent_id',agent_user()->id )->first();
+            if(empty($agnt)){
+            CampaignStage::create(['agent_id' => agent_user()->id , 'campaign_id' => 1, 'referral' => 0, 'commission' => 10]);
+            }
             $data['agent'] = Agent::where('id', auth('agent')->user()->id)->first();
             $data['referrals'] = User::where('referral_id', agent_user()->ref_code)->get();
             $data['referral'] = User::where('referral_id', agent_user()->ref_code)->where('created_at', '>', $date)->get();
