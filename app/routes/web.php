@@ -172,7 +172,8 @@ use Illuminate\Support\Facades\Route;
 
 
         // Route::group(['prefix' => 'affiliates', 'as' => 'affiliates.'], function(){
-            Route::domain('affiliates.mazeoptions.com')->group(['prefix' => 'affiliates', 'as' => 'affiliates.'], function(){ 
+            Route::domain('affiliates.mazeoptions.com')->group(function(){ 
+            Route::group(['prefix' => 'affiliates', 'as' => 'affiliates.'], function(){ 
             Route::get('/register', 'Agency\AuthController@register')->name('register');
             Route::post('/register/submit', 'Agency\AuthController@registers')->name('registers');
             Route::get('/registration/{id}', 'Agency\AuthController@CompleteRegistration')->name('registration');
@@ -222,6 +223,7 @@ use Illuminate\Support\Facades\Route;
             Route::get('admin/agent/task', 'Agency/AdminController@AgentTask')->name('admin.agent.task');
             Route::post('/admin/create/task', 'Agency/AdminController@createTask')->name('admin.create.task');
             });
+        });
     // Route::middleware(['agent'])->group(function(){
     //     Route::get('/', 'Agency\HomeController@index')->name('agency.index');
     //     Route::get('/home', 'Agency\HomeController@index')->name('agency.index');
