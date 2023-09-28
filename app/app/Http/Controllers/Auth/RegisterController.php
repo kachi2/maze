@@ -125,33 +125,59 @@ class RegisterController extends Controller
                 'phone' => $data['phone'],
                 'password' => Hash::make($data['password']),
             ]);
-
             if ($create) {
-                $users = User::latest()->first();
+                $Newusers = User::latest()->first();
                 $bonusAmount = 0;
                 $user =  User::where('ref_code', $data['ref'])->first();
                 $agentUser =  Agent::where(['ref_code' => $data['ref']])->first();
-               if(!empty($user)){
-                        if ($user->sponsor_id == null && $user->sponsor_two == null) {
-                            UserWallet::addRefBonus($user, $bonusAmount);
-                            $data['user_id'] = $users->id;
-                            $user->ReferralRegBonus($data);
-                            $users->update(['referral_id' => $user->ref_code]);
-                        } else {
-                            $agentWallet =  Agent::where(['ref_code' => $user->sponsor_id])->orWhere('ref_code', $user->sponsor_two)->first();
-                            $agentWallet->AddBonus($agentWallet->id, $agentWallet->campaign->reg_comm);
-                            $agentWallet->affiliateCommision($agentWallet->id, $user, 'registration Bonus');
-                            $users->update(['sponsor_two' => $agentWallet->ref_code]);
-                        }
-               }else{
+                if (!empty($user)) {
+                    if ($user->referral_id == null) {
+                        UserWallet::addRefBonus($user, $bonusAmount);
+                        $datas['user_id'] = $Newusers->id;
+                        $datas['referral_id'] = $user->id;
+                        $user->ReferralRegBonus($datas);
+                        $Newusers->update(['sponsor_id' => $user->ref_code]);//this means no agent involved, the user is the sponsor
+                    } else if($user->referral_id != null && $user->sponsor_id == null  && $user->sponsor_two == null){
+                        $agentWallet =  Agent::where(['ref_code' => $user->referral_id])->first();
+                        $agentWallet->affiliateCommision($agentWallet, $Newusers, 'registration Bonus');
+                        $agentWallet->ReferralCount($agentWallet);
+                        $Newusers->update(['referral_id' => $agentWallet->ref_code, 'sponsor_id' => $user->ref_code]);
+                    }else if($user->referral_id != null && $user->sponsor_id != null && $user->sponsor_two == null){
+                        //check if the sponsor_id belongs to a user account 
+                        $usersn =  User::where('ref_code', $user->sponsor_id)->first();
                     
-                        $ss = $agentUser->AddBonus($agentUser->id, $agentUser->levelBonus($agentUser->id));
-                     dd($ss);
-                        $agentUser->affiliateCommision($agentUser->id, $users, 'registration Bonus');
-                        $users->update(['sponsor_id' => $agentUser->ref_code]);
+                        UserWallet::addRefBonus($usersn, $bonusAmount);
+                        $datas['user_id'] = $usersn->id;
+                        $datas['referral_id'] = $Newusers->id;
+                        $user->ReferralRegBonus($datas);    
+                        // dd($usersn);
+                        if($usersn){
+                        $agents = Agent::where(['ref_code' => $usersn->referral_id])->first();
+                        $agents->affiliateCommision($agents, $Newusers, 'registration Bonus');
+                        $Newusers->update(['referral_id' => $agents->ref_code, 'sponsor_id' => $usersn->ref_code, 'sponsor_two' => $user->ref_code ]);
+                        }
+                    }else if($user->referral_id != null && $user->sponsor_id != null && $user->sponsor_two != null){
+                        $usersn =  User::where('ref_code', $user->sponsor_two)->first();
+                        if($usersn){
+                        UserWallet::addRefBonus($usersn, $bonusAmount);
+                        $datas['user_id'] = $Newusers->id;
+                        $datas['referral_id'] = $user->id;
+                        $user->ReferralRegBonus($datas);
+                        
+                        $agents = Agent::where(['ref_code' => $usersn->referral_id])->first();
+                        $agents->affiliateCommision($agents, $Newusers, 'registration Bonus');
+                        $Newusers->update(['referral_id' => $agents->ref_code, 'sponsor_id' => $usersn->ref_code, 'sponsor_two' => $user->ref_code ]);
+                        }
                     }
+                } else {
+                    $agentUser->affiliateCommision($agentUser, $Newusers, 'registration Bonus');
+                    $agentUser->ReferralCount($agentUser);
+                    $Newusers->update(['referral_id' => $agentUser->ref_code]);
+                }
                 // UserWallet::addBonus($users, $bonusAmount);
-                Auth::login($users);
+
+                // dd($data['ref']);
+                Auth::login($Newusers);
                 DB::commit();
                 return redirect()
                     ->to($this->redirectTo);
@@ -159,7 +185,7 @@ class RegisterController extends Controller
         } catch (Exception $e) {
             DB::rollback();
 
-            return back()->withInput($data->all())->withErrors(['ref'=> 'Request failed, try again later' . $e]);
+            return back()->withInput($data->all())->withErrors(['ref' => 'Request failed, try again later' . $e]);
         }
     }
 

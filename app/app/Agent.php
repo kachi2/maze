@@ -52,14 +52,14 @@ class Agent  extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(User::class, 'ref_code', 'ref_code');
     }
 
- 
+
     
     public function levelBonus($agent){
-        $stage = CampaignStage::where('agent_id', $agent)->first();
+        $stage = CampaignStage::where('agent_id', $agent->id)->first();
         if(!empty($stage)){
             return  $stage->campaign->commission;
         }else{
-           CampaignStage::create(['agent_id' => $agent, 'campaign_id' => 1, 'referral' => 0, 'commission' => 10]); 
+           CampaignStage::create(['agent_id' => $agent->id, 'campaign_id' => 1, 'referral' => 0, 'commission' => 10]); 
          return  10;
 
         }
@@ -67,38 +67,51 @@ class Agent  extends Authenticatable implements MustVerifyEmail
 
 
     public function affiliateCommision($agent, $user, $reason){
-        $agent = Agent::whereId($agent)->first();
-      return  AffiliateCommission::create([
-            'agent_id' => $agent,
-            'user_id' => $user,
+        $agents = AffiliateCommission::whereId($agent->id)->latest()->first();
+      AffiliateCommission::create([
+            'agent_id' => $agent->id,
+            'user_id' => $user->id,
             'amount' => $this->levelBonus($agent),
-            'float_balance' => $agent->float_balance,
-            'avail_balance' => $this->levelBonus($agent) + $agent->float_balance,
+            'float_balance' => $agents->float_balance,
+            'avail_balance' => $this->levelBonus($agent) + $agents->float_balance,
             'source' => $reason
       ]);
 
-      (new AgentWallet)->AddBonus($agent, $this->levelBonus($agent));
+     $data = (new AgentWallet)->AddBonus($agent, $this->levelBonus($agent));
+      return $data;
     }
 
-    public function AddBonus($agent, $amount){
-        $agent = (new AgentWallet)->whereAgentId($agent)->first();
-        if(!$agent){
-            $creat =  AgentWallet::create([
-                'agent_id' => $agent,
-                'payments' => $amount,
-                'salary_paid' => 0,
-                'salary_pending' => 0
+    public function InvesmentCommision($agent, $user, $reason, $Cal_amount){
+        $agents = AffiliateCommission::whereId($agent->id)->latest()->first();
+      AffiliateCommission::create([
+            'agent_id' => $agent->id,
+            'user_id' => $user->id,
+            'amount' => $Cal_amount,
+            'float_balance' => $Cal_amount,
+            'avail_balance' => $Cal_amount + $agents->float_balance,
+            'source' => $reason
+      ]);
+
+     $data = (new AgentWallet)->AddBonus($agent, $Cal_amount);
+      return $data;
+    }
+
+    public function ReferralCount($agent){
+        $agents = AffiliateReferrals::where('agent_id', $agent->id)->first();
+        if(!$agents){
+           $agents = AffiliateReferrals::create([
+                'agent_id' => $agent->id,
+                'total_referrals' => 1,
+                'traded_referrals' => 0,
+                'active_referrals' => 1,
+                'inactive_referrals' => 0
             ]);
-            return $creat;
         }else{
-           $ss =  $agent->update([
-                'payments' =>  $agent->payment + $amount, 
-                'salary_paid' => $agent->salary_paid,
-                'salary_pending' => $agent->salary_pending
-            ]);
-            return $ss;
-        } 
+            $agents->total_referrals  = ($agents->total_referrals + 1);
+            $agents->active_referrals = ($agents->active_referrals + 1);
+            $agents->save();
+        }
+        return $agents;
     }
-
 
 }

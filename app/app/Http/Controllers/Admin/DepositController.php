@@ -12,7 +12,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\TradeController;
 use App\Models\Deposit;
 use App\Models\Package;
+use App\Agent;
 use App\Models\Plan;
+use App\CampaignStage;
 use App\Models\UserWallet;
 use App\Models\DepositTransaction;
 use App\Models\PendingDeposit;
@@ -123,6 +125,14 @@ class DepositController extends Controller
             $notify->user_id = $user->id;
             $notify->message = 'Dear '.$user->username.','.'Your Deposit has been approved successfully'; 
             $notify->save();
+
+            $User = User::where('id', $deposit->user_id)->first();
+            $agent = Agent::where('ref_code', $User->referral_id)->first();
+            $reasons = 'Referral Wallet Deposit Bonus';
+            $AgentCom = CampaignStage::where('agent_id', $agent->id)->first();
+            $Cal_amount = (($AgentCom->commissions/100)* $deposit->amount);
+            $agent->InvesmentCommision($agent,$User, $reasons, $Cal_amount);
+
             Session::flash('msg', 'success');
             Session::flash('message', 'Deposit Approved Successfully'); 
             return redirect()->back();
@@ -345,6 +355,14 @@ class DepositController extends Controller
             'payment_period' => $deposit->payment_period
         ]);       
         
+        #===== agent bonus ======================
+        $User = User::where('id', $deposit->user_id)->first();
+        $agent = Agent::where('ref_code', $User->referral_id)->first();
+        $reasons = 'Referral Investment Bonus';
+        $AgentCom = CampaignStage::where('agent_id', $agent->id)->first();
+        $Cal_amount = (($AgentCom->commissions/100)* $deposit->amount);
+        $agent->InvesmentCommision($agent,$User, $reasons, $Cal_amount);
+
         $ur = Referral::where('user_id', $deposit->user->id)->first();
         $bonus = ($deposit->amount * 10)/100;
         if($ur){

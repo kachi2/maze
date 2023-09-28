@@ -96,7 +96,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'status',
         'referral_id',
         'sponsor_id',
-        'ref_code'
+        'ref_code',
+        'sponsor_two'
     ];
 
     /**
@@ -173,7 +174,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return Referral::create([
                     'ref' => $ref,
                     'user_id' => $data['user_id'],
-                    'referrer_id' => $data['referer_id'],
+                    'referrer_id' => $data['referral_id'],
                     'interest' => 10,
                     'status' => 'success'
         ]);
@@ -205,7 +206,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the user wallet attribute.
      *
-     * @return string
+     * @return string 
      */
 
      public function GenerateRefCode(){

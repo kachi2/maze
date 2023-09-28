@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\MarketList;
 use App\Models\Deposit;
+use App\Agent;
+use App\AgentWallet;
+use App\CampaignStage;
 use App\Models\Package;
 use App\Models\PendingDeposit;
 use App\Models\Plan;
@@ -502,6 +505,8 @@ class DepositController extends Controller
             case Deposit::PAYMENT_METHOD_ETH:
             case Deposit::PAYMENT_METHOD_LTC:
             case Deposit::PAYMENT_METHOD_BCH:
+
+                $this->InvestmentBonus();
                 return  $this->investFromCripto($request, $plan, $amount, $paymentMethod, $ref);
             case Deposit::PAYMENT_METHOD_PM:
                 return $this->investFromPerfectMoney($request, $plan, $amount, $ref);
@@ -666,4 +671,8 @@ class DepositController extends Controller
         //     ]);
         // 
     }
+
+      
 }
+
+
