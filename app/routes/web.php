@@ -11,8 +11,8 @@
 
 use Illuminate\Support\Facades\Route;
     #========== mobile routes ======================
-    // Route::domain('app.mazeoptions.com')->group(function(){   
-   Route::group(['prefix' => 'mob'], function(){  
+    Route::domain('app.mazeoptions.com')->group(function(){   
+//    Route::group(['prefix' => 'mob'], function(){  
         Route::post('/user/register', 'Auth\RegisterController@create_user')->name('register_user');
         Route::get('complete-registration', 'Auth\CompleteRegistrationController@index')->name('complete_registration');
         Route::post('complete-registration', 'Auth\CompleteRegistrationController@update')->name('complete_registration');
@@ -171,7 +171,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
-        Route::group(['prefix' => 'affiliates', 'as' => 'affiliates.'], function(){
+        // Route::group(['prefix' => 'affiliates', 'as' => 'affiliates.'], function(){
+            Route::domain('affiliates.mazeoptions.com')->group(['prefix' => 'affiliates', 'as' => 'affiliates.'], function(){ 
             Route::get('/register', 'Agency\AuthController@register')->name('register');
             Route::post('/register/submit', 'Agency\AuthController@registers')->name('registers');
             Route::get('/registration/{id}', 'Agency\AuthController@CompleteRegistration')->name('registration');
