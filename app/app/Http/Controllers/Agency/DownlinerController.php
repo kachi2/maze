@@ -17,9 +17,9 @@ class DownlinerController extends Controller
     }
 
     public function DownlinerIndex(){
-        $data['direct_ref'] = User::where(['referral_id' => agent_user()->ref_code])->orwhere(['sponsor_id', '==', null])->orwhere(['sponsor_two', '==', null])->get();
-        $data['indirect_ref'] = User::where(['referral_id' => agent_user()->ref_code])->orwhere(['sponsor_id', '!=', null])->orwhere(['sponsor_two', '==', null])->get();
-        $data['sponsor_two'] = User::where(['referral_id' => agent_user()->ref_code])->orwhere(['sponsor_id', '!=', null])->orwhere(['sponsor_two', '!=', null])->get();
+        $data['direct_ref'] = User::where(['referral_id' => agent_user()->ref_code])->orwhere('sponsor_id', '==', null)->orwhere('sponsor_two', '==', null)->get();
+        $data['indirect_ref'] = User::where(['referral_id' => agent_user()->ref_code])->orwhere('sponsor_id', '!=', null)->orwhere('sponsor_two', '==', null)->get();
+        $data['sponsor_two'] = User::where(['referral_id' => agent_user()->ref_code])->orwhere('sponsor_id', '!=', null)->orwhere('sponsor_two', '!=', null)->get();
         return view('agency.downlinerIndex', $data);
     }
 
