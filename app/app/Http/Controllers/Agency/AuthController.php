@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
+use App\CampaignStage;
 use Illuminate\Support\Facades\Auth;
 use App\Agent;
 use App\AgentActivity;
@@ -150,9 +151,13 @@ class AuthController extends Controller
             'browser' => $req->userAgent(),
             'login_ip' => $req->Ip(),
         ]);
-        //dd( agent_user()->id);
+        //dd( agent_user()->id);    
 
-  
+
+        $agnt = CampaignStage::where('agent_id',agent_user()->id )->first();
+        if(empty($agnt)){
+        CampaignStage::create(['agent_id' => agent_user()->id , 'campaign_id' => 1, 'referral' => 0, 'commission' => 10]);
+        }
         return redirect()->route('affiliates.index');
     }else{
         return redirect()->back()->withInput($req->all())->withErrors($valid);
