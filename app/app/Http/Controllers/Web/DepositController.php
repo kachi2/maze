@@ -458,7 +458,7 @@ class DepositController extends Controller
         $id = decrypt($id);
         $plan = Plan::findOrFail($id);
         $validte = validator::make($request->all(), [
-            'amount' => "required|numeric",
+            'amount' => "required|numeric|min:0",
             'payment_method' => 'required'
         ]);
         if ($validte->fails()) {

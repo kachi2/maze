@@ -15,6 +15,9 @@ class WalletDepositController extends Controller
     //
     protected function investFromCripto(Request $request)
     {
+        if($request->input('amount') < 0){
+            return response()->json(['msg' => 'Amount must be greater than 0']);
+        }
         $amount = $request->input('amount');
         $paymentMethod = $request->input('payment_method');
         $ref = generate_reference();
