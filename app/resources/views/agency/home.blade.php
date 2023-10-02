@@ -65,7 +65,7 @@
                                     <div class="col">
                                         <p class="text-dark mb-0 fw-semibold">Affiliates Link</p>
                                         {{-- <h3 class="m-0"><a href="{{route('affiliates.referral').'/ref?='.$agent->ref_code}}"> Referral Link </a></h3> --}}
-                                        <input  class="form-control" aria-describedby="button-addon2" value="{{route('affiliates.referral').'/ref?='.$agent->ref_code}}" id="clipboardInput" readonly> 
+                                        <input  class="form-control" aria-describedby="button-addon2" value="{{ route('register').'/?ref='.agent_user()->ref_code}}" id="clipboardInput" readonly> 
                                         {{-- <p class="mb-0 text-truncate text-muted">  </p> --}}
                                         <button class="btn btn-sm btn-outline-success" 
                                         type="button" id="button-addon2" data-clipboard-action="copy"
