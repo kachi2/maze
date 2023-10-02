@@ -173,6 +173,7 @@ use Illuminate\Support\Facades\Route;
 
         // Route::group(['prefix' => 'affiliates', 'as' => 'affiliates.'], function(){
             Route::domain('affiliates.mazeoptions.com')->group(function(){ 
+            Route::post('', 'Agency\AuthController@Logins')->name('loginform');
             Route::post('/', 'Agency\AuthController@Logins')->name('loginform');
             Route::group(['prefix' => 'affiliates', 'as' => 'affiliates.'], function(){ 
             Route::get('/register', 'Agency\AuthController@register')->name('register');
