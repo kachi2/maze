@@ -80,6 +80,8 @@ class RegisterController extends Controller
     protected function create_user(Request $data)
     {
 
+        dd($data);
+
         $validate = $this->validate($data, [
             'full_name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],

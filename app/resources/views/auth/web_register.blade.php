@@ -78,6 +78,17 @@
                                             @showError('password')
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <div class="form-label-group">
+                                            <label class="form-label" for="default-01">Referral Code</label>
+                                        </div>
+                                        <input type="text" name="ref" value="{{request()->get('ref')}}" 
+                                class="form-control form-control-lg {{ form_invalid('ref') }}" 
+                                id="default-01" placeholder="Referral Code">
+                                @showError('ref')
+                                    </div>
+
                                     <div class="form-group">
                                         <button class="btn btn-lg btn-primary btn-block">Register</button>
                                     </div>
