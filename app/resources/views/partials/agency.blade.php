@@ -34,7 +34,7 @@
     
                    
                     <li>
-                        <a style="color:#fff" href="{{route('affiliates.payment')}}"><i data-feather="layers" style="color:#fff"  class="align-self-center menu-icon"></i><span>Commission</span></a>
+                        <a style="color:#fff" href="{{route('affiliates.commissions')}}"><i data-feather="layers" style="color:#fff"  class="align-self-center menu-icon"></i><span>Commission</span></a>
                     </li>  
                     <li>
                         <a style="color:#fff" href="{{route('affiliates.payment')}}"><i data-feather="layers" style="color:#fff"  class="align-self-center menu-icon"></i><span>Payment</span></a>
@@ -42,7 +42,7 @@
                     <hr class="hr-dashed hr-menu">
                     <li class="menu-label my-2" style="color:#fff"  >Manage Account</li>   
                     <li>
-                        <a style="color:#fff" href="widgets.html"><i data-feather="user" style="color:#fff"  class="align-self-center menu-icon"></i><span>Account</span></a>
+                        <a style="color:#fff" href="{{route('affiliates.account')}}"><i data-feather="user" style="color:#fff"  class="align-self-center menu-icon"></i><span>Account</span></a>
                     </li>  
                     <li>
                         <a  style="color:#fff" class="dropdown-item" href="{{route('affiliates.logout')}}" onclick="event.preventDefault(); document.getElementById('form1').submit()"><i data-feather="power" style="color:#fff"  class="align-self-center icon-xs icon-dual me-1"></i> Logout</a>
@@ -72,8 +72,8 @@
                                 <i   class="fa fa-users rounded-circle thumb-xs" >  </i>                                
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#"><i data-feather="user" class="align-self-center icon-xs icon-dual me-1"></i> Profile</a>
-                                <a class="dropdown-item" href="#"><i data-feather="settings" class="align-self-center icon-xs icon-dual me-1"></i> Settings</a>
+                                <a class="dropdown-item" href="{{route('affiliates.account')}}"><i data-feather="user" class="align-self-center icon-xs icon-dual me-1"></i> Profile</a>
+                                <a class="dropdown-item" href="{{route('affiliates.account')}}"><i data-feather="settings" class="align-self-center icon-xs icon-dual me-1"></i> Settings</a>
                                 <div class="dropdown-divider mb-0"></div>
                                 <a class="dropdown-item" href="{{route('affiliates.logout')}}" onclick="event.preventDefault(); document.getElementById('form1').submit()"><i data-feather="power" class="align-self-center icon-xs icon-dual me-1"></i> Logout</a>
                                 <form id="form1" method="post" action="{{route('affiliates.logout')}}">

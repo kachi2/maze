@@ -111,6 +111,13 @@ class AuthController extends Controller
             'login_ip' => $req->Ip(),
         ]);
 
+        CampaignStage::create([
+            'agent_id' => $agent->id,
+            'campaign_id' => 1,
+            'referrals' => 0,
+            'status' => 1,
+            'commission' => 0
+        ]);
         $agent->update([
             'login_counts' => 1
         ]);

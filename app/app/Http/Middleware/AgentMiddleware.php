@@ -16,9 +16,13 @@ class AgentMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(!auth::guard('agent')){
+
+        if(!auth::guard('agent')->check()){
+
                 return redirect()->route('affiliates.loginform');
+            }else{
+                return $next($request);
             }
-        return $next($request);
+       
     }
 }

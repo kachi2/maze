@@ -8,7 +8,7 @@
                 <div class="page-title-box">
                     <div class="row">
                         <div class="col">
-                            <h4 class="page-title">Salary Invoice</h4>
+                            <h4 class="page-title">Payouts Invoice</h4>
                         </div><!--end col-->
                         <div class="col-auto align-self-center">
                             <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
@@ -105,7 +105,7 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>{{$salary->ref}}</td>
-                                                <td>Salary Payment</td>
+                                                <td> Payouts</td>
                                                 <td>{{moneyFormat($salary->amount, 'USD')}}</td>
                                             </tr><!--end tr-->
                                             <tr>                                                        

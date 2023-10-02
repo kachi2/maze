@@ -9,7 +9,7 @@
                 <div class="page-title-box">
                     <div class="row">
                         <div class="col">
-                            <h4 class="page-title">Payments</h4>
+                            <h4 class="page-title">Payouts</h4>
                             
                         </div><!--end col-->
                         <div class="col-auto align-self-center">
@@ -33,19 +33,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Hourly Payments</h4>
-                        <p class="text-muted mb-0">
-                            Payments are calculated per hour, ensure to click the payment process button once the countdown timer completes to ensure you are paid for the hour worked. 
-                            Once you logout, all sessions will be cleared. 
-                        </p>
-                        <div style="float:right"> 
-
-                            <form method="post" action="{{route('agentProcess.payment')}}">
-                                @csrf
-                                <button class="btn btn-primary" id="processPay" hidden> Process Payment </button>
-                            
-                        </form>
-                    </div>
+                        <h4 class="card-title">Payouts</h4>
+                        <p class="text-muted mb-0">Always generate salary invoice within payment perioud</p>
+                        <span style="float:right"><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLogin">
+                            GENERANTE INVOICE
+                        </button> </span>
                     </div><!--end card-header-->
                     <div class="card-body">
                         <table id="row_callback" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -53,9 +45,11 @@
                             <tr>
                                 <th>#Ref</th>
                                 <th>Amount</th>
-                                <th>Status</th>
-                                <th>Period</th>
+                                <th>Payment Method</th>
+                                <th>Wallet Address</th>
                                 <th>Date</th>
+                                <th>Status</th>
+                                <th></th>
                             </tr>
                             </thead>
 
@@ -66,11 +60,11 @@
                            <tr>
                                 <td>{{$pay->ref}}</td>
                                 <td>{{moneyFormat($pay->amount, 'USD')}}</td>
-                               
-                                <td> <span class="badge bg-success">Paid</span></td>
-                                <td> 1 hour</td>
+                                <td>{{$pay->payment_method}}</td>
+                                <td>{{$pay->wallet_address}}</td>
                                 <td>{{$pay->created_at}}</td>
-                                
+                                <td> @if($pay->is_approved == 1)<span class="badge bg-success">Invoice Paid</span>  @else <span class="badge bg-danger">Invoice Unpaid</span> @endif</td>
+                                <td> <a href="{{route('affiliates.payments.invoices', encrypt($pay->id))}}" style="color:green"> View Invoice </a></td>
                             </tr>
                             @endforeach
                            
@@ -84,6 +78,88 @@
       
 
     </div><!-- container -->
+
+
+    <div class="modal fade" id="exampleModalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalDefaultLogin" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title m-0" id="exampleModalDefaultLogin">Payouts Invoice</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div><!--end modal-header-->
+                <div class="modal-body">
+                    <div class="card-body p-0 auth-header-box">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-5 col-lg-3">
+                                    <h6>Payee Details:</h6>
+                                    <p class="text-muted  mb-0">{{agent_user()->name}}.</p> 
+                                    <p class="text-muted  mb-0">{{agent_user()->email}}.</p>  
+                                    <p class="text-muted  mb-0">{{agent_user()->phone}}.</p>  
+                                </div>
+                                <div class="col-md-2 col-lg-3">
+                                </div>
+                            <div class="col-md-5 col-lg-3">
+                                <h6>Payee Address:</h6>
+                                <p class="text-muted  mb-0"> {{agent_user()->city}}.</p> 
+                                <p class="text-muted  mb-0"> {{agent_user()->state}}.</p>  
+                                <p class="text-muted  mb-0"> {{agent_user()->country}}.</p>  
+                            </div>
+                      
+                        </div>
+                             
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                         <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active p-3" id="LogIn_Tab" role="tabpanel">                                        
+                                <form class="form-horizontal auth-form" action="{{route('affiliates.payments.invoice')}}" method="post">
+                                    @csrf
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="username">Payment Method</label>
+                                        <div class="input-group">                                                                                         
+                                            <select class="form-control" name="payment_method"> 
+                                                <option value="btc"> {{agent_user()->payment_method}}</option>
+                                                
+                                            </select>
+                                        </div>                                    
+                                    </div><!--end form-group--> 
+        
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="userpassword">Payment Wallet</label>                                            
+                                        <div class="input-group">                                  
+                                            <input type="text" class="form-control" name="wallet_address" value="{{agent_user()->wallet_address}}"  placeholder="Enter Payment Address" readonly>
+                                        </div>  
+                                        <small> To change address, update account details</small>                             
+                                    </div><!--end form-group--> 
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="userpassword">Amount</label>                                            
+                                        <div class="input-group">                                  
+                                            <input type="text" class="form-control" name="amount" placeholder="Enter Amount">
+                                        </div>  
+                                        
+                                        <small>All accounts are be paid within 48hrs from receipt of invoice.<br>
+                                            If account is not paid within 72hrs contact support team</small>                             
+                                    </div><!--end form-group--> 
+                                    <br>
+                                    <div class="form-group mb-0 row">
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Generate Invoice<i class="fas fa-sign-in-alt ms-1"></i></button>
+                                        </div><!--end col--> 
+                                    </div> <!--end form-group-->                           
+                                </form><!--end form-->
+                            </div>
+                        </div>
+                    </div><!--end card-body-->                                              
+                </div><!--end modal-body-->
+                
+            </div><!--end modal-content-->
+        </div><!--end modal-dialog-->
+    </div><!--end modal-->
+
+
 
 
 

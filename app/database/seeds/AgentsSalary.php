@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Salary;
-class AgentSalary extends Seeder
+class AgentsSalary extends Seeder
 {
     /**
      * Run the database seeds.

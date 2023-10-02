@@ -20,6 +20,7 @@ use App\CampaignStage;
 use Illuminate\Support\Facades\Validator;
 use App\Salary;
 use Carbon\Carbon;
+use App\AgentSalary;
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -34,32 +35,38 @@ class HomeController extends Controller
 
         public function Index(){
             $date = Carbon::now()->addDays(-30);
-            $agnt = CampaignStage::where('agent_id',agent_user()->id )->first();
-            if(empty($agnt)){
-            CampaignStage::create(['agent_id' => agent_user()->id , 'campaign_id' => 1, 'referral' => 0, 'commission' => 10]);
-            }
+            $agent  = Agent::where('id', auth('agent')->user()->id)->first();
+                if($agent->ref_code == null){   
+                    $agent->update(['ref_code' => $this->generateRefCode()]);
+                }
             $data['agent'] = Agent::where('id', auth('agent')->user()->id)->first();
-            $data['referrals'] = User::where('referral_id', agent_user()->ref_code)->get();
+            $data['referrals'] = User::where(['referral_id' => agent_user()->ref_code])->get();
             $data['referral'] = User::where('referral_id', agent_user()->ref_code)->where('created_at', '>', $date)->get();
             $data['campaign'] = CampaignStage::where(['agent_id' => agent_user()->id, 'status' => 1])->first();
             $data['campaigns'] = CampaignStage::where(['agent_id' => agent_user()->id])->get();
             $data['commission'] = AffiliateCommission::whereAgentId(agent_user()->id)->latest()->get();
             $data['wallet'] = AgentWallet::where('agent_id', agent_user()->id)->first();
             $data['activities'] = AgentActivity::where('agent_id', agent_user()->id)->latest()->take(6)->get();
+            // dd($data);
             return view('agency.home', $data);
+        }
+
+        public function Commissions(){
+            $data['agent'] = Agent::where('id', auth('agent')->user()->id)->first();
+            $data['campaign'] = CampaignStage::where(['agent_id' => agent_user()->id, 'status' => 1])->first();
+            $data['campaigns'] = CampaignStage::where(['agent_id' => agent_user()->id])->get();
+            $data['wallet'] = AgentWallet::where('agent_id', agent_user()->id)->first();
+            $data['commission'] = AffiliateCommission::whereAgentId(agent_user()->id)->latest()->get();
+            return view('agency.commissions', $data);
         }
     
         public function Payments(){
             return view('agency.payments')
-            ->with('payments', Payment::where('agent_id', agent_user()->id)->latest()->get());
+            ->with('payments', AgentSalary::where('agent_id', agent_user()->id)->latest()->get());
         }
     
-        public function SalaryPayments(){
-            return view('agency.salary')
-            ->with('payments', Salary::where('agent_id', agent_user()->id)->get());
-        }
     
-        public function SalaryInvoice(Request $request){
+        public function PaymentsInvoice(Request $request){
     
             $valid = Validator::make($request->all(), [
                 'amount' => 'required',
@@ -71,7 +78,7 @@ class HomeController extends Controller
             }
             if(!agent_user()->wallet_address){
                 Session::flash('alert', 'error');
-                Session::flash('msg', "Please update your salary payment Wallet Address"."<br>"."Got to your Account Section to update");
+                Session::flash('msg', "Please update your payment Wallet Address"."<br>"."Got to your Account Section to update");
                 return back();
             }
             if($request->amount < 500){
@@ -86,24 +93,6 @@ class HomeController extends Controller
                 Session::flash('msg', "Amount is greater than your Available Balance");
                 return back();
             }
-           
-            $payment = Salary::where('agent_id', agent_user()->id)->latest()->first();
-            $now = Carbon::now();
-            if($payment == null){
-                $payment = $now->addDays(14);
-            }else{
-              
-                $payment = $payment->next_pay;
-            }
-
-          
-            if($payment > $now){
-            
-                Session::flash('alert', 'error');
-                Session::flash('msg', "Your next payment is on ". Date("M,d", strtotime($payment)));
-                return back();
-            }
-    
             #======deduct agent fund ========
            $wallet = AgentWallet::where('agent_id', agent_user()->id)->first();
     
@@ -115,7 +104,7 @@ class HomeController extends Controller
            ]);
     
             $ref = generate_reference();
-            $salary = new Salary;
+            $salary = new AgentSalary;
             $salary->ref = $ref;
             $salary->agent_id = agent_user()->id;
             $salary->amount = $request->amount;
@@ -135,26 +124,11 @@ class HomeController extends Controller
     
         }
     
-        public function SalaryInvoices($id){
-            $salary = Salary::where('id', decrypt($id))->first();
+        public function PaymentsInvoices($id){
+            $salary = AgentSalary::where('id', decrypt($id))->first();
             return view('agency.invoice', compact('salary', $salary));
         }
     
-        public function paymentProcessor(){
-            $ref = generate_reference();
-            $payment = new Payment;
-            $payment->agent_id = agent_user()->id;
-            $payment->amount = 20;
-            $payment->ref = $ref;
-            $payment->status = 'success';
-            if($payment->save()){
-            $wallet = AgentWallet::where('agent_id', agent_user()->id)->first();
-            $wallet->update(['payments' => $wallet->payments + 20]);
-            Session::flash('alert', 'success');
-            Session::flash('msg', 'Payment Proccessed Successfully');
-            return redirect()->back();
-            }
-        }
 
 public function Account(){
     return view('agency.accounts');
@@ -233,4 +207,10 @@ public function logout(Request $request){
     $request->session()->flush();    
     return redirect()->route('Agent-login');            
         } 
+
+        public function generateRefCode(){
+            $code = substr(md5(uniqid(time())),0,10);
+            return $code;
+        }
 }
+

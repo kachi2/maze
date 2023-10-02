@@ -14,6 +14,7 @@ use App\AffiliateReferrals;
 use App\Models\Deposit;
 use App\Referrals;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ReferralController extends Controller
 {
@@ -36,7 +37,7 @@ class ReferralController extends Controller
     }
 
      public function AgentReferral(){
-        $agent = Agent::where('id', auth('agent')->user()->id)->first();
+        $agent  = Agent::where('id', auth('agent')->user()->id)->first();
         if($agent->ref_code == null){   
             $agent->update(['ref_code' => $this->generateRefCode()]);
         }

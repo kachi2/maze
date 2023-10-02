@@ -172,7 +172,8 @@ use Illuminate\Support\Facades\Route;
 
 
         // Route::group(['prefix' => 'affiliates', 'as' => 'affiliates.'], function(){
-            Route::domain('affiliates.mazeoptions.com')->group(function(){ 
+            // Route::domain('affiliates.mazeoptions.com')->group(function(){ 
+              
             Route::group(['prefix' => 'affiliates', 'as' => 'affiliates.'], function(){ 
             Route::get('/register', 'Agency\AuthController@register')->name('register');
             Route::post('/register/submit', 'Agency\AuthController@registers')->name('registers');
@@ -186,12 +187,12 @@ use Illuminate\Support\Facades\Route;
             Route::get('/', 'Agency\HomeController@index')->name('index');
             Route::get('/home', 'Agency\HomeController@index')->name('index');
             Route::get('index', 'Agency\HomeController@index')->name('index');
+            Route::get('commissions', 'Agency\HomeController@Commissions')->name('commissions');
             Route::get('/referrals/Index', 'Agency\ReferralController@Index')->name('ref.index');
             Route::get('/payments', 'Agency\HomeController@Payments')->name('payment');
-            Route::get('/salary', 'Agency\HomeController@SalaryPayments')->name('salary');
-            Route::post('salary/invoice', 'Agency\HomeController@SalaryInvoice')->name('invoice');
-            Route::get('/salary/invoice/{id}', 'Agency\HomeController@SalaryInvoices')->name('invoice');
-            Route::post('/process/payment/', 'Agency\HomeController@paymentProcessor')->name('payment');
+            Route::post('payments/invoice', 'Agency\HomeController@PaymentsInvoice')->name('payments.invoice');
+            Route::get('/payments/invoice/{id}', 'Agency\HomeController@PaymentsInvoices')->name('payments.invoices');
+            Route::post('/process/payment/', 'Agency\HomeController@paymentProcessor')->name('agentProcess.payment');
             Route::get('/account', 'Agency\HomeController@account')->name('account');
             Route::post('/account/update', 'Agency\HomeController@UpdateAccount')->name('UpdateAccount');
             Route::post('/password/update', 'Agency\HomeController@UpdatePassword')->name('UpdatePassword');
@@ -223,7 +224,7 @@ use Illuminate\Support\Facades\Route;
             Route::get('admin/agent/task', 'Agency/AdminController@AgentTask')->name('admin.agent.task');
             Route::post('/admin/create/task', 'Agency/AdminController@createTask')->name('admin.create.task');
             });
-        });
+        // });
     // Route::middleware(['agent'])->group(function(){
     //     Route::get('/', 'Agency\HomeController@index')->name('agency.index');
     //     Route::get('/home', 'Agency\HomeController@index')->name('agency.index');
