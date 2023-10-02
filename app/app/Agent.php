@@ -102,22 +102,22 @@ class Agent  extends Authenticatable implements MustVerifyEmail
       return $data;
     }
 
-    public function ReferralCount($agent){
-        $agents = AffiliateReferrals::where('agent_id', $agent->id)->first();
-        if(!$agents){
-           $agents = AffiliateReferrals::create([
-                'agent_id' => $agent->id,
-                'total_referrals' => 1,
-                'traded_referrals' => 0,
-                'active_referrals' => 1,
-                'inactive_referrals' => 0
-            ]);
-        }else{
-            $agents->total_referrals  = ($agents->total_referrals + 1);
-            $agents->active_referrals = ($agents->active_referrals + 1);
-            $agents->save();
-        }
-        return $agents;
-    }
+    // public function ReferralCount($agent){
+    //     $agents = AffiliateReferrals::where('agent_id', $agent->id)->first();
+    //     if(!$agents){
+    //        $agents = AffiliateReferrals::create([
+    //             'agent_id' => $agent->id,
+    //             'total_referrals' => 1,
+    //             'traded_referrals' => 0,
+    //             'active_referrals' => 1,
+    //             'inactive_referrals' => 0
+    //         ]);
+    //     }else{
+    //         $agents->total_referrals  = ($agents->total_referrals + 1);
+    //         $agents->active_referrals = ($agents->active_referrals + 1);
+    //         $agents->save();
+    //     }
+    //     return $agents;
+    // }
 
 }

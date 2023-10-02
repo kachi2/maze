@@ -86,7 +86,7 @@
                                         <input type="text" name="ref" value="{{request()->get('ref')}}" 
                                 class="form-control form-control-lg {{ form_invalid('ref') }}" 
                                 id="default-01" placeholder="Referral Code">
-                                @showError('ref')
+                                {{-- @showError('ref') --}}
                                     </div>
 
                                     <div class="form-group">

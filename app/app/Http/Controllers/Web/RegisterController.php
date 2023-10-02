@@ -175,9 +175,10 @@ class RegisterController extends Controller
                     }
                 } else {
                     $agentUser->affiliateCommision($agentUser, $Newusers, 'registration Bonus');
-                    $agentUser->ReferralCount($agentUser);
                     $Newusers->update(['referral_id' => $agentUser->ref_code]);
                 }
+
+              
                 // UserWallet::addBonus($users, $bonusAmount);
 
                 // dd($data['ref']);
@@ -218,6 +219,11 @@ class RegisterController extends Controller
             'referrer_id' => $ref->id,
             'interest' => 0
         ]);
+    }
+    public function GenerateRefCode()
+    {
+        $refcode = strtolower(substr(str_replace(['/', '=', '%', '+', '(', ')', '*', '#', '@', '!', '[', ']'], '', base64_encode(random_bytes(13))), 0, 10));
+        return $refcode;
     }
     
 }
