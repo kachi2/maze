@@ -99,14 +99,14 @@ use Illuminate\Support\Facades\Route;
 
 
     ## =============== Auth routes ===========================
-    Route::group(['prefix' => 'user', 'as' => 'web.'], function(){  
+     
     Route::get('registers/', 'Web\RegisterController@createForm')->name('register');
     Route::post('register/', 'Web\RegisterController@create_user')->name('register_user');
     Route::post('/logout', 'Web\LoginController@Logout')->name('logout');
     Route::get('/logins', 'Web\LoginController@loginForm')->name('logins');
     Route::post('/login', 'Web\LoginController@Login')->name('login');
 
-
+    Route::group(['prefix' => 'user', 'as' => 'web.'], function(){ 
     #============= logged user ============================ 
     Route::get('/home', 'Web\HomeController@index')->name('home');
     Route::get('/', 'Web\HomeController@index')->name('home');
