@@ -206,7 +206,7 @@ use Illuminate\Support\Facades\Route;
             Route::post('/agency/logout', 'Agency/HomeController@logout')->name('agency.logout');
             
             #============== Agent referral ==================
-            Route::get('/', 'Agency\ReferralController@AgentReferral')->name('referral');
+            Route::get('/referrals/index', 'Agency\ReferralController@AgentReferral')->name('referral');
             Route::get('/referral/ref', 'Agency\ReferralController@register')->name('referral.register'); 
             Route::get('/claim/bonus/{id}', 'Agency\ReferralController@ClaimBonus')->name('claimBonus');
             
