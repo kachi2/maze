@@ -26,7 +26,7 @@
                 <div class="nk-content ">
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
                         <div class="brand-logo pb-4 text-center">
-                            <a href="" class="logo-link">
+                            <a href="{{route('index')}}" class="logo-link">
                                 <img class="logo-light logo-img" src="{{asset('/logo.png')}}" srcset="{{asset('/logo.png')}} 2x" alt="logo">
                                 <img class="logo-dark logo-img" src="{{asset('/logo.png')}}" srcset="{{asset('/logo.png')}} 2x" alt="logo-dark">
                             </a>

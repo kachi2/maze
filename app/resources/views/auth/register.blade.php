@@ -24,7 +24,7 @@
             <div class="container">
                 <!-- Page-header -->
                 <center>
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('index') }}">
                         <img src="{{ asset('logo.png') }}" alt="" width="80"/>                                            
                     </a>
                 </center>
