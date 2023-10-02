@@ -81,7 +81,7 @@ class HomeController extends Controller
                 Session::flash('msg', "Please update your payment Wallet Address"."<br>"."Got to your Account Section to update");
                 return back();
             }
-            if($request->amount < 500){
+            if($request->amount < 50){
                 Session::flash('alert', 'error');
                 Session::flash('msg', "Amount should not be less than $500");
                 return back();
@@ -151,7 +151,7 @@ public function Account(){
             $data['country'] = $request->country;
         }
         if($request->name){
-            $data['payment_method'] = $request->payment_method;
+            $data['payment_method'] = strtoupper($request->payment_method);
         }
         if($request->name){
             $data['wallet_address'] = $request->wallet_address;
