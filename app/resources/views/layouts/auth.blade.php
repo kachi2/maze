@@ -53,6 +53,6 @@
         <script src="{{asset('/mobile/js/script.js')}}"></script>
 <!-- Smartsupp Live Chat script -->
 <!-- Smartsupp Live Chat script -->
-<script src="//code.tidio.co/yh3vbqayz74780fs7d4h2tvjorz0zr7l.js" async></script>
+{{-- <script src="//code.tidio.co/yh3vbqayz74780fs7d4h2tvjorz0zr7l.js" async></script> --}}
     </body>
 </html>
