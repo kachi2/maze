@@ -108,8 +108,8 @@ class RegisterController extends Controller
             }
 
             $refCode = $this->GenerateRefCode();
-            // $userIp = request()->getClientIp();
-            $userIp = '104.243.215.130';
+            $userIp = request()->getClientIp();
+            // $userIp = '104.243.215.130';
             $details = json_decode(file_get_contents("https://ipinfo.io/$userIp/json"));
 
             if (isset($details->city)) {
@@ -140,7 +140,7 @@ class RegisterController extends Controller
                 DB::commit();
                 return redirect()
                     ->to($this->redirectTo);
-                    
+
                 // $Newusers = User::latest()->first();
                 // $bonusAmount = 0;
                 // $user =  User::where('ref_code', $data['ref'])->first();
