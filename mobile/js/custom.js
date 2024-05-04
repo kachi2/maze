@@ -47,7 +47,7 @@ function submit_form(form_id, silent){
 
     processor.html(ajax_loader());
 
-    var url = form.attr('action');
+    var url = form.attr('action'); 
 
     return $.post(url, form_data, function (result) {
         if(!silent) ajax_error(result)

@@ -317,7 +317,7 @@ function copyText() {
         $('#HashModal').modal("toggle");
         $('#transactionModal').modal('hide');
 }
-
+ 
 
 
 $('#hashNo').submit(function(e){

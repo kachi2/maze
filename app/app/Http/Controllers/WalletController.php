@@ -118,7 +118,7 @@ class WalletController extends Controller
     {
         $wallet = $request->user()->wallet->transferable_amount;
         $ss = Deposit::where('user_id', $request->user()->id)->sum('amount');
-        if($ss < 200){
+        if($ss < 50){
             // Session::flash('msg', 'danger');
             // Session::flash('message', 'Request failed, your deposit history is too low for this service');
             // return redirect()->back();
@@ -241,7 +241,7 @@ class WalletController extends Controller
            ];
             return response()->json($data);
         }else{
-            $msg = 'Transfer failed, Your Bonus Wallet is less than'.' $'.$request->amounts;
+            $msg = 'Transfer failed, Your Referrals Bonus Wallet is less than'.' $'.$request->amounts;
             $data = [
                'msg' => $msg,
                'alert' => 'error'
