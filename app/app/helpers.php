@@ -459,6 +459,15 @@ if (!function_exists('generate_token')) {
 
         return $token;
     }
+
+
+    if (!function_exists('total_referalls')) {
+        function total_referalls()
+        {
+            return auth()->user()->wallet->referrals;
+        }
+    }
+    
 }
 
 

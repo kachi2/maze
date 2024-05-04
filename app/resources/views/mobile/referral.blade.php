@@ -10,7 +10,7 @@
         <div class="add-card section-to-header mb-30">
             <div class="add-card-inner">
                 <div class="add-card-item add-card-info">
-                    <h3>Referral Earnings <br> {{ moneyFormat(get_stats()['all_time_referral_bonus'], 'USD') }}</h3>
+                    <h3>Referral Earnings <br> {{ moneyFormat(total_referalls(), 'USD')}}</h3>
                     <p> Total referrals: {{ get_stats()['referral_count'] }} user(s)</p>
                 </div>
                 <div class="add-card-item add-balance" data-bs-toggle="modal" data-bs-target="#addBalance">
@@ -141,7 +141,7 @@ function copyText() {
                          type:result.alert,
                          text: result.msg
                          }).then(function(){ 
-                         //location.reload();
+                         location.reload();
                          });
                      // console.log(result);
                      }

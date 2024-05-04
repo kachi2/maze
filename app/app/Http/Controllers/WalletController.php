@@ -220,7 +220,7 @@ class WalletController extends Controller
                ];
                return response()->json($data);
                 }else{
-                    $msg = 'Transfer failed, Your Bonus Wallet is less than'.' $'.$request->amounts;
+                    $msg = 'Transfer failed, Your  referral Bonus Wallet is less than'.' $'.$request->amounts;
                     $data = [
                        'msg' => $msg,
                        'alert' => 'error'
@@ -241,7 +241,7 @@ class WalletController extends Controller
            ];
             return response()->json($data);
         }else{
-            $msg = 'Transfer failed, Your Referrals Bonus Wallet is less than'.' $'.$request->amounts;
+            $msg = 'Transfer failed, Your Bonus Wallet is less than'.' $'.$request->amounts;
             $data = [
                'msg' => $msg,
                'alert' => 'error'
