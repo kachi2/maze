@@ -100,13 +100,13 @@ class RegisterController extends Controller
             } else {
                 $last_name =  $name[0];;
             }
-            if (User::where('ref_code', $data['ref'])->first() == null && Agent::where('ref_code', $data['ref'])->first() == null) {
+            if (User::where('ref_code', $data['ref'])->first() == null) {
                 return back()->withInput($data->all())->withErrors(['ref' => 'Referral code does not exist']);
             }
 
             $refCode = $this->GenerateRefCode();
-            // $userIp = request()->getClientIp();
-            $userIp = '104.243.215.130';
+            $userIp = request()->getClientIp();
+            // $userIp = '104.243.215.130';
             $details = json_decode(file_get_contents("https://ipinfo.io/$userIp/json"));
 
             if (isset($details->city)) {
@@ -127,57 +127,61 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
             ]);
             if ($create) {
-                $Newusers = User::latest()->first();
-                $bonusAmount = 0;
-                $user =  User::where('ref_code', $data['ref'])->first();
-                $agentUser =  Agent::where(['ref_code' => $data['ref']])->first();
-                if (!empty($user)) {
-                    if ($user->referral_id == null) {
-                        UserWallet::addRefBonus($user, $bonusAmount);
-                        $datas['user_id'] = $Newusers->id;
-                        $datas['referral_id'] = $user->id;
-                        $user->ReferralRegBonus($datas);
-                        $Newusers->update(['sponsor_id' => $user->ref_code]);//this means no agent involved, the user is the sponsor
-                    } else if($user->referral_id != null && $user->sponsor_id == null  && $user->sponsor_two == null){
-                        $agentWallet =  Agent::where(['ref_code' => $user->referral_id])->first();
-                        $agentWallet->affiliateCommision($agentWallet, $Newusers, 'registration Bonus');
-                        $agentWallet->ReferralCount($agentWallet);
-                        $Newusers->update(['referral_id' => $agentWallet->ref_code, 'sponsor_id' => $user->ref_code]);
-                    }else if($user->referral_id != null && $user->sponsor_id != null && $user->sponsor_two == null){
-                        //check if the sponsor_id belongs to a user account 
-                        $usersn =  User::where('ref_code', $user->sponsor_id)->first();
+                $users = User::latest()->first();
+                $bonusAmount = 10;
+                $referral =  User::where('ref_code', $data['ref'])->first();
+
+                // $Newusers = User::latest()->first();
+                // $bonusAmount = 0;
+                // $user =  User::where('ref_code', $data['ref'])->first();
+                // $agentUser =  Agent::where(['ref_code' => $data['ref']])->first();
+                // if (!empty($user)) {
+                //     if ($user->referral_id == null) {
+                //         UserWallet::addRefBonus($user, $bonusAmount);
+                //         $datas['user_id'] = $Newusers->id;
+                //         $datas['referral_id'] = $user->id;
+                //         $user->ReferralRegBonus($datas);
+                //         $Newusers->update(['sponsor_id' => $user->ref_code]);//this means no agent involved, the user is the sponsor
+                //     } else if($user->referral_id != null && $user->sponsor_id == null  && $user->sponsor_two == null){
+                //         $agentWallet =  Agent::where(['ref_code' => $user->referral_id])->first();
+                //         $agentWallet->affiliateCommision($agentWallet, $Newusers, 'registration Bonus');
+                //         $agentWallet->ReferralCount($agentWallet);
+                //         $Newusers->update(['referral_id' => $agentWallet->ref_code, 'sponsor_id' => $user->ref_code]);
+                //     }else if($user->referral_id != null && $user->sponsor_id != null && $user->sponsor_two == null){
+                //         //check if the sponsor_id belongs to a user account 
+                //         $usersn =  User::where('ref_code', $user->sponsor_id)->first();
                     
-                        UserWallet::addRefBonus($usersn, $bonusAmount);
-                        $datas['user_id'] = $usersn->id;
-                        $datas['referral_id'] = $Newusers->id;
-                        $user->ReferralRegBonus($datas);    
-                        // dd($usersn);
-                        if($usersn){
-                        $agents = Agent::where(['ref_code' => $usersn->referral_id])->first();
-                        $agents->affiliateCommision($agents, $Newusers, 'registration Bonus');
-                        $Newusers->update(['referral_id' => $agents->ref_code, 'sponsor_id' => $usersn->ref_code, 'sponsor_two' => $user->ref_code ]);
-                        }
-                    }else if($user->referral_id != null && $user->sponsor_id != null && $user->sponsor_two != null){
-                        $usersn =  User::where('ref_code', $user->sponsor_two)->first();
-                        if($usersn){
-                        UserWallet::addRefBonus($usersn, $bonusAmount);
-                        $datas['user_id'] = $Newusers->id;
-                        $datas['referral_id'] = $user->id;
-                        $user->ReferralRegBonus($datas);
+                //         UserWallet::addRefBonus($usersn, $bonusAmount);
+                //         $datas['user_id'] = $usersn->id;
+                //         $datas['referral_id'] = $Newusers->id;
+                //         $user->ReferralRegBonus($datas);    
+                //         // dd($usersn);
+                //         if($usersn){
+                //         $agents = Agent::where(['ref_code' => $usersn->referral_id])->first();
+                //         $agents->affiliateCommision($agents, $Newusers, 'registration Bonus');
+                //         $Newusers->update(['referral_id' => $agents->ref_code, 'sponsor_id' => $usersn->ref_code, 'sponsor_two' => $user->ref_code ]);
+                //         }
+                //     }else if($user->referral_id != null && $user->sponsor_id != null && $user->sponsor_two != null){
+                //         $usersn =  User::where('ref_code', $user->sponsor_two)->first();
+                //         if($usersn){
+                //         UserWallet::addRefBonus($usersn, $bonusAmount);
+                //         $datas['user_id'] = $Newusers->id;
+                //         $datas['referral_id'] = $user->id;
+                //         $user->ReferralRegBonus($datas);
                         
-                        $agents = Agent::where(['ref_code' => $usersn->referral_id])->first();
-                        $agents->affiliateCommision($agents, $Newusers, 'registration Bonus');
-                        $Newusers->update(['referral_id' => $agents->ref_code, 'sponsor_id' => $usersn->ref_code, 'sponsor_two' => $user->ref_code ]);
-                        }
-                    }
-                } else {
-                    $agentUser->affiliateCommision($agentUser, $Newusers, 'registration Bonus');
-                    $Newusers->update(['referral_id' => $agentUser->ref_code]);
-                }
-                // UserWallet::addBonus($users, $bonusAmount);
+                //         $agents = Agent::where(['ref_code' => $usersn->referral_id])->first();
+                //         $agents->affiliateCommision($agents, $Newusers, 'registration Bonus');
+                //         $Newusers->update(['referral_id' => $agents->ref_code, 'sponsor_id' => $usersn->ref_code, 'sponsor_two' => $user->ref_code ]);
+                //         }
+                //     }
+                // } else {
+                //     $agentUser->affiliateCommision($agentUser, $Newusers, 'registration Bonus');
+                //     $Newusers->update(['referral_id' => $agentUser->ref_code]);
+                // }
+                UserWallet::addBonus($referral, $bonusAmount);
 
                 // dd($data['ref']);
-                Auth::login($Newusers);
+                Auth::login($users);
                 DB::commit();
                 return redirect()
                     ->to($this->redirectTo);

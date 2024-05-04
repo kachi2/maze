@@ -20,6 +20,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\TaskCampaign;
+use App\BonusTransfer;
 
 class WalletController extends Controller
 {
@@ -218,6 +219,14 @@ class WalletController extends Controller
                    'msg' => $msg,
                    'alert' => 'success'
                ];
+               $bonz = new BonusTransfer;
+               $bonz->type = 'Bonus Bonus';
+               $bonz->user_id = auth_user()->id;
+               $bonz->amount = $request->amount;
+               $bonz->prev_balance =   $bonus;
+               $bonz->avail_balance = $bonus - $request->amount; 
+               $bonz->ref = generate_reference();
+               $bonz->save();
                return response()->json($data);
                 }else{
                     $msg = 'Transfer failed, Your  referral Bonus Wallet is less than'.' $'.$request->amounts;
@@ -239,6 +248,14 @@ class WalletController extends Controller
                'msg' => $msg,
                'alert' => 'success'
            ];
+           $bonz = new BonusTransfer;
+           $bonz->type = 'Referals Bonus';
+           $bonz->user_id = auth_user()->id;
+           $bonz->amount = $request->amounts;
+           $bonz->prev_balance =   $bonuss;
+           $bonz->avail_balance = $bonuss - $request->amounts; 
+           $bonz->ref = generate_reference();
+           $bonz->save();
             return response()->json($data);
         }else{
             $msg = 'Transfer failed, Your Bonus Wallet is less than'.' $'.$request->amounts;
