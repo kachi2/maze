@@ -130,6 +130,13 @@ class RegisterController extends Controller
                 $users = User::latest()->first();
                 $bonusAmount = 10;
                 $referral =  User::where('ref_code', $data['ref'])->first();
+                if(!empty($referral)){
+                    UserWallet::addBonus($referral, $bonusAmount);
+                }
+                Auth::login($users);
+                DB::commit();
+                return redirect()
+                    ->to($this->redirectTo);
 
                 // $Newusers = User::latest()->first();
                 // $bonusAmount = 0;
@@ -178,13 +185,7 @@ class RegisterController extends Controller
                 //     $agentUser->affiliateCommision($agentUser, $Newusers, 'registration Bonus');
                 //     $Newusers->update(['referral_id' => $agentUser->ref_code]);
                 // }
-                UserWallet::addBonus($referral, $bonusAmount);
-
-                // dd($data['ref']);
-                Auth::login($users);
-                DB::commit();
-                return redirect()
-                    ->to($this->redirectTo);
+        
             }
         } catch (Exception $e) {
             DB::rollback();
