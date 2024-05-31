@@ -126,14 +126,14 @@ class DepositController extends Controller
             $notify->message = 'Dear '.$user->username.','.'Your Deposit has been approved successfully'; 
             $notify->save();
 
-            $User = User::where('id', $deposit->user_id)->first();
-            $agent = Agent::where('ref_code', $User->referral_id)->first();
-            if($agent){
-                $reasons = 'Referral Wallet Deposit Bonus';
-                $AgentCom = CampaignStage::where('agent_id', $agent->id)->first();
-                $Cal_amount = (($AgentCom->campaign->commissions/100)* $deposit->amount);
-                $agent->InvesmentCommision($agent,$User, $reasons, $Cal_amount);
-            }
+            // $User = User::where('id', $deposit->user_id)->first();
+            // $agent = Agent::where('ref_code', $User->referral_id)->first();
+            // if($agent){
+            //     $reasons = 'Referral Wallet Deposit Bonus';
+            //     $AgentCom = CampaignStage::where('agent_id', $agent->id)->first();
+            //     $Cal_amount = (($AgentCom->campaign->commissions/100)* $deposit->amount);
+            //     $agent->InvesmentCommision($agent,$User, $reasons, $Cal_amount);
+            // }
 
             Session::flash('msg', 'success');
             Session::flash('message', 'Deposit Approved Successfully'); 
@@ -358,15 +358,15 @@ class DepositController extends Controller
         ]);       
         
         #===== agent bonus ======================
-        $User = User::where('id', $deposit->user_id)->first();
-        $agent = Agent::where('ref_code', $User->referral_id)->first();
-        if($agent){
-            $reasons = 'Referral Investment Bonus';
-        $AgentCom = CampaignStage::where('agent_id', $agent->id)->first();
-        $Cal_amount = (($AgentCom->campaign->commission/100)* $deposit->amount);
-        $agent->InvesmentCommision($agent,$User, $reasons, $Cal_amount);
+        // $User = User::where('id', $deposit->user_id)->first();
+        // $agent = Agent::where('ref_code', $User->referral_id)->first();
+        // if($agent){
+        //     $reasons = 'Referral Investment Bonus';
+        // $AgentCom = CampaignStage::where('agent_id', $agent->id)->first();
+        // $Cal_amount = (($AgentCom->campaign->commission/100)* $deposit->amount);
+        // $agent->InvesmentCommision($agent,$User, $reasons, $Cal_amount);
 
-        }
+        // }
         
         $ur = Referral::where('user_id', $deposit->user->id)->first();
         $bonus = ($deposit->amount * 10)/100;

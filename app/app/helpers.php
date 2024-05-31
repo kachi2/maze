@@ -397,6 +397,7 @@ if (!function_exists('get_payment_methods')) {
             Deposit::PAYMENT_METHOD_BTC => 'BTC',
             Deposit::PAYMENT_METHOD_ETH => 'ETH',
             Deposit::PAYMENT_METHOD_LTC => 'LTC',
+            Deposit::PAYMENT_METHOD_USDT => 'USDT'
         ];
     }
 } 
@@ -411,6 +412,7 @@ if (!function_exists('get_payment_method')) {
             Deposit::PAYMENT_METHOD_BTC => 'BTC',
             Deposit::PAYMENT_METHOD_ETH => 'ETH',
             Deposit::PAYMENT_METHOD_LTC => 'LTC',
+            Deposit::PAYMENT_METHOD_USDT => 'USDT'
         ];
     }
 }

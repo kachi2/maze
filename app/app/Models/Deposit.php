@@ -57,7 +57,9 @@ class Deposit extends Model
     const PAYMENT_METHOD_ETH = 'ETH';
     const PAYMENT_METHOD_LTC = 'LTC';
     const PAYMENT_METHOD_BCH = 'BCH';
+    const PAYMENT_METHOD_USDT = 'USDT';
     const PAYMENT_METHOD_WALLET = 'WALLET';
+
 
     /**
      * The attributes that are mass assignable.
