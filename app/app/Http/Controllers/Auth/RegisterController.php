@@ -128,10 +128,12 @@ class RegisterController extends Controller
             ]);
             if ($create) {
                 $users = User::latest()->first();
-                $bonusAmount = 10;
+                UserWallet::addAmount($users, 0);
+                $bonusAmount = 0;
                 $referral =  User::where('ref_code', $data['ref'])->first();
                 if(!empty($referral)){
-                    UserWallet::addBonus($referral, $bonusAmount);
+                    $this->saveRef($users, $referral);
+                    UserWallet::addRefBonus($referral, $bonusAmount);
                 }
                 Auth::login($users);
                 DB::commit();

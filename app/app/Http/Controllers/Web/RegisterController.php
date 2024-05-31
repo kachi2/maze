@@ -103,7 +103,7 @@ class RegisterController extends Controller
             } else {
                 $last_name =  $name[0];;
             }
-            if (User::where('ref_code', $data['ref'])->first() == null && Agent::where('ref_code', $data['ref'])->first() == null) {
+            if (!User::where('ref_code', $data['ref'])->first()){
                 return back()->withInput($data->all())->withErrors(['ref' => 'Referral code does not exist']);
             }
 
@@ -122,19 +122,22 @@ class RegisterController extends Controller
                 'first_name' => $first_name,
                 'last_name' => $last_name,
                 'email' => $data['email'],
-                'city' => $city,
-                'country' => $country,
+                'city' => $city??'',
+                'country' => $country??'',
                 'ref_code' => $refCode,
                 'username' =>  $username,
                 'phone' => $data['phone'],
                 'password' => Hash::make($data['password']),
             ]);
             if ($create) {
+                
                 $users = User::latest()->first();
-                $bonusAmount = 10;
+                UserWallet::addAmount($users, 0);
+                $bonusAmount = 0;
                 $referral =  User::where('ref_code', $data['ref'])->first();
                 if(!empty($referral)){
-                    UserWallet::addBonus($referral, $bonusAmount);
+                    $this->saveRef($users, $referral);
+                    UserWallet::addRefBonus($referral, $bonusAmount);
                 }
                 Auth::login($users);
                 DB::commit();
@@ -201,7 +204,7 @@ class RegisterController extends Controller
         } catch (Exception $e) {
             DB::rollback();
 
-            return back()->withInput($data->all())->withErrors(['ref' => 'Request failed, try again later' . $e]);
+            return back()->withInput($data->all())->withErrors(['ref' => 'Request failed, try again later']);
         }
     }
 

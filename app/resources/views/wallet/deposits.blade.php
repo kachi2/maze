@@ -19,7 +19,7 @@
                                          </div>
                                          <div class="pricing-body"><ul class="pricing-features"><li><span class="w-50">Main Wallet</span> - <span class="ml-auto">{{moneyFormat(auth_user()->wallet->amount, 'USD')}}</span></li>
                                             <li><span class="w-50">Bonus Wallet</span> - <span class="ml-auto"> {{moneyFormat(auth_user()->wallet->bonus, 'USD')}}</span></li>
-                                         <li><span class="w-50">Referral Wallet</span> - <span class="ml-auto">{{ moneyFormat(get_stats()['all_time_referral_bonus'], 'USD') }}</span></li>
+                                         <li><span class="w-50">Referral Wallet</span> - <span class="ml-auto">{{ moneyFormat(get_stats()['referral_bonus'], 'USD') }}</span></li>
                                        
                                          </ul>
                                          <hr>

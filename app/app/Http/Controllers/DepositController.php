@@ -17,6 +17,7 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\Validator;
 use App\MarketList;
 use App\Models\Plan;
+use App\Models\Referral;
 use App\Models\UserWallet;
 use App\Modules\BlockChain;
 use App\Modules\PerfectMoney;
@@ -549,6 +550,18 @@ class DepositController extends Controller
         if ($validte->fails()) {
             return response()->json($validte->errors->first());
         }
+        $deposit = Deposit::where('user_id', auth_user()->id)->get();
+        if(count($deposit) <= 0){
+            $ref = Referral::where('user_id', auth_user()->id)->first();
+            $wallet = UserWallet::where('user_id', $ref->referrer_id)->first();
+            if($wallet){
+                $wallet->update([
+                    'referrals' => ($request->amount * 0.1)
+                ]); 
+            }
+          
+        }
+
 
 
         if ($plan->min_deposit > $request->amount) {
