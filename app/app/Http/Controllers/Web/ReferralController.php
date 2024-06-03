@@ -77,7 +77,7 @@ class ReferralController extends Controller
 
         $breadcrumb = [
             [
-                'link' => route('referral'),
+                'link' => route('web.referral'),
                 'title' => 'Referral'
             ]
         ];
@@ -99,7 +99,7 @@ class ReferralController extends Controller
     {
         $breadcrumb = [
             [
-                'link' => route('refer'),
+                'link' => route('web.refer'),
                 'title' => 'Refer'
             ]
         ];

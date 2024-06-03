@@ -113,7 +113,7 @@ class DepositController extends Controller
 
         $breadcrumb = [
             [
-                'link' => route('deposits'),
+                'link' => route('web.deposits'),
                 'title' => 'Deposits'
             ]
         ];
@@ -186,11 +186,11 @@ class DepositController extends Controller
 
         $breadcrumb = [
             [
-                'link' => route('deposits'),
+                'link' => route('web.deposits'),
                 'title' => 'Deposits'
             ],
             [
-                'link' => route('deposits.transactions'),
+                'link' => route('web.deposits.transactions'),
                 'title' => 'Transactions'
             ]
         ];
@@ -213,11 +213,11 @@ class DepositController extends Controller
 
         $breadcrumb = [
             [
-                'link' => route('deposits'),
+                'link' => route('web.deposits'),
                 'title' => 'Deposits'
             ],
             [
-                'link' => route('deposit', ['ref', $ref]),
+                'link' => route('web.deposit', ['ref', $ref]),
                 'title' => 'Deposit: ' . $ref
             ]
         ];
@@ -247,11 +247,11 @@ class DepositController extends Controller
 
         $breadcrumb = [
             [
-                'link' => route('deposits'),
+                'link' => route('web.deposits'),
                 'title' => 'Deposits'
             ],
             [
-                'link' => route('deposits.transactions'),
+                'link' => route('web.deposits.transactions'),
                 'title' => 'Invest'
             ],
             [
@@ -286,7 +286,7 @@ class DepositController extends Controller
         }
         $breadcrumb = [
             [
-                'link' => route('deposits'),
+                'link' => route('web.deposits'),
                 'title' => 'Deposits'
             ],
             [
@@ -378,7 +378,7 @@ class DepositController extends Controller
             Session::flash('message', 'Your request is pending, Your deposit will be approved once confirmed');
             return redirect()->route('web.deposits');
         } else {
-            return back();
+            return redirect()->back();
         }
     }
 
@@ -422,11 +422,11 @@ class DepositController extends Controller
         $payouts = PlanProfit::where(['user_id' => $request->user()->id, 'plan_id' => $id,])->sum('balance');
         $breadcrumb = [
             [
-                'link' => route('deposits'),
+                'link' => route('web.deposits'),
                 'title' => 'Deposits'
             ],
             [
-                'link' => route('deposits.invest', ['id' => $id]),
+                'link' => route('web.deposits.invest', ['id' => $id]),
                 'title' => 'Invest'
             ]
         ];
@@ -539,7 +539,7 @@ class DepositController extends Controller
         try {
             $deposit = $this->saveDeposit($ref, $plans, $request->user(), $amount, Deposit::PAYMENT_METHOD_WALLET);
         } catch (Exception $e) {
-            return redirect()->route('home')->withInput()->with('error', 'Unable to invest on plan');
+            return redirect()->route('web.home')->withInput()->with('error', 'Unable to invest on plan');
         }
         try {
             $request->user()->notify(new InvestmentCreated($deposit));
@@ -552,6 +552,7 @@ class DepositController extends Controller
 
     protected function investFromCripto(Request $request, Plan $plan, $amount, $currency, $ref)
     {
+
         $coins = $currency;
         switch ($coins) {
             case "BTC":
@@ -573,13 +574,16 @@ class DepositController extends Controller
             $transaction = $this->savePendingDeposit($ref, $plan, $request->user(), $amount, $amount2, $currency);
             $wallet = WalletAddress::where('name', $currency)->first();
             Session::flash('msg', 'success');
+         
             Session::flash('message', 'Investment Initiated Successfully');
-            return view('deposit.payment')->with('wallet', $wallet)->with('transaction', $transaction)
-                ->with('plan', $plan);
+            return redirect()->back()->with('transaction', $transaction);
+            // return view('web.deposit.payment')->with('wallet', $wallet)->with('transaction', $transaction)
+            //     ->with('plan', $plan);
         } catch (Exception $exception) {
+            
             Session::flash('msg', 'error');
             Session::flash('message', 'An error occured, try again');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput($request->all());
         }
     }
 

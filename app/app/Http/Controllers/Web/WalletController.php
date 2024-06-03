@@ -50,7 +50,7 @@ class WalletController extends Controller
 
         $breadcrumb = [
             [
-                'link' => route('wallet'),
+                'link' => route('web.wallet'),
                 'title' => 'My Wallet'
             ]
         ];
@@ -72,7 +72,7 @@ class WalletController extends Controller
     {
         $breadcrumb = [
             [
-                'link' => route('transfer'),
+                'link' => route('web.transfer'),
                 'title' => 'Internal Transfer'
             ]
         ];
@@ -92,7 +92,7 @@ class WalletController extends Controller
     {
         $breadcrumb = [
             [
-                'link' => route('transfer'),
+                'link' => route('web.transfer'),
                 'title' => 'Internal Transfer'
             ]
         ];

@@ -70,7 +70,7 @@ class PayoutController extends Controller
 
         $breadcrumb = [
             [
-                'link' => route('payouts'),
+                'link' => route('web.payouts'),
                 'title' => 'Payouts'
             ]
         ];

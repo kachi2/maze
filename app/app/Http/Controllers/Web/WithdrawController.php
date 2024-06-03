@@ -104,7 +104,7 @@ class WithdrawController extends Controller
 
         $breadcrumb = [
             [
-                'link' => route('withdrawals'),
+                'link' => route('web.withdrawals'),
                 'title' => 'Withdrawals'
             ]
         ];
@@ -126,11 +126,11 @@ class WithdrawController extends Controller
     {
         $breadcrumb = [
             [
-                'link' => route('withdrawals'),
+                'link' => route('web.withdrawals'),
                 'title' => 'Withdrawals'
             ],
             [
-                'link' => route('withdrawals.request'),
+                'link' => route('web.withdrawals.request'),
                 'title' => 'Request Withdrawal'
             ]
         ];

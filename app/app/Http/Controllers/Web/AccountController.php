@@ -42,7 +42,7 @@ class AccountController extends Controller
 
         $breadcrumb = [
             [
-                'link' => route('account'),
+                'link' => route('web.account'),
                 'title' => 'Account'
             ]
         ];
