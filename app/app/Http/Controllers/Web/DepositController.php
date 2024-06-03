@@ -576,13 +576,13 @@ class DepositController extends Controller
             Session::flash('msg', 'success');
          
             Session::flash('message', 'Investment Initiated Successfully');
-            return redirect()->back()->with('transaction', $transaction);
-            // return view('web.deposit.payment')->with('wallet', $wallet)->with('transaction', $transaction)
-            //     ->with('plan', $plan);
+       
+            return view('deposit.payment')->with('wallet', $wallet)->with('transaction', $transaction)
+                ->with('plan', $plan);
         } catch (Exception $exception) {
             
             Session::flash('msg', 'error');
-            Session::flash('message', 'An error occured, try again');
+            Session::flash('message', 'An error occured, try again asasas'.$exception);
             return redirect()->back()->withInput($request->all());
         }
     }
