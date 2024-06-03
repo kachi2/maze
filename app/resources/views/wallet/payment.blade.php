@@ -103,7 +103,7 @@
                                                         <em class="click-to-copy icon ni ni-copy"></em>
                                                     </div>
                                                     <div class="form-icon"><em class="icon ni ni-sign-{{strtolower($transaction->currency2)}}-alt"></em></div>
-                                                    <input readonly="" type="text" class="form-control form-control-lg" id="wallet-address" value="0xd5d4f313b28b5256a5bed2f00de3c4f9f1f7c3c0" readonly>
+                                                    <input readonly="" type="text" class="form-control form-control-lg" id="wallet-address" value="{{$wallet->address}}" readonly>
                                                 </div>
                                                                             </div>
                 
