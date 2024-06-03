@@ -520,7 +520,7 @@ class DepositController extends Controller
             case Deposit::PAYMENT_METHOD_LTC:
             case Deposit::PAYMENT_METHOD_BCH:
 
-                $this->InvestmentBonus();
+                // $this->InvestmentBonus();
                 return  $this->investFromCripto($request, $plan, $amount, $paymentMethod, $ref);
             case Deposit::PAYMENT_METHOD_PM:
                 return $this->investFromPerfectMoney($request, $plan, $amount, $ref);
