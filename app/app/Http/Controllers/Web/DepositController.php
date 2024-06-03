@@ -468,15 +468,16 @@ class DepositController extends Controller
             return  redirect()->back()->withInput($request->all())->withErrors($validte);
         }
 
-        $deposit = Deposit::where('user_id', auth_user()->id)->get();
         if(count($deposit) <= 0){
             $ref = Referral::where('user_id', auth_user()->id)->first();
+            if($ref){
             $wallet = UserWallet::where('user_id', $ref->referrer_id)->first();
             if($wallet){
                 $wallet->update([
                     'referrals' => ($request->amount * 0.1)
                 ]); 
             }
+        }
           
         }
 
