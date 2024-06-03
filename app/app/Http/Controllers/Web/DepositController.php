@@ -468,6 +468,7 @@ class DepositController extends Controller
             return  redirect()->back()->withInput($request->all())->withErrors($validte);
         }
 
+        $deposit = Deposit::where('user_id', auth_user()->id)->get();
         if(count($deposit) <= 0){
             $ref = Referral::where('user_id', auth_user()->id)->first();
             if($ref){
