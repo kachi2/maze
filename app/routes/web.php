@@ -108,7 +108,6 @@ use Illuminate\Support\Facades\Route;
 
 
     #============= logged user ============================ 
- 
     Route::get('/home', 'Web\HomeController@index')->name('home');
     Route::get('/', 'Web\HomeController@index')->name('home');
     Route::get('withdrawals', 'Web\WithdrawController@index')->name('withdrawals');
@@ -168,6 +167,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('/user/send/message', 'Web\MessageController@SendMessage')->name('users.send.message');
     Route::get('/user/agent', 'Web\MessageController@Agent')->name('users.agent');
     });
+
 
 
 
